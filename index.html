@@ -22,10 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ========================================
-           DATADESH - GLOBAL STYLES
-           ======================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -246,18 +242,6 @@
             background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 10s ease-in-out infinite;
-        }
-
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            bottom: -200px;
-            left: -200px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 12s ease-in-out infinite reverse;
         }
 
         @keyframes float {
@@ -720,6 +704,161 @@
         }
 
         /* ========================================
+           CATEGORY TABS (para os 34 serviços)
+           ======================================== */
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            color: #4A5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+
+        .tab-btn:hover {
+            border-color: #0066FF;
+            color: #0066FF;
+            background: rgba(0, 102, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            color: white;
+            border-color: #0066FF;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .services-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card-full {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card-full:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15);
+            border-color: #0066FF;
+        }
+
+        .service-icon-wrapper {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #0066FF;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0A2540;
+        }
+
+        .service-desc {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .service-price-box {
+            background: linear-gradient(135deg, #F8FAFF, #F0F4FE);
+            padding: 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .price-label {
+            font-size: 0.7rem;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .price-current {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .price-old {
+            font-size: 0.85rem;
+            color: #A0AEC0;
+            text-decoration: line-through;
+        }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-time {
+            font-size: 0.75rem;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ========================================
            PORTFOLIO
            ======================================== */
 
@@ -781,7 +920,7 @@
         }
 
         /* ========================================
-           SERVICES
+           SERVICES (resumido)
            ======================================== */
 
         .services-grid {
@@ -1152,7 +1291,7 @@
                 <a href="#beneficios" class="nav-link">Benefícios</a>
                 <a href="#sobre" class="nav-link">Sobre</a>
                 <a href="#portfolio" class="nav-link">Portfólio</a>
-                <a href="#servicos" class="nav-link">Serviços</a>
+                <a href="#catalogo" class="nav-link">Serviços</a>
                 <a href="#precos" class="nav-link">Preços</a>
                 <a href="#faq" class="nav-link">FAQ</a>
                 <a href="https://wa.me/5531984987116" target="_blank" class="nav-cta">Falar Agora →</a>
@@ -1273,13 +1412,13 @@
         </div>
     </section>
 
-    <!-- SOBRE (QUEM ESTÁ POR TRÁS) -->
+    <!-- SOBRE (COM O TEXTO NOVO) -->
     <section id="sobre" class="section section-dark">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">👩‍💻 QUEM ESTÁ POR TRÁS</span>
                 <h2>Oi, eu sou a DataDesh!</h2>
-                <p>Prazer em te conhecer! Vou te contar um pouco sobre mim</p>
+                <p>Sua parceira digital de confiança 💙</p>
             </div>
             <div class="about-grid">
                 <div class="about-image">
@@ -1288,12 +1427,12 @@
                     </div>
                 </div>
                 <div class="about-content">
-                    <h3>Sua parceira digital de confiança</h3>
-                    <p>Sou desenvolvedora apaixonada por tecnologia e por ajudar pequenos negócios a crescerem através da internet. Meu objetivo não é só entregar um site bonito — é criar uma ferramenta que realmente traga clientes para você.</p>
-                    <p>Trabalho com atendimento personalizado, linguagem simples (nada de termos técnicos complicados) e foco em resultados reais. Cada projeto é único e feito sob medida para sua necessidade.</p>
-                    <p>Já ajudei mais de 30 clientes a se destacarem online. Agora quero ajudar você também!</p>
+                    <p>Sou desenvolvedora apaixonada por tecnologia e especialista em ajudar pequenos negócios a saírem do anonimato e começarem a vender de verdade na internet.</p>
+                    <p>Mais do que criar sites bonitos, eu desenvolvo ferramentas estratégicas que atraem clientes, aumentam sua visibilidade e fazem seu negócio crescer.</p>
+                    <p>Aqui você não vai encontrar linguagem complicada nem soluções genéricas. Cada projeto é pensado exclusivamente para você, com atendimento próximo, simples e focado em resultado.</p>
+                    <p>✨ Já ajudei mais de 30 clientes a se destacarem online — agora é a sua vez.</p>
                     <div class="about-signature">
-                        💙 Vamos transformar seu negócio juntos? — DataDesh
+                        👉 Chega de ficar invisível na internet. Vamos colocar seu negócio para crescer de verdade.
                     </div>
                 </div>
             </div>
@@ -1342,44 +1481,97 @@
         </div>
     </section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="section section-dark">
+    <!-- CATÁLOGO COMPLETO DE SERVIÇOS (+34 SERVIÇOS) -->
+    <section id="catalogo" class="section section-dark">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">📋 SERVIÇOS</span>
-                <h2>Soluções Completas para Seu Negócio</h2>
-                <p>Do site básico ao dashboard avançado, tenho a solução ideal para você</p>
+                <span class="section-badge">📋 CATÁLOGO COMPLETO</span>
+                <h2>+34 Soluções Digitais</h2>
+                <p>Escolha a categoria e encontre o serviço ideal para o seu negócio</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-code"></i></div>
-                    <h3>Sites Profissionais</h3>
-                    <p>Sites modernos, rápidos e otimizados para converter visitantes em clientes</p>
+
+            <div class="category-tabs">
+                <button class="tab-btn active" data-target="web">🌐 Web & Sites</button>
+                <button class="tab-btn" data-target="dashboards">📊 Dashboards & Automação</button>
+                <button class="tab-btn" data-target="docs">📄 Docs & Currículos</button>
+                <button class="tab-btn" data-target="design">🎨 Artes & Design</button>
+                <button class="tab-btn" data-target="tech">🛠️ Tech & Suporte</button>
+                <button class="tab-btn" data-target="admin">📋 Admin & Organização</button>
+                <button class="tab-btn" data-target="consultoria">🎤 Consultoria</button>
+            </div>
+
+            <!-- WEB & SITES -->
+            <div id="web" class="tab-content active">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-code"></i></div><h3 class="service-title">Mini-site GitHub Pages (1 página)</h3><p class="service-desc">Página única responsiva com apresentação da empresa, contato e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20o%20Mini-site%20GitHub%20Pages" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-link"></i></div><h3 class="service-title">Mini-site com botões para links</h3><p class="service-desc">Página única com botões configuráveis para links de vendas e redes sociais.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20o%20Mini-site%20com%20botões" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-utensils"></i></div><h3 class="service-title">Páginas HTML (cardápio, ofertas)</h3><p class="service-desc">Página HTML personalizada para exibir menus, ofertas ou conteúdo específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20páginas%20HTML" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-search"></i></div><h3 class="service-title">Site automatizado (vagas 24h)</h3><p class="service-desc">Site que busca e exibe vagas recentes por filtro de cargo/área/cidade.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20site%20de%20vagas" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-newspaper"></i></div><h3 class="service-title">Site agregador de notícias</h3><p class="service-desc">Site que coleta e lista automaticamente notícias/feeds de um nicho específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 600 <span class="price-old">R$ 900</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20agregador%20de%20notícias" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Dashboards Interativos</h3>
-                    <p>Painéis com gráficos dinâmicos e integração com Google Sheets</p>
+            </div>
+
+            <!-- DASHBOARDS & AUTOMAÇÃO -->
+            <div id="dashboards" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-line"></i></div><h3 class="service-title">Painel análise dados (simples) + Sheets</h3><p class="service-desc">Dashboard básico com gráficos que puxa dados de planilha Google.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 350 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20dashboard%20simples" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-bar"></i></div><h3 class="service-title">Painel análise dados (intermediário)</h3><p class="service-desc">Dashboard com múltiplas métricas, filtros e visualizações avançadas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 500 <span class="price-old">R$ 800</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20dashboard%20intermediário" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-calendar-alt"></i></div><h3 class="service-title">Painel com agenda eletrônica</h3><p class="service-desc">Agenda integrada ao Google Sheets/Calendar para agendamento de clientes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20agenda%20eletrônica" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-project-diagram"></i></div><h3 class="service-title">Criação de fluxos de trabalho e automação</h3><p class="service-desc">Mapeamento de processos e configuração de automações (Sheets, e-mails).</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 400 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20automação" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-pie"></i></div><h3 class="service-title">Painéis com gráficos (Dashboards)</h3><p class="service-desc">Dashboard personalizado com KPIs e visualizações para tomada de decisão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 450 <span class="price-old">R$ 700</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20dashboard%20personalizado" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-file-alt"></i></div>
-                    <h3>Currículos Digitais</h3>
-                    <p>Página exclusiva com seu currículo, link compartilhável e versão PDF</p>
+            </div>
+
+            <!-- DOCS & CURRÍCULOS -->
+            <div id="docs" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-file-alt"></i></div><h3 class="service-title">Currículo digital + GitHub Pages</h3><p class="service-desc">Currículo moderno publicado como página web com link compartilhável.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20currículo%20digital" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-book"></i></div><h3 class="service-title">Criação de eBooks em PDF</h3><p class="service-desc">Produção, layout e exportação de eBook com texto e imagens prontos.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20eBook" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-file-pdf"></i></div><h3 class="service-title">Criação de resumos em PDF</h3><p class="service-desc">Resumo claro e organizado em PDF pronto para distribuição ou estudo.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20resumo%20PDF" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-robot"></i></div>
-                    <h3>Automações</h3>
-                    <p>Processos automatizados que economizam tempo e reduzem erros</p>
+            </div>
+
+            <!-- ARTES & DESIGN -->
+            <div id="design" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-id-card"></i></div><h3 class="service-title">Cartão de visita em HTML</h3><p class="service-desc">Cartão digital com arte, dados e link clicável para contato.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20cartão%20de%20visita" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-envelope-open-text"></i></div><h3 class="service-title">Convite digital + Google Forms</h3><p class="service-desc">Convite online com arte, detalhes do evento e formulário RSVP.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20convite%20digital" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-image"></i></div><h3 class="service-title">Banner/post social (arte + legenda)</h3><p class="service-desc">Arte pronta para redes com legenda otimizada para engajamento.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 45 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20banner%20social" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-layer-group"></i></div><h3 class="service-title">Pacote de posts (5 artes + legendas)</h3><p class="service-desc">5 posts prontos para 1 semana de publicações.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 180 <span class="price-old">R$ 300</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20pacote%20de%20posts" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-palette"></i></div><h3 class="service-title">Criação de logotipo simples (vetorial)</h3><p class="service-desc">Logo básico em vetor para web e impressão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20logotipo" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-video"></i></div><h3 class="service-title">Roteiro para vídeo curto (Reels/TikTok)</h3><p class="service-desc">Roteiro otimizado com ganchos, cenas e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20roteiro%20para%20Reels" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-tags"></i></div><h3 class="service-title">Pacote de banners promo (3 modelos)</h3><p class="service-desc">Três banners temáticos para promoções ou anúncios.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20banners%20promocionais" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-brush"></i></div><h3 class="service-title">Identidade visual básica</h3><p class="service-desc">Mini-branding com paleta de cores, fontes e modelo de post.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 250 <span class="price-old">R$ 400</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20identidade%20visual" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Design Gráfico</h3>
-                    <p>Identidade visual, posts para redes sociais e materiais promocionais</p>
+            </div>
+
+            <!-- TECH & SUPORTE -->
+            <div id="tech" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-laptop"></i></div><h3 class="service-title">Limpeza de PC/notebook (remoto)</h3><p class="service-desc">Otimização remota: remoção de lixo, ajustes e verificação básica.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20limpeza%20de%20PC" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-mobile-alt"></i></div><h3 class="service-title">Limpeza de celular Android</h3><p class="service-desc">Remoção de cache, apps inúteis e orientação para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 60 <span class="price-old">R$ 100</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20limpeza%20de%20celular" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-hdd"></i></div><h3 class="service-title">Backup automático via Google Drive</h3><p class="service-desc">Configuração de backup automático e organização de pastas importantes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 100 <span class="price-old">R$ 160</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20backup%20automático" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-diagnoses"></i></div><h3 class="service-title">Diagnóstico de lentidão + relatório</h3><p class="service-desc">Análise de desempenho e relatório com recomendações práticas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20diagnóstico%20de%20lentidão" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-download"></i></div><h3 class="service-title">Instalação remota de softwares básicos</h3><p class="service-desc">Instalação e configuração de programas essenciais via acesso remoto.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 80 <span class="price-old">R$ 130</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20instalação%20remota" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-images"></i></div><h3 class="service-title">Compactar fotos no Drive</h3><p class="service-desc">Otimização e compressão de imagens no Google Drive para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20compactar%20fotos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-headset"></i></div>
-                    <h3>Suporte Técnico</h3>
-                    <p>Manutenção, otimização e suporte remoto para seu PC ou celular</p>
+            </div>
+
+            <!-- ADMIN & ORGANIZAÇÃO -->
+            <div id="admin" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-graduation-cap"></i></div><h3 class="service-title">Pesquisa científica (ABNT)</h3><p class="service-desc">Pesquisa com levantamento bibliográfico e formatação ABNT.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20pesquisa%20ABNT" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-google"></i></div><h3 class="service-title">Formulário Google Forms + coleta</h3><p class="service-desc">Formulário com lógica, validações e planilha de respostas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 70 <span class="price-old">R$ 120</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20formulário%20Google%20Forms" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-edit"></i></div><h3 class="service-title">Edição de arquivos, relatórios e rotinas</h3><p class="service-desc">Edição e padronização de documentos administrativos sob demanda.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">A combinar</div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20edição%20de%20arquivos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-folder-open"></i></div><h3 class="service-title">Organização de arquivos e pastas</h3><p class="service-desc">Reestruturação lógica de pastas, renomeação e categorização.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20organização%20de%20pastas" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
+            </div>
+
+            <!-- CONSULTORIA & APRESENTAÇÕES -->
+            <div id="consultoria" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chalkboard"></i></div><h3 class="service-title">Apresentações / Slides (até 20 slides)</h3><p class="service-desc">Criação de apresentação visual para PowerPoint/Google Slides.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20apresentação%20de%20slides" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-simple"></i></div><h3 class="service-title">Análise de sites e redes sociais</h3><p class="service-desc">Auditoria com relatório de melhorias, SEO, UX e plano de ação.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Olá!%20Quero%20análise%20de%20site" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
             </div>
         </div>
@@ -1555,7 +1747,7 @@
                         <li><a href="#beneficios">Benefícios</a></li>
                         <li><a href="#sobre">Sobre</a></li>
                         <li><a href="#portfolio">Portfólio</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#catalogo">Serviços</a></li>
                         <li><a href="#precos">Preços</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
@@ -1608,13 +1800,30 @@
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+            if (question) {
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
                 });
-                item.classList.toggle('active');
+            }
+        });
+
+        // Tabs for services catalog
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                const targetId = btn.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                if (target) target.classList.add('active');
             });
         });
 
@@ -1680,7 +1889,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.benefit-card, .service-card, .testimonial-card, .pricing-card, .about-grid').forEach(el => {
+        document.querySelectorAll('.benefit-card, .service-card, .service-card-full, .testimonial-card, .pricing-card, .about-grid, .portfolio-item').forEach(el => {
             observer.observe(el);
         });
 
