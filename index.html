@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="DataDesh | Ana Paula - Sites e Dashboards que Transformam Dados em Decisões">
     <meta property="og:description" content="+27 dashboards entregues. Especialista em Google Sheets, JavaScript e visualização de dados para tomada de decisão.">
-    <meta property="og:image" content="https://aninhatata.github.io/portifolio/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png?raw=true">
     
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -271,13 +271,6 @@
             line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            .hero-subtitle {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
         .hero-buttons {
             display: flex;
             gap: 1rem;
@@ -474,11 +467,6 @@
             margin: 0 auto;
             box-shadow: 0 20px 40px rgba(0,102,255,0.3);
         }
-        .about-content h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
         .about-content p {
             color: var(--text-muted);
             margin-bottom: 1rem;
@@ -517,57 +505,187 @@
             font-weight: 800;
             margin: 0 auto 1rem;
         }
-        .step-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+
+        /* PORTFOLIO GRID (FOTOS DO SEU TRABALHO) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .step-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            display: block;
+            height: 220px;
+            text-decoration: none;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: #0066FF;
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.15);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.8), rgba(0, 229, 255, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
         }
 
-        /* PORTFÓLIO DESTAQUE */
-        .portfolio-highlight {
-            background: linear-gradient(135deg, #0A1929, #0D2D4A);
-            border-radius: 32px;
-            padding: 3rem;
-            color: white;
-            margin-top: 2rem;
+        /* CATEGORY TABS (34 SERVIÇOS) */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
         }
-        .portfolio-highlight h3 {
-            font-size: 1.5rem;
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            color: #4A5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .tab-btn:hover {
+            border-color: #0066FF;
+            color: #0066FF;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            color: white;
+            border-color: #0066FF;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .services-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card-full {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .service-card-full:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15);
+            border-color: #0066FF;
+        }
+        .service-icon-wrapper {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #0066FF;
             margin-bottom: 1rem;
         }
-        .portfolio-stats {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin: 2rem 0;
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0A2540;
         }
-        .portfolio-stat {
-            text-align: center;
+        .service-desc {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
         }
-        .portfolio-stat-number {
-            font-size: 2.5rem;
+        .service-price-box {
+            background: linear-gradient(135deg, #F8FAFF, #F0F4FE);
+            padding: 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+        .price-label {
+            font-size: 0.7rem;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .price-current {
+            font-size: 1.4rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00E5FF, #10B981);
+            background: linear-gradient(135deg, #0066FF, #00E5FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .badge-list {
             display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .price-old {
+            font-size: 0.85rem;
+            color: #A0AEC0;
+            text-decoration: line-through;
+        }
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
-        .badge-tech {
-            background: rgba(0,229,255,0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
+        .service-time {
+            font-size: 0.75rem;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
-        /* BENEFITS GRID */
+        /* BENEFITS */
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -598,7 +716,7 @@
             color: #0066FF;
         }
 
-        /* SERVICES GRID */
+        /* SERVICES RESUMIDO */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -788,7 +906,7 @@
             <div class="navbar-menu" id="navbarMenu">
                 <a href="#sobre" class="nav-link">Sobre</a>
                 <a href="#portfolio" class="nav-link">Portfólio</a>
-                <a href="#servicos" class="nav-link">Serviços</a>
+                <a href="#catalogo" class="nav-link">Serviços</a>
                 <a href="#precos" class="nav-link">Preços</a>
                 <a href="#faq" class="nav-link">FAQ</a>
                 <a href="https://wa.me/5531984987116" class="nav-cta" target="_blank">Falar Agora →</a>
@@ -803,7 +921,7 @@
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text">
-                <div class="hero-badge">🏆 +27 Dashboards Entregues | 3+ anos de experiência</div>
+                <div class="hero-badge">🏆 +27 Dashboards Entregues | 8+ anos de experiência</div>
                 <h1 class="hero-title">Crio sites e dashboards que <span>transformam dados em decisões</span> e trazem resultados reais</h1>
                 <p class="hero-subtitle">Especialista em visualização de dados, Google Sheets e JavaScript. Seus dados trabalhados com inteligência para você tomar as melhores decisões.</p>
                 <div class="hero-buttons">
@@ -812,7 +930,7 @@
                 </div>
                 <div class="hero-stats">
                     <div><div class="stat-number">27+</div><div class="stat-label">Dashboards Entregues</div></div>
-                    <div><div class="stat-number">3+</div><div class="stat-label">Anos de Experiência</div></div>
+                    <div><div class="stat-number">8+</div><div class="stat-label">Anos de Experiência</div></div>
                     <div><div class="stat-number">100%</div><div class="stat-label">Clientes Satisfeitos</div></div>
                 </div>
             </div>
@@ -838,12 +956,12 @@
         </div>
     </div>
 
-    <!-- SOBRE (COM FOTO E HISTÓRIA REAL) -->
+    <!-- SOBRE -->
     <section id="sobre" class="section section-light">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">👩‍💻 QUEM ESTÁ POR TRÁS</span>
-                <h2>Oi, eu sou a Ana</h2>
+                <h2>Oi, eu sou a Ana Paula</h2>
                 <p>Sua parceira digital para transformar dados em resultados</p>
             </div>
             <div class="about-grid">
@@ -851,12 +969,12 @@
                     <div class="about-avatar">🚀</div>
                 </div>
                 <div class="about-content">
-                    <p>Sou Tecnóloga em Ciência de Dados (último período) e especialista em desenvolver dashboards interativos que ajudam empresas e órgãos públicos a tomar decisões mais inteligentes.</p>
-                    <p>No meu atual trabalho, desenvolvi <strong>27 painéis interativos</strong> para gestão da regulação em saúde, utilizando HTML, CSS, JavaScript puro, Chart.js e integração com Google Sheets em tempo real.</p>
+                    <p>Sou Tecnóloga em Ciência de Dados (último período) e especialista em criar dashboards interativos que ajudam empresas e órgãos públicos a tomar decisões mais inteligentes.</p>
+                    <p>Na Prefeitura de Contagem, desenvolvi <strong>27 painéis interativos</strong> para gestão da regulação em saúde, utilizando HTML, CSS, JavaScript puro, Chart.js e integração com Google Sheets em tempo real.</p>
                     <p>Minha missão é ajudar pequenos negócios e profissionais a terem uma presença digital profissional e ferramentas que realmente tragam resultados — sem enrolação, sem linguagem complicada, com foco no que importa: seu negócio crescer.</p>
                     <div class="hero-stats" style="margin-top: 1rem;">
                         <div><div class="stat-number">27</div><div class="stat-label">Dashboards</div></div>
-                        <div><div class="stat-number">3</div><div class="stat-label">Anos Experiência</div></div>
+                        <div><div class="stat-number">8</div><div class="stat-label">Anos Experiência</div></div>
                         <div><div class="stat-number">100%</div><div class="stat-label">JavaScript Puro</div></div>
                     </div>
                 </div>
@@ -864,7 +982,7 @@
         </div>
     </section>
 
-    <!-- COMO FUNCIONA (tira o medo do cliente) -->
+    <!-- COMO FUNCIONA -->
     <section class="section section-dark">
         <div class="container">
             <div class="section-header">
@@ -881,38 +999,144 @@
         </div>
     </section>
 
-    <!-- PORTFÓLIO REAL (SEUS 27 DASHBOARDS) -->
+    <!-- PORTFÓLIO COM FOTOS DO SEU TRABALHO -->
     <section id="portfolio" class="section section-light">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">🎨 MEUS PROJETOS</span>
-                <h2>+27 Dashboards Entregues</h2>
-                <p>Projetos reais que desenvolvi para a Prefeitura de Contagem e outros clientes</p>
+                <h2>Dashboards Reais que Desenvolvi</h2>
+                <p>Clique nas imagens para ver os projetos completos</p>
             </div>
-            <div class="portfolio-highlight">
-                <h3>🏆 Destaques da minha trajetória</h3>
-                <div class="portfolio-stats">
-                    <div class="portfolio-stat"><div class="portfolio-stat-number">27</div><div>Dashboards Completos</div></div>
-                    <div class="portfolio-stat"><div class="portfolio-stat-number">16</div><div>Planilhas Integradas</div></div>
-                    <div class="portfolio-stat"><div class="portfolio-stat-number">8</div><div>Distritos Sanitários</div></div>
-                    <div class="portfolio-stat"><div class="portfolio-stat-number">10+</div><div>Gráficos por Dashboard</div></div>
+            <div class="portfolio-grid">
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/area%20de%20trabalho.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png?raw=true" alt="Dashboard com gráficos interativos" onerror="this.src='https://placehold.co/600x400/0066FF/white?text=Dashboard'">
+                    <div class="portfolio-overlay">Dashboard com Gráficos Interativos</div>
+                </a>
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/filtros%20dianamicos.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/filtros%20dianamicos.png?raw=true" alt="Painel com filtros dinâmicos" onerror="this.src='https://placehold.co/600x400/7C3AED/white?text=Filtros'">
+                    <div class="portfolio-overlay">Filtros Dinâmicos</div>
+                </a>
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/graficos%20dinamicos%20sincronizados%20com%20tabelas.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20dinamicos%20sincronizados%20com%20tabelas.png?raw=true" alt="Gráficos sincronizados" onerror="this.src='https://placehold.co/600x400/10B981/white?text=Gráficos'">
+                    <div class="portfolio-overlay">Gráficos Sincronizados</div>
+                </a>
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/graficos%20interativos.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20interativos.png?raw=true" alt="Gráficos interativos" onerror="this.src='https://placehold.co/600x400/FF6B6B/white?text=Interativos'">
+                    <div class="portfolio-overlay">Gráficos Interativos</div>
+                </a>
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/paginas%20com%20filtros.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/paginas%20com%20filtros.png?raw=true" alt="Páginas com filtros" onerror="this.src='https://placehold.co/600x400/FFE66D/white?text=Filtros'">
+                    <div class="portfolio-overlay">Páginas com Filtros</div>
+                </a>
+                <a href="https://github.com/datadeshsolucoes-design/servicosdigitais/blob/main/paginas%20com%20menu%20flutuante.png?raw=true" target="_blank" class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/paginas%20com%20menu%20flutuante.png?raw=true" alt="Menu flutuante" onerror="this.src='https://placehold.co/600x400/4ECDC4/white?text=Menu'">
+                    <div class="portfolio-overlay">Menu Flutuante</div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://aninhatata.github.io/portifolio/" target="_blank" class="btn btn-primary">Ver portfólio completo (27 projetos) →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO COMPLETO DE SERVIÇOS (34 SERVIÇOS COM PREÇOS) -->
+    <section id="catalogo" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">📋 CATÁLOGO COMPLETO</span>
+                <h2>+34 Soluções Digitais</h2>
+                <p>Escolha a categoria e encontre o serviço ideal para o seu negócio</p>
+            </div>
+
+            <div class="category-tabs">
+                <button class="tab-btn active" data-target="web">🌐 Web & Sites</button>
+                <button class="tab-btn" data-target="dashboards">📊 Dashboards & Automação</button>
+                <button class="tab-btn" data-target="docs">📄 Docs & Currículos</button>
+                <button class="tab-btn" data-target="design">🎨 Artes & Design</button>
+                <button class="tab-btn" data-target="tech">🛠️ Tech & Suporte</button>
+                <button class="tab-btn" data-target="admin">📋 Admin & Organização</button>
+                <button class="tab-btn" data-target="consultoria">🎤 Consultoria</button>
+            </div>
+
+            <!-- WEB & SITES -->
+            <div id="web" class="tab-content active">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-code"></i></div><h3 class="service-title">Mini-site GitHub Pages (1 página)</h3><p class="service-desc">Página única responsiva com apresentação da empresa, contato e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20o%20Mini-site%20GitHub%20Pages" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-link"></i></div><h3 class="service-title">Mini-site com botões para links</h3><p class="service-desc">Página única com botões configuráveis para links de vendas e redes sociais.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20Mini-site%20com%20botões" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-utensils"></i></div><h3 class="service-title">Páginas HTML (cardápio, ofertas)</h3><p class="service-desc">Página HTML personalizada para exibir menus, ofertas ou conteúdo específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20páginas%20HTML" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-search"></i></div><h3 class="service-title">Site automatizado (vagas 24h)</h3><p class="service-desc">Site que busca e exibe vagas recentes por filtro de cargo/área/cidade.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20site%20de%20vagas" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-newspaper"></i></div><h3 class="service-title">Site agregador de notícias</h3><p class="service-desc">Site que coleta e lista automaticamente notícias/feeds de um nicho específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 600 <span class="price-old">R$ 900</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20agregador%20de%20notícias" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <div class="badge-list">
-                    <span class="badge-tech">📊 Chart.js</span>
-                    <span class="badge-tech">📝 Google Sheets API</span>
-                    <span class="badge-tech">⚡ JavaScript Puro</span>
-                    <span class="badge-tech">🎨 HTML/CSS</span>
-                    <span class="badge-tech">📈 Power Query</span>
-                    <span class="badge-tech">📉 Excel</span>
+            </div>
+
+            <!-- DASHBOARDS & AUTOMAÇÃO -->
+            <div id="dashboards" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-line"></i></div><h3 class="service-title">Painel análise dados (simples) + Sheets</h3><p class="service-desc">Dashboard básico com gráficos que puxa dados de planilha Google.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 350 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20dashboard%20simples" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-bar"></i></div><h3 class="service-title">Painel análise dados (intermediário)</h3><p class="service-desc">Dashboard com múltiplas métricas, filtros e visualizações avançadas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 500 <span class="price-old">R$ 800</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20dashboard%20intermediário" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-calendar-alt"></i></div><h3 class="service-title">Painel com agenda eletrônica</h3><p class="service-desc">Agenda integrada ao Google Sheets/Calendar para agendamento de clientes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20agenda%20eletrônica" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-project-diagram"></i></div><h3 class="service-title">Criação de fluxos de trabalho e automação</h3><p class="service-desc">Mapeamento de processos e configuração de automações (Sheets, e-mails).</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 400 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20automação" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-pie"></i></div><h3 class="service-title">Painéis com gráficos (Dashboards)</h3><p class="service-desc">Dashboard personalizado com KPIs e visualizações para tomada de decisão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 450 <span class="price-old">R$ 700</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20dashboard%20personalizado" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
                 </div>
-                <p style="margin-top: 1.5rem;"><strong>Principais projetos:</strong> Painel Consolidado da Saúde (10+ gráficos), Consolidado de Vagas (lógica de classificação), Pendências por Distrito (integração com 16 planilhas), Ouvidoria, Censo IBGE, Exames Laboratoriais, Distritos Sanitários, entre outros.</p>
-                <a href="https://aninhatata.github.io/portifolio/" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">Ver portfólio completo →</a>
+            </div>
+
+            <!-- DOCS & CURRÍCULOS -->
+            <div id="docs" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-file-alt"></i></div><h3 class="service-title">Currículo digital + GitHub Pages</h3><p class="service-desc">Currículo moderno publicado como página web com link compartilhável.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20currículo%20digital" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-book"></i></div><h3 class="service-title">Criação de eBooks em PDF</h3><p class="service-desc">Produção, layout e exportação de eBook com texto e imagens prontos.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20eBook" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-file-pdf"></i></div><h3 class="service-title">Criação de resumos em PDF</h3><p class="service-desc">Resumo claro e organizado em PDF pronto para distribuição ou estudo.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20resumo%20PDF" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
+            </div>
+
+            <!-- ARTES & DESIGN -->
+            <div id="design" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-id-card"></i></div><h3 class="service-title">Cartão de visita em HTML</h3><p class="service-desc">Cartão digital com arte, dados e link clicável para contato.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20cartão%20de%20visita" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-envelope-open-text"></i></div><h3 class="service-title">Convite digital + Google Forms</h3><p class="service-desc">Convite online com arte, detalhes do evento e formulário RSVP.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20convite%20digital" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-image"></i></div><h3 class="service-title">Banner/post social (arte + legenda)</h3><p class="service-desc">Arte pronta para redes com legenda otimizada para engajamento.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 45 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20banner%20social" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-layer-group"></i></div><h3 class="service-title">Pacote de posts (5 artes + legendas)</h3><p class="service-desc">5 posts prontos para 1 semana de publicações.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 180 <span class="price-old">R$ 300</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20pacote%20de%20posts" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-palette"></i></div><h3 class="service-title">Criação de logotipo simples (vetorial)</h3><p class="service-desc">Logo básico em vetor para web e impressão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20logotipo" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-video"></i></div><h3 class="service-title">Roteiro para vídeo curto (Reels/TikTok)</h3><p class="service-desc">Roteiro otimizado com ganchos, cenas e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20roteiro%20para%20Reels" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-tags"></i></div><h3 class="service-title">Pacote de banners promo (3 modelos)</h3><p class="service-desc">Três banners temáticos para promoções ou anúncios.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20banners%20promocionais" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-brush"></i></div><h3 class="service-title">Identidade visual básica</h3><p class="service-desc">Mini-branding com paleta de cores, fontes e modelo de post.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 250 <span class="price-old">R$ 400</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20identidade%20visual" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
+            </div>
+
+            <!-- TECH & SUPORTE -->
+            <div id="tech" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-laptop"></i></div><h3 class="service-title">Limpeza de PC/notebook (remoto)</h3><p class="service-desc">Otimização remota: remoção de lixo, ajustes e verificação básica.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20limpeza%20de%20PC" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-mobile-alt"></i></div><h3 class="service-title">Limpeza de celular Android</h3><p class="service-desc">Remoção de cache, apps inúteis e orientação para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 60 <span class="price-old">R$ 100</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20limpeza%20de%20celular" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-hdd"></i></div><h3 class="service-title">Backup automático via Google Drive</h3><p class="service-desc">Configuração de backup automático e organização de pastas importantes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 100 <span class="price-old">R$ 160</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20backup%20automático" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-diagnoses"></i></div><h3 class="service-title">Diagnóstico de lentidão + relatório</h3><p class="service-desc">Análise de desempenho e relatório com recomendações práticas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20diagnóstico%20de%20lentidão" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-download"></i></div><h3 class="service-title">Instalação remota de softwares básicos</h3><p class="service-desc">Instalação e configuração de programas essenciais via acesso remoto.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 80 <span class="price-old">R$ 130</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20instalação%20remota" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-images"></i></div><h3 class="service-title">Compactar fotos no Drive</h3><p class="service-desc">Otimização e compressão de imagens no Google Drive para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20compactar%20fotos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
+            </div>
+
+            <!-- ADMIN & ORGANIZAÇÃO -->
+            <div id="admin" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-graduation-cap"></i></div><h3 class="service-title">Pesquisa científica (ABNT)</h3><p class="service-desc">Pesquisa com levantamento bibliográfico e formatação ABNT.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20pesquisa%20ABNT" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-google"></i></div><h3 class="service-title">Formulário Google Forms + coleta</h3><p class="service-desc">Formulário com lógica, validações e planilha de respostas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 70 <span class="price-old">R$ 120</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20formulário%20Google%20Forms" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-edit"></i></div><h3 class="service-title">Edição de arquivos, relatórios e rotinas</h3><p class="service-desc">Edição e padronização de documentos administrativos sob demanda.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">A combinar</div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20edição%20de%20arquivos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-folder-open"></i></div><h3 class="service-title">Organização de arquivos e pastas</h3><p class="service-desc">Reestruturação lógica de pastas, renomeação e categorização.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20organização%20de%20pastas" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
+            </div>
+
+            <!-- CONSULTORIA & APRESENTAÇÕES -->
+            <div id="consultoria" class="tab-content">
+                <div class="services-grid-full">
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chalkboard"></i></div><h3 class="service-title">Apresentações / Slides (até 20 slides)</h3><p class="service-desc">Criação de apresentação visual para PowerPoint/Google Slides.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://wa.me/5531984987116?text=Quero%20apresentação%20de%20slides" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                    <div class="service-card-full"><div class="service-icon-wrapper"><i class="fas fa-chart-simple"></i></div><h3 class="service-title">Análise de sites e redes sociais</h3><p class="service-desc">Auditoria com relatório de melhorias, SEO, UX e plano de ação.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://wa.me/5531984987116?text=Quero%20análise%20de%20site" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- BENEFÍCIOS -->
-    <section class="section section-dark">
+    <section class="section section-light">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">💎 BENEFÍCIOS</span>
@@ -923,24 +1147,6 @@
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-rocket"></i></div><h3>Entrega rápida</h3><p>Projetos prontos em até 7 dias, sem enrolação e com qualidade</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-headset"></i></div><h3>Suporte dedicado</h3><p>30 dias de suporte pós-entrega para garantir que tudo funciona perfeitamente</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-code"></i></div><h3>Código fonte entregue</h3><p>Você é dono do seu projeto. Recebe todos os arquivos e pode modificar quando quiser</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="section section-light">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">📋 SERVIÇOS</span>
-                <h2>Soluções completas para seu negócio</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><div class="service-icon"><i class="fas fa-code"></i></div><h3>Sites Profissionais</h3><p>Sites modernos, rápidos e otimizados para conversão</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Dashboards Interativos</h3><p>Painéis com gráficos dinâmicos e integração com Google Sheets</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-file-alt"></i></div><h3>Currículos Digitais</h3><p>Página exclusiva com seu currículo, link compartilhável e versão PDF</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-robot"></i></div><h3>Automações</h3><p>Processos automatizados que economizam tempo e reduzem erros</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-palette"></i></div><h3>Design Gráfico</h3><p>Identidade visual, posts para redes sociais e materiais promocionais</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-headset"></i></div><h3>Suporte Técnico</h3><p>Manutenção, otimização e suporte remoto</p></div>
             </div>
         </div>
     </section>
@@ -1007,7 +1213,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section"><h4>🚀 DataDesh</h4><p>Soluções digitais que transformam dados em decisões</p></div>
-                <div class="footer-section"><h4>Links</h4><ul><li><a href="#sobre">Sobre</a></li><li><a href="#portfolio">Portfólio</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#precos">Preços</a></li></ul></div>
+                <div class="footer-section"><h4>Links</h4><ul><li><a href="#sobre">Sobre</a></li><li><a href="#portfolio">Portfólio</a></li><li><a href="#catalogo">Serviços</a></li><li><a href="#precos">Preços</a></li></ul></div>
                 <div class="footer-section"><h4>Contato</h4><ul><li><a href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a></li><li><a href="mailto:datadshsolucoes@gmail.com"><i class="far fa-envelope"></i> datadshsolucoes@gmail.com</a></li><li><a href="https://aninhatata.github.io/portifolio/" target="_blank"><i class="fas fa-briefcase"></i> Portfólio completo</a></li></ul></div>
                 <div class="footer-section"><h4>Atendimento</h4><ul><li><i class="far fa-clock"></i> Segunda a Sexta</li><li><i class="fas fa-headset"></i> Suporte Online</li><li><i class="fas fa-rocket"></i> Entrega Rápida</li></ul></div>
             </div>
@@ -1037,6 +1243,20 @@
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
                 item.classList.toggle('active');
+            });
+        });
+
+        // Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                const targetId = btn.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                if (target) target.classList.add('active');
             });
         });
 
@@ -1075,7 +1295,7 @@
                 if (entry.isIntersecting) entry.target.classList.add('fade-in-up');
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.benefit-card, .service-card, .testimonial-card, .pricing-card, .step-card, .about-grid, .portfolio-highlight').forEach(el => observer.observe(el));
+        document.querySelectorAll('.benefit-card, .service-card, .service-card-full, .testimonial-card, .pricing-card, .step-card, .about-grid, .portfolio-item').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
