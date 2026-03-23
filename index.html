@@ -2,21 +2,20 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataDesh Soluções Digitais | Sites, Dashboards e Currículos Profissionais</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DataDesh Soluções Digitais | Sites e Dashboards que Geram Clientes</title>
     
-    <!-- SEO META TAGS -->
-    <meta name="description" content="A DataDesh oferece soluções digitais completas: desenvolvimento de sites, landing pages, dashboards em Google Sheets, currículos profissionais e design gráfico. Transforme seu negócio hoje!">
-    <meta name="keywords" content="desenvolvimento de sites, criação de landing page, dashboard google sheets, currículo profissional, serviços digitais, design gráfico, suporte técnico remoto">
+    <!-- SEO -->
+    <meta name="description" content="Crio sites profissionais e dashboards interativos que transformam visitantes em clientes. Atendimento personalizado, entrega rápida e resultados reais.">
+    <meta name="keywords" content="criação de sites, desenvolvimento web, dashboards, google sheets, landing page, currículo digital, bh, minas gerais">
     <meta name="author" content="DataDesh Soluções Digitais">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://datadeshsolucoes-design.github.io/servicos-digitais/">
     
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="DataDesh Soluções Digitais | Sites, Dashboards e Design">
-    <meta property="og:description" content="+34 serviços digitais profissionais. Transforme sua presença online!">
-    <meta property="og:image" content="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/logo.png">
+    <meta property="og:title" content="DataDesh | Sites que Transformam Visitantes em Clientes">
+    <meta property="og:description" content="Crio sites profissionais e dashboards interativos. Entrega rápida, design moderno e foco em resultado real.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png?raw=true">
     
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,16 +44,43 @@
             padding: 0 24px;
         }
 
-        /* ========== NAVBAR MODERNO COM GRADIENTE ESCURO ========== */
+        /* ========== ANIMAÇÕES ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* ========== NAVBAR ========== */
         .navbar {
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 999;
-            background: linear-gradient(135deg, #0A1929 0%, #0D2D4A 50%, #0A1F3A 100%);
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 229, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 102, 255, 0.2);
             padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
         .navbar-content {
@@ -67,136 +93,95 @@
         .navbar-logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
+            gap: 0.5rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, #00E5FF, #00FF88);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: all 0.3s ease;
+            text-decoration: none;
         }
 
-        .navbar-logo:hover {
-            transform: scale(1.05);
+        .navbar-logo i {
+            background: none;
+            -webkit-text-fill-color: #0066FF;
         }
 
         .navbar-menu {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
-        .navbar-item {
-            position: relative;
-        }
-
         .navbar-link {
-            color: rgba(255, 255, 255, 0.8);
+            color: #FFFFFF;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
             font-weight: 500;
-            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
         .navbar-link:hover {
-            color: #00E5FF;
-            background: rgba(0, 229, 255, 0.1);
-            transform: translateY(-2px);
+            color: #0066FF;
         }
 
         .navbar-cta {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .btn-navbar {
-            padding: 0.6rem 1.3rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-
-        .btn-navbar-outline {
-            background: transparent;
-            border: 2px solid #00E5FF;
-            color: #00E5FF;
-        }
-
-        .btn-navbar-outline:hover {
-            background: rgba(0, 229, 255, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
-        }
-
-        .btn-navbar-primary {
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .btn-navbar-primary:hover {
+        .navbar-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
         }
 
         .navbar-toggle {
             display: none;
             background: none;
             border: none;
-            color: #00E5FF;
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
         }
 
-        /* ========== HERO MODERNO ========== */
-        .hero-moderno {
-            position: relative;
-            min-height: 90vh;
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #F8FAFF 0%, #FFFFFF 50%, #F0F4FE 100%);
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1F2E 50%, #0A0A0A 100%);
+            position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
 
-        .hero-bg-shape {
+        .hero::before {
+            content: '';
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(0,102,255,0.08) 0%, rgba(0,102,255,0) 70%);
-            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%);
             top: -200px;
             right: -200px;
-            animation: floatShape 8s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
         }
 
-        .hero-bg-shape-2 {
+        .hero::after {
+            content: '';
             position: absolute;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, rgba(0,229,255,0) 70%);
-            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
             bottom: -100px;
             left: -100px;
-            animation: floatShape 12s ease-in-out infinite reverse;
+            animation: float 12s ease-in-out infinite reverse;
         }
 
-        @keyframes floatShape {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -20px) scale(1.05); }
-        }
-
-        .hero-content-moderno {
+        .hero-content {
             position: relative;
             z-index: 2;
             display: flex;
@@ -215,39 +200,82 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(0,102,255,0.1);
+            background: rgba(0, 102, 255, 0.2);
             backdrop-filter: blur(10px);
             padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            border-radius: 50px;
             color: #0066FF;
+            font-size: 0.85rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(0,102,255,0.2);
+            border: 1px solid rgba(0, 102, 255, 0.3);
         }
 
-        .hero-title-moderno {
+        .hero-title {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #0A2540 0%, #0066FF 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
         }
 
-        .hero-desc-moderno {
-            font-size: 1.125rem;
-            color: #4A5568;
+        .hero-title span {
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
             margin-bottom: 2rem;
             max-width: 550px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: #0066FF;
+            background: rgba(0, 102, 255, 0.1);
         }
 
         .hero-stats {
             display: flex;
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             flex-wrap: wrap;
         }
 
@@ -257,17 +285,16 @@
         }
 
         .stat-number {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .stat-label {
             font-size: 0.85rem;
-            color: #718096;
+            color: rgba(255,255,255,0.6);
         }
 
         .hero-right {
@@ -276,162 +303,47 @@
             position: relative;
         }
 
-        .hero-card-flutuante {
-            background: rgba(255,255,255,0.95);
+        .hero-card {
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
             border-radius: 32px;
             padding: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-            border: 2px solid rgba(0, 229, 255, 0.2);
-            animation: floatCard 6s ease-in-out infinite;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero-card-flutuante::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #0066FF, #00E5FF, #00FF88);
-        }
-
-        @keyframes floatCard {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .hero-logo-card {
+        .hero-card-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .hero-card-flutuante h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1A1F2E;
+        .hero-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .hero-card-flutuante p {
-            color: #4A5568;
-            font-size: 0.9rem;
+        .hero-card p {
+            color: rgba(255,255,255,0.7);
             margin-bottom: 1rem;
         }
 
-        .price-tag {
+        .hero-card-price {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .price-tag small {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #718096;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0066FF, #0052CC);
-            color: white;
-            box-shadow: 0 4px 14px rgba(0,102,255,0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,102,255,0.4);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-whatsapp:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Trust Bar */
-        .trust-bar {
-            border-top: 1px solid #E2E8F0;
-            border-bottom: 1px solid #E2E8F0;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
-        }
-
-        .trust-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .trust-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
-            color: #0066FF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
-        }
-
-        .trust-text h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-            color: #1A1F2E;
-        }
-
-        .trust-text p {
-            font-size: 0.8rem;
-            color: #718096;
-        }
-
-        /* Seção Geral */
+        /* ========== SEÇÕES GERAIS ========== */
         .section {
             padding: 5rem 0;
         }
 
-        .section-bg {
-            background: linear-gradient(135deg, #F8FAFF 0%, #F0F4FE 100%);
+        .section-dark {
+            background: #0A0A0A;
         }
 
         .section-header {
@@ -442,186 +354,191 @@
         .section-tag {
             display: inline-block;
             padding: 0.25rem 1rem;
-            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
+            background: rgba(0, 102, 255, 0.1);
             color: #0066FF;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         .section-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 700;
-            background: linear-gradient(135deg, #0A2540, #0066FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 1rem;
+            color: #1A1F2E;
+        }
+
+        .section-dark .section-title {
+            color: white;
         }
 
         .section-desc {
-            color: #4A5568;
+            color: #718096;
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
         }
 
-        /* Highlight Cards com Comparativo de Preços */
-        .highlight-grid {
+        .section-dark .section-desc {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ========== BENEFÍCIOS ========== */
+        .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
         }
 
-        .highlight-card {
-            background: white;
-            border: 2px solid #E2E8F0;
-            border-radius: 20px;
-            padding: 2rem;
+        .benefit-card {
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+            border: 1px solid #E2E8F0;
         }
 
-        .highlight-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #0066FF, #00E5FF, #00FF88);
-        }
-
-        .highlight-card:hover {
+        .benefit-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
             border-color: #0066FF;
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
         }
 
-        .highlight-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
-            border-radius: 16px;
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0066FF10, #7C3AED10);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: #0066FF;
             margin: 0 auto 1rem;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+            color: #0066FF;
         }
 
-        .highlight-title {
-            font-size: 1.3rem;
+        .benefit-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #0A2540;
             margin-bottom: 0.5rem;
         }
 
-        .highlight-desc {
+        .benefit-desc {
             color: #718096;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
         }
 
-        /* Comparativo de preços */
-        .price-comparison {
-            background: linear-gradient(135deg, #F8FAFF, #F0F4FE);
-            border-radius: 16px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .market-price {
-            font-size: 0.9rem;
-            color: #A0AEC0;
-            text-decoration: line-through;
-            margin-bottom: 0.25rem;
-        }
-
-        .promo-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .savings-badge {
-            display: inline-block;
-            background: #10B981;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 50px;
-            margin-left: 0.5rem;
-        }
-
-        .btn-card {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            background: linear-gradient(135deg, #0066FF, #0052CC);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
-        }
-
-        .btn-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
-        }
-
-        /* Pacotes */
-        .packages-grid {
+        /* ========== SERVIÇOS ========== */
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .package-card {
+        .service-card {
             background: white;
-            border: 2px solid #E2E8F0;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 2rem;
+            transition: all 0.3s;
+            border: 1px solid #E2E8F0;
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .package-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+        .service-card:hover {
+            transform: translateY(-5px);
             border-color: #0066FF;
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.1);
         }
 
-        .package-card.package-popular {
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-desc {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ========== PORTFÓLIO ========== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid #E2E8F0;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #F0F4FE;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-desc {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+
+        /* ========== PREÇOS ========== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            transition: all 0.3s;
+            border: 1px solid #E2E8F0;
+            position: relative;
+        }
+
+        .pricing-card.popular {
             border: 2px solid #0066FF;
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.25);
-            transform: scale(1.05);
-        }
-
-        .package-card.package-popular:hover {
-            transform: scale(1.05) translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.3);
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15);
         }
 
         .popular-badge {
@@ -629,284 +546,194 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.3rem 1rem;
             border-radius: 50px;
             font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            font-weight: 600;
         }
 
-        .package-icon {
+        .pricing-icon {
             font-size: 2.5rem;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #0066FF;
             margin-bottom: 1rem;
         }
 
-        .package-title {
-            font-size: 1.3rem;
+        .pricing-title {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #0A2540;
             margin-bottom: 0.5rem;
         }
 
-        .package-market-price {
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0066FF;
+            margin: 1rem 0;
+        }
+
+        .pricing-price small {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #718096;
+        }
+
+        .pricing-market {
             font-size: 0.9rem;
             color: #A0AEC0;
             text-decoration: line-through;
-        }
-
-        .package-price {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 1rem;
         }
 
-        .package-features {
+        .pricing-features {
             list-style: none;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
+            margin: 1.5rem 0;
+            text-align: left;
         }
 
-        .package-features li {
+        .pricing-features li {
             padding: 0.5rem 0;
-            color: #4A5568;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 0.9rem;
+            color: #4A5568;
+        }
+
+        .pricing-features i {
+            color: #10B981;
+        }
+
+        /* ========== DEPOIMENTOS ========== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: #0066FF;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: #4A5568;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
         }
 
-        .package-features i {
-            color: #00FF88;
+        .testimonial-name {
             font-weight: 700;
         }
 
-        /* Tabs e Serviços */
-        .category-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.75rem;
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        /* ========== DIFERENCIAIS ========== */
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .differential-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .differential-icon {
+            font-size: 2.5rem;
+            color: #0066FF;
+            margin-bottom: 1rem;
+        }
+
+        .differential-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .differential-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ========== CTA FINAL ========== */
+        .cta-final {
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
+            border-radius: 32px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-final-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-final-desc {
+            color: rgba(255,255,255,0.9);
             margin-bottom: 2rem;
         }
 
-        .tab-btn {
-            padding: 0.7rem 1.5rem;
+        .btn-cta {
             background: white;
-            border: 2px solid #E2E8F0;
-            border-radius: 50px;
-            font-weight: 600;
-            color: #4A5568;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            font-size: 0.85rem;
-        }
-
-        .tab-btn:hover {
-            border-color: #0066FF;
             color: #0066FF;
-            background: rgba(0, 102, 255, 0.05);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #0066FF, #0052CC);
-            color: white;
-            border-color: #0066FF;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .service-card {
-            background: white;
-            border: 2px solid #E2E8F0;
-            border-radius: 20px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,102,255,0.15);
-            border-color: #0066FF;
-        }
-
-        .service-icon-wrapper {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, #E5F0FF, #E0F7FF);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: #0066FF;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
-        }
-
-        .service-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #0A2540;
-        }
-
-        .service-desc {
-            color: #718096;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-
-        .service-price-box {
-            background: linear-gradient(135deg, #F8FAFF, #F0F4FE);
-            padding: 0.75rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid #E2E8F0;
-        }
-
-        .price-label {
-            font-size: 0.7rem;
-            color: #718096;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .price-current {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .price-old {
-            font-size: 0.85rem;
-            color: #A0AEC0;
-            text-decoration: line-through;
-        }
-
-        .service-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid #E2E8F0;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .service-time {
-            font-size: 0.75rem;
-            color: #718096;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        /* CTA */
-        .cta-banner {
-            background: linear-gradient(135deg, #0A1929 0%, #0D2D4A 50%, #0A1F3A 100%);
-            border-radius: 32px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin: 3rem 0;
-            border: 2px solid rgba(0, 229, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .cta-title {
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-desc {
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-outline-light {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            padding: 0.875rem 1.75rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
-            font-weight: 600;
             text-decoration: none;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
+            transition: all 0.3s;
         }
 
-        .btn-outline-light:hover {
-            background: white;
-            color: #0A1929;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* FAQ */
+        /* ========== FAQ ========== */
         .faq-container {
             max-width: 800px;
             margin: 0 auto;
@@ -914,17 +741,10 @@
 
         .faq-item {
             background: white;
-            border: 2px solid #E2E8F0;
+            border: 1px solid #E2E8F0;
             border-radius: 16px;
             margin-bottom: 1rem;
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-item:hover {
-            border-color: #0066FF;
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.15);
         }
 
         .faq-question {
@@ -934,23 +754,14 @@
             align-items: center;
             cursor: pointer;
             font-weight: 700;
-            color: #0A2540;
-        }
-
-        .faq-question i {
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: transform 0.3s;
         }
 
         .faq-answer {
             padding: 0 1.2rem;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s ease;
-            color: #4A5568;
+            transition: all 0.3s;
+            color: #718096;
         }
 
         .faq-item.open .faq-answer {
@@ -958,21 +769,16 @@
             max-height: 300px;
         }
 
-        .faq-item.open .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* Footer */
+        /* ========== FOOTER ========== */
         .footer {
-            background: linear-gradient(135deg, #0A1929 0%, #0D2D4A 100%);
+            background: #0A0A0A;
             color: white;
             padding: 4rem 0 2rem;
-            border-top: 1px solid rgba(0, 229, 255, 0.1);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
         }
@@ -980,19 +786,16 @@
         .footer-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #00E5FF, #00FF88);
+            background: linear-gradient(135deg, #0066FF, #7C3AED);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 1rem;
-            display: inline-block;
         }
 
         .footer-desc {
             color: #94A3B8;
             font-size: 0.85rem;
             margin-bottom: 1.5rem;
-            max-width: 300px;
         }
 
         .footer-social {
@@ -1003,27 +806,23 @@
         .social-link {
             width: 36px;
             height: 36px;
-            background: rgba(0, 229, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #00E5FF;
+            color: white;
             transition: all 0.3s;
-            border: 1px solid rgba(0, 229, 255, 0.2);
         }
 
         .social-link:hover {
-            background: linear-gradient(135deg, #0066FF, #00E5FF);
+            background: #0066FF;
             transform: translateY(-3px);
-            color: white;
-            border-color: transparent;
         }
 
         .footer-title {
             font-size: 1.1rem;
             margin-bottom: 1.2rem;
-            color: white;
         }
 
         .footer-links {
@@ -1038,19 +837,14 @@
             color: #94A3B8;
             text-decoration: none;
             transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
         }
 
         .footer-links a:hover {
-            color: #00E5FF;
-            transform: translateX(5px);
+            color: #0066FF;
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(0, 229, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 2rem;
             display: flex;
             justify-content: space-between;
@@ -1060,6 +854,7 @@
             font-size: 0.8rem;
         }
 
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1073,60 +868,75 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             z-index: 1000;
             transition: all 0.3s;
             text-decoration: none;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.15);
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
         }
 
+        /* Responsividade */
         @media (max-width: 992px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-            .hero-content-moderno { flex-direction: column; text-align: center; }
-            .hero-left { text-align: center; }
-            .hero-desc-moderno { margin-left: auto; margin-right: auto; }
-            .hero-stats { justify-content: center; }
-            .btn-group { justify-content: center; }
-            .navbar-menu { display: none; }
-            .navbar-cta { display: none; }
-            .navbar-toggle { display: block; }
+            .navbar-menu, .navbar-cta {
+                display: none;
+            }
+            .navbar-toggle {
+                display: block;
+            }
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-left {
+                text-align: center;
+            }
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .section { padding: 3rem 0; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .category-tabs { flex-direction: column; align-items: stretch; }
-            .tab-btn { text-align: center; }
-            .services-grid { grid-template-columns: 1fr; }
-            .package-card.package-popular { transform: scale(1); }
-            .package-card.package-popular:hover { transform: translateY(-8px); }
+            .container {
+                padding: 0 20px;
+            }
+            .section {
+                padding: 3rem 0;
+            }
+            .pricing-card.popular {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR MODERNO -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
             <div class="navbar-content">
                 <a href="#" class="navbar-logo">
-                    <i class="fas fa-rocket"></i>
-                    DataDesh
+                    <i class="fas fa-rocket"></i> DataDesh
                 </a>
                 <ul class="navbar-menu">
-                    <li class="navbar-item"><a href="#servicos" class="navbar-link">Serviços</a></li>
-                    <li class="navbar-item"><a href="#pacotes" class="navbar-link">Pacotes</a></li>
-                    <li class="navbar-item"><a href="#faq" class="navbar-link">FAQ</a></li>
+                    <li><a href="#servicos" class="navbar-link">Serviços</a></li>
+                    <li><a href="#portfolio" class="navbar-link">Portfólio</a></li>
+                    <li><a href="#precos" class="navbar-link">Preços</a></li>
+                    <li><a href="#faq" class="navbar-link">FAQ</a></li>
                 </ul>
-                <div class="navbar-cta">
-                    <a href="#servicos" class="btn-navbar btn-navbar-outline">Saiba Mais</a>
-                    <a href="https://wa.me/5531984987116" target="_blank" class="btn-navbar btn-navbar-primary">Falar Agora</a>
-                </div>
+                <a href="https://wa.me/5531984987116" class="navbar-cta" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Fale Comigo
+                </a>
                 <button class="navbar-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1134,450 +944,365 @@
         </div>
     </nav>
 
+    <!-- WhatsApp Float -->
     <a href="https://wa.me/5531984987116?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20DataDesh." class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- HERO MODERNO -->
-    <section class="hero-moderno">
-        <div class="hero-bg-shape"></div>
-        <div class="hero-bg-shape-2"></div>
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="hero-content-moderno">
+            <div class="hero-content">
                 <div class="hero-left">
                     <div class="hero-badge">
-                        <i class="fas fa-star"></i> +34 Serviços Digitais
-                        <i class="fas fa-bolt" style="margin-left: 0.5rem;"></i> Entrega Rápida
+                        <i class="fas fa-star"></i> +34 Projetos Entregues
                     </div>
-                    <h1 class="hero-title-moderno">
-                        Transforme sua<br>
-                        Vida Profissioanl com<br>
-                        <span style="background: linear-gradient(135deg, #0066FF, #00E5FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Soluções Digitais</span>
+                    <h1 class="hero-title">
+                        Crio sites e dashboards que <span>transformam visitantes em clientes</span> todos os dias
                     </h1>
-                    <p class="hero-desc-moderno">
-                        Desenvolvimento de sites, dashboards inteligentes, currículos modernos e design gráfico. Tudo para destacar seu negócio ou carreira.
+                    <p class="hero-desc">
+                        Mesmo que você esteja começando do zero, eu cuido de tudo para você ter uma presença digital profissional que realmente traz resultados.
                     </p>
-                    <div class="btn-group">
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" target="_blank">
-                            <i class="fas fa-file-alt"></i> Solicitar Orçamento
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/5531984987116" class="btn-primary" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Falar comigo agora
                         </a>
-                        <a href="https://wa.me/5531984987116" class="btn btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Falar com Especialista
+                        <a href="#portfolio" class="btn-outline">
+                            Ver Portfólio <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="hero-stats">
                         <div class="stat-item">
                             <span class="stat-number">34+</span>
-                            <span class="stat-label">Serviços Disponíveis</span>
+                            <span class="stat-label">Projetos Entregues</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">5-7</span>
                             <span class="stat-label">Dias de Entrega</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">30</span>
-                            <span class="stat-label">Dias de Garantia</span>
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Clientes Satisfeitos</span>
                         </div>
                     </div>
                 </div>
                 <div class="hero-right">
-                    <div class="hero-card-flutuante">
-                        <div class="hero-logo-card">🚀</div>
-                        <h3>Comece Agora!</h3>
-                        <p>Currículo Digital Profissional</p>
-                        <div class="price-tag">R$ 70<small>,00</small></div>
-                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Link exclusivo + Código fonte + Suporte</p>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="margin-top: 1rem; padding: 0.7rem 1.5rem; font-size: 0.9rem;" target="_blank">Quero este! →</a>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🚀</div>
+                        <h3>Site Profissional</h3>
+                        <p>Design moderno, responsivo e otimizado para conversão</p>
+                        <div class="hero-card-price">a partir de R$ 297</div>
+                        <a href="https://wa.me/5531984987116" class="btn-primary" style="margin-top: 1rem; padding: 0.7rem 1.5rem; display: inline-block;" target="_blank">Quero meu site →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TRUST BAR -->
-    <div class="trust-bar">
-        <div class="container">
-            <div class="trust-content">
-                <div class="trust-item"><div class="trust-icon"><i class="fas fa-handshake"></i></div><div class="trust-text"><h4>Pagamento Seguro</h4><p>50% sinal, 50% na entrega</p></div></div>
-                <div class="trust-item"><div class="trust-icon"><i class="fas fa-clock"></i></div><div class="trust-text"><h4>Prazos Cumpridos</h4><p>Entrega em até 7 dias</p></div></div>
-                <div class="trust-item"><div class="trust-icon"><i class="fas fa-headset"></i></div><div class="trust-text"><h4>Suporte Dedicado</h4><p>30 dias pós-entrega</p></div></div>
-                <div class="trust-item"><div class="trust-icon"><i class="fas fa-code"></i></div><div class="trust-text"><h4>Código Fonte</h4><p>Você recebe todos os arquivos</p></div></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DESTAQUES DA SEMANA COM COMPARATIVO DE PREÇOS -->
-    <section class="section section-bg">
+    <!-- Benefícios -->
+    <section class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">🔥 Ofertas Imperdíveis</span>
-                <h2 class="section-title">Destaques da Semana</h2>
-                <p class="section-desc">Os serviços mais procurados com preços especiais. Compare com o mercado e economize!</p>
+                <span class="section-tag">Por que escolher a DataDesh</span>
+                <h2 class="section-title">O que você ganha com um site profissional</h2>
+                <p class="section-desc">Mais do que um site bonito, você recebe uma ferramenta que trabalha por você</p>
             </div>
-            <div class="highlight-grid">
-                <div class="highlight-card">
-                    <div class="highlight-icon"><i class="fas fa-file-code"></i></div>
-                    <h3 class="highlight-title">Currículo Digital Web</h3>
-                    <p class="highlight-desc">Página exclusiva com seu currículo, otimizada para recrutadores. Link compartilhável e versão em PDF.</p>
-                    <div class="price-comparison">
-                        <div class="market-price">Mercado: R$ 150,00</div>
-                        <div class="promo-price">R$ 70,00 <span class="savings-badge">Economize 53%</span></div>
-                    </div>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn-card" target="_blank">Solicitar Agora <i class="fas fa-arrow-right"></i></a>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="benefit-title">Mais Clientes</h3>
+                    <p class="benefit-desc">Sites otimizados para atrair e converter visitantes em leads e vendas</p>
                 </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon"><i class="fas fa-briefcase"></i></div>
-                    <h3 class="highlight-title">Portfólio Online Completo</h3>
-                    <p class="highlight-desc">Apresente seus melhores trabalhos em uma página profissional. Impressione clientes e empregadores!</p>
-                    <div class="price-comparison">
-                        <div class="market-price">Mercado: R$ 200,00</div>
-                        <div class="promo-price">R$ 100,00 <span class="savings-badge">Economize 50%</span></div>
-                    </div>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn-card" target="_blank">Solicitar Agora <i class="fas fa-arrow-right"></i></a>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="benefit-title">Credibilidade</h3>
+                    <p class="benefit-desc">Presença online profissional que transmite confiança e autoridade</p>
                 </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon"><i class="fas fa-store"></i></div>
-                    <h3 class="highlight-title">Site Simples para Comércio</h3>
-                    <p class="highlight-desc">Sua vitrine digital com fotos, preços e informações do seu negócio. Mais visibilidade, mais vendas!</p>
-                    <div class="price-comparison">
-                        <div class="market-price">Mercado: R$ 400,00</div>
-                        <div class="promo-price">R$ 200,00 <span class="savings-badge">Economize 50%</span></div>
-                    </div>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn-card" target="_blank">Solicitar Agora <i class="fas fa-arrow-right"></i></a>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-rocket"></i></div>
+                    <h3 class="benefit-title">Entrega Rápida</h3>
+                    <p class="benefit-desc">Seu site pronto em até 7 dias, sem enrolação</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3 class="benefit-title">Automação Inteligente</h3>
+                    <p class="benefit-desc">Dashboards e integrações com Google Sheets para controle total</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PACOTES PROMOCIONAIS COM COMPARATIVO -->
-    <section id="pacotes" class="section">
+    <!-- Serviços -->
+    <section id="servicos" class="section section-dark">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">💰 Economize Agora</span>
-                <h2 class="section-title">Pacotes Promocionais</h2>
-                <p class="section-desc">Combine serviços e tenha ainda mais desconto! Compare com os valores de mercado.</p>
-            </div>
-            <div class="packages-grid">
-                <div class="package-card">
-                    <i class="package-icon fas fa-rocket"></i>
-                    <h3 class="package-title">Pacote Start</h3>
-                    <div class="package-market-price">Mercado: R$ 450</div>
-                    <div class="package-price">R$ 247</div>
-                    <div class="savings-badge" style="display: inline-block; margin-bottom: 1rem;">Economize 45%</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> Currículo Digital</li>
-                        <li><i class="fas fa-check"></i> Landing Page (1 página)</li>
-                        <li><i class="fas fa-check"></i> Hospedagem GitHub Pages</li>
-                        <li><i class="fas fa-check"></i> 30 dias de suporte</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" target="_blank">Garantir</a>
-                </div>
-                <div class="package-card package-popular">
-                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
-                    <i class="package-icon fas fa-briefcase"></i>
-                    <h3 class="package-title">Pacote Profissional</h3>
-                    <div class="package-market-price">Mercado: R$ 650</div>
-                    <div class="package-price">R$ 350</div>
-                    <div class="savings-badge" style="display: inline-block; margin-bottom: 1rem;">Economize 46%</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> Currículo Digital</li>
-                        <li><i class="fas fa-check"></i> Portfólio Online</li>
-                        <li><i class="fas fa-check"></i> Landing Page</li>
-                        <li><i class="fas fa-check"></i> Suporte 30 dias</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" target="_blank">Garantir</a>
-                </div>
-                <div class="package-card">
-                    <i class="package-icon fas fa-crown"></i>
-                    <h3 class="package-title">Pacote Premium</h3>
-                    <div class="package-market-price">Mercado: R$ 1.200</div>
-                    <div class="package-price">R$ 597</div>
-                    <div class="savings-badge" style="display: inline-block; margin-bottom: 1rem;">Economize 50%</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> Site Completo (5 páginas)</li>
-                        <li><i class="fas fa-check"></i> Dashboard com Sheets</li>
-                        <li><i class="fas fa-check"></i> Identidade Visual</li>
-                        <li><i class="fas fa-check"></i> Suporte 60 dias</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" target="_blank">Garantir</a>
-                </div>
-                <div class="package-card">
-                    <i class="package-icon fas fa-layer-group"></i>
-                    <h3 class="package-title">Kit Completo</h3>
-                    <div class="package-market-price">Mercado: R$ 550</div>
-                    <div class="package-price">R$ 297</div>
-                    <div class="savings-badge" style="display: inline-block; margin-bottom: 1rem;">Economize 46%</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> Currículo Digital</li>
-                        <li><i class="fas fa-check"></i> Portfólio Online</li>
-                        <li><i class="fas fa-check"></i> Versão em PDF</li>
-                        <li><i class="fas fa-check"></i> Link Exclusivo</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" target="_blank">Garantir</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NOVOS SERVIÇOS: CONSULTORIA E MARKETING DIGITAL -->
-    <section class="section section-bg">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">✨ Novidades</span>
-                <h2 class="section-title">Serviços Exclusivos</h2>
-                <p class="section-desc">Soluções completas para alavancar seu negócio no ambiente digital</p>
+                <span class="section-tag">O que eu faço</span>
+                <h2 class="section-title">Soluções Digitais Completas</h2>
+                <p class="section-desc">Do site básico ao dashboard avançado, tenho a solução ideal para o seu negócio</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="service-title">Consultoria de Marketing Digital</h3>
-                    <p class="service-desc">Estratégias personalizadas para aumentar suas vendas e presença online. Análise de concorrência, público-alvo e canais ideais.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento</span>
-                        <div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> 7 dias</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="service-title">Sites Profissionais</h3>
+                    <p class="service-desc">Landing pages, institucionais e sites completos com design moderno e responsivo</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-search"></i></div>
-                    <h3 class="service-title">Otimização SEO Completa</h3>
-                    <p class="service-desc">Apareça no Google! Otimização completa do seu site para os mecanismos de busca. Aumente seu tráfego orgânico.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento</span>
-                        <div class="price-current">R$ 400 <span class="price-old">R$ 700</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> 7 dias</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="service-title">Dashboards Interativos</h3>
+                    <p class="service-desc">Painéis com gráficos dinâmicos, filtros e integração com Google Sheets</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-calendar-check"></i></div>
-                    <h3 class="service-title">Gestão de Redes Sociais (Mensal)</h3>
-                    <p class="service-desc">Criação de conteúdo, agendamento de posts e interação com seguidores. Pacote mensal com relatórios de resultados.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento (mensal)</span>
-                        <div class="price-current">R$ 250 <span class="price-old">R$ 450</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> Mensal</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3 class="service-title">Currículos Digitais</h3>
+                    <p class="service-desc">Página exclusiva com seu currículo, link compartilhável e versão em PDF</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-envelope-open-text"></i></div>
-                    <h3 class="service-title">Email Marketing Automatizado</h3>
-                    <p class="service-desc">Configuração de campanhas de email marketing com automação, segmentação e análise de resultados.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento</span>
-                        <div class="price-current">R$ 350 <span class="price-old">R$ 600</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> 7 dias</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="service-title">Automações</h3>
+                    <p class="service-desc">Fluxos de trabalho, integrações com planilhas e processos automatizados</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-chart-simple"></i></div>
-                    <h3 class="service-title">Relatórios de Desempenho</h3>
-                    <p class="service-desc">Relatórios detalhados com análise de métricas do seu site, redes sociais e campanhas. Tome decisões baseadas em dados.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento</span>
-                        <div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> 5 dias</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="service-title">Identidade Visual</h3>
+                    <p class="service-desc">Logotipos, paletas de cores e design gráfico para suas redes sociais</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-wrapper"><i class="fas fa-shield-alt"></i></div>
-                    <h3 class="service-title">Manutenção Mensal de Sites</h3>
-                    <p class="service-desc">Plano de manutenção preventiva: backups, atualizações, segurança e suporte técnico prioritário.</p>
-                    <div class="service-price-box">
-                        <span class="price-label">Investimento (mensal)</span>
-                        <div class="price-current">R$ 150 <span class="price-old">R$ 300</span></div>
-                    </div>
-                    <div class="service-footer">
-                        <span class="service-time"><i class="far fa-clock"></i> Mensal</span>
-                        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="service-title">Suporte Técnico</h3>
+                    <p class="service-desc">Manutenção, otimização e suporte remoto para seu PC ou celular</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CATÁLOGO COMPLETO DE SERVIÇOS (mantido como estava) -->
-    <section id="servicos" class="section">
+    <!-- Portfólio com imagens reais -->
+    <section id="portfolio" class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">📋 Catálogo Completo</span>
-                <h2 class="section-title">+34 Soluções Digitais</h2>
-                <p class="section-desc">Escolha a categoria e encontre o serviço ideal para o seu negócio</p>
+                <span class="section-tag">Meus Trabalhos</span>
+                <h2 class="section-title">Projetos Reais</h2>
+                <p class="section-desc">Veja na prática o que eu posso fazer pelo seu negócio</p>
             </div>
-
-            <div class="category-tabs">
-                <button class="tab-btn active" data-target="web">🌐 Web & Sites</button>
-                <button class="tab-btn" data-target="dashboards">📊 Dashboards & Automação</button>
-                <button class="tab-btn" data-target="docs">📄 Docs & Currículos</button>
-                <button class="tab-btn" data-target="design">🎨 Artes & Design</button>
-                <button class="tab-btn" data-target="tech">🛠️ Tech & Suporte</button>
-                <button class="tab-btn" data-target="admin">📋 Admin & Organização</button>
-                <button class="tab-btn" data-target="consultoria">🎤 Consultoria</button>
-            </div>
-
-            <!-- WEB & SITES -->
-            <div id="web" class="tab-content active">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-code"></i></div><h3 class="service-title">Mini-site GitHub Pages (1 página)</h3><p class="service-desc">Página única responsiva com apresentação da empresa, contato e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-link"></i></div><h3 class="service-title">Mini-site com botões para links</h3><p class="service-desc">Página única com botões configuráveis para links de vendas e redes sociais.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-utensils"></i></div><h3 class="service-title">Páginas HTML (cardápio, ofertas)</h3><p class="service-desc">Página HTML personalizada para exibir menus, ofertas ou conteúdo específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-search"></i></div><h3 class="service-title">Site automatizado (vagas 24h)</h3><p class="service-desc">Site que busca e exibe vagas recentes por filtro de cargo/área/cidade.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-newspaper"></i></div><h3 class="service-title">Site agregador de notícias</h3><p class="service-desc">Site que coleta e lista automaticamente notícias/feeds de um nicho específico.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 600 <span class="price-old">R$ 900</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png?raw=true" alt="Dashboard com gráficos interativos" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/0066FF/white?text=Dashboard+Interativo'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Dashboard com Gráficos Interativos</h3>
+                        <p class="portfolio-desc">Painel completo com cards, gráficos e dados sincronizados com planilhas</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- DASHBOARDS & AUTOMAÇÃO -->
-            <div id="dashboards" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-chart-line"></i></div><h3 class="service-title">Painel análise dados (simples) + Sheets</h3><p class="service-desc">Dashboard básico com gráficos que puxa dados de planilha Google.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 350 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-chart-bar"></i></div><h3 class="service-title">Painel análise dados (intermediário)</h3><p class="service-desc">Dashboard com múltiplas métricas, filtros e visualizações avançadas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 500 <span class="price-old">R$ 800</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-calendar-alt"></i></div><h3 class="service-title">Painel com agenda eletrônica</h3><p class="service-desc">Agenda integrada ao Google Sheets/Calendar para agendamento de clientes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-project-diagram"></i></div><h3 class="service-title">Criação de fluxos de trabalho e automação</h3><p class="service-desc">Mapeamento de processos e configuração de automações (Sheets, e-mails).</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 400 <span class="price-old">R$ 600</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-chart-pie"></i></div><h3 class="service-title">Painéis com gráficos (Dashboards)</h3><p class="service-desc">Dashboard personalizado com KPIs e visualizações para tomada de decisão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 450 <span class="price-old">R$ 700</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/filtros%20dianamicos.png?raw=true" alt="Painel com filtros dinâmicos" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/7C3AED/white?text=Filtros+Dinâmicos'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Painel com Filtros Dinâmicos</h3>
+                        <p class="portfolio-desc">Filtros por grupo, subgrupo e caixas de seleção para análise de dados</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- DOCS & CURRÍCULOS -->
-            <div id="docs" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-file-alt"></i></div><h3 class="service-title">Currículo digital + GitHub Pages</h3><p class="service-desc">Currículo moderno publicado como página web com link compartilhável.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-book"></i></div><h3 class="service-title">Criação de eBooks em PDF</h3><p class="service-desc">Produção, layout e exportação de eBook com texto e imagens prontos.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 200 <span class="price-old">R$ 350</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-file-pdf"></i></div><h3 class="service-title">Criação de resumos em PDF</h3><p class="service-desc">Resumo claro e organizado em PDF pronto para distribuição ou estudo.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20dinamicos%20sincronizados%20com%20tabelas.png?raw=true" alt="Gráficos sincronizados" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/10B981/white?text=Gráficos+Sincronizados'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Gráficos Sincronizados</h3>
+                        <p class="portfolio-desc">Visualizações dinâmicas conectadas com tabelas em tempo real</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- ARTES & DESIGN -->
-            <div id="design" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-id-card"></i></div><h3 class="service-title">Cartão de visita em HTML</h3><p class="service-desc">Cartão digital com arte, dados e link clicável para contato.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 90</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-envelope-open-text"></i></div><h3 class="service-title">Convite digital + Google Forms</h3><p class="service-desc">Convite online com arte, detalhes do evento e formulário RSVP.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-image"></i></div><h3 class="service-title">Banner/post social (arte + legenda)</h3><p class="service-desc">Arte pronta para redes com legenda otimizada para engajamento.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 45 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-layer-group"></i></div><h3 class="service-title">Pacote de posts (5 artes + legendas)</h3><p class="service-desc">5 posts prontos para 1 semana de publicações.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 180 <span class="price-old">R$ 300</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-palette"></i></div><h3 class="service-title">Criação de logotipo simples (vetorial)</h3><p class="service-desc">Logo básico em vetor para web e impressão.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-video"></i></div><h3 class="service-title">Roteiro para vídeo curto (Reels/TikTok)</h3><p class="service-desc">Roteiro otimizado com ganchos, cenas e CTA.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-tags"></i></div><h3 class="service-title">Pacote de banners promo (3 modelos)</h3><p class="service-desc">Três banners temáticos para promoções ou anúncios.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-brush"></i></div><h3 class="service-title">Identidade visual básica</h3><p class="service-desc">Mini-branding com paleta de cores, fontes e modelo de post.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 250 <span class="price-old">R$ 400</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/paginas%20com%20filtros.png?raw=true" alt="Páginas com filtros" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/FF6B6B/white?text=Páginas+Filtros'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Páginas com Filtros e Cards</h3>
+                        <p class="portfolio-desc">Interface com botões atualizar, exportar e cards dinâmicos</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- TECH & SUPORTE -->
-            <div id="tech" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-laptop"></i></div><h3 class="service-title">Limpeza de PC/notebook (remoto)</h3><p class="service-desc">Otimização remota: remoção de lixo, ajustes e verificação básica.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-mobile-alt"></i></div><h3 class="service-title">Limpeza de celular Android</h3><p class="service-desc">Remoção de cache, apps inúteis e orientação para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 60 <span class="price-old">R$ 100</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-hdd"></i></div><h3 class="service-title">Backup automático via Google Drive</h3><p class="service-desc">Configuração de backup automático e organização de pastas importantes.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 100 <span class="price-old">R$ 160</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-diagnoses"></i></div><h3 class="service-title">Diagnóstico de lentidão + relatório</h3><p class="service-desc">Análise de desempenho e relatório com recomendações práticas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 90 <span class="price-old">R$ 150</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-download"></i></div><h3 class="service-title">Instalação remota de softwares básicos</h3><p class="service-desc">Instalação e configuração de programas essenciais via acesso remoto.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 80 <span class="price-old">R$ 130</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-images"></i></div><h3 class="service-title">Compactar fotos no Drive</h3><p class="service-desc">Otimização e compressão de imagens no Google Drive para liberar espaço.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 50 <span class="price-old">R$ 80</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/paginas%20com%20menu%20flutuante.png?raw=true" alt="Menu flutuante" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/4ECDC4/white?text=Menu+Flutuante'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Menu Flutuante Interativo</h3>
+                        <p class="portfolio-desc">Navegação moderna e intuitiva para melhor experiência do usuário</p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- ADMIN & ORGANIZAÇÃO -->
-            <div id="admin" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-graduation-cap"></i></div><h3 class="service-title">Pesquisa científica (ABNT)</h3><p class="service-desc">Pesquisa com levantamento bibliográfico e formatação ABNT.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-google"></i></div><h3 class="service-title">Formulário Google Forms + coleta</h3><p class="service-desc">Formulário com lógica, validações e planilha de respostas.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 70 <span class="price-old">R$ 120</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-edit"></i></div><h3 class="service-title">Edição de arquivos, relatórios e rotinas</h3><p class="service-desc">Edição e padronização de documentos administrativos sob demanda.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">A combinar</div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-folder-open"></i></div><h3 class="service-title">Organização de arquivos e pastas</h3><p class="service-desc">Reestruturação lógica de pastas, renomeação e categorização.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 120 <span class="price-old">R$ 200</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                </div>
-            </div>
-
-            <!-- CONSULTORIA & APRESENTAÇÕES -->
-            <div id="consultoria" class="tab-content">
-                <div class="services-grid">
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-chalkboard"></i></div><h3 class="service-title">Apresentações / Slides (até 20 slides)</h3><p class="service-desc">Criação de apresentação visual para PowerPoint/Google Slides.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 150 <span class="price-old">R$ 250</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 5 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
-                    <div class="service-card"><div class="service-icon-wrapper"><i class="fas fa-chart-simple"></i></div><h3 class="service-title">Análise de sites e redes sociais</h3><p class="service-desc">Auditoria com relatório de melhorias, SEO, UX e plano de ação.</p><div class="service-price-box"><span class="price-label">Investimento</span><div class="price-current">R$ 300 <span class="price-old">R$ 500</span></div></div><div class="service-footer"><span class="service-time"><i class="far fa-clock"></i> 7 dias</span><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" target="_blank">Solicitar</a></div></div>
+                <div class="portfolio-item">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/paineis%20com%20graficos%20indicadores.png?raw=true" alt="Gráficos indicadores" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/FFE66D/white?text=Indicadores'">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Painel com Indicadores</h3>
+                        <p class="portfolio-desc">Métricas e KPIs em tempo real para tomada de decisão</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA BANNER -->
+    <!-- Preços (Estratégia de Valor) -->
+    <section id="precos" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Investimento</span>
+                <h2 class="section-title">Planos que cabem no seu bolso</h2>
+                <p class="section-desc">Escolha o plano ideal para o seu momento. Preços acessíveis com qualidade profissional.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <i class="pricing-icon fas fa-rocket"></i>
+                    <h3 class="pricing-title">Plano Inicial</h3>
+                    <div class="pricing-market">Mercado: R$ 450</div>
+                    <div class="pricing-price">R$ 297</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Site 1 página (Landing Page)</li>
+                        <li><i class="fas fa-check"></i> Design responsivo (celular)</li>
+                        <li><i class="fas fa-check"></i> Botão WhatsApp integrado</li>
+                        <li><i class="fas fa-check"></i> Entrega em 5 dias</li>
+                        <li><i class="fas fa-check"></i> 30 dias de suporte</li>
+                    </ul>
+                    <a href="https://wa.me/5531984987116" class="btn-primary" style="width: 100%; text-align: center; display: block;" target="_blank">Quero esse →</a>
+                </div>
+                <div class="pricing-card popular">
+                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
+                    <i class="pricing-icon fas fa-briefcase"></i>
+                    <h3 class="pricing-title">Plano Profissional</h3>
+                    <div class="pricing-market">Mercado: R$ 800</div>
+                    <div class="pricing-price">R$ 697</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Site até 5 páginas</li>
+                        <li><i class="fas fa-check"></i> Design personalizado</li>
+                        <li><i class="fas fa-check"></i> Otimização para Google (SEO)</li>
+                        <li><i class="fas fa-check"></i> Formulário de contato</li>
+                        <li><i class="fas fa-check"></i> 30 dias de suporte</li>
+                    </ul>
+                    <a href="https://wa.me/5531984987116" class="btn-primary" style="width: 100%; text-align: center; display: block;" target="_blank">Quero esse →</a>
+                </div>
+                <div class="pricing-card">
+                    <i class="pricing-icon fas fa-crown"></i>
+                    <h3 class="pricing-title">Plano Premium</h3>
+                    <div class="pricing-market">Mercado: R$ 1.500</div>
+                    <div class="pricing-price">R$ 1.297</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Site completo + Dashboard</li>
+                        <li><i class="fas fa-check"></i> Integração com Google Sheets</li>
+                        <li><i class="fas fa-check"></i> Design exclusivo</li>
+                        <li><i class="fas fa-check"></i> Copy otimizada para vendas</li>
+                        <li><i class="fas fa-check"></i> 60 dias de suporte prioritário</li>
+                    </ul>
+                    <a href="https://wa.me/5531984987116" class="btn-primary" style="width: 100%; text-align: center; display: block;" target="_blank">Quero esse →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos (Prova Social) -->
     <section class="section">
         <div class="container">
-            <div class="cta-banner">
-                <h2 class="cta-title">Pronto para Transformar sua Presença Digital?</h2>
-                <p class="cta-desc">Não perca mais tempo. Solicite um orçamento gratuito agora mesmo!</p>
-                <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" class="btn-outline-light" target="_blank">
-                    <i class="fas fa-paper-plane"></i> Solicitar Orçamento
-                </a>
+            <div class="section-header">
+                <span class="section-tag">O que falam de mim</span>
+                <h2 class="section-title">Clientes Satisfeitos</h2>
+                <p class="section-desc">Resultados reais que me orgulham de compartilhar</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Contratei a DataDesh para meu site e em 1 semana já recebi 3 clientes! O site ficou lindo e super funcional. Recomendo demais!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div>
+                            <div class="testimonial-name">Maria Silva</div>
+                            <div class="testimonial-role">Consultora de Imagem</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"O dashboard que ela fez salvou meu negócio. Agora tenho controle total dos meus dados e consigo tomar decisões muito mais rápidas."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">J</div>
+                        <div>
+                            <div class="testimonial-name">João Santos</div>
+                            <div class="testimonial-role">Pequeno Empresário</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Site rápido, bonito e funcionou perfeitamente no celular. A DataDesh entendeu exatamente o que eu precisava. Super recomendo!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div>
+                            <div class="testimonial-name">Ana Oliveira</div>
+                            <div class="testimonial-role">Fotógrafa</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="section section-bg">
+    <!-- Diferenciais -->
+    <section class="section section-dark">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">❓ Dúvidas Frequentes</span>
-                <h2 class="section-title">FAQ</h2>
-                <p class="section-desc">Encontre respostas para as perguntas mais comuns</p>
+                <span class="section-tag">Meus Diferenciais</span>
+                <h2 class="section-title">Por que escolher a DataDesh?</h2>
+                <p class="section-desc">Atendimento personalizado e foco em resultados reais</p>
+            </div>
+            <div class="differentials-grid">
+                <div class="differential-card">
+                    <div class="differential-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="differential-title">Atendimento Personalizado</h3>
+                    <p class="differential-desc">Entendo seu negócio antes de criar qualquer coisa</p>
+                </div>
+                <div class="differential-card">
+                    <div class="differential-icon"><i class="fas fa-language"></i></div>
+                    <h3 class="differential-title">Linguagem Simples</h3>
+                    <p class="differential-desc">Nada de termos técnicos. Explico tudo de forma clara</p>
+                </div>
+                <div class="differential-card">
+                    <div class="differential-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="differential-title">Código Fonte Entregue</h3>
+                    <p class="differential-desc">Você é dono do seu site. Recebe todos os arquivos</p>
+                </div>
+                <div class="differential-card">
+                    <div class="differential-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="differential-title">Suporte Contínuo</h3>
+                    <p class="differential-desc">30 dias de suporte gratuito após a entrega</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <div class="container">
+        <div class="cta-final">
+            <h2 class="cta-final-title">Não perca mais clientes por não ter presença digital</h2>
+            <p class="cta-final-desc">Comece agora e tenha um site profissional em até 7 dias</p>
+            <a href="https://wa.me/5531984987116" class="btn-cta" target="_blank">
+                <i class="fab fa-whatsapp"></i> Quero meu site agora
+            </a>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Dúvidas</span>
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-desc">Tire suas dúvidas sobre o processo</p>
             </div>
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
-                        Como funciona o processo de desenvolvimento?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Nosso processo é simples: você nos envia os requisitos, fazemos uma proposta, você aprova, recebe 50% de sinal, desenvolvemos, entregamos e recebemos os 50% restantes. Você tem 30 dias de suporte pós-entrega.
-                    </div>
+                    <div class="faq-question">Como funciona o processo? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">1) Você me chama no WhatsApp; 2) Alinhamos os detalhes do seu projeto; 3) Você aprova e paga 50% de sinal; 4) Desenvolvo seu site; 5) Você aprova e paga os 50% restantes. Pronto!</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
-                        Qual é o prazo de entrega?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Nossos prazos variam de 5 a 7 dias úteis, dependendo da complexidade do projeto. Projetos mais simples podem ser entregues em menos tempo!
-                    </div>
+                    <div class="faq-question">Qual o prazo de entrega? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Entre 5 a 7 dias úteis, dependendo da complexidade do projeto. Sites mais simples podem ser entregues em menos tempo.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
-                        Vocês oferecem suporte após a entrega?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Sim! Oferecemos 30 dias de suporte técnico gratuito após a entrega. Pacotes premium incluem até 60 dias de suporte.
-                    </div>
+                    <div class="faq-question">Preciso saber programação? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Não! Eu cuido de tudo. Você só precisa me passar as informações do seu negócio e as fotos que quer usar. O resto é comigo.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
-                        Recebo o código fonte do meu projeto?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Sim! Você recebe todos os arquivos de código fonte, podendo modificar ou usar como base para futuros projetos.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Posso parcelar o pagamento?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Sim! Trabalhamos com 50% de sinal e 50% na entrega. Para valores maiores, podemos negociar parcelamento no cartão de crédito via link de pagamento.
-                    </div>
+                    <div class="faq-question">E se eu precisar de ajustes depois? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Ofereço 30 dias de suporte gratuito para pequenos ajustes. Para alterações maiores, combinamos um valor justo.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1585,7 +1310,7 @@
                     <div class="footer-logo">
                         <i class="fas fa-rocket"></i> DataDesh
                     </div>
-                    <p class="footer-desc">DataDesh Soluções Digitais - Transformando negócios através de tecnologia e design inovador.</p>
+                    <p class="footer-desc">Transformando negócios através de tecnologia e design inovador.</p>
                     <div class="footer-social">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
@@ -1593,38 +1318,32 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="footer-title">Serviços</h4>
+                    <h4 class="footer-title">Links Rápidos</h4>
                     <ul class="footer-links">
-                        <li><a href="#servicos"><i class="fas fa-arrow-right"></i> Sites Profissionais</a></li>
-                        <li><a href="#servicos"><i class="fas fa-arrow-right"></i> Landing Pages</a></li>
-                        <li><a href="#servicos"><i class="fas fa-arrow-right"></i> Dashboards</a></li>
-                        <li><a href="#servicos"><i class="fas fa-arrow-right"></i> Currículos Digitais</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="footer-title">Pacotes</h4>
-                    <ul class="footer-links">
-                        <li><a href="#pacotes"><i class="fas fa-arrow-right"></i> Pacote Start</a></li>
-                        <li><a href="#pacotes"><i class="fas fa-arrow-right"></i> Pacote Profissional</a></li>
-                        <li><a href="#pacotes"><i class="fas fa-arrow-right"></i> Pacote Premium</a></li>
-                        <li><a href="#pacotes"><i class="fas fa-arrow-right"></i> Kit Completo</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#precos">Preços</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="footer-title">Contato</h4>
                     <ul class="footer-links">
-                        <li><a href="https://wa.me/5531984987116"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a></li>
-                        <li><a href="mailto:datadshsolucoes@gmail.com"><i class="fas fa-envelope"></i> datadshsolucoes@gmail.com</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> Atendimento Online</a></li>
+                        <li><a href="https://wa.me/5531984987116">WhatsApp: (31) 98498-7116</a></li>
+                        <li><a href="mailto:datadshsolucoes@gmail.com">datadshsolucoes@gmail.com</a></li>
+                        <li><a href="#">Atendimento Online</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Formulário</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/preview" target="_blank">Solicitar Orçamento</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 DataDesh Soluções Digitais. Todos os direitos reservados.</p>
-                <div>
-                    <a href="#" style="color: #94A3B8; text-decoration: none; margin-right: 1rem;">Política de Privacidade</a>
-                    <a href="#" style="color: #94A3B8; text-decoration: none;">Termos de Serviço</a>
-                </div>
+                <p>Transformando visitantes em clientes</p>
             </div>
         </div>
     </footer>
@@ -1633,33 +1352,8 @@
         // FAQ Toggle
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                faqItem.classList.toggle('open');
-            });
-        });
-
-        // Tab switching
-        const btns = document.querySelectorAll('.tab-btn');
-        const contents = document.querySelectorAll('.tab-content');
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                btns.forEach(b => b.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.target).classList.add('active');
-            });
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === "#" || href === "") return;
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+                const item = this.parentElement;
+                item.classList.toggle('open');
             });
         });
 
@@ -1678,9 +1372,46 @@
                     cta.style.display = 'flex';
                     menu.style.flexDirection = 'column';
                     cta.style.flexDirection = 'column';
+                    menu.style.position = 'absolute';
+                    menu.style.top = '70px';
+                    menu.style.left = '0';
+                    menu.style.width = '100%';
+                    menu.style.background = '#0A0A0A';
+                    menu.style.padding = '2rem';
+                    menu.style.gap = '1rem';
+                    cta.style.position = 'absolute';
+                    cta.style.top = '250px';
+                    cta.style.left = '0';
+                    cta.style.width = '100%';
+                    cta.style.textAlign = 'center';
                 }
             });
         }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === "#" || href === "") return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.padding = '0.8rem 0';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.padding = '1rem 0';
+            }
+        });
     </script>
 </body>
 </html>
