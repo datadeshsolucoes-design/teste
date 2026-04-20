@@ -54,7 +54,6 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
     }
 
     img {
@@ -294,10 +293,7 @@
     .hero {
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(245,158,11,0.15), transparent 28%),
-        radial-gradient(circle at right 10%, rgba(15,118,110,0.20), transparent 22%),
-        linear-gradient(135deg, #0c1426 0%, #101b30 45%, #0f2b33 100%);
+      background: linear-gradient(135deg, #0c1426 0%, #101b30 45%, #0f2b33 100%);
       color: white;
       padding: 88px 0 72px;
     }
@@ -306,9 +302,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
       background-size: 36px 36px;
       mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.25));
       pointer-events: none;
@@ -378,7 +372,6 @@
     }
 
     .hero-panel {
-      position: relative;
       background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 32px;
@@ -387,51 +380,11 @@
       backdrop-filter: blur(16px);
     }
 
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      inset: auto 18px -18px 18px;
-      height: 42px;
-      background: rgba(0,0,0,0.25);
-      filter: blur(24px);
-      border-radius: 999px;
-      z-index: -1;
-    }
-
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: block;
-      background: rgba(255,255,255,0.25);
-    }
-
-    .panel-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.7);
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
     .mockup-window {
       background: rgba(255,255,255,0.94);
       border-radius: 24px;
       padding: 18px;
       color: var(--dark);
-      overflow: hidden;
     }
 
     .mockup-banner {
@@ -440,17 +393,6 @@
       padding: 18px;
       color: white;
       margin-bottom: 16px;
-    }
-
-    .mockup-banner small {
-      display: block;
-      opacity: .8;
-      margin-bottom: 4px;
-    }
-
-    .mockup-banner strong {
-      font-size: 1.15rem;
-      line-height: 1.2;
     }
 
     .mockup-grid {
@@ -465,7 +407,6 @@
       border: 1px solid #e8eef5;
       border-radius: 18px;
       padding: 14px;
-      min-height: 108px;
     }
 
     .mockup-card i {
@@ -479,17 +420,6 @@
       margin-bottom: 10px;
     }
 
-    .mockup-card strong {
-      display: block;
-      font-size: .96rem;
-      margin-bottom: 6px;
-    }
-
-    .mockup-card span {
-      font-size: .82rem;
-      color: #667085;
-    }
-
     .mockup-footer {
       display: flex;
       align-items: center;
@@ -499,17 +429,6 @@
       border-radius: 16px;
       background: #f8fafc;
       border: 1px solid #e8eef5;
-    }
-
-    .mockup-footer .mini {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
-    .mockup-price {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--primary);
     }
 
     /* TRUST BAR */
@@ -528,7 +447,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      align-items: center;
     }
 
     .trust-item {
@@ -547,19 +465,6 @@
       display: grid;
       place-items: center;
       font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .trust-item strong {
-      display: block;
-      font-size: .96rem;
-      color: var(--dark);
-      margin-bottom: 2px;
-    }
-
-    .trust-item span {
-      font-size: .84rem;
-      color: var(--muted);
     }
 
     /* ABOUT */
@@ -570,24 +475,7 @@
       align-items: center;
     }
 
-    .about-photo-wrap {
-      position: relative;
-      max-width: 430px;
-    }
-
-    .about-photo-bg {
-      position: absolute;
-      inset: -18px auto auto -18px;
-      width: 160px;
-      height: 160px;
-      background: linear-gradient(135deg, rgba(15,118,110,.18), rgba(245,158,11,.16));
-      border-radius: 34px;
-      z-index: 0;
-    }
-
     .about-photo-card {
-      position: relative;
-      z-index: 1;
       border-radius: 32px;
       overflow: hidden;
       box-shadow: var(--shadow-lg);
@@ -597,43 +485,8 @@
 
     .about-photo-card img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
-      aspect-ratio: 4/5;
-    }
-
-    .about-badge-floating {
-      position: absolute;
-      right: -18px;
-      bottom: 20px;
-      z-index: 2;
-      background: white;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-md);
-      border-radius: 22px;
-      padding: 16px 18px;
-      min-width: 220px;
-    }
-
-    .about-badge-floating strong {
-      display: block;
-      color: var(--dark);
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .about-copy h2 {
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-      line-height: 1.15;
-      margin-bottom: 18px;
-      color: var(--dark);
-      letter-spacing: -0.03em;
-    }
-
-    .about-copy p {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 16px;
     }
 
     .about-list {
@@ -646,7 +499,6 @@
       list-style: none;
       display: flex;
       gap: 12px;
-      color: #344054;
       align-items: flex-start;
     }
 
@@ -660,7 +512,6 @@
       place-items: center;
       font-size: 12px;
       margin-top: 2px;
-      flex-shrink: 0;
     }
 
     .contact-pills {
@@ -677,16 +528,50 @@
       border-radius: 999px;
       background: white;
       border: 1px solid var(--line);
-      color: #344054;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: var(--shadow-sm);
       transition: .25s ease;
     }
 
-    .pill:hover {
-      transform: translateY(-2px);
-      border-color: #d8e4e1;
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 22px;
+      transition: .28s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ecfdf9, #f5fbfa);
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .price-box {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .price-main strong {
+      font-size: 1.55rem;
       color: var(--primary);
     }
 
@@ -702,18 +587,15 @@
       border-radius: 28px;
       overflow: hidden;
       border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
       transition: .28s ease;
     }
 
     .project-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-md);
-      border-color: #dbe7e4;
     }
 
     .project-media {
-      position: relative;
       aspect-ratio: 16/10;
       overflow: hidden;
       background: #eaf0f7;
@@ -726,461 +608,28 @@
       transition: .5s ease;
     }
 
-    .project-card:hover .project-media img {
-      transform: scale(1.04);
-    }
-
-    .project-tag {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: rgba(15, 23, 42, 0.82);
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 999px;
-      backdrop-filter: blur(8px);
-    }
-
     .project-content {
       padding: 24px;
     }
 
-    .project-content h3 {
-      font-size: 1.15rem;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      color: var(--dark);
-    }
-
-    .project-content p {
-      color: var(--muted);
-      font-size: .96rem;
-      margin-bottom: 16px;
-    }
-
-    .result-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: var(--success-soft);
-      color: var(--primary-dark);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    /* SERVICES */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    .service-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px 22px;
-      box-shadow: var(--shadow-sm);
-      transition: .28s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      opacity: 0;
-      transition: .25s ease;
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-md);
-      border-color: #dbe7e4;
-    }
-
-    .service-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #ecfdf9, #f5fbfa);
-      color: var(--primary);
-      font-size: 24px;
-      margin-bottom: 18px;
-      border: 1px solid #ddf5ee;
-    }
-
-    .service-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: var(--dark);
-    }
-
-    .service-card p {
-      color: var(--muted);
-      font-size: .95rem;
-      margin-bottom: 16px;
-      min-height: 72px;
-    }
-
-    .price-box {
-      background: #f8fafc;
-      border: 1px solid #e8eef5;
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .price-main {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
-    }
-
-    .price-main strong {
-      font-size: 1.55rem;
-      color: var(--primary);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .price-main span {
-      color: #475467;
-      font-weight: 700;
-      font-size: .92rem;
-    }
-
-    .price-cash {
-      color: #98a2b3;
-      font-size: .84rem;
-      text-decoration: line-through;
-    }
-
-    .signal-box {
-      background: var(--warning-soft);
-      color: #9a6700;
-      border-radius: 16px;
-      padding: 14px;
-      font-size: .83rem;
-      border: 1px solid #ffe5a8;
-      margin-bottom: 18px;
-    }
-
-    .signal-box strong {
-      display: block;
-      color: #8f5d00;
-      margin-bottom: 4px;
-    }
-
-    .service-card .btn {
-      width: 100%;
-      padding: 13px 20px;
-    }
-
-    /* CATALOG SECTION */
+    /* CATALOG */
     .catalog-section {
-      background:
-        radial-gradient(circle at 15% 20%, rgba(15,118,110,0.10), transparent 20%),
-        radial-gradient(circle at 90% 10%, rgba(245,158,11,0.10), transparent 18%),
-        #ffffff;
+      background: #ffffff;
     }
 
     .catalog-grid {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: 1fr 1fr;
       gap: 32px;
       align-items: center;
-    }
-
-    .catalog-visual {
-      background: linear-gradient(145deg, #0d1a2f, #0d2532);
-      border-radius: 32px;
-      padding: 26px;
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      overflow: hidden;
-      min-height: 540px;
-    }
-
-    .catalog-visual::before {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      top: -120px;
-      right: -60px;
-      border-radius: 50%;
-      background: rgba(138,243,229,.08);
-      filter: blur(10px);
-    }
-
-    .phone-mockup {
-      width: 270px;
-      background: white;
-      border-radius: 34px;
-      padding: 10px;
-      box-shadow: 0 24px 44px rgba(0,0,0,0.22);
-      position: absolute;
-      left: 38px;
-      top: 54px;
-      transform: rotate(-7deg);
-    }
-
-    .phone-screen {
-      background: #f6f8fb;
-      border-radius: 26px;
-      overflow: hidden;
-      padding-bottom: 14px;
-    }
-
-    .phone-top {
-      background: linear-gradient(135deg, var(--primary), #14b8a6);
-      padding: 20px 16px;
-      color: white;
-    }
-
-    .phone-top strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-
-    .phone-top span {
-      font-size: .78rem;
-      opacity: .86;
-    }
-
-    .phone-item {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin: 12px 12px 0;
-      background: white;
-      border: 1px solid #e9eef5;
-      border-radius: 18px;
-      padding: 10px;
-    }
-
-    .phone-thumb {
-      width: 62px;
-      height: 62px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #dff7ef, #fff2db);
-      flex-shrink: 0;
-    }
-
-    .phone-item strong {
-      display: block;
-      font-size: .86rem;
-      margin-bottom: 4px;
-      color: var(--dark);
-    }
-
-    .phone-item small {
-      color: var(--muted);
-      font-size: .72rem;
-    }
-
-    .laptop-mockup {
-      position: absolute;
-      right: 24px;
-      bottom: 28px;
-      width: 370px;
-      background: #0f172a;
-      border-radius: 22px;
-      padding: 12px 12px 18px;
-      box-shadow: 0 26px 48px rgba(0,0,0,.24);
-    }
-
-    .laptop-screen {
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-      min-height: 220px;
-    }
-
-    .laptop-header {
-      background: #eef3f8;
-      padding: 12px 16px;
-      border-bottom: 1px solid #e7edf5;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .laptop-layout {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-    }
-
-    .laptop-banner {
-      border-radius: 16px;
-      background: linear-gradient(135deg, #ecfdf9, #ffffff);
-      border: 1px solid #dff3ed;
-      padding: 18px;
-      min-height: 132px;
-    }
-
-    .laptop-banner strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--dark);
-    }
-
-    .laptop-mini-cards {
-      display: grid;
-      gap: 10px;
-    }
-
-    .laptop-mini-cards div {
-      background: #f8fafc;
-      border: 1px solid #ebf0f6;
-      border-radius: 14px;
-      min-height: 60px;
-    }
-
-    .catalog-copy {
-      display: grid;
-      gap: 18px;
     }
 
     .catalog-card {
       background: white;
       border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
       border-radius: 24px;
       padding: 22px;
-    }
-
-    .catalog-card h3 {
-      font-size: 1.1rem;
-      color: var(--dark);
-      margin-bottom: 12px;
-    }
-
-    .catalog-card ul {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .catalog-card li {
-      list-style: none;
-      color: #344054;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .catalog-card li i {
-      color: var(--primary);
-      margin-top: 3px;
-    }
-
-    .pricing-stack {
-      display: grid;
-      gap: 14px;
-    }
-
-    .pricing-tier {
-      background: white;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      border-radius: 22px;
-      padding: 18px 20px;
-      transition: .25s ease;
-    }
-
-    .pricing-tier:hover {
-      transform: translateX(4px);
-      border-color: #dbe7e4;
-    }
-
-    .pricing-tier small {
-      color: var(--muted);
-      display: block;
-      margin-top: 6px;
-    }
-
-    .pricing-tier strong {
-      display: block;
-      font-size: .95rem;
-      margin-bottom: 8px;
-      color: var(--dark);
-      letter-spacing: .02em;
-    }
-
-    .pricing-tier .big {
-      font-size: 1.7rem;
-      color: var(--primary);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .process-highlight {
-      background: linear-gradient(135deg, #fff9eb, #fff4dc);
-      border: 1px solid #ffe1a2;
-      border-radius: 24px;
-      padding: 22px;
-      color: #7a5200;
-    }
-
-    /* PROCESS */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .process-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 26px 20px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .process-number {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), #14b8a6);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      margin-bottom: 16px;
-      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.18);
-    }
-
-    .process-card h3 {
-      font-size: 1.02rem;
-      margin-bottom: 10px;
-      color: var(--dark);
-    }
-
-    .process-card p {
-      color: var(--muted);
-      font-size: .94rem;
+      margin-bottom: 20px;
     }
 
     /* CLINICS */
@@ -1188,105 +637,18 @@
       background: linear-gradient(135deg, #0f172a 0%, #10243a 100%);
       border-radius: 34px;
       overflow: hidden;
-      box-shadow: var(--shadow-lg);
       display: grid;
       grid-template-columns: .95fr 1.05fr;
     }
 
     .clinic-visual {
-      position: relative;
-      min-height: 100%;
       padding: 40px;
-      background:
-        radial-gradient(circle at top left, rgba(138,243,229,.14), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
       color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .clinic-visual .badge {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.08);
-      color: rgba(255,255,255,.88);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .clinic-visual h3 {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      line-height: 1.08;
-      margin-bottom: 16px;
-      letter-spacing: -0.04em;
-    }
-
-    .clinic-visual p {
-      color: rgba(255,255,255,.78);
-      max-width: 470px;
-      font-size: 1rem;
-      margin-bottom: 26px;
-    }
-
-    .clinic-points {
-      display: grid;
-      gap: 12px;
-    }
-
-    .clinic-points div {
-      display: flex;
-      gap: 10px;
-      color: rgba(255,255,255,.88);
-      font-size: .95rem;
-      align-items: flex-start;
-    }
-
-    .clinic-points i {
-      color: #8af3e5;
-      margin-top: 4px;
     }
 
     .clinic-pricing {
       background: white;
       padding: 38px;
-      display: grid;
-      gap: 16px;
-      align-content: center;
-    }
-
-    .clinic-tier {
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px 20px;
-      background: #fbfcfe;
-    }
-
-    .clinic-tier strong {
-      color: var(--dark);
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .clinic-tier .big {
-      color: var(--primary);
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .clinic-tier small {
-      color: var(--muted);
-      display: block;
-      margin-top: 6px;
     }
 
     /* TESTIMONIALS */
@@ -1301,84 +663,14 @@
       border: 1px solid var(--line);
       border-radius: 28px;
       padding: 28px;
-      box-shadow: var(--shadow-sm);
-      transition: .25s ease;
-      position: relative;
     }
 
-    .testimonial-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .testimonial-card .quote {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #fff3d8, #fff8ea);
-      color: var(--secondary-dark);
-      font-size: 20px;
-      margin-bottom: 16px;
-    }
-
-    .testimonial-card p {
-      color: #344054;
-      margin-bottom: 18px;
-      font-size: .98rem;
-    }
-
-    .testimonial-card span {
-      display: inline-block;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: #f8fafc;
-      border: 1px solid #e8eef5;
-      color: var(--muted);
-      font-size: .82rem;
-      font-weight: 700;
-    }
-
-    /* CTA FINAL */
+    /* CTA */
     .cta {
-      position: relative;
-      overflow: hidden;
-      padding: 84px 0;
-      background:
-        radial-gradient(circle at top left, rgba(245,158,11,.16), transparent 20%),
-        radial-gradient(circle at right center, rgba(138,243,229,.14), transparent 22%),
-        linear-gradient(135deg, #0c1426 0%, #0e1f34 55%, #0b2d36 100%);
+      background: linear-gradient(135deg, #0c1426 0%, #0e1f34 55%, #0b2d36 100%);
       color: white;
-    }
-
-    .cta-box {
+      padding: 84px 0;
       text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .cta h2 {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-      margin-bottom: 16px;
-    }
-
-    .cta p {
-      color: rgba(255,255,255,.78);
-      font-size: 1.04rem;
-      margin-bottom: 28px;
-    }
-
-    .cta .hero-actions {
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .cta small {
-      color: rgba(255,255,255,.64);
-      font-size: .92rem;
     }
 
     /* FOOTER */
@@ -1396,71 +688,6 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    .footer-brand p {
-      color: rgba(255,255,255,.68);
-      max-width: 420px;
-      margin-top: 14px;
-      font-size: .95rem;
-    }
-
-    .footer h4 {
-      font-size: .95rem;
-      margin-bottom: 14px;
-      color: white;
-    }
-
-    .footer-links,
-    .footer-contact {
-      display: grid;
-      gap: 10px;
-    }
-
-    .footer-links a,
-    .footer-contact a,
-    .footer-contact span {
-      color: rgba(255,255,255,.68);
-      font-size: .92rem;
-      transition: .2s ease;
-    }
-
-    .footer-links a:hover,
-    .footer-contact a:hover {
-      color: white;
-    }
-
-    .footer-bottom {
-      padding-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      color: rgba(255,255,255,.58);
-      font-size: .88rem;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 12px;
-    }
-
-    .footer-social a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-      color: white;
-      transition: .25s ease;
-    }
-
-    .footer-social a:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,.1);
-    }
-
     /* WHATSAPP FLOAT */
     .whatsapp-float {
       position: fixed;
@@ -1476,11 +703,6 @@
       font-size: 28px;
       box-shadow: 0 18px 30px rgba(37, 211, 102, 0.30);
       z-index: 999;
-      transition: .25s ease;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.06);
     }
 
     /* REVEAL */
@@ -1495,618 +717,287 @@
       transform: translateY(0);
     }
 
-    /* MOBILE */
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
-      .hero-grid,
-      .about-grid,
-      .catalog-grid,
-      .clinic-wrap,
-      .footer-top {
+      .hero-grid, .about-grid, .catalog-grid, .clinic-wrap, .footer-top {
         grid-template-columns: 1fr;
       }
-
-      .services-grid {
+      .services-grid, .projects-grid, .testimonials-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
-      .projects-grid,
-      .testimonials-grid,
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .trust-box {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .catalog-visual {
-        min-height: 640px;
       }
     }
 
     @media (max-width: 860px) {
-      .nav-links,
-      .nav-actions .desktop-only {
+      .nav-links, .nav-actions .desktop-only {
         display: none;
       }
-
       .menu-toggle {
         display: inline-grid;
         place-items: center;
       }
-
       .nav-mobile {
         display: none;
         padding: 0 0 20px;
       }
-
       .nav-mobile.active {
         display: grid;
         gap: 12px;
       }
-
       .nav-mobile a {
         background: white;
         border: 1px solid var(--line);
         border-radius: 16px;
         padding: 14px 16px;
-        font-size: 14px;
         font-weight: 600;
-        color: #344054;
-      }
-
-      .hero {
-        padding-top: 64px;
-      }
-
-      .hero-mini-proof,
-      .trust-box,
-      .services-grid,
-      .projects-grid,
-      .process-grid,
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .catalog-visual {
-        min-height: 580px;
-      }
-
-      .phone-mockup {
-        width: 230px;
-        left: 18px;
-        top: 30px;
-      }
-
-      .laptop-mockup {
-        width: calc(100% - 32px);
-        right: 16px;
-        bottom: 16px;
       }
     }
 
     @media (max-width: 640px) {
-      .section {
-        padding: 72px 0;
+      .services-grid, .projects-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
       }
-
-      .nav-wrap {
-        min-height: 74px;
-      }
-
-      .hero-copy p,
-      .section-subtitle,
-      .cta p {
-        font-size: .98rem;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .proof-card,
-      .service-card,
-      .project-card,
-      .testimonial-card,
-      .process-card {
-        border-radius: 22px;
-      }
-
-      .about-badge-floating {
-        position: static;
-        margin-top: 14px;
-      }
-
-      .catalog-visual {
-        min-height: 520px;
-        padding: 18px;
-      }
-
-      .phone-mockup {
-        width: 190px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
+      .trust-box {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="container">
-      <div class="nav-wrap">
-        <a href="#" class="brand" aria-label="DataDesh Soluções">
-          <div class="brand-mark">
-            <i class="fa-solid fa-chart-simple"></i>
-          </div>
-          <div class="brand-text">
-            <strong>DataDesh Soluções</strong>
-            <span>Catálogos, páginas e ferramentas digitais</span>
-          </div>
-        </a>
-
-        <nav class="nav-links" aria-label="Menu principal">
-          <a href="#sobre">Sobre</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#servicos">Serviços</a>
-          <a href="#catalogos">Catálogos</a>
-          <a href="#clinicas">Clínicas</a>
-          <a href="#depoimentos">Depoimentos</a>
-        </nav>
-
-        <div class="nav-actions">
-          <a class="nav-icon-link desktop-only" href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a class="btn btn-light desktop-only" href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" target="_blank">
-            <i class="fa-regular fa-file-lines"></i> Formulário
-          </a>
-          <a class="btn btn-primary desktop-only" href="https://wa.me/5531984987116?text=Olá!%20Quero%20um%20projeto%20para%20meu%20negócio" target="_blank">
-            <i class="fab fa-whatsapp"></i> Falar no WhatsApp
-          </a>
-          <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-            <i class="fa-solid fa-bars"></i>
-          </button>
+<header class="navbar">
+  <div class="container">
+    <div class="nav-wrap">
+      <a href="#" class="brand">
+        <div class="brand-mark"><i class="fa-solid fa-chart-simple"></i></div>
+        <div class="brand-text">
+          <strong>DataDesh Soluções</strong>
+          <span>Catálogos, páginas e ferramentas digitais</span>
         </div>
-      </div>
-
-      <div class="nav-mobile" id="mobileMenu">
+      </a>
+      <nav class="nav-links">
         <a href="#sobre">Sobre</a>
         <a href="#projetos">Projetos</a>
         <a href="#servicos">Serviços</a>
-        <a href="#catalogos">Catálogo Digital</a>
-        <a href="#clinicas">Página para Clínicas</a>
+        <a href="#catalogos">Catálogos</a>
+        <a href="#clinicas">Clínicas</a>
         <a href="#depoimentos">Depoimentos</a>
-        <a href="https://datadeshsolucoes-design.github.io/servicosdigitais/tabela_pre%C3%A7os.html" target="_blank">Tabela de preços</a>
-        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" target="_blank">Preencher formulário</a>
-        <a href="https://wa.me/5531984987116?text=Olá!%20Quero%20um%20projeto%20para%20meu%20negócio" target="_blank">Falar no WhatsApp</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="nav-icon-link desktop-only" href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a class="btn btn-light desktop-only" href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário</a>
+        <a class="btn btn-primary desktop-only" href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+        <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
-  </header>
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#catalogos">Catálogo Digital</a>
+      <a href="#clinicas">Página para Clínicas</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="https://wa.me/5531984987116" target="_blank">Falar no WhatsApp</a>
+    </div>
+  </div>
+</header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-copy reveal">
-            <div class="eyebrow">
-              <i class="fa-solid fa-bolt"></i>
-              +27 projetos já concluídos • especialista em pequenos negócios
-            </div>
-
-            <h1>
-              Soluções digitais com visual <span>profissional</span>, estrutura inteligente
-              e foco em fazer seu negócio vender mais.
-            </h1>
-
-            <p>
-              Crio sites, catálogos digitais, páginas para clínicas, cardápios e ferramentas visuais
-              que organizam sua apresentação, melhoram seu atendimento e facilitam a decisão do cliente.
-            </p>
-
-            <div class="hero-actions">
-              <a href="https://wa.me/5531984987116?text=Olá!%20Quero%20começar%20meu%20projeto" class="btn btn-primary" target="_blank">
-                <i class="fab fa-whatsapp"></i> Quero minha solução agora
-              </a>
-              <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-secondary" target="_blank">
-                <i class="fa-regular fa-file-lines"></i> Preencher formulário
-              </a>
-            </div>
-
-            <div class="hero-mini-proof">
-              <div class="proof-card">
-                <strong>27+</strong>
-                <span>projetos já concluídos</span>
-              </div>
-              <div class="proof-card">
-                <strong>15 dias</strong>
-                <span>prazo médio de entrega</span>
-              </div>
-              <div class="proof-card">
-                <strong>100%</strong>
-                <span>atendimento personalizado</span>
-              </div>
-            </div>
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><i class="fa-solid fa-bolt"></i> +27 projetos já concluídos</div>
+          <h1>Soluções digitais com visual <span>profissional</span> e foco em vendas</h1>
+          <p>Crio sites, catálogos digitais, páginas para clínicas e ferramentas visuais que organizam sua apresentação e facilitam a decisão do cliente.</p>
+          <div class="hero-actions">
+            <a href="https://wa.me/5531984987116" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Quero minha solução</a>
+            <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-secondary" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário</a>
           </div>
-
-          <div class="hero-panel reveal">
-            <div class="panel-top">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="panel-label">preview de solução</div>
-            </div>
-
-            <div class="mockup-window">
-              <div class="mockup-banner">
-                <small>Experiência digital para negócios</small>
-                <strong>Catálogos, sites e páginas com aparência premium e foco comercial.</strong>
-              </div>
-
-              <div class="mockup-grid">
-                <div class="mockup-card">
-                  <i class="fa-solid fa-mobile-screen-button"></i>
-                  <strong>Catálogo digital</strong>
-                  <span>Vitrine visual com botão direto para WhatsApp.</span>
-                </div>
-                <div class="mockup-card">
-                  <i class="fa-solid fa-globe"></i>
-                  <strong>Site profissional</strong>
-                  <span>Página elegante, rápida e pensada para conversão.</span>
-                </div>
-                <div class="mockup-card">
-                  <i class="fa-solid fa-hospital-user"></i>
-                  <strong>Página para clínicas</strong>
-                  <span>Serviços, diferenciais e contato organizados.</span>
-                </div>
-                <div class="mockup-card">
-                  <i class="fa-solid fa-chart-line"></i>
-                  <strong>Dashboard</strong>
-                  <span>Visualização clara para gestão e análise.</span>
-                </div>
-              </div>
-
-              <div class="mockup-footer">
-                <div>
-                  <div class="mini">Investimento inicial acessível</div>
-                  <div class="mockup-price">a partir de 3x de R$ 25,67</div>
-                </div>
-                <a href="https://wa.me/5531984987116" target="_blank" class="btn btn-primary" style="padding: 12px 16px; font-size: 13px;">
-                  Solicitar proposta
-                </a>
-              </div>
-            </div>
+          <div class="hero-mini-proof">
+            <div class="proof-card"><strong>27+</strong><span>projetos concluídos</span></div>
+            <div class="proof-card"><strong>15 dias</strong><span>prazo médio</span></div>
+            <div class="proof-card"><strong>100%</strong><span>personalizado</span></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- TRUST BAR -->
-    <div class="trust-bar">
-      <div class="container">
-        <div class="trust-box reveal">
-          <div class="trust-item">
-            <i class="fa-solid fa-layer-group"></i>
-            <div>
-              <strong>Estrutura profissional</strong>
-              <span>Layout mais corporativo e confiável</span>
+        <div class="hero-panel reveal">
+          <div class="mockup-window">
+            <div class="mockup-banner"><strong>Catálogos, sites e páginas com aparência premium</strong></div>
+            <div class="mockup-grid">
+              <div class="mockup-card"><i class="fa-solid fa-mobile-screen-button"></i><strong>Catálogo digital</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-globe"></i><strong>Site profissional</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-hospital-user"></i><strong>Página para clínicas</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-chart-line"></i><strong>Dashboards</strong></div>
             </div>
-          </div>
-          <div class="trust-item">
-            <i class="fa-solid fa-paper-plane"></i>
-            <div>
-              <strong>Entrega objetiva</strong>
-              <span>Projeto direto ao ponto, sem enrolação</span>
-            </div>
-          </div>
-          <div class="trust-item">
-            <i class="fa-solid fa-envelope-circle-check"></i>
-            <div>
-              <strong>Protótipo por email</strong>
-              <span>Você aprova antes da finalização</span>
-            </div>
-          </div>
-          <div class="trust-item">
-            <i class="fa-solid fa-file-signature"></i>
-            <div>
-              <strong>20% de sinal + contrato</strong>
-              <span>Processo claro e mais segurança</span>
-            </div>
+            <div class="mockup-footer"><div>a partir de 3x de R$ 25,67</div><a href="https://wa.me/5531984987116" class="btn btn-primary" style="padding: 10px 16px;">Solicitar</a></div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- SOBRE -->
-    <section id="sobre" class="section">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-photo-wrap reveal">
-            <div class="about-photo-bg"></div>
-            <div class="about-photo-card">
-              <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/ana-perfil.jpg" alt="Ana - DataDesh Soluções">
-            </div>
-            <div class="about-badge-floating">
-              <strong>+27 projetos já concluídos</strong>
-              <span style="color: var(--muted); font-size: .9rem;">Experiência prática em soluções visuais para negócios.</span>
-            </div>
-          </div>
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-box reveal">
+        <div class="trust-item"><i class="fa-solid fa-layer-group"></i><div><strong>Estrutura profissional</strong><span>Layout confiável</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-paper-plane"></i><div><strong>Entrega rápida</strong><span>Sem enrolação</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-envelope-circle-check"></i><div><strong>Prova por email</strong><span>Você aprova antes</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-file-signature"></i><div><strong>20% de sinal</strong><span>Processo seguro</span></div></div>
+      </div>
+    </div>
+  </div>
 
-          <div class="about-copy reveal">
-            <div class="section-kicker">
-              <i class="fa-solid fa-user-tie"></i> Sobre a profissional
-            </div>
-            <h2>Oi, sou a <span style="color: var(--primary);">Ana</span> — transformo ideias em presença digital com cara de empresa séria.</h2>
-
-            <p>
-              Sou tecnóloga em Ciência de Dados e especialista em criar páginas, catálogos,
-              cardápios e ferramentas digitais com visual moderno, organização estratégica e foco em resultado.
-            </p>
-
-            <p>
-              Meu objetivo é tirar seu negócio da aparência amadora e levar você para uma apresentação
-              mais profissional, clara e confiável — daquelas que passam valor logo no primeiro olhar.
-            </p>
-
-            <ul class="about-list">
-              <li><i class="fa-solid fa-check"></i> Sites, páginas e catálogos com visual mais sofisticado e comercial</li>
-              <li><i class="fa-solid fa-check"></i> Soluções pensadas para WhatsApp, atendimento e vendas</li>
-              <li><i class="fa-solid fa-check"></i> Processo simples: sinal, protótipo, aprovação e entrega final</li>
-              <li><i class="fa-solid fa-check"></i> Atendimento próximo e linguagem fácil para pequenos negócios</li>
-            </ul>
-
-            <div class="contact-pills">
-              <a href="https://wa.me/5531984987116" target="_blank" class="pill">
-                <i class="fab fa-whatsapp"></i> (31) 98498-7116
-              </a>
-              <a href="mailto:datadshsolucoes@gmail.com" class="pill">
-                <i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com
-              </a>
-              <a href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank" class="pill">
-                <i class="fab fa-instagram"></i> Instagram
-              </a>
-              <a href="https://aninhatata.github.io/portifolio/" target="_blank" class="pill">
-                <i class="fa-solid fa-briefcase"></i> Ver portfólio
-              </a>
-            </div>
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo-card reveal">
+          <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/ana-perfil.jpg" alt="Ana">
+        </div>
+        <div class="about-copy reveal">
+          <div class="section-kicker"><i class="fa-solid fa-user-tie"></i> Sobre a profissional</div>
+          <h2>Oi, sou a <span>Ana</span> — transformo ideias em presença digital</h2>
+          <p>Tecnóloga em Ciência de Dados, especialista em criar páginas, catálogos e ferramentas digitais com visual moderno e foco em resultado.</p>
+          <ul class="about-list">
+            <li><i class="fa-solid fa-check"></i> Sites, páginas e catálogos com visual sofisticado</li>
+            <li><i class="fa-solid fa-check"></i> Soluções pensadas para WhatsApp e vendas</li>
+            <li><i class="fa-solid fa-check"></i> Processo simples: sinal, protótipo, entrega</li>
+          </ul>
+          <div class="contact-pills">
+            <a href="https://wa.me/5531984987116" class="pill"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a>
+            <a href="mailto:datadshsolucoes@gmail.com" class="pill"><i class="fa-regular fa-envelope"></i> E-mail</a>
+            <a href="https://www.instagram.com/datadeshsolucoesdigitais/" class="pill"><i class="fab fa-instagram"></i> Instagram</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJETOS -->
-    <section id="projetos" class="section" style="background: #ffffff;">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-kicker">
-            <i class="fa-solid fa-diagram-project"></i> Portfólio
-          </div>
-          <h2 class="section-title">Projetos <span>já concluídos</span></h2>
-          <p class="section-subtitle">
-            Alguns exemplos de soluções já desenvolvidas para gestão, apresentação digital, atendimento e vendas.
-          </p>
+  <!-- PROJETOS -->
+  <section id="projetos" class="section" style="background:#fff">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-diagram-project"></i> Portfólio</div>
+        <h2 class="section-title">Projetos <span>já concluídos</span></h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png" alt="Dashboard"></div>
+          <div class="project-content"><h3>Dashboard para gestão da saúde</h3><p>Painel com gráficos interativos e filtros dinâmicos.</p></div>
         </div>
-
-        <div class="projects-grid">
-          <article class="project-card reveal">
-            <div class="project-media">
-              <span class="project-tag">Dashboard</span>
-              <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png" alt="Projeto de dashboard e gestão da saúde">
-            </div>
-            <div class="project-content">
-              <h3>Dashboard para gestão da saúde</h3>
-              <p>Painel com gráficos interativos, filtros dinâmicos e leitura mais rápida para tomada de decisão.</p>
-              <div class="result-chip">
-                <i class="fa-solid fa-arrow-trend-up"></i> -40% no tempo de análise
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-media">
-              <span class="project-tag">Visualização</span>
-              <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20interativos.png" alt="Projeto de dashboards interativos">
-            </div>
-            <div class="project-content">
-              <h3>Dashboards interativos</h3>
-              <p>Gráficos sincronizados com tabelas, filtros inteligentes e visual profissional para acompanhar indicadores.</p>
-              <div class="result-chip">
-                <i class="fa-solid fa-arrow-trend-up"></i> +35% de eficiência visual
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-media">
-              <span class="project-tag">Presença digital</span>
-              <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png" alt="Modelo de site profissional">
-            </div>
-            <div class="project-content">
-              <h3>Sites com aparência mais forte e estratégica</h3>
-              <p>Páginas modernas para negócios que precisam transmitir mais valor, clareza e credibilidade.</p>
-              <div class="result-chip">
-                <i class="fa-solid fa-badge-check"></i> +27 projetos já concluídos
-              </div>
-            </div>
-          </article>
+        <div class="project-card reveal">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20interativos.png" alt="Dashboards"></div>
+          <div class="project-content"><h3>Dashboards interativos</h3><p>Gráficos sincronizados e visual profissional.</p></div>
         </div>
-
-        <div style="text-align:center; margin-top: 34px;" class="reveal">
-          <a href="https://aninhatata.github.io/portifolio/" target="_blank" class="btn btn-primary">
-            <i class="fa-solid fa-briefcase"></i> Ver portfólio completo
-          </a>
+        <div class="project-card reveal">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png" alt="Sites"></div>
+          <div class="project-content"><h3>Sites profissionais</h3><p>Páginas modernas que transmitem credibilidade.</p></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="section">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-kicker">
-            <i class="fa-solid fa-screwdriver-wrench"></i> Soluções
-          </div>
-          <h2 class="section-title">O que eu <span>faço</span></h2>
-          <p class="section-subtitle">
-            Serviços pensados para apresentar melhor seu negócio, organizar sua comunicação e aumentar sua chance de venda.
-          </p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card reveal">
-            <div class="service-icon">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <h3>Sites profissionais</h3>
-            <p>Sites modernos, responsivos e com estética mais corporativa para valorizar sua marca e transmitir confiança.</p>
-
-            <div class="price-box">
-              <div class="price-main">
-                <strong>R$ 59,70</strong>
-                <span>/ mês (10x)</span>
-              </div>
-              <div class="price-cash">ou R$ 597 à vista</div>
-            </div>
-
-            <div class="signal-box">
-              <strong>20% de sinal + contrato</strong>
-              Protótipo por email antes da finalização e pagamento do restante após aprovação.
-            </div>
-
-            <a href="https://wa.me/5531984987116?text=Olá!%20Tenho%20interesse%20em%20um%20site%20profissional" class="btn btn-primary" target="_blank">
-              Quero este serviço
-            </a>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="service-icon">
-              <i class="fa-solid fa-mobile-screen-button"></i>
-            </div>
-            <h3>Catálogo digital</h3>
-            <p>Uma vitrine elegante para WhatsApp com produtos organizados, categorias e botão direto para atendimento.</p>
-
-            <div class="price-box">
-              <div class="price-main">
-                <strong>R$ 25,67</strong>
-                <span>/ mês (3x)</span>
-              </div>
-              <div class="price-cash">ou R$ 77 à vista</div>
-            </div>
-
-            <div class="signal-box">
-              <strong>20% de sinal + contrato</strong>
-              Você recebe o protótipo por email para aprovar antes da entrega final.
-            </div>
-
-            <a href="https://wa.me/5531984987116?text=Olá!%20Tenho%20interesse%20em%20um%20catálogo%20digital" class="btn btn-primary" target="_blank">
-              Quero este serviço
-            </a>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="service-icon">
-              <i class="fa-solid fa-hospital-user"></i>
-            </div>
-            <h3>Página para clínicas</h3>
-            <p>Apresentação profissional com serviços, diferenciais, informações essenciais e integração com WhatsApp.</p>
-
-            <div class="price-box">
-              <div class="price-main">
-                <strong>R$ 39,40</strong>
-                <span>/ mês (5x)</span>
-              </div>
-              <div class="price-cash">ou R$ 197 à vista</div>
-            </div>
-
-            <div class="signal-box">
-              <strong>20% de sinal + contrato</strong>
-              Processo com aprovação visual antes da publicação.
-            </div>
-
-            <a href="https://wa.me/5531984987116?text=Olá!%20Tenho%20interesse%20em%20uma%20página%20para%20clínica" class="btn btn-primary" target="_blank">
-              Quero este serviço
-            </a>
-          </article>
-
-          <article class="service-card reveal">
-            <div class="service-icon">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-            <h3>Dashboards interativos</h3>
-            <p>Painéis visuais com filtros, indicadores e organização de dados para facilitar acompanhamento e gestão.</p>
-
-            <div class="price-box">
-              <div class="price-main">
-                <strong>R$ 59,70</strong>
-                <span>/ mês (10x)</span>
-              </div>
-              <div class="price-cash">ou R$ 597 à vista</div>
-            </div>
-
-            <div class="signal-box">
-              <strong>20% de sinal + contrato</strong>
-              Entrega estruturada com alinhamento e protótipo antes da etapa final.
-            </div>
-
-            <a href="https://wa.me/5531984987116?text=Olá!%20Tenho%20interesse%20em%20um%20dashboard%20interativo" class="btn btn-primary" target="_blank">
-              Quero este serviço
-            </a>
-          </article>
-        </div>
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-screwdriver-wrench"></i> Soluções</div>
+        <h2 class="section-title">O que eu <span>faço</span></h2>
       </div>
-    </section>
+      <div class="services-grid">
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-globe"></i></div><h3>Sites profissionais</h3><p>Sites modernos e responsivos</p><div class="price-box"><div class="price-main"><strong>R$ 59,70</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Catálogo digital</h3><p>Vitrine para WhatsApp</p><div class="price-box"><div class="price-main"><strong>R$ 25,67</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-hospital-user"></i></div><h3>Página para clínicas</h3><p>Apresentação profissional</p><div class="price-box"><div class="price-main"><strong>R$ 39,40</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Dashboards</h3><p>Painéis interativos</p><div class="price-box"><div class="price-main"><strong>R$ 59,70</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- CATALOGO -->
-    <section id="catalogos" class="section catalog-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-kicker">
-            <i class="fa-solid fa-store"></i> Catálogo Digital
-          </div>
-          <h2 class="section-title"><span>Catálogo digital</span> com cara de marca profissional</h2>
-          <p class="section-subtitle">
-            Transforme seu WhatsApp em uma vitrine bonita, organizada e pronta para vender todos os dias.
-          </p>
-        </div>
+  <!-- CATÁLOGOS -->
+  <section id="catalogos" class="section catalog-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-store"></i> Catálogo Digital</div>
+        <h2 class="section-title"><span>Catálogo digital</span> profissional</h2>
+      </div>
+      <div class="catalog-grid">
+        <div class="catalog-card reveal"><h3>Por que ter um catálogo digital?</h3><ul><li>✓ Visual organizado</li><li>✓ Categorias personalizadas</li><li>✓ Botão direto WhatsApp</li></ul></div>
+        <div class="catalog-card reveal"><h3>Preços</h3><div class="price-main"><strong>R$ 25,67</strong>/mês</div><a href="https://wa.me/5531984987116" class="btn btn-primary">Solicitar</a></div>
+      </div>
+    </div>
+  </section>
 
-        <div class="catalog-grid">
-          <div class="catalog-visual reveal">
-            <div class="phone-mockup">
-              <div class="phone-screen">
-                <div class="phone-top">
-                  <strong>Catálogo da sua marca</strong>
-                  <span>Produtos organizados por categoria</span>
-                </div>
+  <!-- CLÍNICAS -->
+  <section id="clinicas" class="section">
+    <div class="container">
+      <div class="clinic-wrap reveal">
+        <div class="clinic-visual"><h3>Página profissional para <span style="color:#8af3e5">clínicas e consultórios</span></h3><p>Estrutura completa para apresentar serviços, diferenciais e contato.</p></div>
+        <div class="clinic-pricing"><div class="price-main"><strong>R$ 39,40</strong>/mês</div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero para minha clínica</a></div>
+      </div>
+    </div>
+  </section>
 
-                <div class="phone-item">
-                  <div class="phone-thumb"></div>
-                  <div>
-                    <strong>Produto destaque</strong>
-                    <small>Imagem, descrição e botão de atendimento</small>
-                  </div>
-                </div>
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="section" style="background:#fff">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-regular fa-message"></i> Feedbacks</div>
+        <h2 class="section-title">Quem já usou <span>recomenda</span></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal"><p>"A página que a Ana criou trouxe muita credibilidade para minha clínica."</p><strong>Dra. Mariana L.</strong></div>
+        <div class="testimonial-card reveal"><p>"Meu catálogo digital antes era uma bagunça. Agora é profissional e as vendas aumentaram."</p><strong>Renata S.</strong></div>
+        <div class="testimonial-card reveal"><p>"Excelente profissional, entrega no prazo e resolveu todas as minhas dúvidas."</p><strong>Carlos A.</strong></div>
+      </div>
+    </div>
+  </section>
 
-                <div class="phone-item">
-                  <div class="phone-thumb"></div>
-                  <div>
-                    <strong>Categoria personalizada</strong>
-                    <small>Navegação simples e visual mais limpo</small>
-                  </div>
-                </div>
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Pronto para dar um upgrade digital no seu negócio?</h2>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="https://wa.me/5531984987116" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Falar com Ana</a>
+        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-light">Formulário</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-                <div class="phone-item">
-                  <div class="phone-thumb"></div>
-                  <div>
-                    <strong>Compra via WhatsApp</strong>
-                    <small>Contato rápido e âneo</small>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div><strong>DataDesh Soluções</strong><p>Soluções digitais para pequenos negócios</p></div>
+      <div><h4>Links</h4><a href="#sobre">Sobre</a><br><a href="#projetos">Projetos</a><br><a href="#servicos">Serviços</a></div>
+      <div><h4>Contato</h4><a href="https://wa.me/5531984987116">WhatsApp</a><br><a href="mailto:datadshsolucoes@gmail.com">E-mail</a><br><a href="https://www.instagram.com/datadeshsolucoesdigitais/">Instagram</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 DataDesh Soluções. Todos os direitos reservados.</p></div>
+  </div>
+</footer>
 
-</div> </div> </div> </div> <div class="laptop-mockup"> <div class="laptop-screen"> <div class="laptop-header"> <span>🔍 catálogo.marcas.com</span> <i class="fa-regular fa-copy"></i> </div> <div class="laptop-layout"> <div class="laptop-banner"> <strong>Catálogo digital responsivo</strong> <span style="font-size:.8rem;">Acessível no celular, tablet ou computador</span> </div> <div class="laptop-mini-cards"> <div></div> <div></div> </div> </div> </div> </div> </div> <div class="catalog-copy reveal"> <div class="catalog-card"> <h3><i class="fa-regular fa-circle-check" style="color: var(--primary);"></i> Por que ter um catálogo digital?</h3> <ul> <li><i class="fa-solid fa-check"></i> Visual organizado e mais atraente do que lista de produtos no WhatsApp</li> <li><i class="fa-solid fa-check"></i> Categorias para melhor navegação (roupas, calçados, kits, combos)</li> <li><i class="fa-solid fa-check"></i> Botão direto para pedidos e atendimento</li> <li><i class="fa-solid fa-check"></i> Link único para compartilhar em redes sociais e grupos</li> </ul> </div> <div class="pricing-stack"> <div class="pricing-tier"> <strong>Catálogo completo</strong> <div class="big">R$ 25,67</div> <small>em até 3x de R$ 25,67 sem juros</small> <div class="price-cash" style="margin-top: 6px;">R$ 77 à vista</div> </div> <div class="pricing-tier"> <strong>Inclui:</strong> <div>✔ Layout moderno e responsivo</div> <div>✔ Categorias personalizadas</div> <div>✔ Galeria de produtos</div> <div>✔ Botões diretos para WhatsApp</div> <div>✔ Entregue em até 3 dias úteis</div> </div> </div> <div class="process-highlight"> <i class="fa-solid fa-pen-ruler"></i> <strong>Processo simples:</strong> Sinal de 20% + contrato → envio de conteúdo → protótipo por email → ajustes → aprovação → entrega final. </div> <a href="https://wa.me/5531984987116?text=Olá!%20Quero%20um%20catálogo%20digital%20profissional" class="btn btn-primary" style="justify-content: center;" target="_blank"> <i class="fab fa-whatsapp"></i> Solicitar meu catálogo </a> </div> </div> </div> </section> <!-- CLINICAS --> <section id="clinicas" class="section"> <div class="container"> <div class="clinic-wrap reveal"> <div class="clinic-visual"> <div class="badge"><i class="fa-regular fa-hospital"></i> Especial para clínicas e consultórios</div> <h3>Página profissional para <span style="color: #8af3e5;">clínicas e profissionais de saúde</span></h3> <p> Estrutura completa para apresentar seus serviços, diferenciais, profissionais e formas de contato. Uma página que fortalece sua credibilidade e facilita o agendamento de pacientes. </p> <div class="clinic-points"> <div><i class="fa-solid fa-circle-check"></i> Layout organizado para serviços da clínica</div> <div><i class="fa-solid fa-circle-check"></i> Seção de equipe e especialidades</div> <div><i class="fa-solid fa-circle-check"></i> Botões diretos para WhatsApp e telefone</div> <div><i class="fa-solid fa-circle-check"></i> Responsiva e de carregamento rápido</div> </div> </div> <div class="clinic-pricing"> <div class="clinic-tier"> <strong>Página para clínicas</strong> <div class="big">R$ 39,40</div> <small>em até 5x de R$ 39,40 sem juros</small> <div class="price-cash" style="margin-top: 6px;">R$ 197 à vista</div> </div> <div class="clinic-tier"> <strong>O que está incluso:</strong> <div>✔ Design personalizado e moderno</div> <div>✔ Seções: Home, Serviços, Equipe, Contato</div> <div>✔ Mapa de localização e horários</div> <div>✔ Formulário de contato e botão WhatsApp</div> <div>✔ Entrega em até 5 dias úteis</div> </div> <a href="https://wa.me/5531984987116?text=Olá!%20Tenho%20interesse%20na%20página%20para%20minha%20clínica" class="btn btn-primary" target="_blank"> Quero uma página para minha clínica </a> </div> </div> </div> </section> <!-- DEPOIMENTOS --> <section id="depoimentos" class="section" style="background: #ffffff;"> <div class="container"> <div class="section-header reveal"> <div class="section-kicker"> <i class="fa-regular fa-message"></i> Feedbacks reais </div> <h2 class="section-title">Quem já usou <span>recomenda</span></h2> <p class="section-subtitle"> Clientes que transformaram a presença digital e melhoraram a organização do atendimento. </p> </div> <div class="testimonials-grid"> <div class="testimonial-card reveal"> <div class="quote"><i class="fa-solid fa-quote-left"></i></div> <p>"A página que a Ana criou para minha clínica trouxe muito mais credibilidade. Os pacientes comentam que o site é bonito e fácil de agendar. Recomendo demais!"</p> <span>Dra. Mariana L. — Clínica BemEstar</span> </div> <div class="testimonial-card reveal"> <div class="quote"><i class="fa-solid fa-quote-left"></i></div> <p>"Meu catálogo digital antes era uma bagunça no WhatsApp. Agora tenho uma vitrine profissional e organizada. As vendas aumentaram e o atendimento ficou muito mais fácil."</p> <span>Renata S. — Moda Feminina</span> </div> <div class="testimonial-card reveal"> <div class="quote"><i class="fa-solid fa-quote-left"></i></div> <p>"Excelente profissional, entrega no prazo e resolveu todas as minhas dúvidas. O dashboard que ela fez transformou a gestão da minha empresa, tudo mais claro e rápido."</p> <span>Carlos A. — Consultoria</span> </div> </div> </div> </section> <!-- CTA FINAL --> <section class="cta"> <div class="container"> <div class="cta-box reveal"> <div class="eyebrow" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12);"> <i class="fa-regular fa-clock"></i> Atendimento humanizado </div> <h2>Pronto para dar um upgrade digital no seu negócio?</h2> <p> Entre em contato agora e vamos conversar sobre a melhor solução para o seu negócio. Sem enrolação, sem complicação — com orçamento claro e processo simples. </p> <div class="hero-actions"> <a href="https://wa.me/5531984987116?text=Olá!%20Quero%20dar%20um%20upgrade%20digital%20no%20meu%20negócio" class="btn btn-primary" target="_blank"> <i class="fab fa-whatsapp"></i> Falar com Ana agora </a> <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-light" target="_blank"> <i class="fa-regular fa-file-lines"></i> Solicitar orçamento por formulário </a> </div> <small>Resposta rápida • Atendimento personalizado • Projeto sob medida</small> </div> </div> </section> </main> <footer class="footer"> <div class="container"> <div class="footer-top"> <div class="footer-brand"> <div style="display: flex; align-items: center; gap: 12px;"> <div class="brand-mark" style="background: linear-gradient(135deg, #0f766e, #f59e0b);"> <i class="fa-solid fa-chart-simple"></i> </div> <div> <strong style="font-size: 1.1rem;">DataDesh Soluções</strong> <div style="font-size: .8rem; color: rgba(255,255,255,0.6);">Catálogos, páginas e ferramentas digitais</div> </div> </div> <p> Soluções digitais para pequenos negócios que querem uma presença online mais profissional, organizada e focada em vendas. </p> </div> <div> <h4>Mapa do site</h4> <div class="footer-links"> <a href="#sobre">Sobre</a> <a href="#projetos">Projetos</a> <a href="#servicos">Serviços</a> <a href="#catalogos">Catálogos</a> <a href="#clinicas">Clínicas</a> <a href="#depoimentos">Depoimentos</a> </div> </div> <div> <h4>Contato e links</h4> <div class="footer-contact"> <a href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a> <a href="mailto:datadshsolucoes@gmail.com"><i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com</a> <a href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> <a href="https://aninhatata.github.io/portifolio/" target="_blank"><i class="fa-solid fa-briefcase"></i> Portfólio</a> <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário de orçamento</a> </div> </div> </div> <div class="footer-bottom"> <div>© 2025 DataDesh Soluções. Todos os direitos reservados.</div> <div class="footer-social"> <a href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i> </a> <a href="https://wa.me/5531984987116" target="_blank" aria-label="WhatsApp"> <i class="fab fa-whatsapp"></i> </a> </div> </div> </div> </footer> <a href="https://wa.me/5531984987116?text=Olá!%20Quero%20um%20projeto%20para%20meu%20negócio" class="whatsapp-float" target="_blank" aria-label="WhatsApp"> <i class="fab fa-whatsapp"></i> </a> <script> // Menu mobile const menuToggle = document.getElementById('menuToggle'); const mobileMenu = document.getElementById('mobileMenu'); menuToggle.addEventListener('click', () => { mobileMenu.classList.toggle('active'); }); // Fechar menu ao clicar em um link document.querySelectorAll('#mobileMenu a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('active'); }); }); // Reveal on scroll const reveals = document.querySelectorAll('.reveal'); function revealOnScroll() { reveals.forEach(element => { const windowHeight = window.innerHeight; const elementTop = element.getBoundingClientRect().top; const revealPoint = 100; if (elementTop < windowHeight - revealPoint) { element.classList.add('active'); } }); } window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll); </script></body> </html>
+<a href="https://wa.me/5531984987116" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  function revealOnScroll() {
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
+</body>
+</html>
