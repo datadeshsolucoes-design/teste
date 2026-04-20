@@ -688,6 +688,49 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a, .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover, .footer-contact a:hover {
+      color: white;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-contact i {
+      width: 24px;
+      margin-right: 8px;
+    }
+
     /* WHATSAPP FLOAT */
     .whatsapp-float {
       position: fixed;
@@ -810,7 +853,7 @@
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow"><i class="fa-solid fa-bolt"></i> +27 projetos já concluídos</div>
+          <div class="eyebrow"><i class="fa-solid fa-bolt"></i> +54 projetos já concluídos</div>
           <h1>Soluções digitais com visual <span>profissional</span> e foco em vendas</h1>
           <p>Crio sites, catálogos digitais, páginas para clínicas e ferramentas visuais que organizam sua apresentação e facilitam a decisão do cliente.</p>
           <div class="hero-actions">
@@ -818,8 +861,8 @@
             <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-secondary" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário</a>
           </div>
           <div class="hero-mini-proof">
-            <div class="proof-card"><strong>27+</strong><span>projetos concluídos</span></div>
-            <div class="proof-card"><strong>15 dias</strong><span>prazo médio</span></div>
+            <div class="proof-card"><strong>54+</strong><span>projetos concluídos</span></div>
+            <div class="proof-card"><strong>até 30 dias</strong><span>prazo (depende do projeto)</span></div>
             <div class="proof-card"><strong>100%</strong><span>personalizado</span></div>
           </div>
         </div>
@@ -844,7 +887,7 @@
     <div class="container">
       <div class="trust-box reveal">
         <div class="trust-item"><i class="fa-solid fa-layer-group"></i><div><strong>Estrutura profissional</strong><span>Layout confiável</span></div></div>
-        <div class="trust-item"><i class="fa-solid fa-paper-plane"></i><div><strong>Entrega rápida</strong><span>Sem enrolação</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-paper-plane"></i><div><strong>Entrega planejada</strong><span>até 30 dias</span></div></div>
         <div class="trust-item"><i class="fa-solid fa-envelope-circle-check"></i><div><strong>Prova por email</strong><span>Você aprova antes</span></div></div>
         <div class="trust-item"><i class="fa-solid fa-file-signature"></i><div><strong>20% de sinal</strong><span>Processo seguro</span></div></div>
       </div>
@@ -856,12 +899,12 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-photo-card reveal">
-          <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/ana-perfil.jpg" alt="Ana">
+          <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/FOTO.jpeg.jpeg" alt="Ana">
         </div>
         <div class="about-copy reveal">
           <div class="section-kicker"><i class="fa-solid fa-user-tie"></i> Sobre a profissional</div>
           <h2>Oi, sou a <span>Ana</span> — transformo ideias em presença digital</h2>
-          <p>Tecnóloga em Ciência de Dados, especialista em criar páginas, catálogos e ferramentas digitais com visual moderno e foco em resultado.</p>
+          <p>Tecnóloga em Ciência de Dados, especialista em criar páginas, catálogos e ferramentas digitais com visual moderno e foco em resultado. Já concluí <strong>mais de 54 projetos</strong> para diferentes negócios.</p>
           <ul class="about-list">
             <li><i class="fa-solid fa-check"></i> Sites, páginas e catálogos com visual sofisticado</li>
             <li><i class="fa-solid fa-check"></i> Soluções pensadas para WhatsApp e vendas</li>
@@ -971,11 +1014,32 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
-      <div><strong>DataDesh Soluções</strong><p>Soluções digitais para pequenos negócios</p></div>
-      <div><h4>Links</h4><a href="#sobre">Sobre</a><br><a href="#projetos">Projetos</a><br><a href="#servicos">Serviços</a></div>
-      <div><h4>Contato</h4><a href="https://wa.me/5531984987116">WhatsApp</a><br><a href="mailto:datadshsolucoes@gmail.com">E-mail</a><br><a href="https://www.instagram.com/datadeshsolucoesdigitais/">Instagram</a></div>
+      <div>
+        <strong>DataDesh Soluções</strong>
+        <p style="margin-top: 10px;">Soluções digitais para pequenos negócios</p>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 15px;">Links Rápidos</h4>
+        <div class="footer-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#catalogos">Catálogos</a>
+          <a href="#clinicas">Clínicas</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 15px;">Contato</h4>
+        <div class="footer-contact">
+          <a href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a>
+          <a href="mailto:datadshsolucoes@gmail.com"><i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com</a>
+          <a href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i> @datadeshsolucoesdigitais</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom"><p>© 2025 DataDesh Soluções. Todos os direitos reservados.</p></div>
+    <div class="footer-bottom">
+      <p>© 2025 DataDesh Soluções - Ana | Todos os direitos reservados</p>
+    </div>
   </div>
 </footer>
 
