@@ -1,598 +1,1368 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela de Preços - DataDesh Soluções Digitais</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataDesh Soluções | Sites, catálogos digitais e páginas profissionais</title>
+  <meta name="description" content="Sites, catálogos digitais, cardápios e páginas profissionais para pequenos negócios. Soluções modernas, atendimento personalizado e foco em vendas." />
+  <meta name="author" content="Ana - DataDesh Soluções" />
 
-        body {
-            font-family: "Inter", sans-serif;
-            background: linear-gradient(135deg, #f5f7fb 0%, #e8edf5 100%);
-            padding: 2rem;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-        }
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --text: #122033;
+      --muted: #667085;
+      --line: #e6ebf2;
+      --primary: #0f766e;
+      --primary-dark: #0a4f4a;
+      --secondary: #f59e0b;
+      --secondary-dark: #d97706;
+      --dark: #0f172a;
+      --dark-2: #162033;
+      --success-soft: #dff7ef;
+      --warning-soft: #fff3d6;
+      --shadow-sm: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --shadow-lg: 0 30px 60px rgba(2, 8, 23, 0.14);
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+      --container: 1200px;
+    }
 
-        /* CABEÇALHO */
-        .header {
-            background: linear-gradient(135deg, #0c1426 0%, #101b30 45%, #0f2b33 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .header h1 i {
-            color: #8af3e5;
-        }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .header p {
-            color: rgba(255,255,255,0.8);
-            margin-top: 0.5rem;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .header .contato {
-            background: rgba(255,255,255,0.1);
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 40px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .badge-sinal {
-            background: #f59e0b;
-            color: #0c1426;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-left: 8px;
-            display: inline-block;
-        }
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
 
-        /* SEÇÕES */
-        .section {
-            padding: 1rem 2rem;
-        }
+    .section {
+      padding: 96px 0;
+    }
 
-        .section-title {
-            background: linear-gradient(135deg, #0f766e, #0a4f4a);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            margin: 1.5rem 0 1rem 0;
-            border-radius: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e8f7f5;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
 
-        /* TABELA */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1rem;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #ebf8f6;
+      color: var(--primary);
+      border: 1px solid #d7f0eb;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 18px;
+    }
 
-        th {
-            background: #f0fdf9;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 2px solid #0f766e;
-            color: #0f766e;
-            font-weight: 700;
-        }
+    .section-header {
+      max-width: 760px;
+      margin: 0 auto 52px;
+      text-align: center;
+    }
 
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid #e6ebf2;
-            color: #1f2937;
-        }
+    .section-title {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: var(--dark);
+      font-weight: 800;
+    }
 
-        tr:hover {
-            background: #fafefd;
-        }
+    .section-title span {
+      color: var(--primary);
+    }
 
-        /* PREÇOS */
-        .price-installment {
-            font-weight: 800;
-            color: #0f766e;
-            font-size: 1rem;
-        }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
 
-        .price-total {
-            color: #6b7280;
-            font-size: 0.8rem;
-            text-decoration: line-through;
-            margin-left: 8px;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: .25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
 
-        .price-cash {
-            color: #f59e0b;
-            font-weight: 700;
-            font-size: 0.85rem;
-            display: block;
-            margin-top: 4px;
-        }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 14px 28px rgba(15, 118, 110, 0.26);
+    }
 
-        .sinal-info {
-            background: #fef3c7;
-            color: #d97706;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 6px;
-        }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 38px rgba(15, 118, 110, 0.32);
+    }
 
-        .prazo {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+    }
 
-        .prazo-rapido { background: #d1fae5; color: #0b5e42; }
-        .prazo-medio { background: #fef3c7; color: #d97706; }
-        .prazo-longo { background: #e0e7ff; color: #4338ca; }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+      transform: translateY(-2px);
+    }
 
-        .btn-whatsapp-small {
-            background: linear-gradient(135deg, #0f766e, #0a4f4a);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
-        }
+    .btn-light {
+      background: white;
+      color: var(--dark);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
 
-        .btn-whatsapp-small:hover {
-            transform: translateY(-2px);
-            background: #0a4f4a;
-        }
+    .btn-light:hover {
+      transform: translateY(-2px);
+      border-color: #d4dce7;
+    }
 
-        /* DESTAQUE */
-        .highlight-row {
-            background: linear-gradient(90deg, #fefce8 0%, #ffffff 100%);
-            border-left: 4px solid #f59e0b;
-        }
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: saturate(180%) blur(18px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
 
-        /* PACOTES */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
+    .nav-wrap {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        .package-card {
-            background: white;
-            border: 1px solid #e6ebf2;
-            border-radius: 24px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: max-content;
+    }
 
-        .package-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px rgba(15, 118, 110, 0.1);
-            border-color: #0f766e;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.22);
+      font-size: 18px;
+    }
 
-        .package-card.destaque {
-            border: 2px solid #f59e0b;
-            background: linear-gradient(135deg, #fffbeb, white);
-        }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
 
-        .selo-destaque {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: #f59e0b;
-            color: #0c1426;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
+    .brand-text strong {
+      font-size: 1rem;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
 
-        .package-card h4 {
-            color: #0f766e;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
+    .brand-text span {
+      font-size: .78rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
 
-        .package-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0f766e;
-            margin: 0.5rem 0;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
-        .package-installment {
-            font-size: 0.8rem;
-            color: #6b7280;
-        }
+    .nav-links a {
+      color: #344054;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+    }
 
-        .btn-pedir {
-            display: inline-block;
-            margin-top: 1rem;
-            background: linear-gradient(135deg, #0f766e, #0a4f4a);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
 
-        .btn-pedir:hover {
-            background: #f59e0b;
-            transform: scale(1.02);
-        }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        /* RESUMO */
-        .resumo {
-            background: linear-gradient(135deg, #f0fdf9, #ffffff);
-            padding: 1.5rem;
-            border-radius: 24px;
-            margin: 1.5rem 2rem;
-            border: 1px solid #d1fae5;
-        }
+    .nav-icon-link {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--dark);
+      box-shadow: var(--shadow-sm);
+      transition: .25s ease;
+    }
 
-        .resumo h3 {
-            color: #0f766e;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .nav-icon-link:hover {
+      transform: translateY(-2px);
+      color: var(--primary);
+      border-color: #d8e4e1;
+    }
 
-        .resumo ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--dark);
+      font-size: 18px;
+    }
 
-        .resumo li {
-            background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            border: 1px solid #e6ebf2;
-            font-size: 0.85rem;
-        }
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0c1426 0%, #101b30 45%, #0f2b33 100%);
+      color: white;
+      padding: 88px 0 72px;
+    }
 
-        /* FOOTER */
-        .footer {
-            background: #0b1220;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.25));
+      pointer-events: none;
+    }
 
-        .footer a {
-            color: #9ca3af;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 0.8rem;
-        }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
 
-        .footer a:hover {
-            color: white;
-        }
+    .hero-copy h1 {
+      font-size: clamp(2.3rem, 4.5vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      margin: 20px 0 20px;
+      font-weight: 900;
+      max-width: 840px;
+    }
 
-        @media (max-width: 900px) {
-            body { padding: 1rem; }
-            .packages-grid { grid-template-columns: repeat(2, 1fr); }
-            th, td { font-size: 0.8rem; padding: 0.75rem; }
-        }
+    .hero-copy h1 span {
+      color: #8af3e5;
+    }
 
-        @media (max-width: 600px) {
-            .packages-grid { grid-template-columns: 1fr; }
-            .section { padding: 1rem; }
-        }
-    </style>
+    .hero-copy p {
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.82);
+      max-width: 680px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .hero-mini-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 760px;
+    }
+
+    .proof-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 22px;
+      padding: 18px 18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .proof-card strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .proof-card span {
+      color: rgba(255,255,255,0.75);
+      font-size: .9rem;
+    }
+
+    .hero-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(16px);
+    }
+
+    .mockup-window {
+      background: rgba(255,255,255,0.94);
+      border-radius: 24px;
+      padding: 18px;
+      color: var(--dark);
+    }
+
+    .mockup-banner {
+      background: linear-gradient(135deg, var(--primary), #0d9488);
+      border-radius: 18px;
+      padding: 18px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mockup-card {
+      background: #f7fafc;
+      border: 1px solid #e8eef5;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .mockup-card i {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: #e8faf6;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .mockup-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e8eef5;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      margin-top: -22px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .trust-box {
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      border-radius: 24px;
+      padding: 18px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 0;
+    }
+
+    .trust-item i {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: #ecfdf9;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .about-photo-card {
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .about-photo-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .about-list {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0 30px;
+    }
+
+    .about-list li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .about-list i {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e8faf6;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      transition: .25s ease;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 22px;
+      transition: .28s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ecfdf9, #f5fbfa);
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .price-box {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .price-main strong {
+      font-size: 1.55rem;
+      color: var(--primary);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      transition: .28s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-media {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #eaf0f7;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .5s ease;
+    }
+
+    .project-content {
+      padding: 24px;
+    }
+
+    /* CATALOG */
+    .catalog-section {
+      background: #ffffff;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .catalog-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    /* CLINICS */
+    .clinic-wrap {
+      background: linear-gradient(135deg, #0f172a 0%, #10243a 100%);
+      border-radius: 34px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+    }
+
+    .clinic-visual {
+      padding: 40px;
+      color: white;
+    }
+
+    .clinic-pricing {
+      background: white;
+      padding: 38px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, #0c1426 0%, #0e1f34 55%, #0b2d36 100%);
+      color: white;
+      padding: 84px 0;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0b1220;
+      color: white;
+      padding: 54px 0 28px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap: 28px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a, .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover, .footer-contact a:hover {
+      color: white;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-contact i {
+      width: 24px;
+      margin-right: 8px;
+    }
+
+    /* WHATSAPP FLOAT ORIGINAL */
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #25D366, #13a653);
+      color: white;
+      font-size: 28px;
+      box-shadow: 0 18px 30px rgba(37, 211, 102, 0.30);
+      z-index: 999;
+    }
+
+    /* NOVO BOTÃO DE FORMULÁRIO FLUTUANTE */
+    .form-float {
+      position: fixed;
+      right: 20px;
+      bottom: 100px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 18px 30px rgba(15, 118, 110, 0.35);
+      z-index: 998;
+      cursor: pointer;
+      transition: .25s ease;
+      border: none;
+    }
+
+    .form-float:hover {
+      transform: scale(1.05);
+    }
+
+    /* MODAL DO FORMULÁRIO */
+    .modal-form {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-form-content {
+      background: white;
+      border-radius: 32px;
+      padding: 32px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .modal-form-content h2 {
+      color: var(--dark);
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .modal-form-content p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .close-modal:hover {
+      color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: .2s;
+      outline: none;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    }
+
+    .servico-tag {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-grid, .about-grid, .catalog-grid, .clinic-wrap, .footer-top {
+        grid-template-columns: 1fr;
+      }
+      .services-grid, .projects-grid, .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .trust-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-actions .desktop-only {
+        display: none;
+      }
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+      .nav-mobile {
+        display: none;
+        padding: 0 0 20px;
+      }
+      .nav-mobile.active {
+        display: grid;
+        gap: 12px;
+      }
+      .nav-mobile a {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px 16px;
+        font-weight: 600;
+      }
+      .form-float {
+        bottom: 100px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid, .projects-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .trust-box {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <!-- CABEÇALHO -->
-    <div class="header">
-        <h1><i class="fas fa-chart-line"></i> TABELA DE PREÇOS</h1>
-        <p>DataDesh Soluções Digitais | Ana - Desenvolvedora Web - Tecnologa em Ciencias de Dados</p>
-        <div class="contato">
-            <i class="fab fa-whatsapp"></i> (31) 98498-7116 | 
-            <i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com | 
-            <i class="fa-brands fa-pix"></i> PIX disponível
+
+<header class="navbar">
+  <div class="container">
+    <div class="nav-wrap">
+      <a href="#" class="brand">
+        <div class="brand-mark"><i class="fa-solid fa-chart-simple"></i></div>
+        <div class="brand-text">
+          <strong>DataDesh Soluções</strong>
+          <span>Catálogos, páginas e ferramentas digitais</span>
         </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#catalogos">Catálogos</a>
+        <a href="#clinicas">Clínicas</a>
+        <a href="#depoimentos">Depoimentos</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="nav-icon-link desktop-only" href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a class="btn btn-light desktop-only" href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário</a>
+        <a class="btn btn-primary desktop-only" href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+        <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
     </div>
-
-        <!-- DESIGN -->
-    <div class="section">
-        <div class="section-title"><i class="fa-solid fa-palette"></i> ARTES & DESIGN</div>
-        <table>
-            <thead><tr><th>Serviço</th><th>Descrição</th><th>Condições de Pagamento</th><th>Valor Total</th><th>Prazo</th><th></th></tr></thead>
-            <tbody>
-                <tr class="highlight-row">
-                    <td>🎨 Video Com Animação para Instagram</td>
-                    <td>Arte Animada com 15 Segundos apresentando sua página</td>
-                    <td>1x de <strong class="price-installment">R$ 19,97</strong> <span class="Somente via Pix"</span></td>
-                    <td>R$ 19,97</td>
-                    <td><span class="prazo prazo-rapido">2 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                <tr class="highlight-row">
-                    <td>🎨 Post para Redes Sociais</td>
-                    <td>Arte + legenda otimizada (05 Artes)</td>
-                    <td>1x de <strong class="price-installment">R$ 44,00</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 44,00</td>
-                    <td><span class="prazo prazo-rapido">3 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Pacote 5 Posts</td>
-                    <td>25 artes + legendas para uma semana</td>
-                    <td>2x de <strong class="price-installment">R$ 97,00</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 194,00</td>
-                    <td><span class="prazo prazo-rapido">10 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Currículo digital + link GitHub Pages</td>
-                    <td>Currículo moderno publicado como página web com link compartilhável.</td>
-                    <td>2x de <strong class="price-installment">R$ 34,90</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 69,80</td>
-                    <td><span class="prazo prazo-rapido">3 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Cartão de visita (1 arte) em HTML</td>
-                    <td>Cartão digital em página única com arte, dados e link clicável.</td>
-                    <td>2x de <strong class="price-installment">R$ 24,90</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 49,80</td>
-                    <td><span class="prazo prazo-rapido">3 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Convite digital em HTML + Google Forms</td>
-                    <td>Convite online com arte, detalhes do evento e formulário de confirmação.</td>
-                    <td>3x de <strong class="price-installment">R$ 32,50 </strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 97,50</td>
-                    <td><span class="prazo prazo-rapido">3 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Formulário Google Forms + coleta</td>
-                    <td>Formulário configurado com lógica, validações e planilha de respostas.</td>
-                    <td>2x de <strong class="price-installment">R$ 23,50 </strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 47,00</td>
-                    <td><span class="prazo prazo-rapido">2 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Apresentações / Slides (até 20 slides)</td>
-                    <td>Criação de apresentação visual, prontos para PowerPoint/Google Slides.</td>
-                    <td>3x de <strong class="price-installment">R$ 37,50 </strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 107,50</td>
-                    <td><span class="prazo prazo-rapido">2 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🖼️ Organização de arquivos e pastas digitais Com Página que leva Direto para Links</td>
-                    <td>Reestruturação lógica de pastas, renomeação e categorização de arquivos.</td>
-                    <td>3x de <strong class="price-installment">R$ 47,50 </strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 142,50</td>
-                    <td><span class="prazo prazo-rapido">2 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🎨 Identidade Visual Básica</td>
-                    <td>Logo, paleta de cores e tipografia</td>
-                    <td>4x de <strong class="price-installment">R$ 67,67</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 270,67</td>
-                    <td><span class="prazo prazo-medio">7 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#catalogos">Catálogo Digital</a>
+      <a href="#clinicas">Página para Clínicas</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="https://wa.me/5531984987116" target="_blank">Falar no WhatsApp</a>
     </div>
+  </div>
+</header>
 
-    <!-- SITES & CATÁLOGOS -->
-    <div class="section">
-        <div class="section-title"><i class="fa-solid fa-globe"></i> SITES & CATÁLOGOS DIGITAIS</div>
-        <table>
-            <thead>
-                <tr><th>Serviço</th><th>Descrição</th><th>Condições de Pagamento</th><th>Valor Total</th><th>Prazo</th><th></th></tr>
-            </thead>
-            <tbody>
-                <tr class="highlight-row">
-                    <td>📱 Catálogo Digital Básico</td>
-                    <td>Vitrine com até 25 produtos, WhatsApp integrado</td>
-                    <td>3x de <strong class="price-installment">R$ 25,67</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 77,00</td>
-                    <td><span class="prazo prazo-rapido">5 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>📱 Catálogo Digital Profissional</td>
-                    <td>Até 50 produtos + categorias personalizadas</td>
-                    <td>4x de <strong class="price-installment">R$ 44,67</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 178,67</td>
-                    <td><span class="prazo prazo-rapido">7 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🌱 Site Institucional (1 página)</td>
-                    <td>Landing page responsiva e moderna</td>
-                    <td>4x de <strong class="price-installment">R$ 59,70</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 238,67</td>
-                    <td><span class="prazo prazo-medio">7 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🏥 Página para Clínicas</td>
-                    <td>Serviços, profissionais, localização e WhatsApp</td>
-                    <td>5x de <strong class="price-installment">R$ 39,40</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 197,00</td>
-                    <td><span class="prazo prazo-medio">7 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🏪 Site Multi-páginas (até 5 páginas)</td>
-                    <td>Site completo com blog, serviços e contato</td>
-                    <td>10x de <strong class="price-installment">R$ 59,70</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 597,00</td>
-                    <td><span class="prazo prazo-longo">Em até 20 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- DASHBOARDS -->
-    <div class="section">
-        <div class="section-title"><i class="fa-solid fa-chart-line"></i> DASHBOARDS & AUTOMAÇÃO</div>
-        <table>
-            <thead><tr><th>Serviço</th><th>Descrição</th><th>Condições de Pagamento</th><th>Valor Total</th><th>Prazo</th><th></th></tr></thead>
-            <tbody>
-                <tr class="highlight-row">
-                    <td>📊 Dashboard Simples + Google Sheets</td>
-                    <td>Gráficos básicos e indicadores</td>
-                    <td>6x de <strong class="price-installment">R$ 59,67</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 358,00</td>
-                    <td><span class="prazo prazo-medio">Em até 20 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>📈 Dashboard Intermediário</td>
-                    <td>Filtros dinâmicos, KPIs avançados</td>
-                    <td>8x de <strong class="price-installment">R$ 59,70</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 477,60</td>
-                    <td><span class="prazo prazo-longo">Em até 30 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-                <tr>
-                    <td>🤖 Automação de Processos</td>
-                    <td>Fluxos de trabalho, integração com APIs</td>
-                    <td>8x de <strong class="price-installment">R$ 74,67</strong> <span class="sinal-info">20% sinal</span></td>
-                    <td>R$ 597,36</td>
-                    <td><span class="prazo prazo-longo">Em Até 30 dias</span></td>
-                    <td><a href="https://wa.me/5531984987116" class="btn-whatsapp-small"><i class="fab fa-whatsapp"></i> Pedir</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- PACOTES PROMOCIONAIS -->
-    <div class="section">
-        <div class="section-title"><i class="fa-solid fa-gift"></i> 🎁 PACOTES PROMOCIONAIS</div>
-        <div class="packages-grid">
-            <div class="package-card">
-                <div class="selo-destaque">🔥 MAIS VENDIDO</div>
-                <h4>Pacote Start</h4>
-                <p>Catálogo Digital + Página Institucional</p>
-                <div class="package-price">R$ 297,00</div>
-                <div class="package-installment">ou 6x de R$ 49,50</div>
-                <div class="sinal-info" style="margin: 8px auto; display: inline-block;">20% de sinal</div>
-                <a href="https://wa.me/5531984987116" class="btn-pedir">👉 Quero esse</a>
-            </div>
-            <div class="package-card destaque">
-                <div class="selo-destaque">⭐ MAIS COMPLETO</div>
-                <h4>Pacote Profissional</h4>
-                <p>Site + Catálogo + Dashboard Simples</p>
-                <div class="package-price">R$ 497,00</div>
-                <div class="package-installment">ou 10x de R$ 49,70</div>
-                <div class="sinal-info" style="margin: 8px auto; display: inline-block;">20% de sinal</div>
-                <a href="https://wa.me/5531984987116" class="btn-pedir">👉 Quero esse</a>
-            </div>
-            <div class="package-card">
-                <div class="selo-destaque">👑 TOP</div>
-                <h4>Pacote Premium</h4>
-                <p>Site Completo + Dashboard + Identidade Visual</p>
-                <div class="package-price">R$ 797,00</div>
-                <div class="package-installment">ou 10x de R$ 79,70</div>
-                <div class="sinal-info" style="margin: 8px auto; display: inline-block;">20% de sinal</div>
-                <a href="https://wa.me/5531984987116" class="btn-pedir">👉 Quero esse</a>
-            </div>
-            <div class="package-card">
-                <div class="selo-destaque">📦 SUPER</div>
-                <h4>Kit Clínicas</h4>
-                <p>Página para Clínica + Dashboard de Agendamentos</p>
-                <div class="package-price">R$ 547,00</div>
-                <div class="package-installment">ou 10x de R$ 54,70</div>
-                <div class="sinal-info" style="margin: 8px auto; display: inline-block;">20% de sinal</div>
-                <a href="https://wa.me/5531984987116" class="btn-pedir">👉 Quero esse</a>
-            </div>
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><i class="fa-solid fa-bolt"></i> +54 projetos já concluídos</div>
+          <h1>Soluções digitais com visual <span>profissional</span> e foco em vendas</h1>
+          <p>Crio sites, catálogos digitais, páginas para clínicas e ferramentas visuais que organizam sua apresentação e facilitam a decisão do cliente.</p>
+          <div class="hero-actions">
+            <a href="https://wa.me/5531984987116" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Quero minha solução</a>
+            <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-secondary" target="_blank"><i class="fa-regular fa-file-lines"></i> Formulário</a>
+          </div>
+          <div class="hero-mini-proof">
+            <div class="proof-card"><strong>54+</strong><span>projetos concluídos</span></div>
+            <div class="proof-card"><strong>até 30 dias</strong><span>prazo (depende do projeto)</span></div>
+            <div class="proof-card"><strong>100%</strong><span>personalizado</span></div>
+          </div>
         </div>
-    </div>
-
-    <!-- RESUMO -->
-    <div class="resumo">
-        <h3><i class="fa-solid fa-circle-info"></i> INFORMAÇÕES IMPORTANTES</h3>
-        <ul>
-            <li>💰 <strong>20% de sinal</strong> para iniciar o projeto</li>
-            <li>📦 Restante parcelado em até <strong>10x com juros</strong></li>
-            <li>📧 Envio do protótipo por <strong>e-mail para aprovação</strong></li>
-            <li>✅ Ajustes inclusos antes da entrega final</li>
-            <li>📅 Prazos: <strong>3 a 30 dias</strong> dependendo da complexidade</li>
-            <li>💳 Aceito: PIX, cartão de crédito (Link Mercado Pago) boleto</li>
-        </ul>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: #f59e0b; font-weight: 700;">
-            ⚠️ Vagas limitadas por semana - Garanta já o seu projeto!
-        </p>
-    </div>
-
-    <!-- RODAPÉ -->
-    <div class="footer">
-        <p>DataDesh Soluções Digitais | Ana Paula</p>
-        <p style="margin: 0.5rem 0;">
-            <i class="fab fa-whatsapp"></i> (31) 98498-7116 | 
-            <i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com | 
-            <i class="fab fa-instagram"></i> @datadeshsolucoesdigitais
-        </p>
-        <div style="margin-top: 1rem;">
-            <a href="https://datadeshsolucoes-design.github.io/servicosdigitais/termos-uso.html">Termos de Uso</a>
-            <a href="https://datadeshsolucoes-design.github.io/servicosdigitais/politica-privacidade.html">Política de Privacidade</a>
-            <a href="https://datadeshsolucoes-design.github.io/servicosdigitais/contrato-modelo.html">Modelo de Contrato</a>
+        <div class="hero-panel reveal">
+          <div class="mockup-window">
+            <div class="mockup-banner"><strong>Catálogos, sites e páginas com aparência premium</strong></div>
+            <div class="mockup-grid">
+              <div class="mockup-card"><i class="fa-solid fa-mobile-screen-button"></i><strong>Catálogo digital</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-globe"></i><strong>Site profissional</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-hospital-user"></i><strong>Página para clínicas</strong></div>
+              <div class="mockup-card"><i class="fa-solid fa-chart-line"></i><strong>Dashboards</strong></div>
+            </div>
+            <div class="mockup-footer"><div>a partir de 3x de R$ 25,67</div><a href="https://wa.me/5531984987116" class="btn btn-primary" style="padding: 10px 16px;">Solicitar</a></div>
+          </div>
         </div>
+      </div>
     </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-box reveal">
+        <div class="trust-item"><i class="fa-solid fa-layer-group"></i><div><strong>Estrutura profissional</strong><span>Layout confiável</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-paper-plane"></i><div><strong>Entrega planejada</strong><span>até 30 dias</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-envelope-circle-check"></i><div><strong>Prova por email</strong><span>Você aprova antes</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-file-signature"></i><div><strong>20% de sinal</strong><span>Processo seguro</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo-card reveal">
+          <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/FOTO.jpeg.jpeg" alt="Ana">
+        </div>
+        <div class="about-copy reveal">
+          <div class="section-kicker"><i class="fa-solid fa-user-tie"></i> Sobre a profissional</div>
+          <h2>Oi, sou a <span>Ana</span> — transformo ideias em presença digital</h2>
+          <p>Tecnóloga em Ciência de Dados, especialista em criar páginas, catálogos e ferramentas digitais com visual moderno e foco em resultado. Já concluí <strong>mais de 54 projetos</strong> para diferentes negócios.</p>
+          <ul class="about-list">
+            <li><i class="fa-solid fa-check"></i> Sites, páginas e catálogos com visual sofisticado</li>
+            <li><i class="fa-solid fa-check"></i> Soluções pensadas para WhatsApp e vendas</li>
+            <li><i class="fa-solid fa-check"></i> Processo simples: sinal, protótipo, entrega</li>
+          </ul>
+          <div class="contact-pills">
+            <a href="https://wa.me/5531984987116" class="pill"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a>
+            <a href="mailto:datadshsolucoes@gmail.com" class="pill"><i class="fa-regular fa-envelope"></i> E-mail</a>
+            <a href="https://www.instagram.com/datadeshsolucoesdigitais/" class="pill"><i class="fab fa-instagram"></i> Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="section" style="background:#fff">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-diagram-project"></i> Portfólio</div>
+        <h2 class="section-title">Projetos <span>já concluídos</span></h2>
+      </div>
+      <div class="projects-grid">
+        
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/filtros%20com%20graficos%20interativos.png" alt="Dashboard Filtros">
+          </div>
+          <div class="project-content">
+            <h3>Dashboard para gestão da saúde</h3>
+            <p>Painel com gráficos interativos e filtros dinâmicos.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20interativos.png" alt="Dashboards Interativos">
+          </div>
+          <div class="project-content">
+            <h3>Dashboards interativos</h3>
+            <p>Gráficos sincronizados e visual profissional.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/filtros%20dianamicos.png" alt="Dashboards com Filtros">
+          </div>
+          <div class="project-content">
+            <h3>Dashboards com Filtros Especiais</h3>
+            <p>Gráficos sincronizados e visual profissional.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/graficos%20interativos%202.png" alt="Dashboards Especiais">
+          </div>
+          <div class="project-content">
+            <h3>Dashboards Especiais</h3>
+            <p>Gráficos Exclusivos.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/area%20de%20trabalho.png" alt="Dashboard Área de Trabalho">
+          </div>
+          <div class="project-content">
+            <h3>Dashboards profissionais</h3>
+            <p>Páginas modernas que transmitem credibilidade.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/servicosdigitais/main/foto3.png" alt="Sites e Páginas Virtuais">
+          </div>
+          <div class="project-content">
+            <h3>Páginas na WEB/Diversas</h3>
+            <p>Páginas modernas em vários Estilos.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-screwdriver-wrench"></i> Soluções</div>
+        <h2 class="section-title">O que eu <span>faço</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-globe"></i></div><h3>Sites profissionais</h3><p>Sites modernos e responsivos</p><div class="price-box"><div class="price-main"><strong>R$ 59,70</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Catálogo digital</h3><p>Vitrine para WhatsApp</p><div class="price-box"><div class="price-main"><strong>R$ 25,67</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-hospital-user"></i></div><h3>Página para clínicas</h3><p>Apresentação profissional</p><div class="price-box"><div class="price-main"><strong>R$ 39,40</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+        <div class="service-card reveal"><div class="service-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Dashboards</h3><p>Painéis interativos</p><div class="price-box"><div class="price-main"><strong>R$ 59,70</strong>/mês</div></div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGOS -->
+  <section id="catalogos" class="section catalog-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-solid fa-store"></i> Catálogo Digital</div>
+        <h2 class="section-title"><span>Catálogo digital</span> profissional</h2>
+      </div>
+      <div class="catalog-grid">
+        <div class="catalog-card reveal"><h3>Por que ter um catálogo digital?</h3><ul><li>✓ Visual organizado</li><li>✓ Categorias personalizadas</li><li>✓ Botão direto WhatsApp</li></ul></div>
+        <div class="catalog-card reveal"><h3>Preços</h3><div class="price-main"><strong>R$ 25,67</strong>/mês</div><a href="https://wa.me/5531984987116" class="btn btn-primary">Solicitar</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLÍNICAS -->
+  <section id="clinicas" class="section">
+    <div class="container">
+      <div class="clinic-wrap reveal">
+        <div class="clinic-visual"><h3>Página profissional para <span style="color:#8af3e5">clínicas e consultórios</span></h3><p>Estrutura completa para apresentar serviços, diferenciais e contato.</p></div>
+        <div class="clinic-pricing"><div class="price-main"><strong>R$ 39,40</strong>/mês</div><a href="https://wa.me/5531984987116" class="btn btn-primary">Quero para minha clínica</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="section" style="background:#fff">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-kicker"><i class="fa-regular fa-message"></i> Feedbacks</div>
+        <h2 class="section-title">Quem já usou <span>recomenda</span></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal"><p>"A página que a Ana criou trouxe muita credibilidade para minha clínica."</p><strong>Dra. Mariana L.</strong></div>
+        <div class="testimonial-card reveal"><p>"Meu catálogo digital antes era uma bagunça. Agora é profissional e as vendas aumentaram."</p><strong>Renata S.</strong></div>
+        <div class="testimonial-card reveal"><p>"Excelente profissional, entrega no prazo e resolveu todas as minhas dúvidas."</p><strong>Carlos A.</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Pronto para dar um upgrade digital no seu negócio?</h2>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="https://wa.me/5531984987116" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Falar com Ana</a>
+        <a href="https://docs.google.com/forms/d/10BNhmVAOWsMX5mpnDO0gp-VTZ7r45PiGezvORu79VtI/edit" class="btn btn-light">Formulário</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <strong>DataDesh Soluções</strong>
+        <p style="margin-top: 10px;">Soluções digitais para pequenos negócios</p>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 15px;">Links Rápidos</h4>
+        <div class="footer-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#catalogos">Catálogos</a>
+          <a href="#clinicas">Clínicas</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 15px;">Contato</h4>
+        <div class="footer-contact">
+          <a href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> (31) 98498-7116</a>
+          <a href="mailto:datadshsolucoes@gmail.com"><i class="fa-regular fa-envelope"></i> datadshsolucoes@gmail.com</a>
+          <a href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i> @datadeshsolucoesdigitais</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 DataDesh Soluções - Ana | Todos os direitos reservados</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botão WhatsApp original -->
+<a href="https://wa.me/5531984987116" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- NOVO BOTÃO FLUTUANTE DE FORMULÁRIO -->
+<button class="form-float" id="openFormBtn">
+  <i class="fa-regular fa-message"></i>
+</button>
+
+<!-- MODAL DO FORMULÁRIO -->
+<div id="formModal" class="modal-form">
+  <div class="modal-form-content">
+    <button class="close-modal" id="closeModalBtn">&times;</button>
+    <h2><i class="fa-regular fa-file-lines"></i> Fale com a Ana</h2>
+    <p>Preencha os campos abaixo e receba um retorno rápido no WhatsApp!</p>
+    
+    <form id="leadForm">
+      <div class="form-group">
+        <label>👤 Seu nome completo *</label>
+        <input type="text" id="nomeCliente" required placeholder="Ex: Maria Silva">
+      </div>
+      
+      <div class="form-group">
+        <label>📞 Telefone com DDD *</label>
+        <input type="tel" id="telefoneCliente" required placeholder="(31) 99999-9999">
+      </div>
+      
+      <div class="form-group">
+        <label>🎯 Tipo de serviço *</label>
+        <select id="tipoServico" required>
+          <option value="">Selecione...</option>
+          <option value="Dúvida sobre sites">💻 Dúvida sobre sites</option>
+          <option value="Orçamento de catálogo digital">📱 Orçamento de catálogo digital</option>
+          <option value="Orçamento de página para clínica">🏥 Orçamento para clínica</option>
+          <option value="Orçamento de dashboard">📊 Orçamento de dashboard</option>
+          <option value="Suporte técnico">🔧 Suporte técnico</option>
+          <option value="Outro serviço">✨ Outro serviço</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>💬 Mensagem (detalhes do que precisa)</label>
+        <textarea id="mensagemCliente" placeholder="Descreva brevemente o que você está procurando..."></textarea>
+      </div>
+      
+      <button type="submit" class="btn-submit">
+        <i class="fab fa-whatsapp"></i> Enviar mensagem
+      </button>
+    </form>
+    
+    <div class="servico-tag">
+      <i class="fa-solid fa-clock"></i> Retorno em até 15 minutos
+    </div>
+  </div>
 </div>
+
+<script>
+  // Menu mobile
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+  }
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  function revealOnScroll() {
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
+  // FORMULÁRIO MODAL
+  const openFormBtn = document.getElementById('openFormBtn');
+  const formModal = document.getElementById('formModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  
+  openFormBtn.onclick = () => {
+    formModal.style.display = 'flex';
+  };
+  
+  closeModalBtn.onclick = () => {
+    formModal.style.display = 'none';
+  };
+  
+  window.onclick = (event) => {
+    if (event.target === formModal) {
+      formModal.style.display = 'none';
+    }
+  };
+  
+  // Envio do formulário via WhatsApp
+  const leadForm = document.getElementById('leadForm');
+  const NUMERO_WPP = "5531984987116"; // Número da Ana (o mesmo usado no site)
+  
+  leadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const nome = document.getElementById('nomeCliente').value.trim();
+    const telefone = document.getElementById('telefoneCliente').value.trim();
+    const servico = document.getElementById('tipoServico').value;
+    const mensagem = document.getElementById('mensagemCliente').value.trim();
+    
+    if (!nome || !telefone || !servico) {
+      alert('⚠️ Por favor, preencha nome, telefone e tipo de serviço!');
+      return;
+    }
+    
+    // Construir mensagem personalizada
+    let textoWhats = `📋 *NOVO CONTATO - SITE DATADESH* 📋%0A%0A` +
+      `👤 *Nome:* ${nome}%0A` +
+      `📞 *Telefone:* ${telefone}%0A` +
+      `🎯 *Tipo de serviço:* ${servico}%0A` +
+      `💬 *Mensagem:* ${mensagem || "Cliente não deixou mensagem adicional"}%0A%0A` +
+      `✅ *Origem:* Formulário do site DataDesh Soluções`;
+    
+    const urlWhats = `https://wa.me/${NUMERO_WPP}?text=${textoWhats}`;
+    window.open(urlWhats, "_blank");
+    
+    // Fechar modal e limpar formulário
+    formModal.style.display = 'none';
+    leadForm.reset();
+  });
+</script>
+
 </body>
 </html>
