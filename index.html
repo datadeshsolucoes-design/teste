@@ -2,598 +2,761 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Beleza Store - Produtos de Beleza SP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Controle do Cartão - Dashboard</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+            transition: background 0.3s ease, color 0.2s ease, border-color 0.2s;
+        }
+
+        :root {
+            --bg: #f4f7fc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #475569;
+            --border: #e2e8f0;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+        }
+
+        body.dark {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
         }
 
         body {
-            background: #fdf2f8;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.08) 0%, transparent 40%);
+            background: var(--bg);
+            color: var(--text);
             padding: 20px;
+            font-size: 18px;
         }
 
-        /* HEADER */
-        .header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #db5a8c, #b83b6d);
-            border-radius: 50px 50px 30px 30px;
-            margin-bottom: 35px;
-            box-shadow: 0 12px 20px rgba(0,0,0,0.2);
-            color: white;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0 #6b2040;
-        }
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            margin-top: 8px;
-        }
-        .whatsapp-badge {
-            background: #25d366;
-            display: inline-block;
-            padding: 8px 22px;
-            border-radius: 40px;
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        /* CATEGORIAS */
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 35px;
-        }
-        .cat-btn {
-            background: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-            color: #b83b6d;
-            border: 1px solid #ffb7d2;
-        }
-        .cat-btn.active {
-            background: #db5a8c;
-            color: white;
-            border-color: #db5a8c;
-            transform: scale(1.02);
-        }
-
-        /* GRADE DE PRODUTOS */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 28px;
+        .container {
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* CARTÃO DO PRODUTO */
-        .product-card {
-            background: white;
-            border-radius: 35px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.25s ease, box-shadow 0.2s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #ffe0f0;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
-        }
-        .product-img {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
-            padding: 12px;
-        }
-        .product-cat {
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .product-info {
-            padding: 20px;
-            flex: 1;
-        }
-        .product-name {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #4a202e;
-            margin-bottom: 8px;
-        }
-        .product-desc {
-            font-size: 0.85rem;
-            color: #7a5a6a;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .price-area {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
-            border-top: 1px dashed #ffcce0;
-            padding-top: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 15px;
         }
-        .product-price {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #db5a8c;
+
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        .btn-order {
-            background: #25d366;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: bold;
+
+        .theme-toggle {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            background: var(--card);
+            padding: 15px 20px;
+            border-radius: 24px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .filter-group {
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-        .btn-order:hover {
-            background: #128c7e;
-            transform: scale(1.02);
+            background: var(--bg);
+            padding: 5px 12px;
+            border-radius: 40px;
         }
 
-        /* MODAL DE QUANTIDADE */
-        .modal {
+        .filter-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        select, input {
+            padding: 8px 12px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card h3 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .form-panel {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
             display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-danger { background: var(--danger); }
+        .btn-warning { background: var(--warning); }
+        .btn-sm { padding: 6px 12px; font-size: 0.8rem; width: auto; }
+
+        .divida-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .divida-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .badge {
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            background: var(--success);
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Abas de filtro horizontais */
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .filter-tab {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .modal {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
+
         .modal-content {
-            background: white;
-            border-radius: 40px;
-            padding: 30px;
+            background: var(--card);
+            padding: 25px;
+            border-radius: 24px;
             width: 90%;
-            max-width: 450px;
-            text-align: center;
-            box-shadow: 0 20px 30px black;
-            max-height: 90vh;
-            overflow-y: auto;
+            max-width: 400px;
         }
-        .modal-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #db5a8c;
+
+        .hidden {
+            display: none;
         }
-        .modal-content p {
-            font-size: 1.2rem;
-            margin: 10px 0;
-        }
-        .qty-control {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .qty-btn {
-            background: #f0f0f0;
-            border: none;
-            font-size: 2rem;
-            width: 50px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.1s;
-        }
-        .qty-btn:active {
-            background: #ddd;
-        }
-        #quantidade {
-            font-size: 2rem;
-            font-weight: bold;
-            min-width: 50px;
-        }
-        
-        /* Formulário de dados do cliente */
-        .cliente-form {
-            margin: 20px 0;
-            text-align: left;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #4a202e;
-            font-size: 0.9rem;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ffe0f0;
-            border-radius: 25px;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.2s;
-        }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #db5a8c;
-        }
-        .form-group input {
-            background: #fffef7;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .confirm-btn {
-            background: #25d366;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .cancel-btn {
-            background: #aaa;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #a06b82;
-        }
+
         @media (max-width: 700px) {
-            .header h1 { font-size: 1.8rem; }
-            .product-name { font-size: 1.3rem; }
+            body { padding: 12px; font-size: 16px; }
+            .stat-card .value { font-size: 1.5rem; }
         }
     </style>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h1>💳 Controle do Cartão</h1>
+        <button class="theme-toggle" id="themeToggle">🌙 Modo escuro</button>
+    </div>
 
-<div class="header">
-    <h1>💄 Beleza Store</h1>
-    <p>📍 São Paulo - Jardins | Entrega rápida</p>
-    <div class="whatsapp-badge">
-        📱 Peça pelo WhatsApp: (31) 98498-7116
+    <div class="controls-bar">
+        <div class="filter-group"><label>📅 Mês referência:</label><input type="month" id="mesReferencia"></div>
+        <div class="filter-group"><label>🔍 Nome:</label><input type="text" id="filtroNome" placeholder="Digite o nome"></div>
+        <button id="btnLimparFiltros" style="background:var(--text-light); width:auto;">🧹 Limpar</button>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="newLoan">➕ Nova dívida</button>
+        <button class="tab-btn" data-tab="pay">💰 Pagar parcela</button>
+        <button class="tab-btn" data-tab="edit">✏️ Editar/Excluir</button>
+        <button class="tab-btn" data-tab="backup">💾 Backup/Excel</button>
+    </div>
+
+    <div id="newLoan" class="form-panel active">
+        <h3>➕ Cadastrar nova dívida no cartão</h3>
+        <div class="form-row">
+            <div class="form-group"><label>Nome completo</label><input type="text" id="newName" placeholder="Ex: Ana"></div>
+            <div class="form-group"><label>WhatsApp (com DDD)</label><input type="text" id="newWhats" placeholder="11999999999"></div>
+            <div class="form-group"><label>Valor da parcela (R$)</label><input type="number" id="newInstallment" placeholder="275"></div>
+            <div class="form-group"><label>Total de parcelas</label><input type="number" id="newTotal" placeholder="10"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Parcelas já pagas</label><input type="number" id="newPaid" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Cartão</label><select id="newCard"><option value="A">Cartão A (vence dia 10)</option><option value="B">Cartão B (vence dia 25)</option></select></div>
+            <div class="form-group"><label>Data início</label><input type="date" id="newDate"></div>
+        </div>
+        <button id="createLoanBtn">✅ Criar dívida</button>
+    </div>
+
+    <div id="pay" class="form-panel">
+        <h3>💰 Pagar parcela</h3>
+        <div class="form-row">
+            <div class="form-group"><label>Selecione a dívida</label><select id="payLoanSelect"></select></div>
+            <div class="form-group"><label>Data do pagamento</label><input type="date" id="payDate"></div>
+        </div>
+        <button id="payInstallmentBtn">✅ Confirmar pagamento</button>
+    </div>
+
+    <div id="edit" class="form-panel">
+        <h3>✏️ Editar ou excluir dívida</h3>
+        <div class="form-row">
+            <div class="form-group"><label>Dívida</label><select id="editLoanSelect"></select></div>
+            <div class="form-group"><label>Valor parcela (R$)</label><input type="number" id="editInstallmentValue"></div>
+            <div class="form-group"><label>Total parcelas</label><input type="number" id="editTotalParcels"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Senha</label><input type="password" id="editSenha" placeholder="Digite a senha"></div>
+        </div>
+        <div class="form-row">
+            <button id="saveEditBtn">💾 Salvar alterações</button>
+            <button id="deleteLoanBtn" class="btn-danger">🗑️ Excluir dívida</button>
+        </div>
+    </div>
+
+    <div id="backup" class="form-panel">
+        <h3>💾 Exportar / Importar dados</h3>
+        <div class="form-row">
+            <button id="exportExcelBtn">📊 Baixar Excel</button>
+            <button id="backupBtn">📁 Backup (JSON)</button>
+            <input type="file" id="restoreFile" accept=".json" style="display:none">
+            <button id="restoreBtn">🔄 Restaurar backup</button>
+        </div>
+    </div>
+
+    <!-- ABAS DE FILTRO HORIZONTAIS -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">📋 Todos os cartões</button>
+        <button class="filter-tab" data-filter="A">💳 Cartão A (dia 10)</button>
+        <button class="filter-tab" data-filter="B">💳 Cartão B (dia 25)</button>
+    </div>
+
+    <h2>📋 Dívidas ativas</h2>
+    <div id="activeLoansList"></div>
+
+    <h2>✅ Histórico (Quitadas)</h2>
+    <div id="paidLoansList"></div>
+
+    <h2>📊 Tabela completa de todas as dívidas</h2>
+    <div class="table-container">
+        <table class="data-table">
+            <thead><tr><th>Nome</th><th>Cartão</th><th>Parcela</th><th>Valor parcela</th><th>Restantes</th><th>Total pendente</th><th>WhatsApp</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
     </div>
 </div>
 
-<div class="categories">
-    <button class="cat-btn active" data-cat="all">✨ Todos</button>
-    <button class="cat-btn" data-cat="makeup">💄 Maquiagem</button>
-    <button class="cat-btn" data-cat="skincare">🧴 Skincare</button>
-    <button class="cat-btn" data-cat="perfumes">🌸 Perfumes</button>
-    <button class="cat-btn" data-cat="cabelos">💇‍♀️ Cabelos</button>
-</div>
-
-<div class="menu-grid" id="menuGrid"></div>
-
-<footer>
-    💖 Clique no produto → escolha a quantidade → preencha seus dados → envie o pedido!
-</footer>
-
-<!-- MODAL COM QUANTIDADE + FORMULÁRIO -->
-<div id="modalQty" class="modal">
+<div id="modalWhats" class="modal hidden">
     <div class="modal-content">
-        <h3 id="modalProdutoNome">Produto</h3>
-        <p id="modalPreco">R$ 0,00</p>
-        <p>Quantidade:</p>
-        <div class="qty-control">
-            <button class="qty-btn" id="menosQty">-</button>
-            <span id="quantidade">1</span>
-            <button class="qty-btn" id="maisQty">+</button>
-        </div>
-        
-        <!-- Formulário com telefone, endereço e forma de pagamento -->
-        <div class="cliente-form">
-            <div class="form-group">
-                <label>📞 Seu telefone (WhatsApp): *</label>
-                <input type="tel" id="clienteTelefone" placeholder="(31) 99999-9999" required>
-            </div>
-            <div class="form-group">
-                <label>🏠 Endereço completo: *</label>
-                <input type="text" id="clienteEndereco" placeholder="Rua, número, bairro, complemento" required>
-            </div>
-            <div class="form-group">
-                <label>💰 Forma de pagamento: *</label>
-                <select id="formaPagamento">
-                    <option value="">Selecione...</option>
-                    <option value="Dinheiro">💵 Dinheiro (com troco)</option>
-                    <option value="Pix">📱 Pix</option>
-                    <option value="Cartão de Crédito">💳 Cartão de Crédito</option>
-                    <option value="Cartão de Débito">💳 Cartão de Débito</option>
-                    <option value="PicPay">⚡ PicPay</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="modal-buttons">
-            <button class="confirm-btn" id="confirmarPedido">✅ Enviar Pedido</button>
-            <button class="cancel-btn" id="cancelarModal">❌ Cancelar</button>
-        </div>
+        <h3>📲 Enviar cobrança via WhatsApp</h3>
+        <input type="text" id="whatsNumero" placeholder="Número com DDD (ex: 11999999999)">
+        <textarea id="whatsMensagem" rows="4" placeholder="Mensagem personalizada..."></textarea>
+        <button id="btnEnviarWhats" style="background:#25D366;">📲 Enviar</button>
+        <button id="btnFecharWhats" style="background:var(--text-light);">Cancelar</button>
     </div>
 </div>
 
 <script>
-    // NÚMERO DO WHATSAPP DA LOJA
-    const NUMERO_WHATSAPP = "5531984987116";  // 55 + 31 + 984987116
+    const SENHA = "270601";
+    let dividas = [];
+    let nextId = 1;
+    let currentMonth = new Date().toISOString().slice(0,7);
+    let filterCartao = "all";
+    const CARD_DUE = { A: 10, B: 25 };
 
-    // BASE DE PRODUTOS DE BELEZA
-    const produtos = [
-        // Maquiagem
-        { id: 1, nome: "Base Líquida Matte", descricao: "Alta cobertura, acabamento mate, 12h de duração", preco: 59.90, categoria: "makeup", img: "💄" },
-        { id: 2, nome: "Paleta de Sombras 12 Cores", descricao: "Cores neutras e metalizadas, pigmentação intensa", preco: 79.90, categoria: "makeup", img: "🎨" },
-        { id: 3, nome: "Batom Matte Líquido", descricao: "Longa duração, não transfere, 7ml", preco: 39.90, categoria: "makeup", img: "💋" },
-        { id: 4, nome: "Máscara de Cílios", descricao: "Alongamento e volume extremos, à prova d'água", preco: 49.90, categoria: "makeup", img: "👁️" },
-        { id: 5, nome: "Pó Compacto Translúcido", descricao: "Selagem perfeita, controle de brilho", preco: 54.90, categoria: "makeup", img: "✨" },
-        
-        // Skincare
-        { id: 6, nome: "Hidratante Facial", descricao: "Ácido hialurônico, vitamina C, 50g", preco: 89.90, categoria: "skincare", img: "💧" },
-        { id: 7, nome: "Protetor Solar FPS 50", descricao: "Toque seco, oil-free, proteção UVA/UVB", preco: 69.90, categoria: "skincare", img: "☀️" },
-        { id: 8, nome: "Sérum Anti-Idade", descricao: "Retinol + ácido glicólico, 30ml", preco: 129.90, categoria: "skincare", img: "🌟" },
-        { id: 9, nome: "Água Micelar", descricao: "Limpeza suave, remove maquiagem, 500ml", preco: 44.90, categoria: "skincare", img: "🧴" },
-        { id: 10, nome: "Máscara de Argila", descricao: "Limpeza profunda, controle de oleosidade", preco: 34.90, categoria: "skincare", img: "🧖‍♀️" },
-        
-        // Perfumes
-        { id: 11, nome: "Perfume Floratta", descricao: "Feminino, notas florais e frutais, 50ml", preco: 159.90, categoria: "perfumes", img: "🌸" },
-        { id: 12, nome: "Perfume Malbec", descricao: "Masculino, notas amadeiradas e especiarias", preco: 179.90, categoria: "perfumes", img: "🍷" },
-        { id: 13, nome: "Body Splash", descricao: "Fragrância suave, 200ml, uso diário", preco: 49.90, categoria: "perfumes", img: "💕" },
-        { id: 14, nome: "Perfume Importado", descricao: "Luxo, francês, 30ml (réplica premium)", preco: 199.90, categoria: "perfumes", img: "✨" },
-        
-        // Cabelos
-        { id: 15, nome: "Shampoo Reconstrutor", descricao: "Queratina líquida, 300ml, cabelos danificados", preco: 49.90, categoria: "cabelos", img: "🧴" },
-        { id: 16, nome: "Máscara de Hidratação", descricao: "Manteiga de Karité, 500g, hidratação profunda", preco: 59.90, categoria: "cabelos", img: "💇‍♀️" },
-        { id: 17, nome: "Óleo Finalizador", descricao: "Brilho intenso, sem enxágue, 100ml", preco: 39.90, categoria: "cabelos", img: "✨" },
-        { id: 18, nome: "Chapinha Ultra Hair", descricao: "Temperatura regulável, cerâmica, 110v/220v", preco: 149.90, categoria: "cabelos", img: "🔌" },
-        { id: 19, nome: "Secador Profissional", descricao: "1900W, íons negativos, 3 temperaturas", preco: 199.90, categoria: "cabelos", img: "💨" },
-        { id: 20, nome: "Kit Tratamento Capilar", descricao: "Shampoo + Condicionador + Máscara", preco: 109.90, categoria: "cabelos", img: "🎁" }
-    ];
+    function calcularVencimento(inicio, parcelaAtual, cartao) {
+        if(!inicio) return null;
+        let [ano, mes, dia] = inicio.split('-').map(Number);
+        let diaVenc = CARD_DUE[cartao];
+        let mesVenc = mes + (parcelaAtual - 1);
+        let anoVenc = ano;
+        while(mesVenc > 12) { mesVenc -= 12; anoVenc++; }
+        let ultimoDia = new Date(anoVenc, mesVenc, 0).getDate();
+        let finalDia = Math.min(diaVenc, ultimoDia);
+        return `${String(finalDia).padStart(2,'0')}/${String(mesVenc).padStart(2,'0')}/${anoVenc}`;
+    }
 
-    let produtosAtivos = [...produtos];
-    let produtoSelecionado = null;
-    let quantidadeAtual = 1;
-
-    // Elementos
-    const menuGrid = document.getElementById("menuGrid");
-    const modal = document.getElementById("modalQty");
-    const modalProdutoNome = document.getElementById("modalProdutoNome");
-    const modalPrecoSpan = document.getElementById("modalPreco");
-    const quantidadeSpan = document.getElementById("quantidade");
-    const menosBtn = document.getElementById("menosQty");
-    const maisBtn = document.getElementById("maisQty");
-    const confirmarBtn = document.getElementById("confirmarPedido");
-    const cancelarBtn = document.getElementById("cancelarModal");
+    function salvarDados() { localStorage.setItem('dividas_cartao_final', JSON.stringify(dividas)); localStorage.setItem('dividas_nextId_final', nextId); }
     
-    // Campos do formulário
-    const clienteTelefone = document.getElementById("clienteTelefone");
-    const clienteEndereco = document.getElementById("clienteEndereco");
-    const formaPagamento = document.getElementById("formaPagamento");
+    function carregarDados() {
+        let stored = localStorage.getItem('dividas_cartao_final');
+        let storedId = localStorage.getItem('dividas_nextId_final');
+        if(stored) dividas = JSON.parse(stored);
+        if(storedId) nextId = parseInt(storedId);
+        if(!dividas.length) dividas = [];
+    }
 
-    // Renderizar produtos no grid
-    function renderizarProdutos() {
-        menuGrid.innerHTML = "";
-        produtosAtivos.forEach(produto => {
-            const card = document.createElement("div");
-            card.classList.add("product-card");
-            card.addEventListener("click", (e) => {
-                if(e.target.classList.contains("btn-order") || e.target.closest(".btn-order")) {
-                    return;
+    function getFiltered() {
+        let ativos = dividas.filter(d => d.parcelaAtual <= d.totalParcelas);
+        let nome = document.getElementById('filtroNome').value.toLowerCase();
+        if(nome) ativos = ativos.filter(d => d.nome.toLowerCase().includes(nome));
+        if(filterCartao !== 'all') ativos = ativos.filter(d => d.cartao === filterCartao);
+        return ativos;
+    }
+
+    function getPaymentsInMonth(month) {
+        let total = 0;
+        dividas.forEach(d => {
+            d.pagamentos?.forEach(p => { if(p.data.startsWith(month)) total += d.valorParcela; });
+        });
+        return total;
+    }
+
+    function getDueInMonth(month) {
+        let total = 0;
+        dividas.forEach(d => {
+            if(d.parcelaAtual > d.totalParcelas) return;
+            for(let i = d.parcelaAtual; i <= d.totalParcelas; i++) {
+                let venc = calcularVencimento(d.inicio, i, d.cartao);
+                if(venc) {
+                    let [dia, mes, ano] = venc.split('/');
+                    let dueStr = `${ano}-${mes.padStart(2,'0')}`;
+                    if(dueStr === month) total += d.valorParcela;
                 }
-                abrirModal(produto);
-            });
-            
-            const imgDiv = document.createElement("div");
-            imgDiv.className = "product-img";
-            imgDiv.style.backgroundColor = "#fceaeff";
-            imgDiv.style.display = "flex";
-            imgDiv.style.alignItems = "center";
-            imgDiv.style.justifyContent = "center";
-            imgDiv.style.fontSize = "4rem";
-            imgDiv.innerHTML = `<span style="filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2));">${produto.img || "💄"}</span>`;
-            
-            const catSpan = document.createElement("span");
-            catSpan.className = "product-cat";
-            let catTexto = "";
-            if(produto.categoria === "makeup") catTexto = "💄 Maquiagem";
-            else if(produto.categoria === "skincare") catTexto = "🧴 Skincare";
-            else if(produto.categoria === "perfumes") catTexto = "🌸 Perfumes";
-            else catTexto = "💇‍♀️ Cabelos";
-            catSpan.innerText = catTexto;
-            imgDiv.appendChild(catSpan);
-            
-            const infoDiv = document.createElement("div");
-            infoDiv.className = "product-info";
-            infoDiv.innerHTML = `
-                <div class="product-name">${produto.nome}</div>
-                <div class="product-desc">${produto.descricao}</div>
-                <div class="price-area">
-                    <span class="product-price">R$ ${produto.preco.toFixed(2)}</span>
-                    <button class="btn-order" data-id="${produto.id}">📲 Pedir</button>
+            }
+        });
+        return total;
+    }
+
+    function atualizarTela() {
+        let ativos = getFiltered();
+        let todosAtivos = dividas.filter(d => d.parcelaAtual <= d.totalParcelas);
+        let totalDivida = todosAtivos.reduce((s, d) => s + (d.totalParcelas - d.parcelaAtual + 1) * d.valorParcela, 0);
+        let mesRef = document.getElementById('mesReferencia').value || currentMonth;
+        let pagoMes = getPaymentsInMonth(mesRef);
+        let aPagarMes = getDueInMonth(mesRef);
+        
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card"><h3>💰 Dívida total</h3><div class="value">R$ ${totalDivida.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div></div>
+            <div class="stat-card"><h3>📆 A pagar em ${mesRef}</h3><div class="value">R$ ${aPagarMes.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div></div>
+            <div class="stat-card"><h3>✅ Pago em ${mesRef}</h3><div class="value">R$ ${pagoMes.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div></div>
+            <div class="stat-card"><h3>📦 Dívidas ativas</h3><div class="value">${ativos.length}</div></div>
+        `;
+        
+        let activeDiv = document.getElementById('activeLoansList');
+        if(ativos.length === 0) {
+            activeDiv.innerHTML = '<p>Nenhuma dívida ativa para esta visualização.</p>';
+        } else {
+            activeDiv.innerHTML = ativos.map(d => {
+                let faltam = d.totalParcelas - d.parcelaAtual + 1;
+                let pendente = faltam * d.valorParcela;
+                let vencimento = calcularVencimento(d.inicio, d.parcelaAtual, d.cartao) || '—';
+                let percent = ((d.parcelaAtual-1)/d.totalParcelas)*100;
+                return `
+                    <div class="divida-card">
+                        <div class="divida-header"><span>${d.nome} (Cartão ${d.cartao} - vence dia ${d.cartao === 'A' ? '10' : '25'})</span><span class="badge">${d.parcelaAtual}/${d.totalParcelas}</span></div>
+                        <div>💰 R$ ${d.valorParcela.toFixed(2)} / parcela</div>
+                        <div>📅 Início: ${d.inicio} | 🔜 Vencimento: ${vencimento}</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+                        <div><strong>Faltam: ${faltam}x R$ ${d.valorParcela.toFixed(2)} = R$ ${pendente.toFixed(2)}</strong></div>
+                        <div>📞 WhatsApp: ${d.whats || 'não cadastrado'}</div>
+                        <div style="margin-top:10px;"><button class="btn-sm" onclick="abrirWhats(${d.id})">📲 Cobrar WhatsApp</button></div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        let paidDiv = document.getElementById('paidLoansList');
+        let quitadas = dividas.filter(d => d.parcelaAtual > d.totalParcelas);
+        if(filterCartao !== 'all') quitadas = quitadas.filter(d => d.cartao === filterCartao);
+        if(quitadas.length === 0) {
+            paidDiv.innerHTML = '<p>Nenhuma dívida quitada.</p>';
+        } else {
+            paidDiv.innerHTML = quitadas.map(d => `
+                <div class="divida-card" style="border-left-color:var(--success); opacity:0.8">
+                    <div><strong>${d.nome}</strong> (QUITADA) - Cartão ${d.cartao} - ${d.totalParcelas}x R$ ${d.valorParcela.toFixed(2)}</div>
+                    <div>Início: ${d.inicio}</div>
                 </div>
-            `;
-            card.appendChild(imgDiv);
-            card.appendChild(infoDiv);
-            menuGrid.appendChild(card);
+            `).join('');
+        }
+        
+        let todosAtivosTabela = dividas.filter(d => d.parcelaAtual <= d.totalParcelas);
+        let tableBody = document.getElementById('tableBody');
+        if(todosAtivosTabela.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7">Nenhuma dívida ativa no momento.</td></tr>';
+        } else {
+            tableBody.innerHTML = todosAtivosTabela.map(d => {
+                let faltam = d.totalParcelas - d.parcelaAtual + 1;
+                let pendente = faltam * d.valorParcela;
+                return `<tr>
+                    <td><strong>${d.nome}</strong></td>
+                    <td>${d.cartao}</td>
+                    <td>${d.parcelaAtual}/${d.totalParcelas}</td>
+                    <td>R$ ${d.valorParcela.toFixed(2)}</td>
+                    <td>${faltam}</td>
+                    <td>R$ ${pendente.toFixed(2)}</td>
+                    <td><button class="btn-sm" onclick="abrirWhats(${d.id})" style="background:#25D366;">📲</button></td>
+                `;
+            }).join('');
+        }
+        
+        let select = document.getElementById('payLoanSelect');
+        select.innerHTML = todosAtivosTabela.map(d => `<option value="${d.id}">${d.nome} (Cartão ${d.cartao}) - ${d.parcelaAtual}/${d.totalParcelas} - R$ ${d.valorParcela}</option>`).join('');
+        
+        let editSelect = document.getElementById('editLoanSelect');
+        editSelect.innerHTML = dividas.map(d => `<option value="${d.id}">${d.nome} (Cartão ${d.cartao}) - ${d.parcelaAtual}/${d.totalParcelas}${d.parcelaAtual > d.totalParcelas ? ' [QUITADA]' : ''}</option>`).join('');
+        let selected = dividas.find(d => d.id == editSelect.value);
+        if(selected) {
+            document.getElementById('editInstallmentValue').value = selected.valorParcela;
+            document.getElementById('editTotalParcels').value = selected.totalParcelas;
+        }
+    }
+
+    function setFilter(cartao) {
+        filterCartao = cartao;
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            if(btn.getAttribute('data-filter') === cartao) btn.classList.add('active');
+            else btn.classList.remove('active');
         });
-        
-        document.querySelectorAll(".btn-order").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const produtoId = parseInt(btn.getAttribute("data-id"));
-                const produto = produtos.find(p => p.id === produtoId);
-                if(produto) abrirModal(produto);
-            });
-        });
+        atualizarTela();
     }
 
-    // Abrir modal com produto selecionado
-    function abrirModal(produto) {
-        produtoSelecionado = produto;
-        quantidadeAtual = 1;
-        quantidadeSpan.innerText = quantidadeAtual;
-        modalProdutoNome.innerText = produto.nome;
-        modalPrecoSpan.innerText = `R$ ${produto.preco.toFixed(2)} cada`;
-        
-        // Limpar campos do formulário
-        clienteTelefone.value = "";
-        clienteEndereco.value = "";
-        formaPagamento.value = "";
-        
-        modal.style.display = "flex";
-    }
-
-    // Fechar modal
-    function fecharModal() {
-        modal.style.display = "none";
-        produtoSelecionado = null;
-    }
-
-    // Incrementar quantidade
-    maisBtn.onclick = () => {
-        quantidadeAtual++;
-        quantidadeSpan.innerText = quantidadeAtual;
+    window.abrirWhats = function(id) {
+        let divida = dividas.find(d => d.id === id);
+        if(!divida) return;
+        let faltam = divida.totalParcelas - divida.parcelaAtual + 1;
+        let totalPendente = faltam * divida.valorParcela;
+        let vencimento = calcularVencimento(divida.inicio, divida.parcelaAtual, divida.cartao) || 'em breve';
+        let msg = `Olá ${divida.nome}! 🏦\n\nSituação da sua dívida no cartão ${divida.cartao}:\n📌 Parcela: ${divida.parcelaAtual}/${divida.totalParcelas}\n💰 Valor: R$ ${divida.valorParcela.toFixed(2)}\n📅 Próximo vencimento: ${vencimento}\n💵 Total pendente: R$ ${totalPendente.toFixed(2)}\n\nQualquer dúvida, entre em contato!`;
+        document.getElementById('whatsNumero').value = divida.whats || '';
+        document.getElementById('whatsMensagem').value = msg;
+        document.getElementById('modalWhats').classList.remove('hidden');
     };
-    menosBtn.onclick = () => {
-        if(quantidadeAtual > 1) {
-            quantidadeAtual--;
-            quantidadeSpan.innerText = quantidadeAtual;
-        }
+    
+    document.getElementById('btnEnviarWhats').onclick = () => {
+        let numero = document.getElementById('whatsNumero').value.replace(/\D/g, '');
+        let mensagem = encodeURIComponent(document.getElementById('whatsMensagem').value);
+        if(numero) window.open(`https://wa.me/55${numero}?text=${mensagem}`, '_blank');
+        else alert("Informe o número do WhatsApp");
+        document.getElementById('modalWhats').classList.add('hidden');
     };
-
-    // Validar e enviar pedido completo via WhatsApp
-    function enviarPedidoWhatsApp() {
-        if(!produtoSelecionado) return;
-        
-        // Validar campos obrigatórios
-        const telefone = clienteTelefone.value.trim();
-        const endereco = clienteEndereco.value.trim();
-        const pagamento = formaPagamento.value;
-        
-        if(!telefone) {
-            alert("⚠️ Por favor, informe seu telefone para contato!");
-            clienteTelefone.focus();
-            return false;
-        }
-        if(!endereco) {
-            alert("⚠️ Por favor, informe seu endereço completo para entrega!");
-            clienteEndereco.focus();
-            return false;
-        }
-        if(!pagamento) {
-            alert("⚠️ Por favor, selecione a forma de pagamento!");
-            formaPagamento.focus();
-            return false;
-        }
-        
-        const nomeProduto = produtoSelecionado.nome;
-        const precoUnitario = produtoSelecionado.preco;
-        const quantidade = quantidadeAtual;
-        const total = (precoUnitario * quantidade).toFixed(2);
-        
-        // Montar mensagem completa
-        const mensagem = `💄 *NOVO PEDIDO - BELEZA STORE* 💄%0A%0A` +
-            `👤 *Cliente:* ${telefone}%0A` +
-            `🏠 *Endereço:* ${endereco}%0A` +
-            `💰 *Pagamento:* ${pagamento}%0A` +
-            `%0A📋 *PRODUTO:*%0A` +
-            `✨ *Nome:* ${nomeProduto}%0A` +
-            `📦 *Quantidade:* ${quantidade}%0A` +
-            `💵 *Valor unitário:* R$ ${precoUnitario.toFixed(2)}%0A` +
-            `💎 *TOTAL DO PEDIDO:* R$ ${total}%0A%0A` +
-            `✅ *Observação:* Cliente aguarda confirmação do pedido.%0A` +
-            `⏱️ Pedido enviado via catálogo virtual de beleza.`;
-        
-        const urlWhats = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
-        window.open(urlWhats, "_blank");
-        
+    document.getElementById('btnFecharWhats').onclick = () => document.getElementById('modalWhats').classList.add('hidden');
+    
+    document.getElementById('createLoanBtn').onclick = () => {
+        let nome = document.getElementById('newName').value.trim();
+        let whats = document.getElementById('newWhats').value.trim();
+        let valor = parseFloat(document.getElementById('newInstallment').value);
+        let total = parseInt(document.getElementById('newTotal').value);
+        let pagas = parseInt(document.getElementById('newPaid').value) || 0;
+        let cartao = document.getElementById('newCard').value;
+        let inicio = document.getElementById('newDate').value;
+        if(!nome || isNaN(valor) || isNaN(total) || valor<=0 || total<=0) { alert("Preencha todos os campos"); return; }
+        if(pagas >= total) { alert("Parcelas pagas não pode ser maior ou igual ao total"); return; }
+        if(!inicio) inicio = new Date().toISOString().slice(0,10);
+        dividas.push({ id: nextId++, nome, whats, valorParcela: valor, totalParcelas: total, parcelaAtual: pagas+1, cartao, inicio, pagamentos: [] });
+        salvarDados();
+        atualizarTela();
+        document.getElementById('newName').value = '';
+        document.getElementById('newWhats').value = '';
+        document.getElementById('newInstallment').value = '';
+        document.getElementById('newTotal').value = '';
+        document.getElementById('newPaid').value = '0';
+        document.getElementById('newDate').value = '';
+        alert("Dívida cadastrada!");
+    };
+    
+    document.getElementById('payInstallmentBtn').onclick = () => {
+        let id = parseInt(document.getElementById('payLoanSelect').value);
+        let data = document.getElementById('payDate').value;
+        let divida = dividas.find(d => d.id === id);
+        if(!divida || divida.parcelaAtual > divida.totalParcelas) { alert("Dívida já quitada"); return; }
+        if(!data) { alert("Informe a data do pagamento"); return; }
+        if(!divida.pagamentos) divida.pagamentos = [];
+        divida.pagamentos.push({ data, parcela: divida.parcelaAtual });
+        divida.parcelaAtual++;
+        salvarDados();
+        atualizarTela();
+        alert("Pagamento registrado!");
+        document.getElementById('payDate').value = '';
+    };
+    
+    function verificarSenha() {
+        let senha = document.getElementById('editSenha').value;
+        if(senha !== SENHA) { alert("Senha incorreta!"); return false; }
         return true;
     }
-
-    confirmarBtn.onclick = () => {
-        if(produtoSelecionado) {
-            if(enviarPedidoWhatsApp()) {
-                fecharModal();
-            }
-        } else {
-            fecharModal();
+    
+    document.getElementById('saveEditBtn').onclick = () => {
+        if(!verificarSenha()) return;
+        let id = parseInt(document.getElementById('editLoanSelect').value);
+        let divida = dividas.find(d => d.id === id);
+        if(!divida) return;
+        let novoValor = parseFloat(document.getElementById('editInstallmentValue').value);
+        let novoTotal = parseInt(document.getElementById('editTotalParcels').value);
+        if(isNaN(novoValor) || isNaN(novoTotal)) return;
+        divida.valorParcela = novoValor;
+        if(novoTotal < divida.parcelaAtual) divida.parcelaAtual = novoTotal;
+        divida.totalParcelas = novoTotal;
+        if(divida.parcelaAtual > divida.totalParcelas) divida.parcelaAtual = divida.totalParcelas + 1;
+        salvarDados();
+        atualizarTela();
+        alert("Dívida atualizada!");
+        document.getElementById('editSenha').value = '';
+    };
+    
+    document.getElementById('deleteLoanBtn').onclick = () => {
+        if(!verificarSenha()) return;
+        let id = parseInt(document.getElementById('editLoanSelect').value);
+        if(confirm("Excluir permanentemente esta dívida?")) {
+            dividas = dividas.filter(d => d.id !== id);
+            salvarDados();
+            atualizarTela();
+            alert("Dívida excluída!");
+            document.getElementById('editSenha').value = '';
         }
     };
     
-    cancelarBtn.onclick = () => {
-        fecharModal();
+    document.getElementById('btnLimparFiltros').onclick = () => {
+        document.getElementById('filtroNome').value = '';
+        document.getElementById('mesReferencia').value = '';
+        atualizarTela();
     };
     
-    // Fechar modal clicando fora
-    window.onclick = (event) => {
-        if(event.target === modal) {
-            fecharModal();
-        }
+    document.getElementById('exportExcelBtn').onclick = () => {
+        let ws = XLSX.utils.json_to_sheet(dividas.map(d => ({ Nome: d.nome, WhatsApp: d.whats, ValorParcela: d.valorParcela, TotalParcelas: d.totalParcelas, ParcelaAtual: d.parcelaAtual, Status: d.parcelaAtual > d.totalParcelas ? 'Quitado' : 'Ativo', Cartão: d.cartao, Início: d.inicio })));
+        let wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Dividas");
+        XLSX.writeFile(wb, `dividas_cartao_${new Date().toISOString().slice(0,10)}.xlsx`);
     };
-
-    // FILTRO POR CATEGORIA
-    const botoesCategoria = document.querySelectorAll(".cat-btn");
-    botoesCategoria.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const cat = btn.getAttribute("data-cat");
-            botoesCategoria.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            
-            if(cat === "all") {
-                produtosAtivos = [...produtos];
-            } else {
-                produtosAtivos = produtos.filter(p => p.categoria === cat);
-            }
-            renderizarProdutos();
-        });
+    
+    document.getElementById('backupBtn').onclick = () => {
+        let a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([JSON.stringify({dividas, nextId})], {type:'application/json'}));
+        a.download = `backup_cartao.json`;
+        a.click();
+    };
+    document.getElementById('restoreBtn').onclick = () => document.getElementById('restoreFile').click();
+    document.getElementById('restoreFile').onchange = (e) => {
+        let file = e.target.files[0];
+        if(!file) return;
+        let reader = new FileReader();
+        reader.onload = ev => {
+            try {
+                let data = JSON.parse(ev.target.result);
+                dividas = data.dividas || [];
+                nextId = data.nextId || 1;
+                salvarDados();
+                atualizarTela();
+                alert("Backup restaurado!");
+            } catch(e) { alert("Erro ao restaurar"); }
+        };
+        reader.readAsText(file);
+    };
+    
+    document.getElementById('themeToggle').onclick = () => {
+        document.body.classList.toggle('dark');
+        document.getElementById('themeToggle').innerText = document.body.classList.contains('dark') ? '☀️ Modo claro' : '🌙 Modo escuro';
+    };
+    
+    document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+        btn.onclick = () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+        };
     });
     
-    // Inicializar
-    renderizarProdutos();
+    document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.onclick = () => setFilter(btn.getAttribute('data-filter'));
+    });
+    
+    document.getElementById('filtroNome').addEventListener('input', () => atualizarTela());
+    document.getElementById('mesReferencia').addEventListener('change', () => atualizarTela());
+    
+    carregarDados();
+    atualizarTela();
 </script>
 </body>
 </html>
