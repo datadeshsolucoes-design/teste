@@ -12,281 +12,305 @@
             font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
         }
 
-        :root {
-            --bg: #f4f7fc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #475569;
-            --border: #e2e8f0;
-            --primary: #3b82f6;
-            --success: #10b981;
-            --danger: #ef4444;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        body.dark {
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f1f5f9;
-            --text-light: #94a3b8;
-            --border: #334155;
-        }
-
         body {
-            background: var(--bg);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            font-size: 18px;
         }
 
         /* TELA DE ACESSO */
         .tela-acesso {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .acesso-card {
             background: white;
-            padding: 40px;
             border-radius: 32px;
-            width: 90%;
+            padding: 40px 30px;
+            width: 100%;
             max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             text-align: center;
         }
 
-        .acesso-card h2 {
+        .tela-acesso h2 {
             color: #1e293b;
             margin-bottom: 10px;
+            font-size: 1.8rem;
         }
 
-        .acesso-card input {
+        .tela-acesso p {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .tela-acesso input {
             width: 100%;
             padding: 14px;
+            font-size: 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 20px;
-            margin-bottom: 15px;
-            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
             text-align: center;
         }
 
-        .acesso-card button {
+        .tela-acesso input:focus {
+            border-color: #667eea;
+        }
+
+        .tela-acesso button {
             width: 100%;
             padding: 14px;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 30px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        .divisor {
-            margin: 20px 0;
+        .tela-acesso button:hover {
+            background: #5a67d8;
+        }
+
+        .linha-divisoria {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
             color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .linha-divisoria::before,
+        .linha-divisoria::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .linha-divisoria::before {
+            margin-right: 10px;
+        }
+
+        .linha-divisoria::after {
+            margin-left: 10px;
         }
 
         .erro {
             color: #ef4444;
+            font-size: 0.8rem;
             margin-top: 10px;
             display: none;
         }
 
-        /* DASHBOARD */
+        /* DASHBOARD (escondido inicialmente) */
         .dashboard {
             display: none;
-            max-width: 1300px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .header {
+        /* ESTILOS DO DASHBOARD */
+        .dashboard-header {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
             flex-wrap: wrap;
             gap: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--primary), #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .dashboard-header h1 {
+            font-size: 1.5rem;
+            color: #1e293b;
         }
 
-        .btn-tema {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 8px 20px;
-            cursor: pointer;
-        }
-
-        .filtros {
-            background: var(--card);
-            padding: 15px;
+        .modo-admin-badge {
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
             border-radius: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filtros input, .filtros select {
-            padding: 10px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            flex: 1;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .card h3 {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .card .valor {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .botoes-acao {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .btn-acao {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 40px;
-            cursor: pointer;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
-        .btn-acao.ativo {
-            background: var(--primary);
+        .modo-visitante-badge {
+            background: #64748b;
             color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .form-painel {
-            background: var(--card);
-            padding: 20px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
             border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .abas-filtro {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .aba-filtro {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .aba-filtro.ativo {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .tabela-dividas {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .tabela-dividas table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabela-dividas th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .tabela-dividas td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .divida-card {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .progresso {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .progresso-preenchido {
+            background: #10b981;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .btn-acao {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+        }
+
+        .admin-painel {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
             margin-bottom: 25px;
             display: none;
         }
 
-        .form-painel.ativo {
+        .admin-painel.visivel {
             display: block;
         }
 
-        .form-linha {
+        .form-row {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 15px;
         }
 
-        .form-grupo {
+        .form-group {
             flex: 1;
             min-width: 140px;
         }
 
-        .form-grupo label {
+        .form-group label {
             font-size: 0.75rem;
             font-weight: 600;
             display: block;
             margin-bottom: 5px;
+            color: #64748b;
         }
 
-        .form-grupo input, .form-grupo select {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
             border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--bg);
+            border: 1px solid #e2e8f0;
         }
 
         button {
-            background: var(--primary);
+            background: #667eea;
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
         }
 
-        .divida-card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-left: 5px solid var(--primary);
-            box-shadow: var(--shadow);
-        }
-
-        .progresso {
-            height: 6px;
-            background: var(--border);
-            border-radius: 10px;
-            margin: 10px 0;
-        }
-
-        .progresso-preenchido {
-            background: var(--success);
-            height: 100%;
-            border-radius: 10px;
-        }
-
-        .tabela-wrapper {
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            background: var(--card);
-            border-radius: 16px;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: var(--primary);
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        td {
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
+        .hidden {
+            display: none;
         }
 
         .modal {
@@ -302,13 +326,17 @@
             z-index: 1000;
         }
 
-        .hidden {
-            display: none;
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 400px;
         }
 
         @media (max-width: 700px) {
-            body { padding: 12px; font-size: 16px; }
-            .card .valor { font-size: 1.3rem; }
+            .stat-card .value { font-size: 1.3rem; }
+            .form-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -316,288 +344,273 @@
 
 <!-- TELA DE ACESSO -->
 <div id="telaAcesso" class="tela-acesso">
-    <div class="acesso-card">
-        <h2>💳 Controle do Cartão</h2>
-        <p>Digite seu nome para consultar ou acesse como admin</p>
-        
-        <input type="text" id="acessoNome" placeholder="Digite seu nome" autocomplete="off">
-        <button id="btnVisitante">🔍 Ver minhas dívidas</button>
-        
-        <div class="divisor">—————— ou ——————</div>
-        
-        <input type="password" id="acessoAdminSenha" placeholder="Senha do Administrador">
-        <button id="btnAdmin">👑 Acessar como Admin</button>
-        
-        <div id="erroAcesso" class="erro">❌ Nome ou senha incorretos</div>
-    </div>
+    <h2>💳 Controle do Cartão</h2>
+    <p>Acesse sua situação</p>
+    
+    <input type="text" id="acessoNome" placeholder="Digite seu nome (Devedor)" autocomplete="off">
+    <button id="btnEntrarVisitante">🔍 Ver minha situação</button>
+    
+    <div class="linha-divisoria">ou</div>
+    
+    <input type="password" id="acessoAdminSenha" placeholder="Senha do Administrador">
+    <button id="btnEntrarAdmin">👑 Modo Administrador</button>
+    
+    <div id="erroAcesso" class="erro">❌ Nome ou senha incorretos</div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD PRINCIPAL -->
 <div id="dashboard" class="dashboard">
-    <div class="header">
+    <div class="dashboard-header">
         <h1>💳 Controle do Cartão</h1>
-        <button class="btn-tema" id="btnTema">🌙 Modo escuro</button>
+        <div id="modoBadge" class="modo-visitante-badge">👤 Modo Visitante</div>
     </div>
 
-    <div class="filtros">
-        <input type="text" id="filtroNome" placeholder="🔍 Filtrar por nome">
-        <select id="filtroCartao">
+    <!-- FILTROS -->
+    <div class="filtros" style="background:white; padding:15px; border-radius:20px; margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="filtroNome" placeholder="🔍 Filtrar por nome" style="flex:1;">
+        <select id="filtroCartao" style="padding:8px 12px; border-radius:30px;">
             <option value="all">Todos os cartões</option>
             <option value="A">Cartão A (dia 10)</option>
             <option value="B">Cartão B (dia 25)</option>
         </select>
-        <button id="limparFiltros" style="background:#64748b;">Limpar</button>
+        <button id="btnLimparFiltros">Limpar</button>
     </div>
 
-    <div class="cards" id="cards"></div>
+    <!-- CARDS RESUMO -->
+    <div class="stats-grid" id="statsGrid"></div>
 
-    <div class="botoes-acao">
-        <button class="btn-acao ativo" data-acao="novo">➕ Nova dívida</button>
-        <button class="btn-acao" data-acao="pagar">💰 Pagar parcela</button>
-        <button class="btn-acao" data-acao="editar">✏️ Editar/Excluir</button>
+    <!-- PAINEL ADMIN (escondido por padrão) -->
+    <div id="adminPanel" class="admin-painel">
+        <h3>👑 Painel do Administrador</h3>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button id="btnNovaDivida" style="background:#10b981;">➕ Nova dívida</button>
+            <button id="btnPagarParcela" style="background:#f59e0b;">💰 Pagar parcela</button>
+            <button id="btnEditarDivida" style="background:#3b82f6;">✏️ Editar dívida</button>
+            <button id="btnExcluirDivida" style="background:#ef4444;">🗑️ Excluir dívida</button>
+        </div>
+
+        <!-- Formulário Nova Dívida -->
+        <div id="formNovaDivida" style="display:none; margin-top:20px; padding:15px; background:#f1f5f9; border-radius:16px;">
+            <h4>➕ Nova dívida</h4>
+            <div class="form-row">
+                <div class="form-group"><label>Nome</label><input type="text" id="novoNome" placeholder="Nome"></div>
+                <div class="form-group"><label>WhatsApp</label><input type="text" id="novoWhats" placeholder="11999999999"></div>
+                <div class="form-group"><label>Valor parcela (R$)</label><input type="number" id="novoValor" placeholder="275"></div>
+                <div class="form-group"><label>Total parcelas</label><input type="number" id="novoTotal" placeholder="10"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Parcelas já pagas</label><input type="number" id="novoPagas" value="0"></div>
+                <div class="form-group"><label>Cartão</label><select id="novoCartao"><option value="A">Cartão A (dia 10)</option><option value="B">Cartão B (dia 25)</option></select></div>
+                <div class="form-group"><label>Data início</label><input type="date" id="novoInicio"><small style="display:block; font-size:0.7rem;">Deixe em branco para calcular</small></div>
+            </div>
+            <button id="salvarNovaDivida">✅ Salvar dívida</button>
+            <button id="cancelarNovaDivida">Cancelar</button>
+        </div>
+
+        <!-- Formulário Pagar Parcela -->
+        <div id="formPagarParcela" style="display:none; margin-top:20px; padding:15px; background:#f1f5f9; border-radius:16px;">
+            <h4>💰 Pagar parcela</h4>
+            <div class="form-row">
+                <div class="form-group"><label>Dívida</label><select id="pagarSelect"></select></div>
+                <div class="form-group"><label>Data pagamento</label><input type="date" id="pagarData"></div>
+            </div>
+            <button id="confirmarPagamento">✅ Confirmar pagamento</button>
+            <button id="cancelarPagar">Cancelar</button>
+        </div>
+
+        <!-- Formulário Editar Dívida -->
+        <div id="formEditarDivida" style="display:none; margin-top:20px; padding:15px; background:#f1f5f9; border-radius:16px;">
+            <h4>✏️ Editar dívida</h4>
+            <div class="form-row">
+                <div class="form-group"><label>Dívida</label><select id="editarSelect"></select></div>
+                <div class="form-group"><label>Valor parcela</label><input type="number" id="editarValor"></div>
+                <div class="form-group"><label>Total parcelas</label><input type="number" id="editarTotal"></div>
+            </div>
+            <button id="salvarEdicao">💾 Salvar</button>
+            <button id="cancelarEditar">Cancelar</button>
+        </div>
     </div>
 
-    <div id="painelNovo" class="form-painel ativo">
-        <h3>➕ Nova dívida</h3>
-        <div class="form-linha">
-            <div class="form-grupo"><label>Nome</label><input type="text" id="novoNome" placeholder="Nome"></div>
-            <div class="form-grupo"><label>WhatsApp</label><input type="text" id="novoWhats" placeholder="11999999999"></div>
-            <div class="form-grupo"><label>Valor parcela (R$)</label><input type="number" id="novoValor" placeholder="275"></div>
-            <div class="form-grupo"><label>Total parcelas</label><input type="number" id="novoTotal" placeholder="10"></div>
-        </div>
-        <div class="form-linha">
-            <div class="form-grupo"><label>Parcelas já pagas</label><input type="number" id="novoPagas" value="0"></div>
-            <div class="form-grupo"><label>Cartão</label><select id="novoCartao"><option value="A">Cartão A (dia 10)</option><option value="B">Cartão B (dia 25)</option></select></div>
-            <div class="form-grupo"><label>Data início (opcional)</label><input type="date" id="novoInicio"><small style="display:block;">Deixe em branco para calcular</small></div>
-        </div>
-        <button id="salvarNovo">Salvar</button>
+    <!-- ABAS DE FILTRO (TODO MUNDO VÊ) -->
+    <div class="abas-filtro">
+        <button class="aba-filtro ativo" data-filtro="all">📋 Todos os cartões</button>
+        <button class="aba-filtro" data-filtro="A">💳 Cartão A (dia 10)</button>
+        <button class="aba-filtro" data-filtro="B">💳 Cartão B (dia 25)</button>
     </div>
 
-    <div id="painelPagar" class="form-painel">
-        <h3>💰 Pagar parcela</h3>
-        <div class="form-linha">
-            <div class="form-grupo"><label>Dívida</label><select id="pagarSelect"></select></div>
-            <div class="form-grupo"><label>Data pagamento</label><input type="date" id="pagarData"></div>
-        </div>
-        <button id="confirmarPagar">Confirmar</button>
-    </div>
+    <!-- LISTA DE DÍVIDAS -->
+    <h2 style="margin-bottom: 15px;">📋 Dívidas ativas</h2>
+    <div id="listaDividas"></div>
 
-    <div id="painelEditar" class="form-painel">
-        <h3>✏️ Editar/Excluir</h3>
-        <div class="form-linha">
-            <div class="form-grupo"><label>Dívida</label><select id="editarSelect"></select></div>
-            <div class="form-grupo"><label>Valor parcela</label><input type="number" id="editarValor"></div>
-            <div class="form-grupo"><label>Total parcelas</label><input type="number" id="editarTotal"></div>
-        </div>
-        <div class="form-linha">
-            <div class="form-grupo"><label>Senha</label><input type="password" id="editarSenha" placeholder="Senha (270601)"></div>
-        </div>
-        <button id="salvarEdicao">Salvar</button>
-        <button id="excluirDivida" style="background:#ef4444;">Excluir</button>
-    </div>
-
-    <h2>📋 Dívidas ativas</h2>
-    <div id="listaAtivas"></div>
-
-    <h2>✅ Quitadas</h2>
+    <h2 style="margin: 30px 0 15px;">✅ Dívidas quitadas</h2>
     <div id="listaQuitadas"></div>
 
-    <div class="tabela-wrapper">
-        <h2>📊 Tabela completa</h2>
-        <table>
-            <thead><tr><th>Nome</th><th>Cartão</th><th>Parcela</th><th>Valor</th><th>Faltam</th><th>Total pendente</th><th>WhatsApp</th></tr></thead>
-            <tbody id="tabelaBody"></tbody>
-        </table>
+    <div class="tabela-dividas">
+        <h2 style="padding: 15px 0 0 15px;">📊 Tabela completa</h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead><tr><th>Nome</th><th>Cartão</th><th>Parcela</th><th>Valor</th><th>Faltam</th><th>Total pendente</th><th>WhatsApp</th></tr></thead>
+                <tbody id="tabelaBody"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <!-- MODAL WHATSAPP -->
 <div id="modalWhats" class="modal hidden">
-    <div class="acesso-card" style="padding: 30px;">
+    <div class="modal-content">
         <h3>📲 Enviar WhatsApp</h3>
         <input type="text" id="whatsNumero" placeholder="Número com DDD">
-        <textarea id="whatsMsg" rows="4" style="width:100%; margin:10px 0; padding:10px; border-radius:12px;"></textarea>
-        <button id="enviarWhats" style="background:#25D366;">Enviar</button>
-        <button id="fecharWhats" style="background:#64748b;">Cancelar</button>
+        <textarea id="whatsMsg" rows="4" style="width:100%; margin:10px 0; padding:8px;"></textarea>
+        <button id="enviarWhats">📲 Enviar</button>
+        <button id="fecharWhats">Cancelar</button>
     </div>
 </div>
 
 <script>
+    // ============================================================
     // CONFIGURAÇÕES
+    // ============================================================
     const SENHA_ADMIN = "270601";
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXHtK040N3yXHCXbQunBYaWP8HmpygMrnqcAiLZ-Lf66tgTfad28T_znuGtV9XNqNauw/exec";
-    
     let dividas = [];
     let nextId = 1;
     let modoAdmin = false;
     let nomeVisitante = "";
-    let filtroCartaoAtual = "all";
-    
+    let filtroCartao = "all";
+
     const CARD_DUE = { A: 10, B: 25 };
 
     // ============================================================
-    // FUNÇÕES DE DATA
+    // FUNÇÕES DE CÁLCULO
     // ============================================================
-    function calcularDataInicio(pagas, cartao) {
+    function calcularDataInicioAutomatico(parcelasPagas, cartao) {
         let hoje = new Date();
-        let dia = CARD_DUE[cartao];
+        let diaVencimento = CARD_DUE[cartao];
         let ano = hoje.getFullYear();
-        let mes = hoje.getMonth() - pagas;
-        while(mes < 0) { mes += 12; ano--; }
+        let mes = hoje.getMonth() - parcelasPagas;
+        while (mes < 0) { mes += 12; ano--; }
         let ultimoDia = new Date(ano, mes + 1, 0).getDate();
-        let diaFinal = Math.min(dia, ultimoDia);
-        return `${ano}-${String(mes+1).padStart(2,'0')}-${String(diaFinal).padStart(2,'0')}`;
+        let diaFinal = Math.min(diaVencimento, ultimoDia);
+        return `${ano}-${String(mes + 1).padStart(2, '0')}-${String(diaFinal).padStart(2, '0')}`;
     }
 
-    function vencimento(inicio, atual, cartao) {
+    function calcularVencimento(inicio, parcelaAtual, cartao) {
         if(!inicio) return null;
         let [ano, mes] = inicio.split('-').map(Number);
-        let dia = CARD_DUE[cartao];
-        let mesVenc = mes + atual - 1;
+        let diaVenc = CARD_DUE[cartao];
+        let mesVenc = mes + (parcelaAtual - 1);
         let anoVenc = ano;
         while(mesVenc > 12) { mesVenc -= 12; anoVenc++; }
         let ultimoDia = new Date(anoVenc, mesVenc, 0).getDate();
-        let finalDia = Math.min(dia, ultimoDia);
+        let finalDia = Math.min(diaVenc, ultimoDia);
         return `${String(finalDia).padStart(2,'0')}/${String(mesVenc).padStart(2,'0')}/${anoVenc}`;
     }
 
     // ============================================================
-    // SINCRONIZAÇÃO COM GOOGLE SHEETS
+    // SALVAR/CARREGAR
     // ============================================================
-    async function salvarParaPlanilha() {
-        try {
-            const dados = dividas.map(d => ({
-                id: d.id, nome: d.nome, whats: d.whats, valorParcela: d.valor,
-                totalParcelas: d.total, parcelaAtual: d.atual, cartao: d.cartao,
-                inicio: d.inicio, pagamentos: JSON.stringify(d.pagamentos || [])
-            }));
-            await fetch(`${SCRIPT_URL}?action=save&dados=${encodeURIComponent(JSON.stringify(dados))}`);
-            console.log("✅ Salvo na planilha");
-        } catch(e) { console.log("Erro ao salvar"); }
-    }
-
-    async function carregarDaPlanilha() {
-        try {
-            const response = await fetch(`${SCRIPT_URL}?action=load`);
-            const data = await response.json();
-            if(data.success && data.data && data.data.length > 0) {
-                dividas = data.data.map(row => ({
-                    id: parseInt(row[0]), nome: row[1], whats: row[2] || '',
-                    valor: parseFloat(row[3]), total: parseInt(row[4]),
-                    atual: parseInt(row[5]), cartao: row[6], inicio: row[7],
-                    pagamentos: JSON.parse(row[8] || '[]')
-                }));
-                nextId = Math.max(...dividas.map(d => d.id), 0) + 1;
-                salvarLocal();
-                atualizarTela();
-                console.log("✅ Carregado da planilha");
-            }
-        } catch(e) { console.log("Erro ao carregar"); }
-    }
-
-    function salvarLocal() {
+    function salvarDados() {
         localStorage.setItem('dividas_app', JSON.stringify(dividas));
         localStorage.setItem('nextId_app', nextId);
     }
 
-    function carregarLocal() {
+    function carregarDados() {
         let stored = localStorage.getItem('dividas_app');
         let storedId = localStorage.getItem('nextId_app');
         if(stored) dividas = JSON.parse(stored);
         if(storedId) nextId = parseInt(storedId);
         if(!dividas.length) {
+            // Dados de exemplo
             dividas = [
-                { id: nextId++, nome: "Ana", whats: "11999999999", valor: 275, total: 10, atual: 3, cartao: "A", inicio: "2025-03-10", pagamentos: [] },
-                { id: nextId++, nome: "João", whats: "11888888888", valor: 500, total: 6, atual: 2, cartao: "B", inicio: "2025-04-25", pagamentos: [] }
+                { id: nextId++, nome: "Ana", whats: "11999999999", valorParcela: 275, totalParcelas: 10, parcelaAtual: 3, cartao: "A", inicio: "2025-03-10", pagamentos: [] },
+                { id: nextId++, nome: "João", whats: "11888888888", valorParcela: 500, totalParcelas: 6, parcelaAtual: 2, cartao: "B", inicio: "2025-04-25", pagamentos: [] }
             ];
-            salvarLocal();
+            salvarDados();
         }
     }
 
     // ============================================================
-    // FILTROS E EXIBIÇÃO
+    // FILTRAR DÍVIDAS (conforme modo admin ou visitante)
     // ============================================================
     function getDividasFiltradas() {
-        let ativos = dividas.filter(d => d.atual <= d.total);
+        let ativos = dividas.filter(d => d.parcelaAtual <= d.totalParcelas);
         
+        // Filtro por nome (visitante vê só o dele, admin vê todos)
         if(!modoAdmin && nomeVisitante) {
             ativos = ativos.filter(d => d.nome.toLowerCase() === nomeVisitante.toLowerCase());
         }
         
-        let nome = document.getElementById('filtroNome').value.toLowerCase();
-        if(nome && modoAdmin) {
-            ativos = ativos.filter(d => d.nome.toLowerCase().includes(nome));
+        // Filtro por nome na caixa de pesquisa
+        let nomeFiltro = document.getElementById('filtroNome')?.value.toLowerCase();
+        if(nomeFiltro && modoAdmin) {
+            ativos = ativos.filter(d => d.nome.toLowerCase().includes(nomeFiltro));
         }
         
-        if(filtroCartaoAtual !== 'all') {
-            ativos = ativos.filter(d => d.cartao === filtroCartaoAtual);
+        // Filtro por cartão
+        let cartaoFiltro = document.getElementById('filtroCartao')?.value || filtroCartao;
+        if(cartaoFiltro !== 'all') {
+            ativos = ativos.filter(d => d.cartao === cartaoFiltro);
         }
         
         return ativos;
     }
 
+    // ============================================================
+    // ATUALIZAR TELA
+    // ============================================================
     function atualizarTela() {
         let ativos = getDividasFiltradas();
-        let totalDivida = ativos.reduce((s,d) => s + (d.total - d.atual + 1) * d.valor, 0);
+        let totalDivida = ativos.reduce((s,d) => s + (d.totalParcelas - d.parcelaAtual + 1) * d.valorParcela, 0);
         
-        document.getElementById('cards').innerHTML = `
-            <div class="card"><h3>💰 Dívida total</h3><div class="valor">R$ ${totalDivida.toFixed(2)}</div></div>
-            <div class="card"><h3>📦 Dívidas ativas</h3><div class="valor">${ativos.length}</div></div>
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card"><h3>💰 Dívida total</h3><div class="value">R$ ${totalDivida.toFixed(2)}</div></div>
+            <div class="stat-card"><h3>📦 Dívidas ativas</h3><div class="value">${ativos.length}</div></div>
         `;
         
+        // Lista de dívidas ativas (cards)
         let htmlAtivas = '';
         for(let d of ativos) {
-            let faltam = d.total - d.atual + 1;
-            let pendente = faltam * d.valor;
-            let venc = vencimento(d.inicio, d.atual, d.cartao) || '—';
-            let percent = ((d.atual-1)/d.total)*100;
+            let faltam = d.totalParcelas - d.parcelaAtual + 1;
+            let pendente = faltam * d.valorParcela;
+            let vencimento = calcularVencimento(d.inicio, d.parcelaAtual, d.cartao) || '—';
+            let percent = ((d.parcelaAtual-1)/d.totalParcelas)*100;
             htmlAtivas += `
                 <div class="divida-card">
-                    <div style="display:flex; justify-content:space-between;"><strong>${d.nome} (Cartão ${d.cartao})</strong><span>${d.atual}/${d.total}</span></div>
-                    <div>💰 R$ ${d.valor.toFixed(2)}/mês</div>
-                    <div>📅 Vencimento: ${venc}</div>
+                    <div><strong>${d.nome}</strong> (Cartão ${d.cartao} - vence dia ${d.cartao === 'A' ? '10' : '25'}) <span style="float:right">${d.parcelaAtual}/${d.totalParcelas}</span></div>
+                    <div>💰 R$ ${d.valorParcela.toFixed(2)}/mês</div>
+                    <div>📅 Vencimento: ${vencimento}</div>
                     <div class="progresso"><div class="progresso-preenchido" style="width:${percent}%"></div></div>
                     <div><strong>Faltam ${faltam}x = R$ ${pendente.toFixed(2)}</strong></div>
-                    <button class="btn-pequeno" onclick="abrirWhats(${d.id})" style="margin-top:8px; padding:5px 12px;">📲 WhatsApp</button>
+                    ${modoAdmin ? `<button class="btn-acao" onclick="abrirWhats(${d.id})">📲 WhatsApp</button>` : `<button class="btn-acao" onclick="abrirWhats(${d.id})">📲 WhatsApp</button>`}
                 </div>
             `;
         }
-        document.getElementById('listaAtivas').innerHTML = htmlAtivas || '<p>Nenhuma dívida ativa.</p>';
+        document.getElementById('listaDividas').innerHTML = htmlAtivas || '<p>Nenhuma dívida ativa.</p>';
         
-        let quitadas = dividas.filter(d => d.atual > d.total);
+        // Quitadas
+        let quitadas = dividas.filter(d => d.parcelaAtual > d.totalParcelas);
         if(!modoAdmin && nomeVisitante) {
             quitadas = quitadas.filter(d => d.nome.toLowerCase() === nomeVisitante.toLowerCase());
         }
         let htmlQuitadas = '';
         for(let d of quitadas) {
-            htmlQuitadas += `<div class="divida-card" style="border-left-color:#10b981"><strong>${d.nome}</strong> (QUITADA) - ${d.total}x R$ ${d.valor.toFixed(2)}</div>`;
+            htmlQuitadas += `<div class="divida-card" style="border-left-color:#10b981"><strong>${d.nome}</strong> (QUITADA) - ${d.totalParcelas}x R$ ${d.valorParcela.toFixed(2)}</div>`;
         }
         document.getElementById('listaQuitadas').innerHTML = htmlQuitadas || '<p>Nenhuma dívida quitada.</p>';
         
+        // Tabela completa
         let tabelaHtml = '';
         for(let d of ativos) {
-            let faltam = d.total - d.atual + 1;
-            tabelaHtml += `<tr>
-                <td>${d.nome}</td>
-                <td>${d.cartao}</td>
-                <td>${d.atual}/${d.total}</td>
-                <td>R$ ${d.valor.toFixed(2)}</td>
-                <td>${faltam}</td>
-                <td>R$ ${(faltam*d.valor).toFixed(2)}</td>
-                <td><button onclick="abrirWhats(${d.id})" style="padding:4px 10px;">📲</button></td>
-            刻`;
+            let faltam = d.totalParcelas - d.parcelaAtual + 1;
+            tabelaHtml += `<tr><td>${d.nome}</td><td>${d.cartao}</td><td>${d.parcelaAtual}/${d.totalParcelas}</td><td>R$ ${d.valorParcela.toFixed(2)}</td><td>${faltam}</td><td>R$ ${(faltam*d.valorParcela).toFixed(2)}</td><td><button class="btn-acao" onclick="abrirWhats(${d.id})">📲</button></td></tr>`;
         }
         document.getElementById('tabelaBody').innerHTML = tabelaHtml || '<tr><td colspan="7">Nenhuma dívida ativa</td></tr>';
         
+        // Atualizar selects do admin
         if(modoAdmin) {
-            let todosAtivos = dividas.filter(d => d.atual <= d.total);
-            document.getElementById('pagarSelect').innerHTML = todosAtivos.map(d => `<option value="${d.id}">${d.nome} - ${d.atual}/${d.total}</option>`).join('');
-            document.getElementById('editarSelect').innerHTML = dividas.map(d => `<option value="${d.id}">${d.nome} - ${d.atual}/${d.total}</option>`).join('');
-            let selected = dividas.find(d => d.id == document.getElementById('editarSelect').value);
-            if(selected) {
-                document.getElementById('editarValor').value = selected.valor;
-                document.getElementById('editarTotal').value = selected.total;
-            }
+            let todosAtivos = dividas.filter(d => d.parcelaAtual <= d.totalParcelas);
+            document.getElementById('pagarSelect').innerHTML = todosAtivos.map(d => `<option value="${d.id}">${d.nome} - ${d.parcelaAtual}/${d.totalParcelas}</option>`).join('');
+            document.getElementById('editarSelect').innerHTML = dividas.map(d => `<option value="${d.id}">${d.nome} - ${d.parcelaAtual}/${d.totalParcelas}</option>`).join('');
         }
     }
 
@@ -607,8 +620,8 @@
     window.abrirWhats = function(id) {
         let d = dividas.find(x => x.id === id);
         if(!d) return;
-        let faltam = d.total - d.atual + 1;
-        let msg = `Olá ${d.nome}! Dívida cartão ${d.cartao}: ${d.atual}/${d.total} - R$ ${d.valor.toFixed(2)}/mês. Faltam ${faltam}x = R$ ${(faltam*d.valor).toFixed(2)}. Vencimento: ${vencimento(d.inicio, d.atual, d.cartao)}`;
+        let faltam = d.totalParcelas - d.parcelaAtual + 1;
+        let msg = `Olá ${d.nome}! Dívida cartão ${d.cartao}: ${d.parcelaAtual}/${d.totalParcelas} - R$ ${d.valorParcela.toFixed(2)}/mês. Faltam ${faltam}x = R$ ${(faltam*d.valorParcela).toFixed(2)}.`;
         document.getElementById('whatsNumero').value = d.whats || '';
         document.getElementById('whatsMsg').value = msg;
         document.getElementById('modalWhats').classList.remove('hidden');
@@ -624,9 +637,38 @@
     document.getElementById('fecharWhats').onclick = () => document.getElementById('modalWhats').classList.add('hidden');
 
     // ============================================================
-    // ADMIN - CRUD
+    // EVENTOS DO ADMIN
     // ============================================================
-    document.getElementById('salvarNovo').onclick = async () => {
+    document.getElementById('btnNovaDivida').onclick = () => {
+        document.getElementById('formNovaDivida').style.display = 'block';
+        document.getElementById('formPagarParcela').style.display = 'none';
+        document.getElementById('formEditarDivida').style.display = 'none';
+    };
+    document.getElementById('btnPagarParcela').onclick = () => {
+        document.getElementById('formPagarParcela').style.display = 'block';
+        document.getElementById('formNovaDivida').style.display = 'none';
+        document.getElementById('formEditarDivida').style.display = 'none';
+    };
+    document.getElementById('btnEditarDivida').onclick = () => {
+        document.getElementById('formEditarDivida').style.display = 'block';
+        document.getElementById('formNovaDivida').style.display = 'none';
+        document.getElementById('formPagarParcela').style.display = 'none';
+    };
+    document.getElementById('btnExcluirDivida').onclick = async () => {
+        let id = parseInt(document.getElementById('editarSelect').value);
+        if(confirm("Excluir permanentemente esta dívida?")) {
+            dividas = dividas.filter(d => d.id !== id);
+            salvarDados();
+            atualizarTela();
+            alert("✅ Dívida excluída!");
+        }
+    };
+    
+    document.getElementById('cancelarNovaDivida').onclick = () => document.getElementById('formNovaDivida').style.display = 'none';
+    document.getElementById('cancelarPagar').onclick = () => document.getElementById('formPagarParcela').style.display = 'none';
+    document.getElementById('cancelarEditar').onclick = () => document.getElementById('formEditarDivida').style.display = 'none';
+    
+    document.getElementById('salvarNovaDivida').onclick = () => {
         let nome = document.getElementById('novoNome').value.trim();
         let whats = document.getElementById('novoWhats').value.trim();
         let valor = parseFloat(document.getElementById('novoValor').value);
@@ -637,135 +679,118 @@
         
         if(!nome || isNaN(valor) || isNaN(total) || valor<=0 || total<=0) { alert("Preencha os campos"); return; }
         if(pagas >= total) { alert("Parcelas pagas inválidas"); return; }
-        if(!inicio) inicio = calcularDataInicio(pagas, cartao);
+        if(!inicio) inicio = calcularDataInicioAutomatico(pagas, cartao);
         
-        dividas.push({ id: nextId++, nome, whats, valor, total, atual: pagas+1, cartao, inicio, pagamentos: [] });
-        salvarLocal();
-        await salvarParaPlanilha();
+        dividas.push({ id: nextId++, nome, whats, valorParcela: valor, totalParcelas: total, parcelaAtual: pagas+1, cartao, inicio, pagamentos: [] });
+        salvarDados();
         atualizarTela();
         alert("✅ Dívida cadastrada!");
-        
         document.getElementById('novoNome').value = '';
         document.getElementById('novoWhats').value = '';
         document.getElementById('novoValor').value = '';
         document.getElementById('novoTotal').value = '';
         document.getElementById('novoPagas').value = '0';
         document.getElementById('novoInicio').value = '';
+        document.getElementById('formNovaDivida').style.display = 'none';
     };
     
-    document.getElementById('confirmarPagar').onclick = async () => {
+    document.getElementById('confirmarPagamento').onclick = () => {
         let id = parseInt(document.getElementById('pagarSelect').value);
         let data = document.getElementById('pagarData').value;
         let d = dividas.find(x => x.id === id);
-        if(!d || d.atual > d.total) { alert("Dívida quitada"); return; }
+        if(!d || d.parcelaAtual > d.totalParcelas) { alert("Dívida quitada"); return; }
         if(!data) { alert("Data obrigatória"); return; }
-        if(!d.pagamentos) d.pagamentos = [];
-        d.pagamentos.push({ data, parcela: d.atual });
-        d.atual++;
-        salvarLocal();
-        await salvarParaPlanilha();
+        d.parcelaAtual++;
+        salvarDados();
         atualizarTela();
         alert("✅ Pagamento registrado!");
         document.getElementById('pagarData').value = '';
+        document.getElementById('formPagarParcela').style.display = 'none';
     };
     
-    function verificarSenha() {
-        if(document.getElementById('editarSenha').value !== SENHA_ADMIN) {
-            alert("Senha incorreta!");
-            return false;
-        }
-        return true;
-    }
-    
-    document.getElementById('salvarEdicao').onclick = async () => {
-        if(!verificarSenha()) return;
+    document.getElementById('salvarEdicao').onclick = () => {
         let id = parseInt(document.getElementById('editarSelect').value);
         let d = dividas.find(x => x.id === id);
         if(!d) return;
         let novoValor = parseFloat(document.getElementById('editarValor').value);
         let novoTotal = parseInt(document.getElementById('editarTotal').value);
         if(isNaN(novoValor) || isNaN(novoTotal)) return;
-        d.valor = novoValor;
-        if(novoTotal < d.atual) d.atual = novoTotal;
-        d.total = novoTotal;
-        if(d.atual > d.total) d.atual = d.total + 1;
-        salvarLocal();
-        await salvarParaPlanilha();
+        d.valorParcela = novoValor;
+        if(novoTotal < d.parcelaAtual) d.parcelaAtual = novoTotal;
+        d.totalParcelas = novoTotal;
+        if(d.parcelaAtual > d.totalParcelas) d.parcelaAtual = d.totalParcelas + 1;
+        salvarDados();
         atualizarTela();
-        alert("Atualizado!");
-        document.getElementById('editarSenha').value = '';
+        alert("✅ Dívida atualizada!");
+        document.getElementById('formEditarDivida').style.display = 'none';
     };
     
-    document.getElementById('excluirDivida').onclick = async () => {
-        if(!verificarSenha()) return;
-        let id = parseInt(document.getElementById('editarSelect').value);
-        if(confirm("Excluir permanentemente?")) {
-            dividas = dividas.filter(x => x.id !== id);
-            salvarLocal();
-            await salvarParaPlanilha();
-            atualizarTela();
-            alert("Excluído!");
-            document.getElementById('editarSenha').value = '';
-        }
-    };
-
     // ============================================================
-    // FILTROS E UI
+    // FILTROS E EVENTOS GERAIS
     // ============================================================
-    document.getElementById('limparFiltros').onclick = () => {
+    document.getElementById('btnLimparFiltros').onclick = () => {
         document.getElementById('filtroNome').value = '';
         document.getElementById('filtroCartao').value = 'all';
-        filtroCartaoAtual = 'all';
         atualizarTela();
     };
     
     document.getElementById('filtroNome').addEventListener('input', () => atualizarTela());
     document.getElementById('filtroCartao').addEventListener('change', (e) => {
-        filtroCartaoAtual = e.target.value;
+        filtroCartao = e.target.value;
         atualizarTela();
     });
     
-    document.querySelectorAll('.btn-acao').forEach(btn => {
+    document.querySelectorAll('.aba-filtro').forEach(btn => {
         btn.onclick = () => {
-            document.querySelectorAll('.btn-acao').forEach(b => b.classList.remove('ativo'));
+            document.querySelectorAll('.aba-filtro').forEach(b => b.classList.remove('ativo'));
             btn.classList.add('ativo');
-            document.querySelectorAll('.form-painel').forEach(p => p.classList.remove('ativo'));
-            document.getElementById(`painel${btn.getAttribute('data-acao').charAt(0).toUpperCase() + btn.getAttribute('data-acao').slice(1)}`).classList.add('ativo');
+            filtroCartao = btn.getAttribute('data-filtro');
+            document.getElementById('filtroCartao').value = filtroCartao;
+            atualizarTela();
         };
     });
     
-    document.getElementById('btnTema').onclick = () => {
-        document.body.classList.toggle('dark');
-        document.getElementById('btnTema').innerText = document.body.classList.contains('dark') ? '☀️ Claro' : '🌙 Escuro';
-    };
-
     // ============================================================
-    // ACESSO
+    // TELA DE ACESSO
     // ============================================================
-    document.getElementById('btnVisitante').onclick = async () => {
+    document.getElementById('btnEntrarVisitante').onclick = () => {
         let nome = document.getElementById('acessoNome').value.trim();
-        if(!nome) { document.getElementById('erroAcesso').style.display = 'block'; return; }
+        if(!nome) {
+            document.getElementById('erroAcesso').style.display = 'block';
+            return;
+        }
         nomeVisitante = nome;
         modoAdmin = false;
-        await carregarDaPlanilha();
         document.getElementById('telaAcesso').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('modoBadge').className = 'modo-visitante-badge';
+        document.getElementById('modoBadge').innerHTML = '👤 Modo Visitante - ' + nome;
+        document.getElementById('adminPanel').classList.remove('visivel');
+        document.getElementById('adminPanel').style.display = 'none';
         atualizarTela();
     };
     
-    document.getElementById('btnAdmin').onclick = async () => {
+    document.getElementById('btnEntrarAdmin').onclick = () => {
         let senha = document.getElementById('acessoAdminSenha').value;
-        if(senha !== SENHA_ADMIN) { document.getElementById('erroAcesso').style.display = 'block'; return; }
+        if(senha !== SENHA_ADMIN) {
+            document.getElementById('erroAcesso').style.display = 'block';
+            return;
+        }
         modoAdmin = true;
         nomeVisitante = "";
-        await carregarDaPlanilha();
         document.getElementById('telaAcesso').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('modoBadge').className = 'modo-admin-badge';
+        document.getElementById('modoBadge').innerHTML = '👑 Modo Administrador';
+        document.getElementById('adminPanel').classList.add('visivel');
+        document.getElementById('adminPanel').style.display = 'block';
         atualizarTela();
     };
     
-    // INICIAR
-    carregarLocal();
+    // ============================================================
+    // INICIALIZAÇÃO
+    // ============================================================
+    carregarDados();
 </script>
 </body>
 </html>
