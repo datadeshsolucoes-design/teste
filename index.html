@@ -222,31 +222,31 @@
                 <div id="listaCartoes"></div>
             </div>
 
-<div id="panel-pessoa" class="form-panel">
-    <h3>👥 Gerenciar Pessoas</h3>
-    <div class="form-row">
-        <div class="form-group"><label>Nome *</label><input type="text" id="pessoaNome" placeholder="Ex: Maria, João"></div>
-        <div class="form-group"><label>CPF</label><input type="text" id="pessoaCPF" placeholder="00000000000" maxlength="11"></div>
-    </div>
-    <div class="form-row">
-        <div class="form-group"><label>WhatsApp</label><input type="text" id="pessoaWhatsApp" placeholder="11999999999"></div>
-        <div class="form-group">
-            <label>Parentesco</label>
-            <select id="pessoaParentesco">
-                <option value="familiar">👨‍👩‍👧 Familiar</option>
-                <option value="conjuge">👫 Cônjuge</option>
-                <option value="filho">👶 Filho(a)</option>
-                <option value="amigo">🤝 Amigo(a)</option>
-                <option value="cliente">💼 Cliente</option>
-                <option value="outro">👤 Outro</option>
-            </select>
-        </div>
-    </div>
-    <button class="btn btn-success" id="btnSalvarPessoa">✅ SALVAR PESSOA</button>
-    <hr style="margin:20px 0;border-color:var(--border);">
-    <h4>Pessoas Cadastradas</h4>
-    <div id="listaPessoas"></div>
-</div>
+            <div id="panel-pessoa" class="form-panel">
+                <h3>👥 Gerenciar Pessoas</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Nome *</label><input type="text" id="pessoaNome" placeholder="Ex: Maria, João"></div>
+                    <div class="form-group"><label>CPF</label><input type="text" id="pessoaCPF" placeholder="00000000000" maxlength="11"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>WhatsApp</label><input type="text" id="pessoaWhatsApp" placeholder="11999999999"></div>
+                    <div class="form-group">
+                        <label>Parentesco</label>
+                        <select id="pessoaParentesco">
+                            <option value="familiar">👨‍👩‍👧 Familiar</option>
+                            <option value="conjuge">👫 Cônjuge</option>
+                            <option value="filho">👶 Filho(a)</option>
+                            <option value="amigo">🤝 Amigo(a)</option>
+                            <option value="cliente">💼 Cliente</option>
+                            <option value="outro">👤 Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-success" id="btnSalvarPessoa">✅ SALVAR PESSOA</button>
+                <hr style="margin:20px 0;border-color:var(--border);">
+                <h4>Pessoas Cadastradas</h4>
+                <div id="listaPessoas"></div>
+            </div>
 
             <div id="panel-investimento" class="form-panel">
                 <h3>📈 Novo Investimento</h3>
@@ -337,7 +337,6 @@ async function carregarTudo(){
         despesas = d.data || []; receitas = r.data || []; investimentos = i.data || [];
         metas = m.data || []; cartoes = c.data || []; usuariosLista = u.data || []; categoriasLista = cat.data || [];
         if(!isAdmin && usuarioLogado) despesas = despesas.filter(g => g.usuario_id == usuarioLogado.id);
-        console.log('✅ Dados carregados. Usuarios:', usuariosLista.length, 'Despesas:', despesas.length);
     } catch(e){ console.error('❌ Erro:', e); }
     hideLoading();
     popularSelects();
@@ -353,30 +352,22 @@ function popularSelects(){
     }
     document.getElementById('despCartao').innerHTML = '<option value="">Sem cartão</option>' + cartoes.map(c => `<option value="${c.id}">💳 ${c.nome_cartao} (vence dia ${c.dia_vencimento})</option>`).join('');
 
-    // Montar lista de usuários garantindo que o admin apareça
     const listaUsuarios = [...usuariosLista];
     if(!listaUsuarios.find(u => u.cpf === '12345678909')){
         listaUsuarios.unshift({ id: 1, nome: 'Administrador', cpf: '12345678909', tipo: 'admin', parentesco: 'admin' });
     }
     
-    // ✅ SELECT "Quem gastou" - com ícones de parentesco
     document.getElementById('despUsuario').innerHTML = listaUsuarios.map(u => {
         const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
         return `<option value="${u.id}">${icone} ${u.nome} ${u.tipo==='admin'?'(Admin)':''}</option>`;
     }).join('');
 
-    // ✅ LISTA de pessoas cadastradas (painel Pessoas)
     document.getElementById('listaPessoas').innerHTML = listaUsuarios.map(u => {
         const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
         const parentescoNome = u.parentesco==='admin'?'Administrador':u.parentesco==='familiar'?'Familiar':u.parentesco==='conjuge'?'Cônjuge':u.parentesco==='filho'?'Filho(a)':u.parentesco==='amigo'?'Amigo(a)':u.parentesco==='cliente'?'Cliente':'Outro';
-        return `
-        <div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-            <span>${icone} <strong>${u.nome}</strong> | ${parentescoNome} ${u.whatsapp?' | 📱 '+u.whatsapp:''}</span>
-            ${u.cpf !== '12345678909' ? `<button onclick="excluirPessoa(${u.id})" class="btn-sm btn-danger">🗑️</button>` : '<span style="font-size:0.6rem;">Admin padrão</span>'}
-        </div>`;
+        return `<div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><span>${icone} <strong>${u.nome}</strong> | ${parentescoNome} ${u.whatsapp?' | 📱 '+u.whatsapp:''}</span>${u.cpf !== '12345678909' ? `<button onclick="excluirPessoa(${u.id})" class="btn-sm btn-danger">🗑️</button>` : '<span style="font-size:0.6rem;">Admin padrão</span>'}</div>`;
     }).join('') || '<p>Nenhuma pessoa cadastrada.</p>';
 
-    // Lista de cartões
     document.getElementById('listaCartoes').innerHTML = cartoes.map(c => {
         const gf = despesas.filter(g => g.cartao_id == c.id && !g.pago);
         const tf = gf.reduce((s,g) => s + parseFloat(g.valor), 0);
@@ -433,7 +424,25 @@ function renderizarConteudo(){
     if(chartInstance){ chartInstance.destroy(); chartInstance = null; }
 
     if(tabAtual === 'grafico'){ graficoCt.classList.remove('hidden'); setTimeout(renderizarGrafico,100); document.getElementById('pagination').innerHTML=''; return; }
-    if(tabAtual === 'metas'){ document.getElementById('pagination').innerHTML=''; container.innerHTML = metas.length===0?'<p style="text-align:center;padding:40px;">Nenhuma meta.</p>':'<div class="card-grid">'+metas.map(m=>{const pct=Math.min((m.valor_atual/m.valor_meta)*100,100);return`<div class="item-card"><div class="item-card-header"><span class="item-card-title">🎯 ${m.nome}</span><span>${pct.toFixed(0)}%</span></div><div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${pct}%;background:linear-gradient(90deg,#4a6cf7,#10b981);"></div></div><p>💰 R$ ${fMoeda(m.valor_atual)} / R$ ${fMoeda(m.valor_meta)}</p>${m.data_limite?`<p style="font-size:0.8rem;">📅 ${formatarData(m.data_limite)}</p>`:''}</div>`;}).join('')+'</div>'; return; }
+    
+    if(tabAtual === 'metas'){ 
+        document.getElementById('pagination').innerHTML=''; 
+        container.innerHTML = metas.length===0?'<p style="text-align:center;padding:40px;">Nenhuma meta.</p>':'<div class="card-grid">'+metas.map(m=>{
+            const pct=Math.min((m.valor_atual/m.valor_meta)*100,100);
+            return`<div class="item-card">
+                <div class="item-card-header"><span class="item-card-title">🎯 ${m.nome}</span><span>${pct.toFixed(0)}%</span></div>
+                <div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${pct}%;background:linear-gradient(90deg,#4a6cf7,#10b981);"></div></div>
+                <p>💰 R$ ${fMoeda(m.valor_atual)} / R$ ${fMoeda(m.valor_meta)}</p>
+                ${m.data_limite?`<p style="font-size:0.8rem;">📅 Até ${formatarData(m.data_limite)}</p>`:''}
+                ${isAdmin?`<div style="margin-top:8px;display:flex;gap:6px;">
+                    <button class="btn-sm btn-success" onclick="atualizarMeta(${m.id})">✏️ Atualizar</button>
+                    <button class="btn-sm btn-danger" onclick="excluirMeta(${m.id})">🗑️ Excluir</button>
+                </div>`:''}
+            </div>`;
+        }).join('')+'</div>'; 
+        return; 
+    }
+    
     if(tabAtual === 'cartoes_tab'){ document.getElementById('pagination').innerHTML=''; container.innerHTML = cartoes.length===0?'<p style="text-align:center;padding:40px;">Nenhum cartão.</p>':'<div class="card-grid">'+cartoes.map(c=>{const gf=despesas.filter(g=>g.cartao_id==c.id&&!g.pago);const tf=gf.reduce((s,g)=>s+parseFloat(g.valor),0);const pu=(c.limite||0)>0?(tf/c.limite)*100:0;return`<div class="item-card"><div class="item-card-header"><span class="item-card-title">💳 ${c.nome_cartao}</span><span>${c.bandeira||''}</span></div><p>📅 Vence dia <strong>${c.dia_vencimento}</strong></p><p>🧾 Fatura: <strong style="color:#ef4444;">R$ ${fMoeda(tf)}</strong></p><div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${Math.min(pu,100)}%;background:${pu>80?'#ef4444':'#10b981'};"></div></div></div>`;}).join('')+'</div>'; return; }
 
     const dados = getDadosFiltrados();
@@ -450,7 +459,13 @@ function renderizarConteudo(){
                 const cat=categoriasLista.find(c=>c.id==d.categoria_id); const cart=cartoes.find(c=>c.id==d.cartao_id); const pago=d.pago||d.status==='quitado';
                 return`<div class="item-card" style="border-left-color:${d.tipo==='fixa'?'#f59e0b':(pago?'#10b981':'#ef4444')};opacity:${pago?'0.7':'1'};"><div class="item-card-header"><span class="item-card-title">${d.tipo==='fixa'?'🔄':''} ${cat?.icone||'📦'} ${cat?.nome||'Despesa'}</span><span class="item-card-valor" style="color:${pago?'#10b981':'#ef4444'};">R$ ${fMoeda(d.valor)}</span></div><p style="font-size:0.85rem;">📝 ${d.descricao||'Sem descrição'}</p><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span>${cart?`<span>💳 ${cart.nome_cartao}</span>`:''}<span>${d.parcelas>1?`📊 ${d.parcelas}x`:''}</span><span>${pago?'✅ Pago':'⚠️ Pendente'}</span></div><div style="margin-top:8px;display:flex;gap:6px;">${!pago&&isAdmin?`<button class="btn-sm btn-success" onclick="marcarPago(${d.id})">✅ Pagar</button>`:''}${d.whatsapp?`<button class="btn-sm" style="background:#25D366;color:white;" onclick="cobrarWhatsApp(${d.id})">📲 Cobrar</button>`:''}${isAdmin?`<button class="btn-sm btn-danger" onclick="confirmarExcluir(${d.id})">🗑️</button>`:''}</div></div>`;
             }
-            return`<div class="item-card" style="border-left-color:${d.cor};"><div class="item-card-header"><span class="item-card-title">${d.tipo==='renda'?'💰':'📈'} ${d.descricao||'Sem descrição'}</span><span class="item-card-valor" style="color:${d.cor};">${d.sinal} R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span>${d.corretora?`<span>🏦 ${d.corretora}</span>`:''}</div></div>`;
+            if(d.tipo==='renda'){
+                return`<div class="item-card" style="border-left-color:#10b981;"><div class="item-card-header"><span class="item-card-title">💰 ${d.descricao||'Renda'}</span><span class="item-card-valor" style="color:#10b981;">+ R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span><span>${d.tipo_renda||''}</span></div>${isAdmin?`<div style="margin-top:8px;"><button class="btn-sm btn-danger" onclick="excluirReceita(${d.id})">🗑️ Excluir</button></div>`:''}</div>`;
+            }
+            if(d.tipo==='investimento'){
+                return`<div class="item-card" style="border-left-color:#8b5cf6;"><div class="item-card-header"><span class="item-card-title">📈 ${d.descricao||'Investimento'}</span><span class="item-card-valor" style="color:#8b5cf6;">R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span>${d.corretora?`<span>🏦 ${d.corretora}</span>`:''}</div>${isAdmin?`<div style="margin-top:8px;"><button class="btn-sm btn-danger" onclick="excluirInvestimento(${d.id})">🗑️ Excluir</button></div>`:''}</div>`;
+            }
+            return`<div class="item-card" style="border-left-color:${d.cor};"><div class="item-card-header"><span class="item-card-title">${d.descricao||'Sem descrição'}</span><span class="item-card-valor" style="color:${d.cor};">${d.sinal} R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span></div></div>`;
         }).join('')+'</div>';
     } else {
         tabelaCt.classList.remove('hidden');
@@ -508,6 +523,7 @@ async function salvarRenda(){
     await db.from('receitas').insert([{admin_id:usuarioLogado.id,valor,descricao:document.getElementById('rendaDescricao').value.trim()||'Renda',data:new Date().toISOString().split('T')[0],tipo:document.getElementById('rendaTipo').value}]);
     document.getElementById('rendaValor').value=''; alert('✅ Renda salva!'); carregarTudo();
 }
+async function excluirReceita(id){ if(confirm('Excluir esta receita?')){ await db.from('receitas').delete().eq('id',id); carregarTudo(); } }
 
 async function salvarCartao(){
     const nome=document.getElementById('cartaoNome').value.trim();
@@ -522,24 +538,11 @@ async function salvarPessoa(){
     if(!nome) return alert('❌ Informe o nome!');
     const cpf = document.getElementById('pessoaCPF').value.trim();
     if(cpf && cpf.length===11 && !validarCPF(cpf)) return alert('❌ CPF inválido!');
-    
     const parentesco = document.getElementById('pessoaParentesco').value;
-    
-    const { data, error } = await db.from('usuarios').insert([{
-        nome,
-        cpf: cpf || null,
-        whatsapp: document.getElementById('pessoaWhatsApp').value.trim(),
-        tipo: 'comum',
-        parentesco: parentesco
-    }]).select();
-    
+    const { data, error } = await db.from('usuarios').insert([{nome,cpf:cpf||null,whatsapp:document.getElementById('pessoaWhatsApp').value.trim(),tipo:'comum',parentesco}]).select();
     if(error){ alert('❌ Erro ao salvar: ' + error.message); return; }
-    console.log('✅ Pessoa salva:', data);
-    document.getElementById('pessoaNome').value = '';
-    document.getElementById('pessoaCPF').value = '';
-    document.getElementById('pessoaWhatsApp').value = '';
-    alert('✅ Pessoa cadastrada com sucesso!');
-    await carregarTudo();
+    document.getElementById('pessoaNome').value=''; document.getElementById('pessoaCPF').value=''; document.getElementById('pessoaWhatsApp').value='';
+    alert('✅ Pessoa cadastrada!'); carregarTudo();
 }
 async function excluirPessoa(id){ if(confirm('Excluir pessoa?')){ await db.from('usuarios').delete().eq('id',id); carregarTudo(); } }
 
@@ -549,6 +552,7 @@ async function salvarInvestimento(){
     await db.from('investimentos').insert([{admin_id:usuarioLogado.id,valor,corretora:document.getElementById('invCorretora').value.trim(),data:new Date().toISOString().split('T')[0],tipo:document.getElementById('invTipo').value,descricao:document.getElementById('invTipo').value}]);
     document.getElementById('invValor').value=''; alert('✅ Investimento salvo!'); carregarTudo();
 }
+async function excluirInvestimento(id){ if(confirm('Excluir investimento?')){ await db.from('investimentos').delete().eq('id',id); carregarTudo(); } }
 
 async function salvarMeta(){
     const nome=document.getElementById('metaNome').value.trim(); const alvo=parseFloat(document.getElementById('metaAlvo').value);
@@ -556,6 +560,17 @@ async function salvarMeta(){
     await db.from('metas').insert([{admin_id:usuarioLogado.id,nome,valor_meta:alvo,valor_atual:parseFloat(document.getElementById('metaAtual').value)||0,data_limite:document.getElementById('metaData').value||null}]);
     document.getElementById('metaNome').value=''; alert('✅ Meta salva!'); carregarTudo();
 }
+async function atualizarMeta(id){
+    const meta = metas.find(m => m.id == id);
+    if(!meta) return;
+    const novoValor = prompt('Valor atual da meta:', meta.valor_atual);
+    if(novoValor === null) return;
+    const valorNum = parseFloat(novoValor);
+    if(isNaN(valorNum)) return alert('Valor inválido!');
+    await db.from('metas').update({valor_atual:valorNum}).eq('id',id);
+    carregarTudo();
+}
+async function excluirMeta(id){ if(confirm('Excluir meta?')){ await db.from('metas').delete().eq('id',id); carregarTudo(); } }
 
 function exportarExcel(){
     const dados=getDadosFiltrados(); if(dados.length===0)return alert('Nenhum dado!');
@@ -569,19 +584,17 @@ async function redefinirSenha(){
     const codigo = document.getElementById('resetCodigo').value.trim();
     const nova = document.getElementById('resetNovaSenha').value;
     const confirma = document.getElementById('resetConfirmaSenha').value;
-
     if(!nome) return alert('Digite seu nome!');
     if(!cpf || !validarCPF(cpf)) return alert('CPF inválido!');
     if(codigo !== CODIGO_SEGURANCA) return alert('❌ Código de segurança incorreto! O código padrão é: ' + CODIGO_SEGURANCA);
     if(nova.length < 4) return alert('Senha deve ter 4+ caracteres!');
     if(nova !== confirma) return alert('Senhas não conferem!');
-
     showLoading('Redefinindo...');
     const { data } = await db.from('usuarios').select('*').eq('cpf', cpf).eq('tipo', 'admin');
     if(!data || data.length === 0){ hideLoading(); return alert('❌ Admin não encontrado!'); }
     await db.from('usuarios').update({ senha: nova, nome }).eq('cpf', cpf);
     hideLoading();
-    alert('✅ Senha redefinida com sucesso!');
+    alert('✅ Senha redefinida!');
     document.getElementById('resetScreen').classList.add('hidden');
     document.getElementById('loginScreen').classList.remove('hidden');
     document.getElementById('resetCodigo').value = '';
@@ -641,9 +654,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('despData').value = new Date().toISOString().split('T')[0];
     ['loginNome','loginCPF','loginSenha'].forEach(id=>{ document.getElementById(id)?.addEventListener('keypress',e=>{ if(e.key==='Enter')document.getElementById('btnLogin').click(); }); });
 
-    console.log('✅ Financeiro PRO v3 - Pronto!');
+    console.log('✅ Financeiro PRO v4 - Completo!');
     console.log('👑 Admin: CPF 12345678909 / Senha: admin');
-    console.log('🔐 Código segurança redefinição: ' + CODIGO_SEGURANCA);
+    console.log('🔐 Código segurança: ' + CODIGO_SEGURANCA);
+    console.log('🗑️ Botões Excluir: Receitas, Investimentos, Metas');
+    console.log('✏️ Botão Atualizar: Metas');
 });
 </script>
 </body>
