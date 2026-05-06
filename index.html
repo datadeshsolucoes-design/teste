@@ -222,21 +222,31 @@
                 <div id="listaCartoes"></div>
             </div>
 
-            <div id="panel-pessoa" class="form-panel">
-                <h3>👥 Gerenciar Pessoas</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Nome *</label><input type="text" id="pessoaNome" placeholder="Ex: Maria, João"></div>
-                    <div class="form-group"><label>CPF</label><input type="text" id="pessoaCPF" placeholder="00000000000" maxlength="11"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>WhatsApp</label><input type="text" id="pessoaWhatsApp" placeholder="11999999999"></div>
-                    <div class="form-group"><label>Tipo</label><select id="pessoaTipo"><option value="comum">Usuário comum</option></select></div>
-                </div>
-                <button class="btn btn-success" id="btnSalvarPessoa">✅ SALVAR PESSOA</button>
-                <hr style="margin:20px 0;border-color:var(--border);">
-                <h4>Pessoas Cadastradas</h4>
-                <div id="listaPessoas"></div>
-            </div>
+<div id="panel-pessoa" class="form-panel">
+    <h3>👥 Gerenciar Pessoas</h3>
+    <div class="form-row">
+        <div class="form-group"><label>Nome *</label><input type="text" id="pessoaNome" placeholder="Ex: Maria, João"></div>
+        <div class="form-group"><label>CPF</label><input type="text" id="pessoaCPF" placeholder="00000000000" maxlength="11"></div>
+    </div>
+    <div class="form-row">
+        <div class="form-group"><label>WhatsApp</label><input type="text" id="pessoaWhatsApp" placeholder="11999999999"></div>
+        <div class="form-group">
+            <label>Parentesco</label>
+            <select id="pessoaParentesco">
+                <option value="familiar">👨‍👩‍👧 Familiar</option>
+                <option value="conjuge">👫 Cônjuge</option>
+                <option value="filho">👶 Filho(a)</option>
+                <option value="amigo">🤝 Amigo(a)</option>
+                <option value="cliente">💼 Cliente</option>
+                <option value="outro">👤 Outro</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success" id="btnSalvarPessoa">✅ SALVAR PESSOA</button>
+    <hr style="margin:20px 0;border-color:var(--border);">
+    <h4>Pessoas Cadastradas</h4>
+    <div id="listaPessoas"></div>
+</div>
 
             <div id="panel-investimento" class="form-panel">
                 <h3>📈 Novo Investimento</h3>
@@ -343,25 +353,35 @@ function popularSelects(){
     }
     document.getElementById('despCartao').innerHTML = '<option value="">Sem cartão</option>' + cartoes.map(c => `<option value="${c.id}">💳 ${c.nome_cartao} (vence dia ${c.dia_vencimento})</option>`).join('');
 
-    // CORREÇÃO: Montar lista de usuários garantindo que o admin apareça
+    // Montar lista de usuários garantindo que o admin apareça
     const listaUsuarios = [...usuariosLista];
     if(!listaUsuarios.find(u => u.cpf === '12345678909')){
-        listaUsuarios.unshift({ id: 1, nome: 'Administrador', cpf: '12345678909', tipo: 'admin' });
+        listaUsuarios.unshift({ id: 1, nome: 'Administrador', cpf: '12345678909', tipo: 'admin', parentesco: 'admin' });
     }
-    document.getElementById('despUsuario').innerHTML = listaUsuarios.map(u => `<option value="${u.id}">👤 ${u.nome} ${u.tipo==='admin'?'(Admin)':''}</option>`).join('');
+    
+    // ✅ SELECT "Quem gastou" - com ícones de parentesco
+    document.getElementById('despUsuario').innerHTML = listaUsuarios.map(u => {
+        const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
+        return `<option value="${u.id}">${icone} ${u.nome} ${u.tipo==='admin'?'(Admin)':''}</option>`;
+    }).join('');
 
+    // ✅ LISTA de pessoas cadastradas (painel Pessoas)
+    document.getElementById('listaPessoas').innerHTML = listaUsuarios.map(u => {
+        const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
+        const parentescoNome = u.parentesco==='admin'?'Administrador':u.parentesco==='familiar'?'Familiar':u.parentesco==='conjuge'?'Cônjuge':u.parentesco==='filho'?'Filho(a)':u.parentesco==='amigo'?'Amigo(a)':u.parentesco==='cliente'?'Cliente':'Outro';
+        return `
+        <div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+            <span>${icone} <strong>${u.nome}</strong> | ${parentescoNome} ${u.whatsapp?' | 📱 '+u.whatsapp:''}</span>
+            ${u.cpf !== '12345678909' ? `<button onclick="excluirPessoa(${u.id})" class="btn-sm btn-danger">🗑️</button>` : '<span style="font-size:0.6rem;">Admin padrão</span>'}
+        </div>`;
+    }).join('') || '<p>Nenhuma pessoa cadastrada.</p>';
+
+    // Lista de cartões
     document.getElementById('listaCartoes').innerHTML = cartoes.map(c => {
         const gf = despesas.filter(g => g.cartao_id == c.id && !g.pago);
         const tf = gf.reduce((s,g) => s + parseFloat(g.valor), 0);
         return `<div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>💳 ${c.nome_cartao} - ${c.bandeira||''} | Vence dia ${c.dia_vencimento} | Fatura: R$ ${fMoeda(tf)}</span><button onclick="excluirCartao(${c.id})" class="btn-sm btn-danger">🗑️</button></div>`;
     }).join('') || '<p>Nenhum cartão.</p>';
-
-    document.getElementById('listaPessoas').innerHTML = listaUsuarios.map(u => `
-        <div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-            <span>👤 ${u.nome} | CPF: ${u.cpf||'—'} | ${u.whatsapp||'Sem WhatsApp'} | <span class="badge ${u.tipo==='admin'?'badge-admin':''}" style="font-size:0.6rem;">${u.tipo}</span></span>
-            ${u.cpf !== '12345678909' ? `<button onclick="excluirPessoa(${u.id})" class="btn-sm btn-danger">🗑️</button>` : '<span style="font-size:0.6rem;">Admin</span>'}
-        </div>
-    `).join('') || '<p>Nenhuma pessoa cadastrada.</p>';
 }
 
 function atualizarDashboard(){
@@ -498,14 +518,26 @@ async function salvarCartao(){
 async function excluirCartao(id){ if(confirm('Excluir cartão?')){ await db.from('cartoes').delete().eq('id',id); carregarTudo(); } }
 
 async function salvarPessoa(){
-    const nome=document.getElementById('pessoaNome').value.trim();
-    if(!nome)return alert('❌ Informe o nome!');
-    const cpf=document.getElementById('pessoaCPF').value.trim();
-    if(cpf && cpf.length===11 && !validarCPF(cpf))return alert('❌ CPF inválido!');
-    const { data, error } = await db.from('usuarios').insert([{nome,cpf:cpf||null,whatsapp:document.getElementById('pessoaWhatsApp').value.trim(),tipo:'comum'}]).select();
+    const nome = document.getElementById('pessoaNome').value.trim();
+    if(!nome) return alert('❌ Informe o nome!');
+    const cpf = document.getElementById('pessoaCPF').value.trim();
+    if(cpf && cpf.length===11 && !validarCPF(cpf)) return alert('❌ CPF inválido!');
+    
+    const parentesco = document.getElementById('pessoaParentesco').value;
+    
+    const { data, error } = await db.from('usuarios').insert([{
+        nome,
+        cpf: cpf || null,
+        whatsapp: document.getElementById('pessoaWhatsApp').value.trim(),
+        tipo: 'comum',
+        parentesco: parentesco
+    }]).select();
+    
     if(error){ alert('❌ Erro ao salvar: ' + error.message); return; }
     console.log('✅ Pessoa salva:', data);
-    document.getElementById('pessoaNome').value=''; document.getElementById('pessoaCPF').value=''; document.getElementById('pessoaWhatsApp').value='';
+    document.getElementById('pessoaNome').value = '';
+    document.getElementById('pessoaCPF').value = '';
+    document.getElementById('pessoaWhatsApp').value = '';
     alert('✅ Pessoa cadastrada com sucesso!');
     await carregarTudo();
 }
