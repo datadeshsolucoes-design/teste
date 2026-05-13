@@ -15,8 +15,7 @@
         /* LOGIN */
         .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
         .login-card { background: white; border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
-        .login-card h1 { font-size: 1.8rem; font-weight: 800; text-align: center; color: #1e293b; margin-bottom: 8px; }
-        .login-card h1 span { background: linear-gradient(135deg, #4f46e5, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-card h1 { font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 8px; background: linear-gradient(135deg, #4f46e5, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-card .subtitle { text-align: center; color: #64748b; font-size: 0.85rem; margin-bottom: 32px; }
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; font-size: 0.7rem; font-weight: 600; margin-bottom: 6px; color: #334155; text-transform: uppercase; }
@@ -58,8 +57,17 @@
         .panel h3 { margin-bottom: 20px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
         .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; }
+        .form-group label { display: block; font-size: 0.7rem; font-weight: 600; margin-bottom: 4px; color: #334155; text-transform: uppercase; }
+        .form-group small { font-size: 0.65rem; color: #64748b; display: block; margin-top: 4px; }
+        
         .btn-salvar { background: #4f46e5; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; }
         .btn-excel { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        
+        /* DIAS DA SEMANA - CHECKBOX */
+        .dias-semana { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+        .dia-checkbox { display: flex; align-items: center; gap: 6px; background: #f8fafc; padding: 8px 16px; border-radius: 40px; cursor: pointer; }
+        .dia-checkbox input { width: 18px; height: 18px; cursor: pointer; }
+        .dia-checkbox label { cursor: pointer; font-size: 0.8rem; font-weight: 500; }
         
         /* FILTROS */
         .filtro-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
@@ -86,6 +94,11 @@
         .cal-livre { background: #d1fae5; color: #065f46; }
         .cal-ocupado { background: #fee2e2; color: #991b1b; }
         
+        /* GRÁFICOS - TAMANHO REDUZIDO E SEM LINHAS */
+        .grafico-container { max-width: 400px; margin: 0 auto; }
+        .grafico-pequeno { max-height: 250px; }
+        .graficos-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
@@ -96,6 +109,7 @@
             .stats { grid-template-columns: repeat(2, 1fr); }
             .app-main { padding: 12px; }
             .calendario-grid { grid-template-columns: repeat(2, 1fr); }
+            .graficos-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -105,7 +119,7 @@
 <div id="loginScreen">
     <div class="login-container">
         <div class="login-card">
-            <h1>📅 <span>Data Desh Agenda</span></h1>
+            <h1>📅 Data Desh Agenda</h1>
             <p class="subtitle">Sistema Profissional de Agendamentos</p>
             <div class="input-group"><label>CPF</label><input type="text" id="inputCpf" placeholder="12345678909"></div>
             <div class="input-group"><label>SENHA</label><input type="password" id="inputSenha" placeholder="admin"></div>
@@ -191,7 +205,10 @@
         <div id="dashboardTab" class="tab-content active">
             <div class="panel">
                 <h3><i class="fas fa-chart-line"></i> Dashboard - Resumo do Negócio</h3>
-                <canvas id="graficoDashboard" height="200"></canvas>
+                <div class="graficos-row">
+                    <div class="grafico-container"><canvas id="graficoDashboard" class="grafico-pequeno"></canvas></div>
+                    <div class="grafico-container"><canvas id="graficoStatus" class="grafico-pequeno"></canvas></div>
+                </div>
             </div>
             <div class="panel">
                 <h3><i class="fas fa-clock"></i> Próximos Agendamentos</h3>
@@ -204,8 +221,16 @@
             <div class="panel">
                 <h3><i class="fas fa-user-plus"></i> Novo Prestador</h3>
                 <div class="form-row">
-                    <div class="form-group"><input type="text" id="novoPrestadorNome" placeholder="Nome do prestador"></div>
-                    <div class="form-group"><input type="text" id="novoPrestadorWhats" placeholder="WhatsApp"></div>
+                    <div class="form-group">
+                        <label>NOME COMPLETO</label>
+                        <input type="text" id="novoPrestadorNome" placeholder="Ex: João Silva">
+                        <small>Nome do profissional</small>
+                    </div>
+                    <div class="form-group">
+                        <label>WHATSAPP</label>
+                        <input type="text" id="novoPrestadorWhats" placeholder="11999999999">
+                        <small>Número com DDD</small>
+                    </div>
                 </div>
                 <button class="btn-salvar" id="addPrestadorBtn">Salvar Prestador</button>
             </div>
@@ -220,10 +245,26 @@
             <div class="panel">
                 <h3><i class="fas fa-cut"></i> Novo Serviço</h3>
                 <div class="form-row">
-                    <div class="form-group"><input type="text" id="novoServicoNome" placeholder="Nome do serviço"></div>
-                    <div class="form-group"><input type="number" id="novoServicoDuracao" placeholder="Duração (min)" value="60"></div>
-                    <div class="form-group"><input type="number" id="novoServicoValor" placeholder="Valor (R$)" step="0.01" value="50"></div>
-                    <div class="form-group"><input type="number" id="novoServicoSinal" placeholder="Sinal (%)" step="1" value="30"></div>
+                    <div class="form-group">
+                        <label>NOME DO SERVIÇO</label>
+                        <input type="text" id="novoServicoNome" placeholder="Ex: Corte de Cabelo">
+                        <small>Nome do procedimento/serviço</small>
+                    </div>
+                    <div class="form-group">
+                        <label>DURAÇÃO (minutos)</label>
+                        <input type="number" id="novoServicoDuracao" value="60" step="15">
+                        <small>Tempo médio do serviço</small>
+                    </div>
+                    <div class="form-group">
+                        <label>VALOR (R$)</label>
+                        <input type="number" id="novoServicoValor" step="0.01" value="50">
+                        <small>Preço do serviço</small>
+                    </div>
+                    <div class="form-group">
+                        <label>SINAL (%)</label>
+                        <input type="number" id="novoServicoSinal" step="5" value="30">
+                        <small>Percentual de entrada</small>
+                    </div>
                 </div>
                 <button class="btn-salvar" id="addServicoBtn">Salvar Serviço</button>
             </div>
@@ -233,33 +274,106 @@
             </div>
         </div>
 
-        <!-- HORÁRIOS -->
+        <!-- HORÁRIOS - VERSÃO MELHORADA COM CRIAÇÃO EM MASSA -->
         <div id="horariosTab" class="tab-content">
             <div class="panel">
-                <h3><i class="fas fa-calendar-plus"></i> Criar Horários</h3>
+                <h3><i class="fas fa-calendar-plus"></i> Criar Horários em Massa</h3>
                 <div class="form-row">
-                    <div class="form-group"><select id="horarioPrestadorSelect"></select></div>
-                    <div class="form-group"><select id="horarioServicoSelect"></select></div>
-                    <div class="form-group"><input type="date" id="horarioDataInput"></div>
-                    <div class="form-group"><input type="time" id="horarioInicioInput"></div>
-                    <div class="form-group"><input type="time" id="horarioFimInput"></div>
+                    <div class="form-group">
+                        <label>PRESTADOR</label>
+                        <select id="horarioPrestadorSelect"></select>
+                        <small>Selecione o profissional</small>
+                    </div>
+                    <div class="form-group">
+                        <label>SERVIÇO</label>
+                        <select id="horarioServicoSelect"></select>
+                        <small>Selecione o serviço oferecido</small>
+                    </div>
                 </div>
-                <button class="btn-salvar" id="criarHorariosBtn">Criar Horários</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>DATA INÍCIO</label>
+                        <input type="date" id="horarioDataInicio">
+                        <small>Primeiro dia do período</small>
+                    </div>
+                    <div class="form-group">
+                        <label>DATA FIM</label>
+                        <input type="date" id="horarioDataFim">
+                        <small>Último dia do período</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>HORÁRIO INÍCIO</label>
+                        <input type="time" id="horarioHoraInicio">
+                        <small>Ex: 08:00</small>
+                    </div>
+                    <div class="form-group">
+                        <label>HORÁRIO FIM</label>
+                        <input type="time" id="horarioHoraFim">
+                        <small>Ex: 18:00</small>
+                    </div>
+                    <div class="form-group">
+                        <label>INTERVALO (minutos)</label>
+                        <input type="number" id="horarioIntervalo" value="60">
+                        <small>Tempo entre cada horário</small>
+                    </div>
+                </div>
+                
+                <div class="dias-semana">
+                    <div class="dia-checkbox"><input type="checkbox" id="checkSegunda" value="1"> <label>Segunda</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkTerca" value="2"> <label>Terça</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkQuarta" value="3"> <label>Quarta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkQuinta" value="4"> <label>Quinta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkSexta" value="5"> <label>Sexta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkSabado" value="6"> <label>Sábado</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="checkDomingo" value="0"> <label>Domingo</label></div>
+                </div>
+                
+                <button class="btn-salvar" id="criarHorariosMassaBtn">Criar Horários</button>
             </div>
         </div>
 
-        <!-- AGENDAMENTOS (CRUD completo) -->
+        <!-- AGENDAMENTOS -->
         <div id="agendamentosTab" class="tab-content">
             <div class="panel">
                 <h3><i class="fas fa-calendar-check"></i> Novo Agendamento</h3>
                 <div class="form-row">
-                    <div class="form-group"><input type="text" id="agendamentoCliente" placeholder="Nome do cliente"></div>
-                    <div class="form-group"><input type="text" id="agendamentoWhats" placeholder="WhatsApp"></div>
-                    <div class="form-group"><select id="agendamentoPrestador"></select></div>
-                    <div class="form-group"><select id="agendamentoServico"></select></div>
-                    <div class="form-group"><input type="date" id="agendamentoData"></div>
-                    <div class="form-group"><input type="time" id="agendamentoHora"></div>
-                    <div class="form-group"><input type="number" id="agendamentoSinalPago" placeholder="Sinal pago (R$)" step="0.01" value="0"></div>
+                    <div class="form-group">
+                        <label>NOME DO CLIENTE</label>
+                        <input type="text" id="agendamentoCliente" placeholder="Nome completo">
+                        <small>Nome do paciente/cliente</small>
+                    </div>
+                    <div class="form-group">
+                        <label>WHATSAPP</label>
+                        <input type="text" id="agendamentoWhats" placeholder="11999999999">
+                        <small>Número com DDD</small>
+                    </div>
+                    <div class="form-group">
+                        <label>PRESTADOR</label>
+                        <select id="agendamentoPrestador"></select>
+                        <small>Profissional que atenderá</small>
+                    </div>
+                    <div class="form-group">
+                        <label>SERVIÇO</label>
+                        <select id="agendamentoServico"></select>
+                        <small>Serviço contratado</small>
+                    </div>
+                    <div class="form-group">
+                        <label>DATA</label>
+                        <input type="date" id="agendamentoData">
+                        <small>Dia do agendamento</small>
+                    </div>
+                    <div class="form-group">
+                        <label>HORÁRIO</label>
+                        <input type="time" id="agendamentoHora">
+                        <small>Horário do serviço</small>
+                    </div>
+                    <div class="form-group">
+                        <label>SINAL PAGO (R$)</label>
+                        <input type="number" id="agendamentoSinalPago" step="0.01" value="0">
+                        <small>Valor da entrada paga</small>
+                    </div>
                 </div>
                 <button class="btn-salvar" id="addAgendamentoBtn">Salvar Agendamento</button>
             </div>
@@ -305,7 +419,10 @@
             <div class="panel">
                 <h3><i class="fas fa-chart-line"></i> Resumo Financeiro</h3>
                 <div id="resumoFinanceiro" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px;"></div>
-                <canvas id="graficoFinanceiro" height="200"></canvas>
+                <div class="graficos-row">
+                    <div class="grafico-container"><canvas id="graficoFinanceiro" class="grafico-pequeno"></canvas></div>
+                    <div class="grafico-container"><canvas id="graficoServicos" class="grafico-pequeno"></canvas></div>
+                </div>
             </div>
         </div>
     </div>
@@ -327,10 +444,9 @@ var nextAgeId = 1;
 var usuarioAtual = null;
 
 var graficoDashboard = null;
+var graficoStatus = null;
 var graficoFinanceiro = null;
-
-// LINK DA AGENDA EXTERNA (para clientes)
-var LINK_AGENDA_EXTERNA = window.location.href.split('#')[0] + '?modo=cliente';
+var graficoServicos = null;
 
 // ============================================
 // FUNÇÕES DE TELA
@@ -371,7 +487,6 @@ function enviarWhatsApp(numero, mensagem) {
 function notificarCliente(agendamento) {
     var serv = servicos.find(s => s.id === agendamento.servicoId);
     var prest = prestadores.find(p => p.id === agendamento.prestadorId);
-    var valorSinal = (serv ? serv.valor * (serv.sinalPercentual / 100) : 0);
     var msg = '✅ *AGENDAMENTO CONFIRMADO!*\n\n' +
               '📅 Data: ' + agendamento.data + '\n' +
               '⏰ Horário: ' + agendamento.hora + '\n' +
@@ -399,10 +514,85 @@ function notificarPrestador(agendamento) {
 }
 
 // ============================================
+// CRIAR HORÁRIOS EM MASSA (NOVO!)
+// ============================================
+function criarHorariosEmMassa() {
+    var prestadorId = parseInt(document.getElementById('horarioPrestadorSelect').value);
+    var servicoId = parseInt(document.getElementById('horarioServicoSelect').value);
+    var dataInicio = document.getElementById('horarioDataInicio').value;
+    var dataFim = document.getElementById('horarioDataFim').value;
+    var horaInicio = document.getElementById('horarioHoraInicio').value;
+    var horaFim = document.getElementById('horarioHoraFim').value;
+    var intervalo = parseInt(document.getElementById('horarioIntervalo').value);
+    
+    var diasSemana = [];
+    if (document.getElementById('checkSegunda').checked) diasSemana.push(1);
+    if (document.getElementById('checkTerca').checked) diasSemana.push(2);
+    if (document.getElementById('checkQuarta').checked) diasSemana.push(3);
+    if (document.getElementById('checkQuinta').checked) diasSemana.push(4);
+    if (document.getElementById('checkSexta').checked) diasSemana.push(5);
+    if (document.getElementById('checkSabado').checked) diasSemana.push(6);
+    if (document.getElementById('checkDomingo').checked) diasSemana.push(0);
+    
+    if (!prestadorId || !servicoId || !dataInicio || !dataFim || !horaInicio || !horaFim) {
+        alert('Preencha todos os campos!');
+        return;
+    }
+    
+    if (diasSemana.length === 0) {
+        alert('Selecione pelo menos um dia da semana!');
+        return;
+    }
+    
+    var startDate = new Date(dataInicio);
+    var endDate = new Date(dataFim);
+    var horariosCriados = 0;
+    var horariosDuplicados = 0;
+    
+    for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        var diaSemana = d.getDay();
+        
+        if (diasSemana.includes(diaSemana)) {
+            var dataStr = d.toISOString().split('T')[0];
+            var horaAtual = new Date(dataStr + 'T' + horaInicio + ':00');
+            var horaFinal = new Date(dataStr + 'T' + horaFim + ':00');
+            
+            while (horaAtual < horaFinal) {
+                var horaStr = horaAtual.toTimeString().slice(0,5);
+                
+                // Verificar se já existe
+                var existe = horarios.some(function(h) {
+                    return h.data === dataStr && h.hora === horaStr && h.prestadorId === prestadorId;
+                });
+                
+                if (!existe) {
+                    horarios.push({
+                        id: Date.now() + horariosCriados,
+                        prestadorId: prestadorId,
+                        servicoId: servicoId,
+                        data: dataStr,
+                        hora: horaStr,
+                        status: 'livre'
+                    });
+                    horariosCriados++;
+                } else {
+                    horariosDuplicados++;
+                }
+                
+                horaAtual = new Date(horaAtual.getTime() + intervalo * 60000);
+            }
+        }
+    }
+    
+    alert('✅ ' + horariosCriados + ' horários criados!\n' + (horariosDuplicados > 0 ? '⚠️ ' + horariosDuplicados + ' horários já existiam e foram ignorados.' : ''));
+    atualizarTelaCompleta();
+    showToast(horariosCriados + ' horários criados com sucesso!');
+}
+
+// ============================================
 // ATUALIZAR TELA COMPLETA
 // ============================================
 function atualizarTelaCompleta() {
-    // Stats
     document.getElementById('totalPrestadores').innerText = prestadores.length;
     document.getElementById('totalServicos').innerText = servicos.length;
     document.getElementById('totalAgendamentos').innerText = agendamentos.length;
@@ -457,19 +647,10 @@ function atualizarTelaCompleta() {
         servSelectAge.innerHTML += '<option value="' + servicos[i].id + '">' + servicos[i].nome + ' - R$ ' + servicos[i].valor.toFixed(2) + '</option>';
     }
     
-    // Agendamentos (tabela)
     renderizarTabelaAgendamentos();
-    
-    // Dashboard
     renderizarDashboard();
-    
-    // Consolidado
     renderizarConsolidado();
-    
-    // Financeiro
     renderizarFinanceiro();
-    
-    // Calendário
     carregarCalendario();
 }
 
@@ -510,7 +691,7 @@ function excluirAgendamento(id) {
 }
 
 // ============================================
-// DASHBOARD
+// DASHBOARD COM GRÁFICOS SEM LINHAS
 // ============================================
 function renderizarDashboard() {
     // Próximos agendamentos
@@ -531,8 +712,8 @@ function renderizarDashboard() {
         }
     }
     
-    // Gráfico
-    var ctx = document.getElementById('graficoDashboard').getContext('2d');
+    // Gráfico 1: Agendamentos por dia da semana (SEM LINHAS)
+    var ctx1 = document.getElementById('graficoDashboard').getContext('2d');
     var dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
     var agendamentosPorDia = [0,0,0,0,0,0,0];
     for (var i = 0; i < agendamentos.length; i++) {
@@ -542,10 +723,26 @@ function renderizarDashboard() {
         agendamentosPorDia[idx]++;
     }
     if (graficoDashboard) graficoDashboard.destroy();
-    graficoDashboard = new Chart(ctx, {
+    graficoDashboard = new Chart(ctx1, {
         type: 'bar',
-        data: { labels: dias, datasets: [{ label: 'Agendamentos', data: agendamentosPorDia, backgroundColor: '#4f46e5', borderRadius: 8 }] },
-        options: { responsive: true, maintainAspectRatio: true }
+        data: { labels: dias, datasets: [{ label: 'Agendamentos', data: agendamentosPorDia, backgroundColor: '#4f46e5', borderRadius: 8, barPercentage: 0.65 }] },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } },
+            scales: { x: { grid: { display: false } }, y: { grid: { display: false, drawBorder: false }, ticks: { stepSize: 1 } } }
+        }
+    });
+    
+    // Gráfico 2: Status dos agendamentos (SEM LINHAS)
+    var ctx2 = document.getElementById('graficoStatus').getContext('2d');
+    var confirmados = agendamentos.filter(function(a) { return a.status === 'confirmado'; }).length;
+    var pendentes = agendamentos.filter(function(a) { return a.status === 'pendente'; }).length;
+    if (graficoStatus) graficoStatus.destroy();
+    graficoStatus = new Chart(ctx2, {
+        type: 'doughnut',
+        data: { labels: ['Confirmados', 'Pendentes'], datasets: [{ data: [confirmados, pendentes], backgroundColor: ['#10b981', '#f59e0b'], borderWidth: 0 }] },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
     });
 }
 
@@ -575,11 +772,14 @@ function renderizarConsolidado() {
         else pendentes++;
     }
     
-    document.getElementById('resumoConsolidado').innerHTML = 
-        '<div class="stat-card"><div class="stat-number">' + dados.length + '</div><div class="stat-label">Total Agendamentos</div></div>' +
-        '<div class="stat-card"><div class="stat-number">R$ ' + totalValor.toFixed(2) + '</div><div class="stat-label">Valor Total</div></div>' +
-        '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
-        '<div class="stat-card"><div class="stat-number">' + confirmados + ' / ' + pendentes + '</div><div class="stat-label">Confirmados/Pendentes</div></div>';
+    var resumoDiv = document.getElementById('resumoConsolidado');
+    if (resumoDiv) {
+        resumoDiv.innerHTML = 
+            '<div class="stat-card"><div class="stat-number">' + dados.length + '</div><div class="stat-label">Total Agendamentos</div></div>' +
+            '<div class="stat-card"><div class="stat-number">R$ ' + totalValor.toFixed(2) + '</div><div class="stat-label">Valor Total</div></div>' +
+            '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
+            '<div class="stat-card"><div class="stat-number">' + confirmados + ' / ' + pendentes + '</div><div class="stat-label">Confirmados/Pendentes</div></div>';
+    }
     
     var tbody = document.querySelector('#tabelaConsolidado tbody');
     if (!tbody) return;
@@ -608,6 +808,7 @@ function limparFiltro() {
     if (document.getElementById('filtroStatus')) document.getElementById('filtroStatus').value = '';
     renderizarConsolidado();
 }
+
 function exportarExcel() {
     var dados = [];
     var dataFiltro = document.getElementById('filtroData').value;
@@ -639,12 +840,14 @@ function exportarExcel() {
 }
 
 // ============================================
-// FINANCEIRO
+// FINANCEIRO COM GRÁFICOS SEM LINHAS
 // ============================================
 function renderizarFinanceiro() {
     var totalBruto = 0;
     var totalSinal = 0;
     var totalAReceber = 0;
+    var servicosCount = {};
+    
     for (var i = 0; i < agendamentos.length; i++) {
         var a = agendamentos[i];
         var serv = servicos.find(function(s) { return s.id === a.servicoId; });
@@ -652,18 +855,43 @@ function renderizarFinanceiro() {
         totalBruto += valor;
         totalSinal += a.sinalPago || 0;
         if (a.status !== 'confirmado') totalAReceber += valor - (a.sinalPago || 0);
+        
+        if (serv) {
+            servicosCount[serv.nome] = (servicosCount[serv.nome] || 0) + 1;
+        }
     }
-    document.getElementById('resumoFinanceiro').innerHTML = 
-        '<div class="stat-card"><div class="stat-number">R$ ' + totalBruto.toFixed(2) + '</div><div class="stat-label">Valor Bruto</div></div>' +
-        '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
-        '<div class="stat-card"><div class="stat-number">R$ ' + totalAReceber.toFixed(2) + '</div><div class="stat-label">A Receber</div></div>';
     
-    var ctx = document.getElementById('graficoFinanceiro').getContext('2d');
+    var resumoDiv = document.getElementById('resumoFinanceiro');
+    if (resumoDiv) {
+        resumoDiv.innerHTML = 
+            '<div class="stat-card"><div class="stat-number">R$ ' + totalBruto.toFixed(2) + '</div><div class="stat-label">Valor Bruto</div></div>' +
+            '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
+            '<div class="stat-card"><div class="stat-number">R$ ' + totalAReceber.toFixed(2) + '</div><div class="stat-label">A Receber</div></div>';
+    }
+    
+    // Gráfico Financeiro (SEM LINHAS)
+    var ctxFin = document.getElementById('graficoFinanceiro').getContext('2d');
     if (graficoFinanceiro) graficoFinanceiro.destroy();
-    graficoFinanceiro = new Chart(ctx, {
+    graficoFinanceiro = new Chart(ctxFin, {
         type: 'doughnut',
-        data: { labels: ['Sinal Recebido', 'A Receber'], datasets: [{ data: [totalSinal, totalAReceber], backgroundColor: ['#10b981', '#f59e0b'] }] },
-        options: { responsive: true, maintainAspectRatio: true }
+        data: { labels: ['Sinal Recebido', 'A Receber'], datasets: [{ data: [totalSinal, totalAReceber], backgroundColor: ['#10b981', '#f59e0b'], borderWidth: 0 }] },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+    });
+    
+    // Gráfico de Serviços mais procurados (SEM LINHAS)
+    var ctxServ = document.getElementById('graficoServicos').getContext('2d');
+    var servLabels = Object.keys(servicosCount);
+    var servData = Object.values(servicosCount);
+    if (graficoServicos) graficoServicos.destroy();
+    graficoServicos = new Chart(ctxServ, {
+        type: 'bar',
+        data: { labels: servLabels, datasets: [{ label: 'Quantidade', data: servData, backgroundColor: '#8b5cf6', borderRadius: 8, barPercentage: 0.65 }] },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } },
+            scales: { x: { grid: { display: false } }, y: { grid: { display: false, drawBorder: false }, ticks: { stepSize: 1 } } }
+        }
     });
 }
 
@@ -705,7 +933,7 @@ function carregarCalendario() {
         for (var j = 0; j < horariosDia.length && j < 3; j++) {
             var h = horariosDia[j];
             var ocupado = agendamentosDia.some(function(a) { return a.hora === h.hora; });
-            var classe = ocupado ? 'cal-ocupado' : 'cal-livre';
+            var classe = ocupado ? 'cal-ocupado' : 'cal-libre';
             var texto = ocupado ? '🔴 ' + h.hora : '🟢 ' + h.hora;
             diaDiv.innerHTML += '<div class="cal-horario ' + classe + '">' + texto + '</div>';
         }
@@ -757,29 +985,6 @@ function excluirServico(id) {
         atualizarTelaCompleta();
         showToast('Serviço excluído');
     }
-}
-
-function criarHorarios() {
-    var prestId = parseInt(document.getElementById('horarioPrestadorSelect').value);
-    var servId = parseInt(document.getElementById('horarioServicoSelect').value);
-    var data = document.getElementById('horarioDataInput').value;
-    var inicio = document.getElementById('horarioInicioInput').value;
-    var fim = document.getElementById('horarioFimInput').value;
-    if (!prestId || !servId || !data || !inicio || !fim) { alert('Preencha todos os campos'); return; }
-    var horaAtual = new Date(data + 'T' + inicio + ':00');
-    var horaFim = new Date(data + 'T' + fim + ':00');
-    var criados = 0;
-    while (horaAtual < horaFim) {
-        var horaStr = horaAtual.toTimeString().slice(0,5);
-        horarios.push({ prestadorId: prestId, servicoId: servId, data: data, hora: horaStr, status: 'livre' });
-        horaAtual = new Date(horaAtual.getTime() + 60 * 60000);
-        criados++;
-    }
-    alert('✅ ' + criados + ' horários criados!');
-    document.getElementById('horarioDataInput').value = '';
-    document.getElementById('horarioInicioInput').value = '';
-    document.getElementById('horarioFimInput').value = '';
-    atualizarTelaCompleta();
 }
 
 function adicionarAgendamento() {
@@ -865,7 +1070,7 @@ document.getElementById('btnCopiarLinkAgenda').onclick = function() {
 // BOTÕES
 document.getElementById('addPrestadorBtn').onclick = adicionarPrestador;
 document.getElementById('addServicoBtn').onclick = adicionarServico;
-document.getElementById('criarHorariosBtn').onclick = criarHorarios;
+document.getElementById('criarHorariosMassaBtn').onclick = criarHorariosEmMassa;
 document.getElementById('addAgendamentoBtn').onclick = adicionarAgendamento;
 document.getElementById('aplicarFiltroBtn').onclick = aplicarFiltro;
 document.getElementById('limparFiltroBtn').onclick = limparFiltro;
@@ -895,9 +1100,19 @@ window.enviarWhatsAppCliente = enviarWhatsAppCliente;
 
 // DATA PADRÃO
 var hoje = new Date().toISOString().split('T')[0];
-document.getElementById('horarioDataInput').value = hoje;
+document.getElementById('horarioDataInicio').value = hoje;
+document.getElementById('horarioDataFim').value = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
 document.getElementById('agendamentoData').value = hoje;
 document.getElementById('filtroData').value = hoje;
+document.getElementById('horarioHoraInicio').value = '08:00';
+document.getElementById('horarioHoraFim').value = '18:00';
+
+// SELECIONAR DIAS PADRÃO (Segunda a Sexta)
+document.getElementById('checkSegunda').checked = true;
+document.getElementById('checkTerca').checked = true;
+document.getElementById('checkQuarta').checked = true;
+document.getElementById('checkQuinta').checked = true;
+document.getElementById('checkSexta').checked = true;
 
 // DADOS DE EXEMPLO
 prestadores = [
@@ -906,18 +1121,23 @@ prestadores = [
 ];
 servicos = [
     { id: 1, nome: 'Corte de Cabelo', duracao: 60, valor: 50, sinalPercentual: 30 },
-    { id: 2, nome: 'Manicure', duracao: 45, valor: 35, sinalPercentual: 30 }
+    { id: 2, nome: 'Manicure', duracao: 45, valor: 35, sinalPercentual: 30 },
+    { id: 3, nome: 'Pedicure', duracao: 45, valor: 35, sinalPercentual: 30 },
+    { id: 4, nome: 'Massagem Relaxante', duracao: 90, valor: 120, sinalPercentual: 30 }
 ];
 agendamentos = [
     { id: 1, cliente: 'Ana Souza', whats: '11977777777', prestadorId: 1, servicoId: 1, data: hoje, hora: '09:00', sinalPago: 15, status: 'confirmado' },
     { id: 2, cliente: 'Carlos Lima', whats: '11966666666', prestadorId: 2, servicoId: 2, data: hoje, hora: '14:00', sinalPago: 0, status: 'pendente' }
 ];
 nextPrestId = 3;
-nextServId = 3;
+nextServId = 5;
 nextAgeId = 3;
 
 mostrarLogin();
-console.log('✅ Sistema COMPLETO carregado! Use CPF: 12345678909 e senha: admin');
+console.log('✅ SISTEMA COMPLETO - Agendamento Profissional');
+console.log('🔐 Login: CPF 12345678909 | Senha: admin');
+console.log('📅 Criar horários em massa: selecione período, dias da semana e intervalo!');
+console.log('📊 Gráficos sem linhas de grade e tamanho reduzido!');
 </script>
 </body>
 </html>
