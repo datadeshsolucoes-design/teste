@@ -11,7 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f5f7fa; }
         
-        /* LOGIN */
         .login-container {
             min-height: 100vh;
             display: flex;
@@ -31,73 +30,62 @@
         .login-card .subtitle { text-align: center; color: #64748b; font-size: 0.85rem; margin-bottom: 32px; }
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; font-size: 0.7rem; font-weight: 600; margin-bottom: 6px; color: #334155; text-transform: uppercase; }
-        .input-group input { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; transition: all 0.2s; }
+        .input-group input { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; }
         .input-group input:focus { outline: none; border-color: #4f46e5; }
-        .btn { width: 100%; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; }
         .btn-primary { background: linear-gradient(135deg, #4f46e5, #8b5cf6); color: white; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79,70,229,0.3); }
-        .btn-secondary { background: #f1f5f9; color: #334155; margin-top: 12px; }
+        .btn-primary:hover { transform: translateY(-2px); }
         .link { text-align: center; margin-top: 16px; font-size: 0.8rem; }
         .link span { color: #4f46e5; cursor: pointer; }
         .hidden { display: none !important; }
         
-        /* SISTEMA */
         .app-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .header { background: white; border-radius: 16px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .header { background: white; border-radius: 16px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
         .header h1 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #4f46e5, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .user-info { display: flex; align-items: center; gap: 16px; }
         .user-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, #4f46e5, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
         .btn-logout { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
         
-        /* TABS */
         .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-        .tab { padding: 10px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 40px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .tab { padding: 10px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 40px; cursor: pointer; font-weight: 600; }
         .tab.active { background: #4f46e5; color: white; border-color: #4f46e5; }
         
-        /* CARDS */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px; }
-        .stat-card { background: white; padding: 20px; border-radius: 16px; border-left: 4px solid #4f46e5; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .stat-card { background: white; padding: 20px; border-radius: 16px; border-left: 4px solid #4f46e5; }
         .stat-value { font-size: 1.8rem; font-weight: 800; }
         .stat-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; margin-top: 4px; }
         
-        /* FORMULÁRIOS */
-        .form-panel { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .form-panel { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; }
         .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
         .form-group label { display: block; font-size: 0.7rem; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; }
-        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; }
         
-        /* TABELA */
-        .table-container { background: white; border-radius: 16px; overflow-x: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .table-container { background: white; border-radius: 16px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 14px 16px; background: #f8fafc; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #64748b; }
+        th { text-align: left; padding: 14px 16px; background: #f8fafc; font-size: 0.7rem; font-weight: 700; color: #64748b; }
         td { padding: 12px 16px; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
-        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
-        .status-confirmado { background: #d1fae5; color: #065f46; }
-        .status-pendente { background: #fef3c7; color: #92400e; }
         
-        /* LOADING */
         .loading { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center; }
         .loading.show { display: flex; }
         .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* TOAST */
         .toast { position: fixed; bottom: 20px; right: 20px; background: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; border-left: 4px solid #10b981; }
         
         @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div class="loading" id="loading"><div class="spinner"></div></div>
 
-<!-- TELA DE LOGIN -->
+<!-- LOGIN -->
 <div id="loginContainer" class="login-container">
     <div class="login-card">
         <h1>📅 Data Desh Agenda</h1>
         <p class="subtitle">Sistema de Agendamentos</p>
-        <div id="loginError" style="background:#fee2e2; color:#991b1b; padding:12px; border-radius:12px; margin-bottom:16px; display:none;"></div>
         <div class="input-group"><label>NOME</label><input type="text" id="loginNome" placeholder="Seu nome"></div>
         <div class="input-group"><label>CPF</label><input type="text" id="loginCPF" placeholder="12345678909"></div>
         <div class="input-group"><label>SENHA</label><input type="password" id="loginSenha" placeholder="******"></div>
@@ -106,43 +94,43 @@
     </div>
 </div>
 
-<!-- TELA DE CADASTRO -->
+<!-- CADASTRO -->
 <div id="cadastroContainer" class="login-container hidden">
     <div class="login-card">
         <h1>📝 Criar Conta</h1>
         <p class="subtitle">Cadastre-se gratuitamente</p>
-        <div class="input-group"><label>NOME COMPLETO</label><input type="text" id="cadNome" placeholder="Seu nome"></div>
-        <div class="input-group"><label>CPF</label><input type="text" id="cadCpf" placeholder="12345678909"></div>
-        <div class="input-group"><label>WHATSAPP</label><input type="text" id="cadWhats" placeholder="11999999999"></div>
-        <div class="input-group"><label>SENHA</label><input type="password" id="cadSenha" placeholder="******"></div>
-        <div class="input-group"><label>CONFIRMAR SENHA</label><input type="password" id="cadConfirma" placeholder="******"></div>
+        <div class="input-group"><label>NOME</label><input type="text" id="cadNome"></div>
+        <div class="input-group"><label>CPF</label><input type="text" id="cadCpf"></div>
+        <div class="input-group"><label>WHATSAPP</label><input type="text" id="cadWhats"></div>
+        <div class="input-group"><label>SENHA</label><input type="password" id="cadSenha"></div>
+        <div class="input-group"><label>CONFIRMAR</label><input type="password" id="cadConfirma"></div>
         <button class="btn btn-primary" id="btnCadastrar">CRIAR CONTA</button>
-        <div class="link"><span id="btnVoltarLogin">🔙 Voltar ao login</span></div>
+        <div class="link"><span id="btnVoltarLogin">🔙 Voltar</span></div>
     </div>
 </div>
 
-<!-- TELA DE REDEFINIR SENHA -->
+<!-- REDEFINIR -->
 <div id="resetContainer" class="login-container hidden">
     <div class="login-card">
         <h1>🔑 Redefinir Senha</h1>
         <p class="subtitle">Código: 123456</p>
-        <div class="input-group"><label>CPF</label><input type="text" id="resetCpf" placeholder="12345678909"></div>
-        <div class="input-group"><label>CÓDIGO</label><input type="text" id="resetCodigo" placeholder="123456"></div>
-        <div class="input-group"><label>NOVA SENHA</label><input type="password" id="resetNova" placeholder="******"></div>
-        <div class="input-group"><label>CONFIRMAR</label><input type="password" id="resetConfirma" placeholder="******"></div>
+        <div class="input-group"><label>CPF</label><input type="text" id="resetCpf"></div>
+        <div class="input-group"><label>CÓDIGO</label><input type="text" id="resetCodigo"></div>
+        <div class="input-group"><label>NOVA SENHA</label><input type="password" id="resetNova"></div>
+        <div class="input-group"><label>CONFIRMAR</label><input type="password" id="resetConfirma"></div>
         <button class="btn btn-primary" id="btnReset">REDEFINIR</button>
-        <div class="link"><span id="btnVoltarLogin2">🔙 Voltar ao login</span></div>
+        <div class="link"><span id="btnVoltarLogin2">🔙 Voltar</span></div>
     </div>
 </div>
 
-<!-- SISTEMA PRINCIPAL -->
+<!-- SISTEMA -->
 <div id="appContainer" class="hidden">
     <div class="app-container">
         <div class="header">
             <h1>📅 Data Desh Agenda</h1>
             <div class="user-info">
                 <div class="user-avatar"><i class="fas fa-user"></i></div>
-                <span id="userName">Carregando...</span>
+                <span id="userName"></span>
                 <button class="btn-logout" id="btnSair">Sair</button>
             </div>
         </div>
@@ -157,51 +145,47 @@
             <button class="tab" data-tab="agendamentos">📋 Agendamentos</button>
         </div>
 
-        <!-- DASHBOARD -->
-        <div id="tabDashboard" class="tab-content">
+        <div id="tabDashboard" class="tab-content active">
             <div class="form-panel">
-                <h3 style="margin-bottom: 16px;">📈 Bem-vindo ao sistema!</h3>
-                <p style="color: #64748b;">Gerencie seus prestadores, serviços, horários e agendamentos.</p>
+                <h3>📈 Bem-vindo ao sistema!</h3>
+                <p style="color:#64748b; margin-top:8px;">Gerencie seus prestadores, serviços, horários e agendamentos.</p>
             </div>
         </div>
 
-        <!-- PRESTADORES -->
-        <div id="tabPrestadores" class="tab-content hidden">
+        <div id="tabPrestadores" class="tab-content">
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">➕ Novo Prestador</h3>
+                <h3>➕ Novo Prestador</h3>
                 <div class="form-row">
-                    <div class="form-group"><label>NOME</label><input type="text" id="prestadorNome" placeholder="Nome do profissional"></div>
-                    <div class="form-group"><label>WHATSAPP</label><input type="text" id="prestadorWhats" placeholder="11999999999"></div>
+                    <div class="form-group"><label>NOME</label><input type="text" id="prestadorNome"></div>
+                    <div class="form-group"><label>WHATSAPP</label><input type="text" id="prestadorWhats"></div>
                 </div>
-                <button class="btn btn-primary" id="btnSalvarPrestador" style="width: auto; padding: 10px 24px;">Salvar</button>
+                <button class="btn btn-primary" id="btnSalvarPrestador" style="width:auto; padding:10px 24px;">Salvar</button>
             </div>
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">📋 Lista de Prestadores</h3>
+                <h3>📋 Lista de Prestadores</h3>
                 <div id="listaPrestadores"></div>
             </div>
         </div>
 
-        <!-- SERVIÇOS -->
-        <div id="tabServicos" class="tab-content hidden">
+        <div id="tabServicos" class="tab-content">
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">➕ Novo Serviço</h3>
+                <h3>➕ Novo Serviço</h3>
                 <div class="form-row">
-                    <div class="form-group"><label>NOME</label><input type="text" id="servicoNome" placeholder="Ex: Corte de Cabelo"></div>
+                    <div class="form-group"><label>NOME</label><input type="text" id="servicoNome"></div>
                     <div class="form-group"><label>DURAÇÃO (min)</label><input type="number" id="servicoDuracao" value="60"></div>
                     <div class="form-group"><label>VALOR (R$)</label><input type="number" id="servicoValor" step="0.01" value="50"></div>
                 </div>
-                <button class="btn btn-primary" id="btnSalvarServico" style="width: auto; padding: 10px 24px;">Salvar</button>
+                <button class="btn btn-primary" id="btnSalvarServico" style="width:auto; padding:10px 24px;">Salvar</button>
             </div>
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">📋 Lista de Serviços</h3>
+                <h3>📋 Lista de Serviços</h3>
                 <div id="listaServicos"></div>
             </div>
         </div>
 
-        <!-- HORÁRIOS -->
-        <div id="tabHorarios" class="tab-content hidden">
+        <div id="tabHorarios" class="tab-content">
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">⏰ Criar Horários</h3>
+                <h3>⏰ Criar Horários</h3>
                 <div class="form-row">
                     <div class="form-group"><label>PRESTADOR</label><select id="horarioPrestador"></select></div>
                     <div class="form-group"><label>SERVIÇO</label><select id="horarioServico"></select></div>
@@ -209,14 +193,13 @@
                     <div class="form-group"><label>INÍCIO</label><input type="time" id="horarioInicio"></div>
                     <div class="form-group"><label>FIM</label><input type="time" id="horarioFim"></div>
                 </div>
-                <button class="btn btn-primary" id="btnCriarHorarios" style="width: auto; padding: 10px 24px;">Criar Horários</button>
+                <button class="btn btn-primary" id="btnCriarHorarios" style="width:auto; padding:10px 24px;">Criar</button>
             </div>
         </div>
 
-        <!-- AGENDAMENTOS -->
-        <div id="tabAgendamentos" class="tab-content hidden">
+        <div id="tabAgendamentos" class="tab-content">
             <div class="form-panel">
-                <h3 style="margin-bottom: 20px;">📋 Lista de Agendamentos</h3>
+                <h3>📋 Lista de Agendamentos</h3>
                 <div class="table-container">
                     <table>
                         <thead><tr><th>Cliente</th><th>WhatsApp</th><th>Serviço</th><th>Prestador</th><th>Data/Hora</th><th>Status</th></tr></thead>
@@ -230,151 +213,119 @@
 
 <script>
 // ============================================
-// SUPABASE
+// INICIALIZAÇÃO - SEM ERRO DE REDECLARAÇÃO
 // ============================================
-const supabase = window.supabase.createClient(
-    'https://tvhpqfysvunmppddupum.supabase.co',
-    'sb_publishable_fA1a63dl0MoJ8zjZiBJprw_4syerDaL'
-);
+(function() {
+    if (!window._supabaseClient) {
+        window._supabaseClient = window.supabase.createClient(
+            'https://tvhpqfysvunmppddupum.supabase.co',
+            'sb_publishable_fA1a63dl0MoJ8zjZiBJprw_4syerDaL'
+        );
+    }
+})();
 
-let usuarioLogado = null;
-let prestadores = [];
-let servicos = [];
-let agendamentos = [];
+var supabase = window._supabaseClient;
+var usuarioLogado = null;
+var prestadores = [];
+var servicos = [];
+var agendamentos = [];
 
+// UTILITÁRIOS
 function showLoading() { document.getElementById('loading').classList.add('show'); }
 function hideLoading() { document.getElementById('loading').classList.remove('show'); }
+function showToast(msg) { var t=document.createElement('div'); t.className='toast'; t.innerHTML='✅ '+msg; document.body.appendChild(t); setTimeout(function(){t.remove();},3000); }
+function formatarData(d) { return d ? new Date(d).toLocaleDateString('pt-BR') : '—'; }
+function formatarHora(d) { return d ? new Date(d).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—'; }
+function fMoeda(v) { return parseFloat(v||0).toFixed(2); }
 
-function showToast(msg) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = '<i class="fas fa-check-circle" style="color:#10b981"></i> ' + msg;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+// NAVEGAÇÃO ENTRE TELAS
+function mostrarLogin() {
+    document.getElementById('loginContainer').classList.remove('hidden');
+    document.getElementById('cadastroContainer').classList.add('hidden');
+    document.getElementById('resetContainer').classList.add('hidden');
+    document.getElementById('appContainer').classList.add('hidden');
+}
+function mostrarCadastro() {
+    document.getElementById('loginContainer').classList.add('hidden');
+    document.getElementById('cadastroContainer').classList.remove('hidden');
+    document.getElementById('resetContainer').classList.add('hidden');
+}
+function mostrarReset() {
+    document.getElementById('loginContainer').classList.add('hidden');
+    document.getElementById('cadastroContainer').classList.add('hidden');
+    document.getElementById('resetContainer').classList.remove('hidden');
+}
+function mostrarApp() {
+    document.getElementById('loginContainer').classList.add('hidden');
+    document.getElementById('cadastroContainer').classList.add('hidden');
+    document.getElementById('resetContainer').classList.add('hidden');
+    document.getElementById('appContainer').classList.remove('hidden');
 }
 
-function formatarData(d) { return d ? new Date(d).toLocaleDateString('pt-BR') : '—'; }
-function formatarHora(d) { return d ? new Date(d).toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) : '—'; }
-function fMoeda(v) { return parseFloat(v || 0).toFixed(2); }
-
-// ============================================
 // LOGIN
-// ============================================
-document.getElementById('btnLogin').onclick = async () => {
-    const cpf = document.getElementById('loginCPF').value.trim();
-    const senha = document.getElementById('loginSenha').value.trim();
-    
-    if (!cpf || !senha) {
-        const errDiv = document.getElementById('loginError');
-        errDiv.textContent = 'Preencha CPF e senha!';
-        errDiv.style.display = 'block';
-        return;
-    }
-    
+document.getElementById('btnLogin').onclick = async function() {
+    var cpf = document.getElementById('loginCPF').value.trim();
+    var senha = document.getElementById('loginSenha').value.trim();
+    if (!cpf || !senha) { alert('Preencha CPF e senha!'); return; }
     showLoading();
-    
-    // Admin padrão
     if (cpf === '12345678909' && senha === 'admin') {
-        usuarioLogado = { id: 1, nome: 'Administrador', cpf: '12345678909' };
+        usuarioLogado = { id: 1, nome: 'Administrador' };
         document.getElementById('userName').innerHTML = 'Administrador';
-        document.getElementById('loginContainer').classList.add('hidden');
-        document.getElementById('appContainer').classList.remove('hidden');
+        mostrarApp();
         hideLoading();
         carregarDados();
         return;
     }
-    
-    // Buscar no banco
-    const { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
+    var { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
     hideLoading();
-    
     if (data && data.length > 0 && data[0].senha === senha) {
-        usuarioLogado = data[0];
+        usuarioLogado = { id: data[0].id, nome: data[0].nome };
         document.getElementById('userName').innerHTML = usuarioLogado.nome;
-        document.getElementById('loginContainer').classList.add('hidden');
-        document.getElementById('appContainer').classList.remove('hidden');
+        mostrarApp();
         carregarDados();
-    } else {
-        const errDiv = document.getElementById('loginError');
-        errDiv.textContent = 'CPF ou senha incorretos!';
-        errDiv.style.display = 'block';
-    }
+    } else { alert('CPF ou senha incorretos!'); }
 };
 
-// ============================================
 // CADASTRO
-// ============================================
-document.getElementById('btnMostrarCadastro').onclick = () => {
-    document.getElementById('loginContainer').classList.add('hidden');
-    document.getElementById('cadastroContainer').classList.remove('hidden');
-};
-document.getElementById('btnVoltarLogin').onclick = () => {
-    document.getElementById('cadastroContainer').classList.add('hidden');
-    document.getElementById('loginContainer').classList.remove('hidden');
-};
-document.getElementById('btnVoltarLogin2').onclick = () => {
-    document.getElementById('resetContainer').classList.add('hidden');
-    document.getElementById('loginContainer').classList.remove('hidden');
-};
+document.getElementById('btnMostrarCadastro').onclick = mostrarCadastro;
+document.getElementById('btnVoltarLogin').onclick = mostrarLogin;
+document.getElementById('btnMostrarReset').onclick = mostrarReset;
+document.getElementById('btnVoltarLogin2').onclick = mostrarLogin;
 
-document.getElementById('btnCadastrar').onclick = async () => {
-    const nome = document.getElementById('cadNome').value.trim();
-    const cpf = document.getElementById('cadCpf').value.trim();
-    const whats = document.getElementById('cadWhats').value.trim();
-    const senha = document.getElementById('cadSenha').value;
-    const confirma = document.getElementById('cadConfirma').value;
-    
-    if (!nome || !cpf || !senha) return alert('Preencha todos os campos!');
-    if (senha !== confirma) return alert('Senhas não conferem!');
-    if (senha.length < 4) return alert('Senha deve ter pelo menos 4 caracteres!');
-    
+document.getElementById('btnCadastrar').onclick = async function() {
+    var nome = document.getElementById('cadNome').value.trim();
+    var cpf = document.getElementById('cadCpf').value.trim();
+    var whats = document.getElementById('cadWhats').value.trim();
+    var senha = document.getElementById('cadSenha').value;
+    var confirma = document.getElementById('cadConfirma').value;
+    if (!nome || !cpf || !senha) { alert('Preencha todos os campos!'); return; }
+    if (senha !== confirma) { alert('Senhas não conferem!'); return; }
+    if (senha.length < 4) { alert('Senha deve ter 4+ caracteres'); return; }
     showLoading();
-    const { error } = await supabase.from('usuarios').insert([{ nome, cpf, whatsapp: whats, senha, tipo: 'comum' }]);
+    var { error } = await supabase.from('usuarios').insert([{ nome: nome, cpf: cpf, whatsapp: whats, senha: senha, tipo: 'comum' }]);
     hideLoading();
-    
-    if (error) alert('Erro: ' + error.message);
-    else {
-        alert('✅ Conta criada! Faça login.');
-        document.getElementById('cadastroContainer').classList.add('hidden');
-        document.getElementById('loginContainer').classList.remove('hidden');
-    }
+    if (error) { alert('Erro: '+error.message); } else { alert('✅ Conta criada! Faça login.'); mostrarLogin(); }
 };
 
-// ============================================
-// REDEFINIR SENHA
-// ============================================
-document.getElementById('btnMostrarReset').onclick = () => {
-    document.getElementById('loginContainer').classList.add('hidden');
-    document.getElementById('resetContainer').classList.remove('hidden');
-};
-document.getElementById('btnReset').onclick = async () => {
-    const cpf = document.getElementById('resetCpf').value.trim();
-    const codigo = document.getElementById('resetCodigo').value.trim();
-    const nova = document.getElementById('resetNova').value;
-    const confirma = document.getElementById('resetConfirma').value;
-    
-    if (codigo !== '123456') return alert('Código incorreto! Use: 123456');
-    if (nova.length < 4) return alert('Senha deve ter 4+ caracteres');
-    if (nova !== confirma) return alert('Senhas não conferem');
-    
+// REDEFINIR
+document.getElementById('btnReset').onclick = async function() {
+    var cpf = document.getElementById('resetCpf').value.trim();
+    var codigo = document.getElementById('resetCodigo').value.trim();
+    var nova = document.getElementById('resetNova').value;
+    var confirma = document.getElementById('resetConfirma').value;
+    if (codigo !== '123456') { alert('Código incorreto! Use: 123456'); return; }
+    if (nova.length < 4) { alert('Senha deve ter 4+ caracteres'); return; }
+    if (nova !== confirma) { alert('Senhas não conferem'); return; }
     showLoading();
-    const { error } = await supabase.from('usuarios').update({ senha: nova }).eq('cpf', cpf);
+    var { error } = await supabase.from('usuarios').update({ senha: nova }).eq('cpf', cpf);
     hideLoading();
-    
-    if (error) alert('Erro: ' + error.message);
-    else {
-        alert('✅ Senha redefinida!');
-        document.getElementById('resetContainer').classList.add('hidden');
-        document.getElementById('loginContainer').classList.remove('hidden');
-    }
+    if (error) { alert('Erro: '+error.message); } else { alert('✅ Senha redefinida!'); mostrarLogin(); }
 };
 
-// ============================================
 // CARREGAR DADOS
-// ============================================
 async function carregarDados() {
     showLoading();
-    const [p, s, a] = await Promise.all([
+    var [p, s, a] = await Promise.all([
         supabase.from('prestadores').select('*').eq('admin_id', usuarioLogado.id),
         supabase.from('servicos').select('*').eq('admin_id', usuarioLogado.id),
         supabase.from('agendamentos').select('*').eq('admin_id', usuarioLogado.id)
@@ -384,94 +335,55 @@ async function carregarDados() {
     agendamentos = a.data || [];
     hideLoading();
     
-    // Stats
     document.getElementById('statsGrid').innerHTML = `
         <div class="stat-card"><div class="stat-value">${prestadores.length}</div><div class="stat-label">Prestadores</div></div>
         <div class="stat-card"><div class="stat-value">${servicos.length}</div><div class="stat-label">Serviços</div></div>
         <div class="stat-card"><div class="stat-value">${agendamentos.length}</div><div class="stat-label">Agendamentos</div></div>
-        <div class="stat-card"><div class="stat-value">R$ ${fMoeda(agendamentos.reduce((s,a) => s + (a.valor_total || 0), 0))}</div><div class="stat-label">Faturado</div></div>
+        <div class="stat-card"><div class="stat-value">R$ ${fMoeda(agendamentos.reduce(function(s,a){return s+(a.valor_total||0);},0))}</div><div class="stat-label">Faturado</div></div>
     `;
     
-    renderizarPrestadores();
-    renderizarServicos();
-    renderizarSelects();
-    renderizarAgendamentos();
-}
-
-function renderizarPrestadores() {
-    const container = document.getElementById('listaPrestadores');
-    if (!container) return;
-    container.innerHTML = prestadores.map(p => `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #e2e8f0;">
-            <div><strong>${p.nome}</strong><br><small class="text-slate-500">📱 ${p.whatsapp || 'N/A'}</small></div>
-            <button onclick="excluirPrestador(${p.id})" style="background:#ef4444; color:white; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Excluir</button>
-        </div>
-    `).join('') || '<p class="text-center py-8">Nenhum prestador</p>';
-}
-
-function renderizarServicos() {
-    const container = document.getElementById('listaServicos');
-    if (!container) return;
-    container.innerHTML = servicos.map(s => `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #e2e8f0;">
-            <div><strong>${s.nome}</strong><br><small>⏱️ ${s.duracao}min | 💰 R$ ${fMoeda(s.valor)}</small></div>
-            <button onclick="excluirServico(${s.id})" style="background:#ef4444; color:white; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Excluir</button>
-        </div>
-    `).join('') || '<p class="text-center py-8">Nenhum serviço</p>';
-}
-
-function renderizarSelects() {
-    const prestSelect = document.getElementById('horarioPrestador');
-    const servSelect = document.getElementById('horarioServico');
-    if (prestSelect) prestSelect.innerHTML = prestadores.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
-    if (servSelect) servSelect.innerHTML = servicos.map(s => `<option value="${s.id}">${s.nome} - R$ ${fMoeda(s.valor)}</option>`).join('');
-}
-
-function renderizarAgendamentos() {
-    const container = document.getElementById('tabelaAgendamentos');
-    if (!container) return;
-    container.innerHTML = agendamentos.map(a => {
-        const servico = servicos.find(s => s.id === a.servico_id);
-        const prestador = prestadores.find(p => p.id === a.prestador_id);
-        return `<tr>
-            <td>${a.cliente_nome || '—'}</td>
-            <td>${a.cliente_whatsapp || '—'}</td>
-            <td>${servico ? servico.nome : '—'}</td>
-            <td>${prestador ? prestador.nome : '—'}</td>
-            <td>${formatarData(a.data_agendamento)} ${formatarHora(a.data_agendamento)}</td>
-            <td><span class="status-badge ${a.status === 'confirmado' ? 'status-confirmado' : 'status-pendente'}">${a.status === 'confirmado' ? 'Confirmado' : 'Pendente'}</span></td>
-        </tr>`;
+    document.getElementById('listaPrestadores').innerHTML = prestadores.map(function(p) {
+        return '<div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid #e2e8f0;"><div><strong>'+p.nome+'</strong><br><small>📱 '+(p.whatsapp||'N/A')+'</small></div><button onclick="excluirPrestador('+p.id+')" style="background:#ef4444; color:white; border:none; padding:6px 12px; border-radius:8px;">Excluir</button></div>';
+    }).join('') || '<p class="text-center py-8">Nenhum prestador</p>';
+    
+    document.getElementById('listaServicos').innerHTML = servicos.map(function(s) {
+        return '<div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid #e2e8f0;"><div><strong>'+s.nome+'</strong><br><small>⏱️ '+s.duracao+'min | 💰 R$ '+fMoeda(s.valor)+'</small></div><button onclick="excluirServico('+s.id+')" style="background:#ef4444; color:white; border:none; padding:6px 12px; border-radius:8px;">Excluir</button></div>';
+    }).join('') || '<p class="text-center py-8">Nenhum serviço</p>';
+    
+    document.getElementById('horarioPrestador').innerHTML = prestadores.map(function(p) { return '<option value="'+p.id+'">'+p.nome+'</option>'; }).join('');
+    document.getElementById('horarioServico').innerHTML = servicos.map(function(s) { return '<option value="'+s.id+'">'+s.nome+' - R$ '+fMoeda(s.valor)+'</option>'; }).join('');
+    
+    document.getElementById('tabelaAgendamentos').innerHTML = agendamentos.map(function(a) {
+        var servico = servicos.find(function(s) { return s.id === a.servico_id; });
+        var prestador = prestadores.find(function(p) { return p.id === a.prestador_id; });
+        return '<tr><td>'+(a.cliente_nome||'—')+'</td><td>'+(a.cliente_whatsapp||'—')+'</td><td>'+(servico?servico.nome:'—')+'</td><td>'+(prestador?prestador.nome:'—')+'</td><td>'+formatarData(a.data_agendamento)+' '+formatarHora(a.data_agendamento)+'</td><td><span class="status-badge">'+(a.status||'pendente')+'</span></td></tr>';
     }).join('') || '<tr><td colspan="6" class="text-center py-8">Nenhum agendamento</td></tr>';
 }
 
-// ============================================
 // CRUD
-// ============================================
-document.getElementById('btnSalvarPrestador').onclick = async () => {
-    const nome = document.getElementById('prestadorNome').value.trim();
-    if (!nome) return alert('Informe o nome!');
+document.getElementById('btnSalvarPrestador').onclick = async function() {
+    var nome = document.getElementById('prestadorNome').value.trim();
+    if (!nome) { alert('Informe o nome!'); return; }
     showLoading();
-    await supabase.from('prestadores').insert([{ admin_id: usuarioLogado.id, nome, whatsapp: document.getElementById('prestadorWhats').value.trim() }]);
+    await supabase.from('prestadores').insert([{ admin_id: usuarioLogado.id, nome: nome, whatsapp: document.getElementById('prestadorWhats').value.trim() }]);
     hideLoading();
     showToast('Prestador salvo!');
     document.getElementById('prestadorNome').value = '';
     document.getElementById('prestadorWhats').value = '';
     carregarDados();
 };
-
-window.excluirPrestador = async (id) => {
+window.excluirPrestador = async function(id) {
     if (!confirm('Excluir prestador?')) return;
     showLoading();
     await supabase.from('prestadores').delete().eq('id', id);
     hideLoading();
     carregarDados();
 };
-
-document.getElementById('btnSalvarServico').onclick = async () => {
-    const nome = document.getElementById('servicoNome').value.trim();
-    if (!nome) return alert('Informe o nome!');
+document.getElementById('btnSalvarServico').onclick = async function() {
+    var nome = document.getElementById('servicoNome').value.trim();
+    if (!nome) { alert('Informe o nome!'); return; }
     showLoading();
-    await supabase.from('servicos').insert([{ admin_id: usuarioLogado.id, nome, duracao: parseInt(document.getElementById('servicoDuracao').value) || 60, valor: parseFloat(document.getElementById('servicoValor').value) || 0 }]);
+    await supabase.from('servicos').insert([{ admin_id: usuarioLogado.id, nome: nome, duracao: parseInt(document.getElementById('servicoDuracao').value)||60, valor: parseFloat(document.getElementById('servicoValor').value)||0 }]);
     hideLoading();
     showToast('Serviço salvo!');
     document.getElementById('servicoNome').value = '';
@@ -479,72 +391,61 @@ document.getElementById('btnSalvarServico').onclick = async () => {
     document.getElementById('servicoValor').value = '';
     carregarDados();
 };
-
-window.excluirServico = async (id) => {
+window.excluirServico = async function(id) {
     if (!confirm('Excluir serviço?')) return;
     showLoading();
     await supabase.from('servicos').delete().eq('id', id);
     hideLoading();
     carregarDados();
 };
-
-document.getElementById('btnCriarHorarios').onclick = async () => {
-    const pid = document.getElementById('horarioPrestador').value;
-    const sid = document.getElementById('horarioServico').value;
-    const data = document.getElementById('horarioData').value;
-    const inicio = document.getElementById('horarioInicio').value;
-    const fim = document.getElementById('horarioFim').value;
-    
-    if (!pid || !data || !inicio || !fim) return alert('Preencha todos os campos!');
-    
-    const lista = [];
-    let horaAtual = new Date(`${data}T${inicio}:00`);
-    const horaFim = new Date(`${data}T${fim}:00`);
-    
+document.getElementById('btnCriarHorarios').onclick = async function() {
+    var pid = document.getElementById('horarioPrestador').value;
+    var sid = document.getElementById('horarioServico').value;
+    var data = document.getElementById('horarioData').value;
+    var inicio = document.getElementById('horarioInicio').value;
+    var fim = document.getElementById('horarioFim').value;
+    if (!pid || !data || !inicio || !fim) { alert('Preencha todos os campos!'); return; }
+    var lista = [];
+    var horaAtual = new Date(data+'T'+inicio+':00');
+    var horaFim = new Date(data+'T'+fim+':00');
     while (horaAtual < horaFim) {
-        lista.push({
-            admin_id: usuarioLogado.id,
-            prestador_id: parseInt(pid),
-            servico_id: parseInt(sid),
-            data_hora: horaAtual.toISOString(),
-            status: 'livre'
-        });
-        horaAtual = new Date(horaAtual.getTime() + 60 * 60000);
+        lista.push({ admin_id: usuarioLogado.id, prestador_id: parseInt(pid), servico_id: parseInt(sid), data_hora: horaAtual.toISOString(), status: 'livre' });
+        horaAtual = new Date(horaAtual.getTime() + 60*60000);
     }
-    
-    if (lista.length === 0) return alert('Nenhum horário gerado!');
-    
+    if (lista.length === 0) { alert('Nenhum horário gerado!'); return; }
     showLoading();
     await supabase.from('horarios').insert(lista);
     hideLoading();
-    alert(`✅ ${lista.length} horários criados!`);
+    alert('✅ '+lista.length+' horários criados!');
     carregarDados();
 };
 
-// ============================================
-// TABS E SAIR
-// ============================================
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.onclick = () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const tabId = tab.dataset.tab;
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
-        document.getElementById(`tab${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`).classList.remove('hidden');
+// TABS
+var tabs = document.querySelectorAll('.tab');
+for (var i = 0; i < tabs.length; i++) {
+    tabs[i].onclick = function() {
+        for (var j = 0; j < tabs.length; j++) tabs[j].classList.remove('active');
+        this.classList.add('active');
+        var tabId = this.dataset.tab;
+        var contents = document.querySelectorAll('.tab-content');
+        for (var k = 0; k < contents.length; k++) contents[k].classList.remove('active');
+        document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1)).classList.add('active');
     };
-});
+}
 
-document.getElementById('btnSair').onclick = () => {
+// SAIR
+document.getElementById('btnSair').onclick = function() {
     usuarioLogado = null;
-    document.getElementById('appContainer').classList.add('hidden');
-    document.getElementById('loginContainer').classList.remove('hidden');
+    mostrarLogin();
     document.getElementById('loginCPF').value = '';
     document.getElementById('loginSenha').value = '';
 };
 
-// Inicializar
+// DATA PADRÃO
 document.getElementById('horarioData').value = new Date().toISOString().split('T')[0];
-console.log('✅ Sistema carregado! Admin: CPF 12345678909 / Senha: admin');
+
+console.log('✅ Sistema carregado!');
+console.log('👑 Admin: CPF 12345678909 / Senha: admin');
 </script>
 </body>
 </html>
