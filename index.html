@@ -3,662 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💰 Financeiro PRO</title>
+    <title>📅 Data Desh Agenda | Sistema de Agendamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg: #f5f7fa; --card: #ffffff; --text: #1a1a2e; --text-light: #666;
-            --border: #e1e5eb; --primary: #4a6cf7; --success: #10b981; --danger: #ef4444;
-            --warning: #f59e0b; --shadow: 0 2px 10px rgba(0,0,0,0.08);
-            --radius: 14px; --radius-sm: 10px;
-        }
-        body.dark {
-            --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --text-light: #94a3b8;
-            --border: #334155; --shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; transition: all 0.3s; line-height: 1.5; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        
-        .login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .login-card { background: white; border-radius: 24px; padding: 44px 40px; width: 100%; max-width: 440px; box-shadow: 0 30px 60px rgba(0,0,0,0.3); text-align: center; }
-        .login-card h1 { font-size: 2rem; color: #4a6cf7; margin-bottom: 6px; }
-        .login-card .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 28px; }
-        .input-group { margin-bottom: 18px; text-align: left; }
-        .input-group label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 5px; color: #333; text-transform: uppercase; }
-        .input-group input { width: 100%; padding: 14px 16px; border: 2px solid #e1e5eb; border-radius: var(--radius-sm); font-size: 1rem; background: #f8fafc; }
-        .input-group input:focus { outline: none; border-color: #4a6cf7; background: white; }
-        .btn { width: 100%; padding: 15px; border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
-        .btn-primary { background: #4a6cf7; color: white; }
-        .btn-primary:hover { background: #3651d6; }
-        .btn-success { background: #10b981; color: white; width: auto; }
-        .btn-warning { background: #f59e0b; color: #000; width: auto; }
-        .btn-danger { background: #ef4444; color: white; width: auto; }
-        .btn-sm { padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
-        
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 15px; }
-        .header h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #4a6cf7, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .theme-toggle { background: var(--card); border: 1px solid var(--border); padding: 12px 22px; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--text); box-shadow: var(--shadow); }
-        .user-bar { background: var(--card); padding: 16px 24px; border-radius: var(--radius); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); flex-wrap: wrap; gap: 12px; }
-        .badge { padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-        .badge-admin { background: #fef3c7; color: #92400e; }
-        .btn-logout { background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 24px; }
-        .stat-card { background: var(--card); padding: 22px 24px; border-radius: var(--radius); box-shadow: var(--shadow); border-left: 5px solid #4a6cf7; }
-        .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
-        .stat-card .stat-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        .stat-card .stat-value { font-size: 1.6rem; font-weight: 800; margin-top: 2px; }
-        .stat-card .stat-sub { font-size: 0.7rem; color: var(--text-light); margin-top: 2px; }
-        
-        .progress-bar-custom { height: 10px; background: var(--border); border-radius: 10px; margin: 10px 0; overflow: hidden; }
-        .progress-fill-custom { height: 100%; border-radius: 10px; transition: width 0.6s ease; }
-        
-        .admin-section { margin-bottom: 24px; }
-        .admin-nav { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-        .admin-nav button { padding: 11px 18px; border: none; border-radius: var(--radius); background: var(--card); color: var(--text); font-weight: 600; cursor: pointer; box-shadow: var(--shadow); font-size: 0.8rem; }
-        .admin-nav button.active { background: #4a6cf7; color: white; }
-        .form-panel { background: var(--card); padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow); display: none; }
-        .form-panel.active { display: block; }
-        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 0.72rem; font-weight: 700; margin-bottom: 4px; color: var(--text-light); text-transform: uppercase; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 14px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 0.95rem; }
-        
-        .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
-        .tab { padding: 12px 24px; border: none; border-radius: 50px; background: var(--card); color: var(--text); font-weight: 600; cursor: pointer; box-shadow: var(--shadow); font-size: 0.85rem; }
-        .tab.active { background: #4a6cf7; color: white; }
-        .view-toggle { display: flex; gap: 4px; background: var(--border); padding: 4px; border-radius: 10px; }
-        .view-btn { width: 42px; height: 42px; border: none; border-radius: 8px; background: transparent; color: var(--text-light); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .view-btn.active { background: #6c5ce7; color: white; }
-        
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin-bottom: 20px; }
-        .item-card { background: var(--card); padding: 20px 24px; border-radius: var(--radius); box-shadow: var(--shadow); border-left: 5px solid #4a6cf7; }
-        .item-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .item-card-title { font-weight: 700; font-size: 1rem; }
-        .item-card-valor { font-size: 1.2rem; font-weight: 800; }
-        .item-card-meta { display: flex; gap: 8px; font-size: 0.72rem; color: var(--text-light); flex-wrap: wrap; margin: 6px 0; }
-        
-        .table-container { overflow-x: auto; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        thead { background: #4a6cf7; color: white; }
-        th { padding: 14px 16px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; }
-        td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
-        
-        .pagination { display: flex; justify-content: center; gap: 6px; padding: 20px; flex-wrap: wrap; }
-        .pagination button { padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-weight: 600; cursor: pointer; }
-        .pagination button.active { background: #4a6cf7; color: white; }
-        
-        .chart-container { background: var(--card); padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px; }
-        .chart-container canvas { max-height: 350px; }
-        
-        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 9999; flex-direction: column; }
-        .loading-overlay.show { display: flex; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
+        .gradient-bg { background: linear-gradient(135deg, #0a1929 0%, #0f2b3d 100%); }
+        .card { transition: all 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15); }
+        .screen { display: none; }
+        .screen.active { display: flex; }
+        .loading { display: none; position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center; }
+        .loading.show { display: flex; }
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .loading-text { color: white; margin-top: 12px; font-weight: 600; }
-        
-        .hidden { display: none !important; }
-        .filtro-bar { background: var(--card); padding: 16px; border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-        .filtro-bar input { padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
-        .link-esqueci { color: #4a6cf7; cursor: pointer; font-size: 0.85rem; text-decoration: underline; margin-top: 12px; display: inline-block; }
-        
-        @media (max-width: 768px) { body { padding: 10px; } .stats-grid { grid-template-columns: 1fr 1fr; } .card-grid { grid-template-columns: 1fr; } }
+        .tab-btn { cursor: pointer; }
+        .tab-btn.active { color: #3b82f6; border-bottom: 3px solid #3b82f6; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
+<!-- LOADING -->
+<div class="loading" id="loading">
     <div class="spinner"></div>
-    <div class="loading-text">Carregando...</div>
+    <p class="text-white mt-4 font-bold">Carregando...</p>
 </div>
 
-<!-- LOGIN -->
-<div id="loginScreen" class="login-screen">
-    <div class="login-card">
-        <h1>💰 Financeiro PRO</h1>
-        <p class="subtitle">Controle financeiro inteligente</p>
-        <div class="input-group"><label>Nome Completo</label><input type="text" id="loginNome" placeholder="Seu nome"></div>
-        <div class="input-group"><label>CPF</label><input type="text" id="loginCPF" placeholder="00000000000" maxlength="11"></div>
-        <div class="input-group"><label>Senha (admin)</label><input type="password" id="loginSenha" placeholder="******"></div>
-        <button class="btn btn-primary" id="btnLogin">🔓 ENTRAR</button>
-        <span class="link-esqueci" id="btnEsqueciSenha">🔑 Esqueci a senha / Redefinir</span>
+<!-- TELA DE LOGIN -->
+<div id="screenLogin" class="screen active fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">📅</div>
+            <h1 class="text-2xl font-extrabold">Data Desh Agenda</h1>
+            <p class="text-slate-500 text-sm">Sistema Profissional de Agendamentos</p>
+        </div>
+        <div class="space-y-4">
+            <div><label class="block text-xs font-bold uppercase mb-1">Nome</label><input type="text" id="loginNome" class="w-full px-4 py-3 border-2 rounded-xl"></div>
+            <div><label class="block text-xs font-bold uppercase mb-1">CPF</label><input type="text" id="loginCPF" placeholder="12345678909" class="w-full px-4 py-3 border-2 rounded-xl"></div>
+            <div><label class="block text-xs font-bold uppercase mb-1">Senha</label><input type="password" id="loginSenha" class="w-full px-4 py-3 border-2 rounded-xl"></div>
+        </div>
+        <button id="btnLogin" class="w-full mt-6 bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">🔓 ENTRAR</button>
+        <div class="flex justify-between mt-4 text-sm">
+            <span class="text-blue-500 cursor-pointer" onclick="mostrarCadastro()">📝 Criar conta</span>
+            <span class="text-rose-500 cursor-pointer" onclick="mostrarReset()">🔑 Esqueci a senha</span>
+        </div>
+        <p class="text-center text-xs text-slate-400 mt-4">Admin: 12345678909 | admin</p>
     </div>
 </div>
 
-<!-- REDEFINIR SENHA -->
-<div id="resetScreen" class="login-screen hidden">
-    <div class="login-card">
-        <h1>🔑 Redefinir Senha</h1>
-        <p class="subtitle">Verificação de segurança</p>
-        <div class="input-group"><label>Nome Completo</label><input type="text" id="resetNome" placeholder="Seu nome completo"></div>
-        <div class="input-group"><label>CPF do Admin</label><input type="text" id="resetCPF" placeholder="12345678909" maxlength="11"></div>
-        <div class="input-group"><label>Código de Segurança</label><input type="password" id="resetCodigo" placeholder="Código padrão: 123456" maxlength="6"></div>
-        <div class="input-group"><label>Nova Senha</label><input type="password" id="resetNovaSenha" placeholder="Mínimo 4 caracteres"></div>
-        <div class="input-group"><label>Confirmar Senha</label><input type="password" id="resetConfirmaSenha" placeholder="Repita a senha"></div>
-        <button class="btn btn-primary" id="btnConfirmarReset">✅ REDEFINIR</button>
-        <button class="btn btn-warning" id="btnVoltarLogin">🔙 VOLTAR</button>
+<!-- TELA DE CADASTRO -->
+<div id="screenCadastro" class="screen fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">📝</div>
+            <h1 class="text-2xl font-extrabold">Criar Conta</h1>
+            <p class="text-slate-500 text-sm">Cadastre-se gratuitamente</p>
+        </div>
+        <div class="space-y-3">
+            <input type="text" id="cadastroNome" placeholder="Nome completo" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="cadastroCPF" placeholder="CPF" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="cadastroWhatsApp" placeholder="WhatsApp" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="cadastroSenha" placeholder="Senha" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="cadastroConfirma" placeholder="Confirmar senha" class="w-full px-4 py-3 border-2 rounded-xl">
+        </div>
+        <button id="btnCadastrar" class="w-full mt-6 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700">✅ CRIAR CONTA</button>
+        <p class="text-center text-sm mt-4"><span class="text-blue-500 cursor-pointer" onclick="voltarLogin()">🔙 Voltar ao login</span></p>
     </div>
 </div>
 
-<!-- SISTEMA -->
-<div id="mainScreen" class="hidden">
-    <div class="container">
-        <div class="header">
-            <h1>💰 Financeiro PRO</h1>
-            <button class="theme-toggle" id="btnTheme">🌙 Escuro</button>
+<!-- TELA DE REDEFINIR SENHA -->
+<div id="screenReset" class="screen fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">🔑</div>
+            <h1 class="text-2xl font-extrabold">Redefinir Senha</h1>
+            <p class="text-slate-500 text-sm">Código de segurança: 123456</p>
         </div>
-
-        <div class="user-bar">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <strong id="displayNome"></strong>
-                <span id="badgeAdmin" class="badge badge-admin hidden">ADMIN</span>
-            </div>
-            <button class="btn-logout" id="btnLogout">🚪 Sair</button>
+        <div class="space-y-3">
+            <input type="text" id="resetCPF" placeholder="CPF" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="resetCodigo" placeholder="Código (123456)" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="resetNovaSenha" placeholder="Nova senha" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="resetConfirma" placeholder="Confirmar senha" class="w-full px-4 py-3 border-2 rounded-xl">
         </div>
+        <button id="btnReset" class="w-full mt-6 bg-rose-600 text-white py-3 rounded-xl font-bold hover:bg-rose-700">✅ REDEFINIR</button>
+        <p class="text-center text-sm mt-4"><span class="text-blue-500 cursor-pointer" onclick="voltarLogin()">🔙 Voltar ao login</span></p>
+    </div>
+</div>
 
-        <div class="stats-grid" id="statsGrid"></div>
+<!-- SISTEMA PRINCIPAL -->
+<div id="screenSistema" class="hidden h-screen flex overflow-hidden bg-[#f0f4f8]">
+    <!-- SIDEBAR -->
+    <div class="w-64 gradient-bg text-white hidden md:flex flex-col h-full shadow-2xl">
+        <div class="p-6 flex items-center gap-3 border-b border-white/10">
+            <div class="bg-blue-600 p-2 rounded-xl">📅</div>
+            <span class="text-lg font-extrabold">Data Desh <span class="text-blue-400">Agenda</span></span>
+        </div>
+        <nav class="flex-1 mt-4 px-3 space-y-1">
+            <a href="#" onclick="switchTab('dashboard')" class="sidebar-item active flex items-center gap-3 p-3 rounded-xl text-sm font-semibold bg-blue-600/20"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="#" onclick="switchTab('prestadores')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-users"></i> Prestadores</a>
+            <a href="#" onclick="switchTab('servicos')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-cut"></i> Serviços</a>
+            <a href="#" onclick="switchTab('horarios')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-clock"></i> Horários</a>
+            <a href="#" onclick="switchTab('agendamentos')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-calendar-check"></i> Agendamentos</a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center"><i class="fas fa-user text-sm"></i></div>
+                <div><p class="text-xs font-bold" id="sidebarNome">Usuário</p><button onclick="logout()" class="text-[10px] text-red-400">Sair</button></div>
+            </div>
+        </div>
+    </div>
 
-        <!-- ADMIN -->
-        <div id="adminSection" class="admin-section hidden">
-            <div class="admin-nav">
-                <button class="active" data-panel="despesa">➕ Despesa</button>
-                <button data-panel="renda">💰 Renda</button>
-                <button data-panel="cartao">💳 Cartão</button>
-                <button data-panel="pessoa">👥 Pessoas</button>
-                <button data-panel="investimento">📈 Investir</button>
-                <button data-panel="meta">🎯 Meta</button>
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="h-20 gradient-bg text-white flex items-center justify-between px-8 shadow-lg">
+            <div><h2 class="text-xl font-extrabold" id="headerTitle">Dashboard</h2><p class="text-blue-300 text-[10px]">Sistema de Agendamentos</p></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right"><p class="text-xs text-emerald-400 font-bold flex items-center gap-1"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> Online</p></div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            <!-- TABS -->
+            <div class="flex gap-6 border-b border-slate-200 mb-6">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active pb-2 font-bold text-blue-600">📊 Dashboard</button>
+                <button onclick="switchTab('prestadores')" id="tab-prestadores" class="tab-btn pb-2 font-bold text-slate-400">👨‍💼 Prestadores</button>
+                <button onclick="switchTab('servicos')" id="tab-servicos" class="tab-btn pb-2 font-bold text-slate-400">✂️ Serviços</button>
+                <button onclick="switchTab('horarios')" id="tab-horarios" class="tab-btn pb-2 font-bold text-slate-400">⏰ Horários</button>
+                <button onclick="switchTab('agendamentos')" id="tab-agendamentos" class="tab-btn pb-2 font-bold text-slate-400">📋 Agendamentos</button>
             </div>
 
-            <div id="panel-despesa" class="form-panel active">
-                <h3>➕ Nova Despesa</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Valor R$ *</label><input type="number" id="despValor" step="0.01"></div>
-                    <div class="form-group"><label>Categoria</label><select id="despCategoria"></select></div>
+            <!-- DASHBOARD -->
+            <div id="content-dashboard" class="tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6" id="statsGrid"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm"><h3 class="font-bold mb-4">📈 Agendamentos por Mês</h3><canvas id="chartAgendamentos" height="200"></canvas></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm"><h3 class="font-bold mb-4">🥧 Serviços mais procurados</h3><canvas id="chartServicos" height="200"></canvas></div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Descrição</label><input type="text" id="despDescricao"></div>
-                    <div class="form-group"><label>Data</label><input type="date" id="despData"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Cartão</label><select id="despCartao"><option value="">Sem cartão</option></select></div>
-                    <div class="form-group"><label>Parcelas</label><input type="number" id="despParcelas" value="1" min="1" max="48"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Quem gastou</label><select id="despUsuario"></select></div>
-                    <div class="form-group"><label>WhatsApp</label><input type="text" id="despWhatsApp" placeholder="11999999999"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="despRecorrente" style="width:auto;"> Fixa</label></div>
-                    <div class="form-group"><label>Vencimento</label><input type="number" id="despDiaVenc" min="1" max="31" value="10" disabled></div>
-                </div>
-                <button class="btn btn-success" id="btnSalvarDespesa">✅ SALVAR</button>
             </div>
 
-            <div id="panel-renda" class="form-panel">
-                <h3>💰 Nova Renda</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Valor R$</label><input type="number" id="rendaValor" step="0.01"></div>
-                    <div class="form-group"><label>Tipo</label><select id="rendaTipo"><option>💵 Salário</option><option>💻 Freelance</option><option>📈 Rendimento</option><option>💰 Outros</option></select></div>
+            <!-- PRESTADORES -->
+            <div id="content-prestadores" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">➕ Novo Prestador</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <input type="text" id="prestadorNome" placeholder="Nome" class="px-4 py-3 border rounded-xl">
+                        <input type="text" id="prestadorWhatsApp" placeholder="WhatsApp" class="px-4 py-3 border rounded-xl">
+                        <button id="btnSalvarPrestador" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Salvar</button>
+                    </div>
+                    <hr class="my-6">
+                    <h3 class="font-bold mb-4">📋 Lista de Prestadores</h3>
+                    <div id="listaPrestadores" class="space-y-2"></div>
                 </div>
-                <div class="form-group"><label>Descrição</label><input type="text" id="rendaDescricao"></div>
-                <button class="btn btn-success" id="btnSalvarRenda">✅ SALVAR</button>
             </div>
 
-            <div id="panel-cartao" class="form-panel">
-                <h3>💳 Cadastrar Cartão</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Nome</label><input type="text" id="cartaoNome"></div>
-                    <div class="form-group"><label>Bandeira</label><select id="cartaoBandeira"><option>Mastercard</option><option>Visa</option><option>Elo</option><option>Hipercard</option><option>Outra</option></select></div>
+            <!-- SERVIÇOS -->
+            <div id="content-servicos" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">➕ Novo Serviço</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <input type="text" id="servicoNome" placeholder="Nome do serviço" class="px-4 py-3 border rounded-xl">
+                        <input type="number" id="servicoDuracao" placeholder="Duração (min)" class="px-4 py-3 border rounded-xl">
+                        <input type="number" id="servicoValor" placeholder="Valor (R$)" class="px-4 py-3 border rounded-xl">
+                        <button id="btnSalvarServico" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Salvar</button>
+                    </div>
+                    <hr class="my-6">
+                    <h3 class="font-bold mb-4">📋 Lista de Serviços</h3>
+                    <div id="listaServicos" class="space-y-2"></div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Dia Venc.</label><input type="number" id="cartaoDia" min="1" max="31" value="10"></div>
-                    <div class="form-group"><label>Limite R$</label><input type="number" id="cartaoLimite" step="0.01" value="1000"></div>
-                </div>
-                <button class="btn btn-success" id="btnSalvarCartao">✅ SALVAR</button>
-                <hr style="margin:20px 0;border-color:var(--border);">
-                <h4>Cartões Cadastrados</h4>
-                <div id="listaCartoes"></div>
             </div>
 
-            <div id="panel-pessoa" class="form-panel">
-                <h3>👥 Gerenciar Pessoas</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Nome *</label><input type="text" id="pessoaNome" placeholder="Ex: Maria, João"></div>
-                    <div class="form-group"><label>CPF</label><input type="text" id="pessoaCPF" placeholder="00000000000" maxlength="11"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>WhatsApp</label><input type="text" id="pessoaWhatsApp" placeholder="11999999999"></div>
-                    <div class="form-group">
-                        <label>Parentesco</label>
-                        <select id="pessoaParentesco">
-                            <option value="familiar">👨‍👩‍👧 Familiar</option>
-                            <option value="conjuge">👫 Cônjuge</option>
-                            <option value="filho">👶 Filho(a)</option>
-                            <option value="amigo">🤝 Amigo(a)</option>
-                            <option value="cliente">💼 Cliente</option>
-                            <option value="outro">👤 Outro</option>
-                        </select>
+            <!-- HORÁRIOS -->
+            <div id="content-horarios" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">⏰ Criar Horários</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
+                        <select id="horarioPrestador" class="px-4 py-3 border rounded-xl"></select>
+                        <select id="horarioServico" class="px-4 py-3 border rounded-xl"></select>
+                        <input type="date" id="horarioData" class="px-4 py-3 border rounded-xl">
+                        <input type="time" id="horarioInicio" class="px-4 py-3 border rounded-xl">
+                        <input type="time" id="horarioFim" class="px-4 py-3 border rounded-xl">
+                        <button id="btnCriarHorarios" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Criar</button>
                     </div>
                 </div>
-                <button class="btn btn-success" id="btnSalvarPessoa">✅ SALVAR PESSOA</button>
-                <hr style="margin:20px 0;border-color:var(--border);">
-                <h4>Pessoas Cadastradas</h4>
-                <div id="listaPessoas"></div>
             </div>
 
-            <div id="panel-investimento" class="form-panel">
-                <h3>📈 Novo Investimento</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Valor R$</label><input type="number" id="invValor" step="0.01"></div>
-                    <div class="form-group"><label>Tipo</label><select id="invTipo"><option>Poupança</option><option>CDB</option><option>Tesouro</option><option>Ações</option><option>Outro</option></select></div>
+            <!-- AGENDAMENTOS -->
+            <div id="content-agendamentos" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-4 border-b"><input type="text" id="buscaAgendamentos" placeholder="🔍 Buscar cliente..." class="px-4 py-2 border rounded-xl w-64"></div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-50"><tr><th class="px-6 py-3 text-left text-xs font-bold">Cliente</th><th class="px-6 py-3 text-left text-xs font-bold">Serviço</th><th class="px-6 py-3 text-left text-xs font-bold">Prestador</th><th class="px-6 py-3 text-left text-xs font-bold">Data/Hora</th><th class="px-6 py-3 text-left text-xs font-bold">Status</th></tr></thead>
+                            <tbody id="tabelaAgendamentos"></tbody>
+                        </table>
+                    </div>
+                    <div class="p-4 border-t" id="paginacaoAgendamentos"></div>
                 </div>
-                <div class="form-group"><label>Corretora</label><input type="text" id="invCorretora"></div>
-                <button class="btn btn-success" id="btnSalvarInvestimento">✅ SALVAR</button>
-            </div>
-
-            <div id="panel-meta" class="form-panel">
-                <h3>🎯 Nova Meta</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Objetivo</label><input type="text" id="metaNome"></div>
-                    <div class="form-group"><label>Valor Meta R$</label><input type="number" id="metaAlvo" step="0.01"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Valor Atual</label><input type="number" id="metaAtual" step="0.01" value="0"></div>
-                    <div class="form-group"><label>Data Limite</label><input type="date" id="metaData"></div>
-                </div>
-                <button class="btn btn-success" id="btnSalvarMeta">✅ SALVAR</button>
             </div>
         </div>
-
-        <!-- FILTROS -->
-        <div class="filtro-bar">
-            <input type="month" id="filtroMes">
-            <input type="text" id="filtroTexto" placeholder="Buscar...">
-            <button class="btn-sm btn-success" onclick="aplicarFiltros()">🔍</button>
-            <button class="btn-sm btn-danger" onclick="limparFiltros()">🧹</button>
-            <button class="btn-sm btn-success" onclick="exportarExcel()" style="margin-left:auto;">📊 Excel</button>
-        </div>
-
-        <!-- TABS -->
-        <div style="display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
-            <div class="tabs">
-                <button class="tab active" data-tab="todos">📋 Todos</button>
-                <button class="tab" data-tab="despesas">📉 Despesas</button>
-                <button class="tab" data-tab="fixas">🔄 Fixas</button>
-                <button class="tab" data-tab="rendas">💵 Rendas</button>
-                <button class="tab" data-tab="investimentos">📈 Investir</button>
-                <button class="tab" data-tab="metas">🎯 Metas</button>
-                <button class="tab" data-tab="cartoes_tab">💳 Cartões</button>
-                <button class="tab" data-tab="grafico">📊 Gráfico</button>
-            </div>
-            <div class="view-toggle">
-                <button class="view-btn active" data-view="cards">🃏</button>
-                <button class="view-btn" data-view="tabela">📋</button>
-            </div>
-        </div>
-
-        <div id="conteudoContainer"></div>
-        <div id="tabelaContainer" class="hidden"><div class="table-container"><table><thead id="tabelaHead"></thead><tbody id="tabelaBody"></tbody></table></div></div>
-        <div id="graficoContainer" class="chart-container hidden"><h4>📊 Gastos por Categoria</h4><canvas id="graficoCanvas"></canvas></div>
-        <div class="pagination" id="pagination"></div>
-    </div>
+    </main>
 </div>
 
 <script>
-const db = window.supabase.createClient('https://wzrsxzhdfmbccicluytb.supabase.co', 'sb_publishable__OGAIY97ObenG-digw9E1Q_4SkuMJkF');
+// ============================================
+// CONFIGURAÇÃO
+// ============================================
+const supabase = window.supabase.createClient('https://tvhpqfysvunmppddupum.supabase.co', 'sb_publishable_fA1a63dl0MoJ8zjZiBJprw_4syerDaL');
 const CODIGO_SEGURANCA = '123456';
+let usuarioLogado = null;
+let prestadores = [], servicos = [], horarios = [], agendamentos = [];
+let paginaAtual = 1;
+let itensPorPagina = 10;
 
-let usuarioLogado = null, isAdmin = false, tabAtual = 'todos', viewAtual = 'cards', paginaAtual = 1;
-const ITENS_POR_PAGINA = 8;
-let despesas = [], receitas = [], investimentos = [], metas = [], cartoes = [], usuariosLista = [], categoriasLista = [];
-let chartInstance = null;
+function showLoading() { document.getElementById('loading').classList.add('show'); }
+function hideLoading() { document.getElementById('loading').classList.remove('show'); }
+function voltarLogin() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenLogin').classList.add('active'); }
+function mostrarCadastro() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenCadastro').classList.add('active'); }
+function mostrarReset() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenReset').classList.add('active'); }
+function formatarData(d) { return d ? new Date(d).toLocaleDateString('pt-BR') : '—'; }
+function formatarHora(d) { return d ? new Date(d).toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) : '—'; }
+function fMoeda(v) { return parseFloat(v || 0).toFixed(2); }
 
-function showLoading(m='Carregando...'){ document.getElementById('loadingOverlay').classList.add('show'); document.querySelector('.loading-text').textContent=m; }
-function hideLoading(){ document.getElementById('loadingOverlay').classList.remove('show'); }
-function validarCPF(cpf){ cpf=cpf.replace(/\D/g,''); if(cpf.length!==11||/^(\d)\1{10}$/.test(cpf))return false; let s=0; for(let i=0;i<9;i++)s+=parseInt(cpf[i])*(10-i); let r=(s*10)%11; if(r===10)r=0; if(r!==parseInt(cpf[9]))return false; s=0; for(let i=0;i<10;i++)s+=parseInt(cpf[i])*(11-i); r=(s*10)%11; if(r===10)r=0; return r===parseInt(cpf[10]); }
-function formatarCPF(cpf){ cpf=cpf.replace(/\D/g,''); return cpf.length===11?cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4'):cpf; }
-function formatarData(data){ if(!data)return'—'; return new Date(data.split('T')[0]).toLocaleDateString('pt-BR'); }
-function fMoeda(v){ return parseFloat(v||0).toFixed(2); }
-
-async function carregarTudo(){
-    showLoading('Carregando dados...');
-    try {
-        const [d, r, i, m, c, u, cat] = await Promise.all([
-            db.from('despesas').select('*').eq('admin_id', usuarioLogado.id).order('data',{ascending:false}),
-            db.from('receitas').select('*').eq('admin_id', usuarioLogado.id).order('data',{ascending:false}),
-            db.from('investimentos').select('*').eq('admin_id', usuarioLogado.id).order('data',{ascending:false}),
-            db.from('metas').select('*').eq('admin_id', usuarioLogado.id),
-            db.from('cartoes').select('*').eq('admin_id', usuarioLogado.id),
-            db.from('usuarios').select('*').order('nome'),
-            db.from('categorias').select('*').eq('tipo','gasto')
-        ]);
-        despesas = d.data || []; receitas = r.data || []; investimentos = i.data || [];
-        metas = m.data || []; cartoes = c.data || []; usuariosLista = u.data || []; categoriasLista = cat.data || [];
-        if(!isAdmin && usuarioLogado) despesas = despesas.filter(g => g.usuario_id == usuarioLogado.id);
-    } catch(e){ console.error('❌ Erro:', e); }
-    hideLoading();
-    popularSelects();
-    atualizarDashboard();
-}
-
-function popularSelects(){
-    const selCat = document.getElementById('despCategoria');
-    if(categoriasLista.length > 0){
-        selCat.innerHTML = categoriasLista.map(c => `<option value="${c.id}">${c.icone} ${c.nome}</option>`).join('');
+// ============================================
+// LOGIN
+// ============================================
+document.getElementById('btnLogin').onclick = async () => {
+    const cpf = document.getElementById('loginCPF').value.trim();
+    const senha = document.getElementById('loginSenha').value.trim();
+    if (cpf === '12345678909' && senha === 'admin') {
+        usuarioLogado = { id: 1, nome: 'Administrador', cpf: '12345678909' };
+        document.getElementById('sidebarNome').innerHTML = 'Administrador';
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screenSistema').classList.remove('hidden');
+        document.getElementById('screenSistema').style.display = 'flex';
+        carregarDados();
     } else {
-        selCat.innerHTML = '<option value="1">🛒 Supermercado</option><option value="3">🍔 Alimentação</option><option value="5">🚗 Transporte</option><option value="6">🏠 Moradia</option><option value="7">🎮 Lazer</option><option value="15">📦 Outros</option>';
+        const { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
+        if (data && data.length > 0 && data[0].senha === senha) {
+            usuarioLogado = { id: data[0].id, nome: data[0].nome };
+            document.getElementById('sidebarNome').innerHTML = usuarioLogado.nome;
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screenSistema').classList.remove('hidden');
+            document.getElementById('screenSistema').style.display = 'flex';
+            carregarDados();
+        } else { alert('❌ CPF ou senha inválidos!'); }
     }
-    document.getElementById('despCartao').innerHTML = '<option value="">Sem cartão</option>' + cartoes.map(c => `<option value="${c.id}">💳 ${c.nome_cartao} (vence dia ${c.dia_vencimento})</option>`).join('');
+};
 
-    const listaUsuarios = [...usuariosLista];
-    if(!listaUsuarios.find(u => u.cpf === '12345678909')){
-        listaUsuarios.unshift({ id: 1, nome: 'Administrador', cpf: '12345678909', tipo: 'admin', parentesco: 'admin' });
-    }
-    
-    document.getElementById('despUsuario').innerHTML = listaUsuarios.map(u => {
-        const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
-        return `<option value="${u.id}">${icone} ${u.nome} ${u.tipo==='admin'?'(Admin)':''}</option>`;
-    }).join('');
+// ============================================
+// CADASTRO
+// ============================================
+document.getElementById('btnCadastrar').onclick = async () => {
+    const nome = document.getElementById('cadastroNome').value.trim();
+    const cpf = document.getElementById('cadastroCPF').value.trim();
+    const whatsapp = document.getElementById('cadastroWhatsApp').value.trim();
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirma = document.getElementById('cadastroConfirma').value;
+    if (!nome || !cpf || !senha) return alert('Preencha todos os campos!');
+    if (senha !== confirma) return alert('Senhas não conferem!');
+    if (senha.length < 4) return alert('Senha deve ter 4+ caracteres');
+    const { error } = await supabase.from('usuarios').insert([{ nome, cpf, whatsapp, senha, tipo: 'comum' }]);
+    if (error) alert('Erro: ' + error.message);
+    else { alert('✅ Conta criada! Faça login.'); voltarLogin(); }
+};
 
-    document.getElementById('listaPessoas').innerHTML = listaUsuarios.map(u => {
-        const icone = u.parentesco==='admin'?'👑':u.parentesco==='familiar'?'👨‍👩‍👧':u.parentesco==='conjuge'?'👫':u.parentesco==='filho'?'👶':u.parentesco==='amigo'?'🤝':u.parentesco==='cliente'?'💼':'👤';
-        const parentescoNome = u.parentesco==='admin'?'Administrador':u.parentesco==='familiar'?'Familiar':u.parentesco==='conjuge'?'Cônjuge':u.parentesco==='filho'?'Filho(a)':u.parentesco==='amigo'?'Amigo(a)':u.parentesco==='cliente'?'Cliente':'Outro';
-        return `<div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><span>${icone} <strong>${u.nome}</strong> | ${parentescoNome} ${u.whatsapp?' | 📱 '+u.whatsapp:''}</span>${u.cpf !== '12345678909' ? `<button onclick="excluirPessoa(${u.id})" class="btn-sm btn-danger">🗑️</button>` : '<span style="font-size:0.6rem;">Admin padrão</span>'}</div>`;
-    }).join('') || '<p>Nenhuma pessoa cadastrada.</p>';
-
-    document.getElementById('listaCartoes').innerHTML = cartoes.map(c => {
-        const gf = despesas.filter(g => g.cartao_id == c.id && !g.pago);
-        const tf = gf.reduce((s,g) => s + parseFloat(g.valor), 0);
-        return `<div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>💳 ${c.nome_cartao} - ${c.bandeira||''} | Vence dia ${c.dia_vencimento} | Fatura: R$ ${fMoeda(tf)}</span><button onclick="excluirCartao(${c.id})" class="btn-sm btn-danger">🗑️</button></div>`;
-    }).join('') || '<p>Nenhum cartão.</p>';
-}
-
-function atualizarDashboard(){
-    const agora = new Date();
-    const mesAtual = `${agora.getFullYear()}-${String(agora.getMonth()+1).padStart(2,'0')}`;
-    const gastosMes = despesas.filter(g => g.data && g.data.startsWith(mesAtual) && !g.pago);
-    const totalGastos = gastosMes.reduce((s,g) => s + parseFloat(g.valor), 0);
-    const fixas = despesas.filter(g => g.recorrente && !g.pago);
-    const totalFixas = fixas.reduce((s,g) => s + parseFloat(g.valor), 0);
-    const totalRendas = receitas.reduce((s,r) => s + parseFloat(r.valor), 0);
-    const totalInv = investimentos.reduce((s,i) => s + parseFloat(i.valor), 0);
-    const saldo = totalRendas - totalGastos;
-    const pct = totalRendas > 0 ? (totalGastos / totalRendas) * 100 : 0;
-    let cp = '#10b981'; if(pct > 50 && pct <= 80) cp = '#f59e0b'; if(pct > 80) cp = '#ef4444';
-
-    document.getElementById('statsGrid').innerHTML = `
-        <div class="stat-card" style="border-left-color:${saldo>=0?cp:'#ef4444'};"><div class="stat-icon">${saldo>=0?'🟢':'🔴'}</div><div class="stat-label">Saldo</div><div class="stat-value" style="color:${saldo>=0?cp:'#ef4444'};">R$ ${fMoeda(saldo)}</div><div class="stat-sub">${pct.toFixed(0)}% comprometido</div><div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${Math.min(pct,100)}%;background:${cp};"></div></div></div>
-        <div class="stat-card"><div class="stat-icon">💵</div><div class="stat-label">Receitas</div><div class="stat-value">R$ ${fMoeda(totalRendas)}</div></div>
-        <div class="stat-card"><div class="stat-icon">📉</div><div class="stat-label">Despesas</div><div class="stat-value">R$ ${fMoeda(totalGastos)}</div><div class="stat-sub">🔄 Fixas: R$ ${fMoeda(totalFixas)}</div></div>
-        <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-label">Investido</div><div class="stat-value">R$ ${fMoeda(totalInv)}</div></div>
-    `;
-    renderizarConteudo();
-}
-
-function getDadosFiltrados(){
-    const mesFiltro = document.getElementById('filtroMes').value;
-    const texto = document.getElementById('filtroTexto').value.toLowerCase();
-    let dados = [];
-    switch(tabAtual){
-        case 'todos': dados = [...despesas.map(d=>({...d,tipo:'despesa',cor:'#ef4444',sinal:'-'})),...receitas.map(r=>({...r,tipo:'renda',cor:'#10b981',sinal:'+'})),...investimentos.map(i=>({...i,tipo:'investimento',cor:'#8b5cf6',sinal:'📈'}))]; break;
-        case 'despesas': dados = despesas.filter(d=>!d.recorrente).map(d=>({...d,tipo:'despesa',cor:'#ef4444',sinal:'-'})); break;
-        case 'fixas': dados = despesas.filter(d=>d.recorrente).map(d=>({...d,tipo:'fixa',cor:'#f59e0b',sinal:'🔄'})); break;
-        case 'rendas': dados = receitas.map(r=>({...r,tipo:'renda',cor:'#10b981',sinal:'+'})); break;
-        case 'investimentos': dados = investimentos.map(i=>({...i,tipo:'investimento',cor:'#8b5cf6',sinal:'📈'})); break;
-        case 'metas': return metas;
-        case 'cartoes_tab': return cartoes;
-    }
-    if(mesFiltro) dados = dados.filter(d => d.data && d.data.startsWith(mesFiltro));
-    if(texto) dados = dados.filter(d => (d.descricao||'').toLowerCase().includes(texto));
-    dados.sort((a,b) => (b.data||'').localeCompare(a.data||''));
-    return dados;
-}
-
-function renderizarConteudo(){
-    const container = document.getElementById('conteudoContainer');
-    const tabelaCt = document.getElementById('tabelaContainer');
-    const graficoCt = document.getElementById('graficoContainer');
-    container.innerHTML = ''; tabelaCt.classList.add('hidden'); graficoCt.classList.add('hidden');
-    if(chartInstance){ chartInstance.destroy(); chartInstance = null; }
-
-    if(tabAtual === 'grafico'){ graficoCt.classList.remove('hidden'); setTimeout(renderizarGrafico,100); document.getElementById('pagination').innerHTML=''; return; }
-    
-    if(tabAtual === 'metas'){ 
-        document.getElementById('pagination').innerHTML=''; 
-        container.innerHTML = metas.length===0?'<p style="text-align:center;padding:40px;">Nenhuma meta.</p>':'<div class="card-grid">'+metas.map(m=>{
-            const pct=Math.min((m.valor_atual/m.valor_meta)*100,100);
-            return`<div class="item-card">
-                <div class="item-card-header"><span class="item-card-title">🎯 ${m.nome}</span><span>${pct.toFixed(0)}%</span></div>
-                <div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${pct}%;background:linear-gradient(90deg,#4a6cf7,#10b981);"></div></div>
-                <p>💰 R$ ${fMoeda(m.valor_atual)} / R$ ${fMoeda(m.valor_meta)}</p>
-                ${m.data_limite?`<p style="font-size:0.8rem;">📅 Até ${formatarData(m.data_limite)}</p>`:''}
-                ${isAdmin?`<div style="margin-top:8px;display:flex;gap:6px;">
-                    <button class="btn-sm btn-success" onclick="atualizarMeta(${m.id})">✏️ Atualizar</button>
-                    <button class="btn-sm btn-danger" onclick="excluirMeta(${m.id})">🗑️ Excluir</button>
-                </div>`:''}
-            </div>`;
-        }).join('')+'</div>'; 
-        return; 
-    }
-    
-    if(tabAtual === 'cartoes_tab'){ document.getElementById('pagination').innerHTML=''; container.innerHTML = cartoes.length===0?'<p style="text-align:center;padding:40px;">Nenhum cartão.</p>':'<div class="card-grid">'+cartoes.map(c=>{const gf=despesas.filter(g=>g.cartao_id==c.id&&!g.pago);const tf=gf.reduce((s,g)=>s+parseFloat(g.valor),0);const pu=(c.limite||0)>0?(tf/c.limite)*100:0;return`<div class="item-card"><div class="item-card-header"><span class="item-card-title">💳 ${c.nome_cartao}</span><span>${c.bandeira||''}</span></div><p>📅 Vence dia <strong>${c.dia_vencimento}</strong></p><p>🧾 Fatura: <strong style="color:#ef4444;">R$ ${fMoeda(tf)}</strong></p><div class="progress-bar-custom"><div class="progress-fill-custom" style="width:${Math.min(pu,100)}%;background:${pu>80?'#ef4444':'#10b981'};"></div></div></div>`;}).join('')+'</div>'; return; }
-
-    const dados = getDadosFiltrados();
-    const totalPag = Math.ceil(dados.length/ITENS_POR_PAGINA)||1;
-    if(paginaAtual>totalPag) paginaAtual=totalPag;
-    const paginados = dados.slice((paginaAtual-1)*ITENS_POR_PAGINA,paginaAtual*ITENS_POR_PAGINA);
-
-    if(dados.length===0){ container.innerHTML='<p style="text-align:center;padding:40px;">Nenhum registro.</p>'; document.getElementById('pagination').innerHTML=''; return; }
-
-    if(viewAtual==='cards'){
-        container.classList.remove('hidden');
-        container.innerHTML='<div class="card-grid">'+paginados.map(d=>{
-            if(d.tipo==='despesa'||d.tipo==='fixa'){
-                const cat=categoriasLista.find(c=>c.id==d.categoria_id); const cart=cartoes.find(c=>c.id==d.cartao_id); const pago=d.pago||d.status==='quitado';
-                return`<div class="item-card" style="border-left-color:${d.tipo==='fixa'?'#f59e0b':(pago?'#10b981':'#ef4444')};opacity:${pago?'0.7':'1'};"><div class="item-card-header"><span class="item-card-title">${d.tipo==='fixa'?'🔄':''} ${cat?.icone||'📦'} ${cat?.nome||'Despesa'}</span><span class="item-card-valor" style="color:${pago?'#10b981':'#ef4444'};">R$ ${fMoeda(d.valor)}</span></div><p style="font-size:0.85rem;">📝 ${d.descricao||'Sem descrição'}</p><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span>${cart?`<span>💳 ${cart.nome_cartao}</span>`:''}<span>${d.parcelas>1?`📊 ${d.parcelas}x`:''}</span><span>${pago?'✅ Pago':'⚠️ Pendente'}</span></div><div style="margin-top:8px;display:flex;gap:6px;">${!pago&&isAdmin?`<button class="btn-sm btn-success" onclick="marcarPago(${d.id})">✅ Pagar</button>`:''}${d.whatsapp?`<button class="btn-sm" style="background:#25D366;color:white;" onclick="cobrarWhatsApp(${d.id})">📲 Cobrar</button>`:''}${isAdmin?`<button class="btn-sm btn-danger" onclick="confirmarExcluir(${d.id})">🗑️</button>`:''}</div></div>`;
-            }
-            if(d.tipo==='renda'){
-                return`<div class="item-card" style="border-left-color:#10b981;"><div class="item-card-header"><span class="item-card-title">💰 ${d.descricao||'Renda'}</span><span class="item-card-valor" style="color:#10b981;">+ R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span><span>${d.tipo_renda||''}</span></div>${isAdmin?`<div style="margin-top:8px;"><button class="btn-sm btn-danger" onclick="excluirReceita(${d.id})">🗑️ Excluir</button></div>`:''}</div>`;
-            }
-            if(d.tipo==='investimento'){
-                return`<div class="item-card" style="border-left-color:#8b5cf6;"><div class="item-card-header"><span class="item-card-title">📈 ${d.descricao||'Investimento'}</span><span class="item-card-valor" style="color:#8b5cf6;">R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span>${d.corretora?`<span>🏦 ${d.corretora}</span>`:''}</div>${isAdmin?`<div style="margin-top:8px;"><button class="btn-sm btn-danger" onclick="excluirInvestimento(${d.id})">🗑️ Excluir</button></div>`:''}</div>`;
-            }
-            return`<div class="item-card" style="border-left-color:${d.cor};"><div class="item-card-header"><span class="item-card-title">${d.descricao||'Sem descrição'}</span><span class="item-card-valor" style="color:${d.cor};">${d.sinal} R$ ${fMoeda(d.valor)}</span></div><div class="item-card-meta"><span>📅 ${formatarData(d.data)}</span></div></div>`;
-        }).join('')+'</div>';
-    } else {
-        tabelaCt.classList.remove('hidden');
-        document.getElementById('tabelaHead').innerHTML='<tr><th>Tipo</th><th>Descrição</th><th>Valor</th><th>Data</th><th>Status</th></tr>';
-        document.getElementById('tabelaBody').innerHTML=paginados.map(d=>`<tr><td>${d.sinal} ${d.tipo}</td><td>${d.descricao||'—'}</td><td style="color:${d.cor};">R$ ${fMoeda(d.valor)}</td><td>${formatarData(d.data)}</td><td>${d.tipo==='despesa'?(d.pago?'Pago':'Pendente'):'—'}</td></tr>`).join('');
-    }
-
-    let pagHTML='';
-    for(let i=1;i<=totalPag;i++) pagHTML+=`<button onclick="mudarPagina(${i})" class="${i===paginaAtual?'active':''}">${i}</button>`;
-    document.getElementById('pagination').innerHTML=pagHTML;
-}
-
-function renderizarGrafico(){
-    const ctx=document.getElementById('graficoCanvas')?.getContext('2d'); if(!ctx)return;
-    const pc={}; despesas.filter(d=>!d.pago).forEach(d=>{const cat=categoriasLista.find(c=>c.id==d.categoria_id);const n=cat?cat.nome:'Outros';pc[n]=(pc[n]||0)+parseFloat(d.valor);});
-    if(Object.keys(pc).length===0)return;
-    chartInstance=new Chart(ctx,{type:'pie',data:{labels:Object.keys(pc),datasets:[{data:Object.values(pc),backgroundColor:['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899','#06b6d4','#84cc16']}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
-}
-
-function mudarPagina(p){ paginaAtual=p; renderizarConteudo(); }
-function aplicarFiltros(){ paginaAtual=1; renderizarConteudo(); }
-function limparFiltros(){ document.getElementById('filtroMes').value=''; document.getElementById('filtroTexto').value=''; paginaAtual=1; renderizarConteudo(); }
-
-async function salvarDespesa(){
-    const valor=parseFloat(document.getElementById('despValor').value);
-    if(!valor||valor<=0)return alert('❌ Informe o valor!');
-    const recorrente=document.getElementById('despRecorrente').checked;
-    const dados={
-        admin_id:usuarioLogado.id,categoria_id:parseInt(document.getElementById('despCategoria').value)||1,
-        cartao_id:document.getElementById('despCartao').value?parseInt(document.getElementById('despCartao').value):null,
-        usuario_id:parseInt(document.getElementById('despUsuario').value)||usuarioLogado.id,
-        descricao:document.getElementById('despDescricao').value.trim()||'Despesa',valor,
-        parcelas:parseInt(document.getElementById('despParcelas').value)||1,
-        total_parcelas:parseInt(document.getElementById('despParcelas').value)||1,parcela_atual:1,
-        data:document.getElementById('despData').value||new Date().toISOString().split('T')[0],
-        whatsapp:document.getElementById('despWhatsApp').value.trim(),
-        recorrente,dia_vencimento:recorrente?parseInt(document.getElementById('despDiaVenc').value)||10:null,
-        status:'ativo',pago:false
-    };
-    showLoading('Salvando...');
-    if(dados.parcelas>1&&dados.cartao_id){
-        const vp=valor/dados.parcelas; const di=new Date(dados.data.split('T')[0]);
-        for(let i=0;i<dados.parcelas;i++){ const dp=new Date(di); dp.setMonth(dp.getMonth()+i); await db.from('despesas').insert([{...dados,valor:vp,descricao:`${dados.descricao} (${i+1}/${dados.parcelas})`,data:dp.toISOString().split('T')[0],parcela_atual:i+1}]); }
-    } else { await db.from('despesas').insert([dados]); }
-    hideLoading(); alert('✅ Salvo!'); document.getElementById('despValor').value=''; carregarTudo();
-}
-
-async function marcarPago(id){ if(!confirm('Marcar como pago?'))return; showLoading(); await db.from('despesas').update({pago:true,status:'quitado',data_pagamento:new Date().toISOString().split('T')[0]}).eq('id',id); hideLoading(); carregarTudo(); }
-function cobrarWhatsApp(id){ const g=despesas.find(d=>d.id==id); if(!g||!g.whatsapp)return; const cart=cartoes.find(c=>c.id==g.cartao_id); const msg=encodeURIComponent(`Olá!\n\n📌 Cobrança - Financeiro PRO\n📝 ${g.descricao}\n💰 R$ ${fMoeda(g.valor)}\n📅 ${formatarData(g.data)}${cart?`\n💳 ${cart.nome_cartao} (vence dia ${cart.dia_vencimento})`:''}\n\nPor favor, realize o pagamento!`); window.open(`https://wa.me/55${g.whatsapp.replace(/\D/g,'')}?text=${msg}`,'_blank'); }
-function confirmarExcluir(id){ if(confirm('EXCLUIR esta despesa?')){ showLoading(); db.from('despesas').delete().eq('id',id).then(()=>{ hideLoading(); carregarTudo(); }); } }
-
-async function salvarRenda(){
-    const valor=parseFloat(document.getElementById('rendaValor').value);
-    if(!valor)return alert('❌ Informe o valor!');
-    await db.from('receitas').insert([{admin_id:usuarioLogado.id,valor,descricao:document.getElementById('rendaDescricao').value.trim()||'Renda',data:new Date().toISOString().split('T')[0],tipo:document.getElementById('rendaTipo').value}]);
-    document.getElementById('rendaValor').value=''; alert('✅ Renda salva!'); carregarTudo();
-}
-async function excluirReceita(id){ if(confirm('Excluir esta receita?')){ await db.from('receitas').delete().eq('id',id); carregarTudo(); } }
-
-async function salvarCartao(){
-    const nome=document.getElementById('cartaoNome').value.trim();
-    if(!nome)return alert('❌ Informe o nome!');
-    await db.from('cartoes').insert([{admin_id:usuarioLogado.id,nome_cartao:nome,bandeira:document.getElementById('cartaoBandeira').value,dia_vencimento:parseInt(document.getElementById('cartaoDia').value)||10,limite:parseFloat(document.getElementById('cartaoLimite').value)||0}]);
-    document.getElementById('cartaoNome').value=''; alert('✅ Cartão salvo!'); carregarTudo();
-}
-async function excluirCartao(id){ if(confirm('Excluir cartão?')){ await db.from('cartoes').delete().eq('id',id); carregarTudo(); } }
-
-async function salvarPessoa(){
-    const nome = document.getElementById('pessoaNome').value.trim();
-    if(!nome) return alert('❌ Informe o nome!');
-    const cpf = document.getElementById('pessoaCPF').value.trim();
-    if(cpf && cpf.length===11 && !validarCPF(cpf)) return alert('❌ CPF inválido!');
-    const parentesco = document.getElementById('pessoaParentesco').value;
-    const { data, error } = await db.from('usuarios').insert([{nome,cpf:cpf||null,whatsapp:document.getElementById('pessoaWhatsApp').value.trim(),tipo:'comum',parentesco}]).select();
-    if(error){ alert('❌ Erro ao salvar: ' + error.message); return; }
-    document.getElementById('pessoaNome').value=''; document.getElementById('pessoaCPF').value=''; document.getElementById('pessoaWhatsApp').value='';
-    alert('✅ Pessoa cadastrada!'); carregarTudo();
-}
-async function excluirPessoa(id){ if(confirm('Excluir pessoa?')){ await db.from('usuarios').delete().eq('id',id); carregarTudo(); } }
-
-async function salvarInvestimento(){
-    const valor=parseFloat(document.getElementById('invValor').value);
-    if(!valor)return alert('❌ Informe o valor!');
-    await db.from('investimentos').insert([{admin_id:usuarioLogado.id,valor,corretora:document.getElementById('invCorretora').value.trim(),data:new Date().toISOString().split('T')[0],tipo:document.getElementById('invTipo').value,descricao:document.getElementById('invTipo').value}]);
-    document.getElementById('invValor').value=''; alert('✅ Investimento salvo!'); carregarTudo();
-}
-async function excluirInvestimento(id){ if(confirm('Excluir investimento?')){ await db.from('investimentos').delete().eq('id',id); carregarTudo(); } }
-
-async function salvarMeta(){
-    const nome=document.getElementById('metaNome').value.trim(); const alvo=parseFloat(document.getElementById('metaAlvo').value);
-    if(!nome||!alvo)return alert('❌ Preencha!');
-    await db.from('metas').insert([{admin_id:usuarioLogado.id,nome,valor_meta:alvo,valor_atual:parseFloat(document.getElementById('metaAtual').value)||0,data_limite:document.getElementById('metaData').value||null}]);
-    document.getElementById('metaNome').value=''; alert('✅ Meta salva!'); carregarTudo();
-}
-async function atualizarMeta(id){
-    const meta = metas.find(m => m.id == id);
-    if(!meta) return;
-    const novoValor = prompt('Valor atual da meta:', meta.valor_atual);
-    if(novoValor === null) return;
-    const valorNum = parseFloat(novoValor);
-    if(isNaN(valorNum)) return alert('Valor inválido!');
-    await db.from('metas').update({valor_atual:valorNum}).eq('id',id);
-    carregarTudo();
-}
-async function excluirMeta(id){ if(confirm('Excluir meta?')){ await db.from('metas').delete().eq('id',id); carregarTudo(); } }
-
-function exportarExcel(){
-    const dados=getDadosFiltrados(); if(dados.length===0)return alert('Nenhum dado!');
-    const ws=XLSX.utils.json_to_sheet(dados.map(d=>({Tipo:d.tipo||'',Descricao:d.descricao||'',Valor:d.valor||0,Data:formatarData(d.data),Status:d.pago?'Pago':'Pendente'})));
-    const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"Financeiro"); XLSX.writeFile(wb,`financeiro_${new Date().toISOString().slice(0,10)}.xlsx`);
-}
-
-async function redefinirSenha(){
-    const nome = document.getElementById('resetNome').value.trim();
+// ============================================
+// REDEFINIR SENHA
+// ============================================
+document.getElementById('btnReset').onclick = async () => {
     const cpf = document.getElementById('resetCPF').value.trim();
     const codigo = document.getElementById('resetCodigo').value.trim();
     const nova = document.getElementById('resetNovaSenha').value;
-    const confirma = document.getElementById('resetConfirmaSenha').value;
-    if(!nome) return alert('Digite seu nome!');
-    if(!cpf || !validarCPF(cpf)) return alert('CPF inválido!');
-    if(codigo !== CODIGO_SEGURANCA) return alert('❌ Código de segurança incorreto! O código padrão é: ' + CODIGO_SEGURANCA);
-    if(nova.length < 4) return alert('Senha deve ter 4+ caracteres!');
-    if(nova !== confirma) return alert('Senhas não conferem!');
-    showLoading('Redefinindo...');
-    const { data } = await db.from('usuarios').select('*').eq('cpf', cpf).eq('tipo', 'admin');
-    if(!data || data.length === 0){ hideLoading(); return alert('❌ Admin não encontrado!'); }
-    await db.from('usuarios').update({ senha: nova, nome }).eq('cpf', cpf);
+    const confirma = document.getElementById('resetConfirma').value;
+    if (codigo !== CODIGO_SEGURANCA) return alert('❌ Código incorreto! Use: 123456');
+    if (nova.length < 4) return alert('Senha deve ter 4+ caracteres');
+    if (nova !== confirma) return alert('Senhas não conferem');
+    const { error } = await supabase.from('usuarios').update({ senha: nova }).eq('cpf', cpf);
+    if (error) alert('Erro: ' + error.message);
+    else { alert('✅ Senha redefinida!'); voltarLogin(); }
+};
+
+// ============================================
+// CARREGAR DADOS
+// ============================================
+async function carregarDados() {
+    showLoading();
+    const [p, s, h, a] = await Promise.all([
+        supabase.from('prestadores').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('servicos').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('horarios').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('agendamentos').select('*').eq('admin_id', usuarioLogado.id)
+    ]);
+    prestadores = p.data || [];
+    servicos = s.data || [];
+    horarios = h.data || [];
+    agendamentos = a.data || [];
     hideLoading();
-    alert('✅ Senha redefinida!');
-    document.getElementById('resetScreen').classList.add('hidden');
-    document.getElementById('loginScreen').classList.remove('hidden');
-    document.getElementById('resetCodigo').value = '';
-    document.getElementById('resetNovaSenha').value = '';
-    document.getElementById('resetConfirmaSenha').value = '';
+    renderizarDashboard();
+    renderizarPrestadores();
+    renderizarServicos();
+    renderizarSelects();
+    renderizarAgendamentos();
 }
 
-// EVENTOS
+function renderizarDashboard() {
+    document.getElementById('statsGrid').innerHTML = `
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-blue-500"><p class="text-slate-500 text-xs font-bold uppercase">Agendamentos</p><h3 class="text-3xl font-extrabold">${agendamentos.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-amber-500"><p class="text-slate-500 text-xs font-bold uppercase">Prestadores</p><h3 class="text-3xl font-extrabold">${prestadores.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-emerald-500"><p class="text-slate-500 text-xs font-bold uppercase">Serviços</p><h3 class="text-3xl font-extrabold">${servicos.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-rose-500"><p class="text-slate-500 text-xs font-bold uppercase">Faturado</p><h3 class="text-3xl font-extrabold">R$ ${fMoeda(agendamentos.reduce((s,a)=>s+(a.valor_total||0),0))}</h3></div>
+    `;
+    // Gráficos
+    new Chart(document.getElementById('chartAgendamentos'), { type: 'line', data: { labels: ['Jan','Fev','Mar','Abr','Mai','Jun'], datasets: [{ label: 'Agendamentos', data: [12,19,15,25,22,30], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.05)', fill: true }] }, options: { responsive: true } });
+    new Chart(document.getElementById('chartServicos'), { type: 'doughnut', data: { labels: servicos.map(s=>s.nome) || ['Corte','Manicure','Pedicure'], datasets: [{ data: [30,25,20], backgroundColor: ['#3b82f6','#8b5cf6','#10b981'] }] }, options: { responsive: true } });
+}
+
+function renderizarPrestadores() {
+    document.getElementById('listaPrestadores').innerHTML = prestadores.map(p => `<div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl"><div><strong>${p.nome}</strong><br><small class="text-slate-500">📱 ${p.whatsapp || 'N/A'}</small></div><button onclick="excluirPrestador(${p.id})" class="bg-rose-500 text-white px-4 py-2 rounded-lg text-sm">Excluir</button></div>`).join('') || '<p class="text-center py-8">Nenhum prestador cadastrado</p>';
+}
+
+function renderizarServicos() {
+    document.getElementById('listaServicos').innerHTML = servicos.map(s => `<div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl"><div><strong>${s.nome}</strong><br><small>⏱️ ${s.duracao}min | 💰 R$ ${fMoeda(s.valor)}</small></div><button onclick="excluirServico(${s.id})" class="bg-rose-500 text-white px-4 py-2 rounded-lg text-sm">Excluir</button></div>`).join('') || '<p class="text-center py-8">Nenhum serviço cadastrado</p>';
+}
+
+function renderizarSelects() {
+    document.getElementById('horarioPrestador').innerHTML = prestadores.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
+    document.getElementById('horarioServico').innerHTML = servicos.map(s => `<option value="${s.id}">${s.nome} - R$ ${fMoeda(s.valor)}</option>`).join('');
+}
+
+function renderizarAgendamentos() {
+    let dados = [...agendamentos];
+    const busca = document.getElementById('buscaAgendamentos')?.value.toLowerCase() || '';
+    if (busca) dados = dados.filter(a => a.cliente_nome.toLowerCase().includes(busca));
+    const totalPag = Math.ceil(dados.length / itensPorPagina) || 1;
+    if (paginaAtual > totalPag) paginaAtual = totalPag;
+    const paginados = dados.slice((paginaAtual - 1) * itensPorPagina, paginaAtual * itensPorPagina);
+    document.getElementById('tabelaAgendamentos').innerHTML = paginados.map(a => {
+        const servico = servicos.find(s => s.id === a.servico_id);
+        const prestador = prestadores.find(p => p.id === a.prestador_id);
+        return `<tr class="border-b"><td class="px-6 py-4">${a.cliente_nome}</td><td class="px-6 py-4">${servico ? servico.nome : '—'}</td><td class="px-6 py-4">${prestador ? prestador.nome : '—'}</td><td class="px-6 py-4">${formatarData(a.data_agendamento)} ${formatarHora(a.data_agendamento)}</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${a.status === 'confirmado' ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}">${a.status === 'confirmado' ? 'Confirmado' : 'Pendente'}</span></td></tr>`;
+    }).join('');
+    let pagHTML = ''; for (let i = 1; i <= totalPag; i++) pagHTML += `<button onclick="paginaAtual=${i};renderizarAgendamentos()" class="px-3 py-1 rounded-lg text-sm font-bold ${i === paginaAtual ? 'bg-blue-600 text-white' : 'bg-slate-100'}">${i}</button>`;
+    document.getElementById('paginacaoAgendamentos').innerHTML = `<span class="text-xs text-slate-500">${dados.length} registros</span><div class="flex gap-1">${pagHTML}</div>`;
+}
+
+// CRUD
+document.getElementById('btnSalvarPrestador').onclick = async () => {
+    const nome = document.getElementById('prestadorNome').value.trim();
+    if (!nome) return alert('Informe o nome!');
+    showLoading();
+    await supabase.from('prestadores').insert([{ admin_id: usuarioLogado.id, nome, whatsapp: document.getElementById('prestadorWhatsApp').value.trim() }]);
+    hideLoading();
+    carregarDados();
+    document.getElementById('prestadorNome').value = '';
+    document.getElementById('prestadorWhatsApp').value = '';
+};
+window.excluirPrestador = async (id) => { if (confirm('Excluir?')) { showLoading(); await supabase.from('prestadores').delete().eq('id', id); hideLoading(); carregarDados(); } };
+
+document.getElementById('btnSalvarServico').onclick = async () => {
+    const nome = document.getElementById('servicoNome').value.trim();
+    if (!nome) return alert('Informe o nome!');
+    showLoading();
+    await supabase.from('servicos').insert([{ admin_id: usuarioLogado.id, nome, duracao: parseInt(document.getElementById('servicoDuracao').value) || 60, valor: parseFloat(document.getElementById('servicoValor').value) || 0 }]);
+    hideLoading();
+    carregarDados();
+    document.getElementById('servicoNome').value = '';
+    document.getElementById('servicoDuracao').value = '';
+    document.getElementById('servicoValor').value = '';
+};
+window.excluirServico = async (id) => { if (confirm('Excluir?')) { showLoading(); await supabase.from('servicos').delete().eq('id', id); hideLoading(); carregarDados(); } };
+
+document.getElementById('btnCriarHorarios').onclick = async () => {
+    const pid = document.getElementById('horarioPrestador').value;
+    const sid = document.getElementById('horarioServico').value;
+    const data = document.getElementById('horarioData').value;
+    const inicio = document.getElementById('horarioInicio').value;
+    const fim = document.getElementById('horarioFim').value;
+    if (!pid || !data || !inicio || !fim) return alert('Preencha todos os campos!');
+    const lista = [];
+    let horaAtual = new Date(`${data}T${inicio}:00`);
+    const horaFim = new Date(`${data}T${fim}:00`);
+    while (horaAtual < horaFim) {
+        lista.push({ admin_id: usuarioLogado.id, prestador_id: parseInt(pid), servico_id: parseInt(sid), data_hora: horaAtual.toISOString(), status: 'livre' });
+        horaAtual = new Date(horaAtual.getTime() + 60 * 60000);
+    }
+    if (lista.length === 0) return alert('Nenhum horário gerado!');
+    showLoading();
+    await supabase.from('horarios').insert(lista);
+    hideLoading();
+    alert(`✅ ${lista.length} horários criados!`);
+    carregarDados();
+};
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active', 'text-blue-600'); b.classList.add('text-slate-400'); });
+    document.getElementById('tab-' + tabId).classList.add('active', 'text-blue-600');
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('content-' + tabId).classList.add('active');
+    document.getElementById('headerTitle').innerHTML = document.getElementById('tab-' + tabId).innerHTML.trim().replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+}
+
+function logout() { document.getElementById('screenSistema').style.display = 'none'; voltarLogin(); }
+
 document.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('theme')==='dark'){ document.body.classList.add('dark'); document.getElementById('btnTheme').textContent='☀️ Claro'; }
-    document.getElementById('btnTheme').addEventListener('click',()=>{ document.body.classList.toggle('dark'); const d=document.body.classList.contains('dark'); document.getElementById('btnTheme').textContent=d?'☀️ Claro':'🌙 Escuro'; localStorage.setItem('theme',d?'dark':'light'); });
-    document.getElementById('despRecorrente').addEventListener('change',function(){ document.getElementById('despDiaVenc').disabled=!this.checked; });
-
-    document.getElementById('btnLogin').addEventListener('click', async () => {
-        const nome=document.getElementById('loginNome').value.trim();
-        const cpf=document.getElementById('loginCPF').value.trim();
-        const senha=document.getElementById('loginSenha').value.trim();
-        if(!nome) return alert('Digite seu nome!');
-        if(!cpf||!validarCPF(cpf)) return alert('CPF inválido!');
-        showLoading('Autenticando...');
-        if(cpf==='12345678909'){
-            const { data } = await db.from('usuarios').select('*').eq('cpf', cpf);
-            const senhaSalva = (data && data.length>0) ? data[0].senha : 'admin';
-            if(senha === senhaSalva || senha === 'admin'){
-                if(!data || data.length===0){ await db.from('usuarios').insert([{nome,cpf,tipo:'admin',senha:'admin'}]); }
-                usuarioLogado = data?.[0] || {id:1,nome,cpf,tipo:'admin'}; isAdmin = true;
-            } else { hideLoading(); return alert('❌ Senha incorreta!'); }
-        } else {
-            const { data } = await db.from('usuarios').select('*').eq('cpf',cpf);
-            if(data && data.length>0){ usuarioLogado=data[0]; isAdmin=usuarioLogado.tipo==='admin'; }
-            else { const { data:novo } = await db.from('usuarios').insert([{nome,cpf,tipo:'comum'}]).select(); usuarioLogado=novo[0]; isAdmin=false; }
-        }
-        hideLoading();
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('mainScreen').classList.remove('hidden');
-        document.getElementById('displayNome').textContent = `${usuarioLogado.nome} (${formatarCPF(usuarioLogado.cpf)})`;
-        if(isAdmin){ document.getElementById('badgeAdmin').classList.remove('hidden'); document.getElementById('adminSection').classList.remove('hidden'); }
-        carregarTudo();
-    });
-
-    document.getElementById('btnEsqueciSenha').addEventListener('click',()=>{ document.getElementById('loginScreen').classList.add('hidden'); document.getElementById('resetScreen').classList.remove('hidden'); });
-    document.getElementById('btnVoltarLogin').addEventListener('click',()=>{ document.getElementById('resetScreen').classList.add('hidden'); document.getElementById('loginScreen').classList.remove('hidden'); });
-    document.getElementById('btnConfirmarReset').addEventListener('click', redefinirSenha);
-    document.getElementById('btnLogout').addEventListener('click',()=>{ if(confirm('Sair?')){ usuarioLogado=null; document.getElementById('mainScreen').classList.add('hidden'); document.getElementById('loginScreen').classList.remove('hidden'); } });
-
-    document.querySelectorAll('.admin-nav button').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.admin-nav button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active')); document.getElementById('panel-'+b.dataset.panel).classList.add('active'); }));
-    document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); t.classList.add('active'); tabAtual=t.dataset.tab; paginaAtual=1; renderizarConteudo(); }));
-    document.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.view-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); viewAtual=b.dataset.view; renderizarConteudo(); }));
-
-    document.getElementById('btnSalvarDespesa').addEventListener('click', salvarDespesa);
-    document.getElementById('btnSalvarRenda').addEventListener('click', salvarRenda);
-    document.getElementById('btnSalvarCartao').addEventListener('click', salvarCartao);
-    document.getElementById('btnSalvarPessoa').addEventListener('click', salvarPessoa);
-    document.getElementById('btnSalvarInvestimento').addEventListener('click', salvarInvestimento);
-    document.getElementById('btnSalvarMeta').addEventListener('click', salvarMeta);
-
-    document.getElementById('despData').value = new Date().toISOString().split('T')[0];
-    ['loginNome','loginCPF','loginSenha'].forEach(id=>{ document.getElementById(id)?.addEventListener('keypress',e=>{ if(e.key==='Enter')document.getElementById('btnLogin').click(); }); });
-
-    console.log('✅ Financeiro PRO v4 - Completo!');
+    console.log('✅ Sistema Data Desh Agenda carregado!');
     console.log('👑 Admin: CPF 12345678909 / Senha: admin');
-    console.log('🔐 Código segurança: ' + CODIGO_SEGURANCA);
-    console.log('🗑️ Botões Excluir: Receitas, Investimentos, Metas');
-    console.log('✏️ Botão Atualizar: Metas');
+    document.getElementById('horarioData').value = new Date().toISOString().split('T')[0];
 });
 </script>
 </body>
