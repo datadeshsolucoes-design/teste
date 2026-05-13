@@ -61,13 +61,14 @@
         .form-group small { font-size: 0.65rem; color: #64748b; display: block; margin-top: 4px; }
         
         .btn-salvar { background: #4f46e5; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-excluir-lote { background: #ef4444; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-transferir { background: #f59e0b; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; }
         .btn-excel { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
         
-        /* DIAS DA SEMANA - CHECKBOX */
+        /* DIAS DA SEMANA */
         .dias-semana { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
         .dia-checkbox { display: flex; align-items: center; gap: 6px; background: #f8fafc; padding: 8px 16px; border-radius: 40px; cursor: pointer; }
         .dia-checkbox input { width: 18px; height: 18px; cursor: pointer; }
-        .dia-checkbox label { cursor: pointer; font-size: 0.8rem; font-weight: 500; }
         
         /* FILTROS */
         .filtro-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
@@ -94,15 +95,21 @@
         .cal-livre { background: #d1fae5; color: #065f46; }
         .cal-ocupado { background: #fee2e2; color: #991b1b; }
         
-        /* GRÁFICOS - TAMANHO REDUZIDO E SEM LINHAS */
+        /* GRÁFICOS */
         .grafico-container { max-width: 400px; margin: 0 auto; }
         .grafico-pequeno { max-height: 250px; }
         .graficos-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 20px; }
         
+        /* MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; }
+        .modal-content h3 { margin-bottom: 16px; }
+        .modal-content select { width: 100%; padding: 10px; margin: 16px 0; border: 1px solid #e2e8f0; border-radius: 8px; }
+        .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; }
+        
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
-        /* TOAST */
         .toast { position: fixed; bottom: 20px; right: 20px; background: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; border-left: 4px solid #10b981; }
         
         @media (max-width: 768px) {
@@ -162,6 +169,21 @@
     </div>
 </div>
 
+<!-- MODAL TRANSFERIR -->
+<div id="modalTransferir" class="modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-exchange-alt"></i> Transferir Agendamentos</h3>
+        <p>Transferir agendamentos do prestador:</p>
+        <select id="transferirOrigem"></select>
+        <p>Para o prestador:</p>
+        <select id="transferirDestino"></select>
+        <div class="modal-buttons">
+            <button class="btn-salvar" onclick="confirmarTransferencia()">Transferir</button>
+            <button class="btn-excluir-lote" onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 <!-- SISTEMA PRINCIPAL -->
 <div id="sistemaScreen" class="hidden">
     <div class="app-main">
@@ -199,6 +221,7 @@
             <button class="tab" data-tab="consolidado">📊 Consolidado</button>
             <button class="tab" data-tab="calendario">📅 Calendário</button>
             <button class="tab" data-tab="financeiro">💰 Financeiro</button>
+            <button class="tab" data-tab="ferramentas">🔧 Ferramentas</button>
         </div>
 
         <!-- DASHBOARD -->
@@ -274,7 +297,7 @@
             </div>
         </div>
 
-        <!-- HORÁRIOS - VERSÃO MELHORADA COM CRIAÇÃO EM MASSA -->
+        <!-- HORÁRIOS -->
         <div id="horariosTab" class="tab-content">
             <div class="panel">
                 <h3><i class="fas fa-calendar-plus"></i> Criar Horários em Massa</h3>
@@ -403,7 +426,7 @@
             </div>
         </div>
 
-        <!-- CALENDÁRIO VISUAL -->
+        <!-- CALENDÁRIO -->
         <div id="calendarioTab" class="tab-content">
             <div class="panel">
                 <h3><i class="fas fa-calendar-alt"></i> Calendário de Horários</h3>
@@ -423,6 +446,57 @@
                     <div class="grafico-container"><canvas id="graficoFinanceiro" class="grafico-pequeno"></canvas></div>
                     <div class="grafico-container"><canvas id="graficoServicos" class="grafico-pequeno"></canvas></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- FERRAMENTAS (NOVO!) -->
+        <div id="ferramentasTab" class="tab-content">
+            <div class="panel">
+                <h3><i class="fas fa-trash-alt"></i> Excluir Horários em Lote</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>PRESTADOR</label>
+                        <select id="excluirPrestadorSelect"></select>
+                        <small>Selecione o profissional</small>
+                    </div>
+                    <div class="form-group">
+                        <label>DATA INÍCIO</label>
+                        <input type="date" id="excluirDataInicio">
+                        <small>Primeiro dia para exclusão</small>
+                    </div>
+                    <div class="form-group">
+                        <label>DATA FIM</label>
+                        <input type="date" id="excluirDataFim">
+                        <small>Último dia para exclusão</small>
+                    </div>
+                </div>
+                <div class="dias-semana">
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirSegunda"> <label>Segunda</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirTerca"> <label>Terça</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirQuarta"> <label>Quarta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirQuinta"> <label>Quinta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirSexta"> <label>Sexta</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirSabado"> <label>Sábado</label></div>
+                    <div class="dia-checkbox"><input type="checkbox" id="excluirDomingo"> <label>Domingo</label></div>
+                </div>
+                <button class="btn-excluir-lote" id="excluirHorariosLoteBtn">🗑️ Excluir Horários</button>
+            </div>
+            
+            <div class="panel">
+                <h3><i class="fas fa-exchange-alt"></i> Transferir Agendamentos</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>PRESTADOR ORIGEM</label>
+                        <select id="transferirPrestadorOrigem"></select>
+                        <small>De quem vai transferir</small>
+                    </div>
+                    <div class="form-group">
+                        <label>PRESTADOR DESTINO</label>
+                        <select id="transferirPrestadorDestino"></select>
+                        <small>Para quem vai transferir</small>
+                    </div>
+                </div>
+                <button class="btn-transferir" id="transferirAgendamentosBtn">🔄 Transferir Agendamentos</button>
             </div>
         </div>
     </div>
@@ -514,7 +588,7 @@ function notificarPrestador(agendamento) {
 }
 
 // ============================================
-// CRIAR HORÁRIOS EM MASSA (NOVO!)
+// CRIAÇÃO DE HORÁRIOS EM MASSA
 // ============================================
 function criarHorariosEmMassa() {
     var prestadorId = parseInt(document.getElementById('horarioPrestadorSelect').value);
@@ -560,7 +634,6 @@ function criarHorariosEmMassa() {
             while (horaAtual < horaFinal) {
                 var horaStr = horaAtual.toTimeString().slice(0,5);
                 
-                // Verificar se já existe
                 var existe = horarios.some(function(h) {
                     return h.data === dataStr && h.hora === horaStr && h.prestadorId === prestadorId;
                 });
@@ -587,6 +660,102 @@ function criarHorariosEmMassa() {
     alert('✅ ' + horariosCriados + ' horários criados!\n' + (horariosDuplicados > 0 ? '⚠️ ' + horariosDuplicados + ' horários já existiam e foram ignorados.' : ''));
     atualizarTelaCompleta();
     showToast(horariosCriados + ' horários criados com sucesso!');
+}
+
+// ============================================
+// EXCLUIR HORÁRIOS EM LOTE (NOVO!)
+// ============================================
+function excluirHorariosEmLote() {
+    var prestadorId = parseInt(document.getElementById('excluirPrestadorSelect').value);
+    var dataInicio = document.getElementById('excluirDataInicio').value;
+    var dataFim = document.getElementById('excluirDataFim').value;
+    
+    var diasSemana = [];
+    if (document.getElementById('excluirSegunda').checked) diasSemana.push(1);
+    if (document.getElementById('excluirTerca').checked) diasSemana.push(2);
+    if (document.getElementById('excluirQuarta').checked) diasSemana.push(3);
+    if (document.getElementById('excluirQuinta').checked) diasSemana.push(4);
+    if (document.getElementById('excluirSexta').checked) diasSemana.push(5);
+    if (document.getElementById('excluirSabado').checked) diasSemana.push(6);
+    if (document.getElementById('excluirDomingo').checked) diasSemana.push(0);
+    
+    if (!prestadorId || !dataInicio || !dataFim) {
+        alert('Preencha prestador, data início e data fim!');
+        return;
+    }
+    
+    if (diasSemana.length === 0) {
+        alert('Selecione pelo menos um dia da semana para excluir!');
+        return;
+    }
+    
+    var startDate = new Date(dataInicio);
+    var endDate = new Date(dataFim);
+    var horariosExcluidos = 0;
+    
+    for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        var diaSemana = d.getDay();
+        
+        if (diasSemana.includes(diaSemana)) {
+            var dataStr = d.toISOString().split('T')[0];
+            var horariosParaExcluir = [];
+            
+            for (var i = 0; i < horarios.length; i++) {
+                if (horarios[i].prestadorId === prestadorId && horarios[i].data === dataStr) {
+                    horariosParaExcluir.push(horarios[i].id);
+                }
+            }
+            
+            for (var j = 0; j < horariosParaExcluir.length; j++) {
+                var id = horariosParaExcluir[j];
+                horarios = horarios.filter(function(h) { return h.id !== id; });
+                horariosExcluidos++;
+            }
+        }
+    }
+    
+    if (confirm('⚠️ ATENÇÃO: Você está excluindo ' + horariosExcluidos + ' horários. Esta ação não pode ser desfeita. Confirmar?')) {
+        atualizarTelaCompleta();
+        showToast(horariosExcluidos + ' horários excluídos com sucesso!');
+    }
+}
+
+// ============================================
+// TRANSFERIR AGENDAMENTOS (NOVO!)
+// ============================================
+function transferirAgendamentos() {
+    var prestadorOrigemId = parseInt(document.getElementById('transferirPrestadorOrigem').value);
+    var prestadorDestinoId = parseInt(document.getElementById('transferirPrestadorDestino').value);
+    
+    if (!prestadorOrigemId || !prestadorDestinoId) {
+        alert('Selecione os prestadores de origem e destino!');
+        return;
+    }
+    
+    if (prestadorOrigemId === prestadorDestinoId) {
+        alert('Os prestadores de origem e destino devem ser diferentes!');
+        return;
+    }
+    
+    var prestadorOrigem = prestadores.find(p => p.id === prestadorOrigemId);
+    var prestadorDestino = prestadores.find(p => p.id === prestadorDestinoId);
+    
+    var agendamentosParaTransferir = agendamentos.filter(function(a) { return a.prestadorId === prestadorOrigemId; });
+    
+    if (agendamentosParaTransferir.length === 0) {
+        alert('Não há agendamentos para transferir do prestador ' + prestadorOrigem.nome);
+        return;
+    }
+    
+    if (confirm('⚠️ ATENÇÃO: Você está transferindo ' + agendamentosParaTransferir.length + ' agendamentos do prestador ' + prestadorOrigem.nome + ' para ' + prestadorDestino.nome + '. Confirmar?')) {
+        for (var i = 0; i < agendamentos.length; i++) {
+            if (agendamentos[i].prestadorId === prestadorOrigemId) {
+                agendamentos[i].prestadorId = prestadorDestinoId;
+            }
+        }
+        atualizarTelaCompleta();
+        showToast(agendamentosParaTransferir.length + ' agendamentos transferidos com sucesso!');
+    }
 }
 
 // ============================================
@@ -631,11 +800,22 @@ function atualizarTelaCompleta() {
     // Selects
     var prestSelect = document.getElementById('horarioPrestadorSelect');
     var prestSelectAge = document.getElementById('agendamentoPrestador');
+    var excluirSelect = document.getElementById('excluirPrestadorSelect');
+    var transferirOrigem = document.getElementById('transferirPrestadorOrigem');
+    var transferirDestino = document.getElementById('transferirPrestadorDestino');
+    
     prestSelect.innerHTML = '';
     prestSelectAge.innerHTML = '';
+    excluirSelect.innerHTML = '';
+    transferirOrigem.innerHTML = '';
+    transferirDestino.innerHTML = '';
+    
     for (var i = 0; i < prestadores.length; i++) {
         prestSelect.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
         prestSelectAge.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
+        excluirSelect.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
+        transferirOrigem.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
+        transferirDestino.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
     }
     
     var servSelect = document.getElementById('horarioServicoSelect');
@@ -691,10 +871,9 @@ function excluirAgendamento(id) {
 }
 
 // ============================================
-// DASHBOARD COM GRÁFICOS SEM LINHAS
+// DASHBOARD
 // ============================================
 function renderizarDashboard() {
-    // Próximos agendamentos
     var hoje = new Date().toISOString().split('T')[0];
     var proximos = agendamentos.filter(function(a) { return a.data >= hoje; }).sort(function(a,b) { return a.data.localeCompare(b.data); }).slice(0,5);
     var container = document.getElementById('proximosAgendamentos');
@@ -712,7 +891,6 @@ function renderizarDashboard() {
         }
     }
     
-    // Gráfico 1: Agendamentos por dia da semana (SEM LINHAS)
     var ctx1 = document.getElementById('graficoDashboard').getContext('2d');
     var dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
     var agendamentosPorDia = [0,0,0,0,0,0,0];
@@ -734,7 +912,6 @@ function renderizarDashboard() {
         }
     });
     
-    // Gráfico 2: Status dos agendamentos (SEM LINHAS)
     var ctx2 = document.getElementById('graficoStatus').getContext('2d');
     var confirmados = agendamentos.filter(function(a) { return a.status === 'confirmado'; }).length;
     var pendentes = agendamentos.filter(function(a) { return a.status === 'pendente'; }).length;
@@ -747,7 +924,7 @@ function renderizarDashboard() {
 }
 
 // ============================================
-// CONSOLIDADO COM FILTROS
+// CONSOLIDADO
 // ============================================
 function renderizarConsolidado() {
     var dataFiltro = document.getElementById('filtroData') ? document.getElementById('filtroData').value : '';
@@ -840,7 +1017,7 @@ function exportarExcel() {
 }
 
 // ============================================
-// FINANCEIRO COM GRÁFICOS SEM LINHAS
+// FINANCEIRO
 // ============================================
 function renderizarFinanceiro() {
     var totalBruto = 0;
@@ -869,7 +1046,6 @@ function renderizarFinanceiro() {
             '<div class="stat-card"><div class="stat-number">R$ ' + totalAReceber.toFixed(2) + '</div><div class="stat-label">A Receber</div></div>';
     }
     
-    // Gráfico Financeiro (SEM LINHAS)
     var ctxFin = document.getElementById('graficoFinanceiro').getContext('2d');
     if (graficoFinanceiro) graficoFinanceiro.destroy();
     graficoFinanceiro = new Chart(ctxFin, {
@@ -878,7 +1054,6 @@ function renderizarFinanceiro() {
         options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
     });
     
-    // Gráfico de Serviços mais procurados (SEM LINHAS)
     var ctxServ = document.getElementById('graficoServicos').getContext('2d');
     var servLabels = Object.keys(servicosCount);
     var servData = Object.values(servicosCount);
@@ -896,7 +1071,7 @@ function renderizarFinanceiro() {
 }
 
 // ============================================
-// CALENDÁRIO VISUAL
+// CALENDÁRIO
 // ============================================
 function carregarCalendario() {
     var mesAno = document.getElementById('calendarioMes').value;
@@ -933,7 +1108,7 @@ function carregarCalendario() {
         for (var j = 0; j < horariosDia.length && j < 3; j++) {
             var h = horariosDia[j];
             var ocupado = agendamentosDia.some(function(a) { return a.hora === h.hora; });
-            var classe = ocupado ? 'cal-ocupado' : 'cal-libre';
+            var classe = ocupado ? 'cal-ocupado' : 'cal-livre';
             var texto = ocupado ? '🔴 ' + h.hora : '🟢 ' + h.hora;
             diaDiv.innerHTML += '<div class="cal-horario ' + classe + '">' + texto + '</div>';
         }
@@ -1075,6 +1250,8 @@ document.getElementById('addAgendamentoBtn').onclick = adicionarAgendamento;
 document.getElementById('aplicarFiltroBtn').onclick = aplicarFiltro;
 document.getElementById('limparFiltroBtn').onclick = limparFiltro;
 document.getElementById('exportarExcelBtn').onclick = exportarExcel;
+document.getElementById('excluirHorariosLoteBtn').onclick = excluirHorariosEmLote;
+document.getElementById('transferirAgendamentosBtn').onclick = transferirAgendamentos;
 
 // TABS
 var tabs = document.querySelectorAll('.tab');
@@ -1104,6 +1281,8 @@ document.getElementById('horarioDataInicio').value = hoje;
 document.getElementById('horarioDataFim').value = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
 document.getElementById('agendamentoData').value = hoje;
 document.getElementById('filtroData').value = hoje;
+document.getElementById('excluirDataInicio').value = hoje;
+document.getElementById('excluirDataFim').value = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
 document.getElementById('horarioHoraInicio').value = '08:00';
 document.getElementById('horarioHoraFim').value = '18:00';
 
@@ -1134,10 +1313,11 @@ nextServId = 5;
 nextAgeId = 3;
 
 mostrarLogin();
-console.log('✅ SISTEMA COMPLETO - Agendamento Profissional');
+console.log('✅ SISTEMA COMPLETO - Com novas ferramentas!');
 console.log('🔐 Login: CPF 12345678909 | Senha: admin');
-console.log('📅 Criar horários em massa: selecione período, dias da semana e intervalo!');
-console.log('📊 Gráficos sem linhas de grade e tamanho reduzido!');
+console.log('📅 Nova aba "Ferramentas" com:');
+console.log('   🗑️ Excluir horários em lote');
+console.log('   🔄 Transferir agendamentos entre prestadores');
 </script>
 </body>
 </html>
