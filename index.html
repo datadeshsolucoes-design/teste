@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📅 Data Desh Agenda</title>
+    <title>📅 Data Desh Agenda - Sistema Profissional</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -11,21 +13,8 @@
         body { font-family: 'Inter', sans-serif; background: #f0f4f8; }
         
         /* LOGIN */
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-        .login-card {
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        }
+        .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .login-card { background: white; border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
         .login-card h1 { font-size: 1.8rem; font-weight: 800; text-align: center; color: #1e293b; margin-bottom: 8px; }
         .login-card h1 span { background: linear-gradient(135deg, #4f46e5, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-card .subtitle { text-align: center; color: #64748b; font-size: 0.85rem; margin-bottom: 32px; }
@@ -36,7 +25,6 @@
         .btn { width: 100%; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
         .btn-primary { background: #4f46e5; color: white; }
         .btn-primary:hover { background: #4338ca; }
-        .btn-secondary { background: #f1f5f9; color: #334155; margin-top: 12px; }
         .link { text-align: center; margin-top: 20px; font-size: 0.8rem; }
         .link span { color: #4f46e5; cursor: pointer; }
         .hidden { display: none !important; }
@@ -48,14 +36,17 @@
         .user-avatar { width: 40px; height: 40px; background: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
         .btn-sair { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
         
-        /* CONTAINER */
-        .app-main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .app-main { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
-        /* CARDS */
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        /* STATS */
+        .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: white; padding: 20px; border-radius: 16px; border-left: 4px solid #4f46e5; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .stat-number { font-size: 2rem; font-weight: 800; }
+        .stat-number { font-size: 1.8rem; font-weight: 800; }
         .stat-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; margin-top: 5px; }
+        
+        /* BOTÃO AGENDA EXTERNA */
+        .btn-agenda-externa { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        .btn-agenda-externa:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
         
         /* TABS */
         .tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
@@ -64,28 +55,47 @@
         
         /* PAINÉIS */
         .panel { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .panel h3 { margin-bottom: 20px; font-size: 1.1rem; }
+        .panel h3 { margin-bottom: 20px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
         .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; }
         .btn-salvar { background: #4f46e5; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-excel { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        
+        /* FILTROS */
+        .filtro-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+        .filtro-row input, .filtro-row select { padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 10px; }
         
         /* TABELA */
         .table-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 12px; background: #f8fafc; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
         td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
+        .status-pago { background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .status-pendente { background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .btn-whats { background: #25D366; color: white; border: none; padding: 4px 8px; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
         
         .item-list { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
         .item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; }
-        .item-row:last-child { border-bottom: none; }
         .btn-excluir { background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
+        
+        /* CALENDÁRIO */
+        .calendario-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; }
+        .cal-dia { background: #f8fafc; border-radius: 12px; padding: 12px; min-height: 100px; }
+        .cal-dia-num { font-weight: 700; margin-bottom: 8px; }
+        .cal-horario { font-size: 0.7rem; padding: 4px; margin: 2px 0; border-radius: 6px; cursor: pointer; }
+        .cal-livre { background: #d1fae5; color: #065f46; }
+        .cal-ocupado { background: #fee2e2; color: #991b1b; }
         
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
+        /* TOAST */
+        .toast { position: fixed; bottom: 20px; right: 20px; background: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; border-left: 4px solid #10b981; }
+        
         @media (max-width: 768px) {
-            .stats { grid-template-columns: 1fr 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
             .app-main { padding: 12px; }
+            .calendario-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -96,9 +106,9 @@
     <div class="login-container">
         <div class="login-card">
             <h1>📅 <span>Data Desh Agenda</span></h1>
-            <p class="subtitle">Sistema de Agendamentos</p>
+            <p class="subtitle">Sistema Profissional de Agendamentos</p>
             <div class="input-group"><label>CPF</label><input type="text" id="inputCpf" placeholder="12345678909"></div>
-            <div class="input-group"><label>SENHA</label><input type="password" id="inputSenha" placeholder="******"></div>
+            <div class="input-group"><label>SENHA</label><input type="password" id="inputSenha" placeholder="admin"></div>
             <button class="btn btn-primary" id="btnEntrar">ENTRAR</button>
             <div class="link"><span id="btnCriarConta">📝 Criar conta</span> | <span id="btnEsqueciSenha">🔑 Esqueci a senha</span></div>
         </div>
@@ -138,7 +148,7 @@
     </div>
 </div>
 
-<!-- SISTEMA PRINCIPAL (MOCKADO - SEM BANCO) -->
+<!-- SISTEMA PRINCIPAL -->
 <div id="sistemaScreen" class="hidden">
     <div class="app-main">
         <div class="app-header">
@@ -150,33 +160,49 @@
             </div>
         </div>
 
+        <!-- BOTÃO AGENDA EXTERNA -->
+        <button class="btn-agenda-externa" id="btnCopiarLinkAgenda">
+            <i class="fas fa-share-alt"></i> Compartilhar Agenda Externa
+            <i class="fas fa-copy"></i>
+        </button>
+
+        <!-- STATS -->
         <div class="stats">
             <div class="stat-card"><div class="stat-number" id="totalPrestadores">0</div><div class="stat-label">PRESTADORES</div></div>
             <div class="stat-card"><div class="stat-number" id="totalServicos">0</div><div class="stat-label">SERVIÇOS</div></div>
-            <div class="stat-card"><div class="stat-number" id="totalHorarios">0</div><div class="stat-label">HORÁRIOS</div></div>
-            <div class="stat-card"><div class="stat-number" id="totalAgendamentos">0</div><div class="stat-label">AGENDAMENTOS</div></div>
+            <div class="stat-card"><div class="stat-number" id="totalAgendamentos">0</div><div class="stat-label">TOTAL AGEND.</div></div>
+            <div class="stat-card"><div class="stat-number" id="totalHoje">0</div><div class="stat-label">AGEND. HOJE</div></div>
+            <div class="stat-card"><div class="stat-number" id="totalSinal">R$ 0</div><div class="stat-label">SINAL RECEBIDO</div></div>
         </div>
 
+        <!-- TABS -->
         <div class="tabs">
             <button class="tab active" data-tab="dashboard">📊 Dashboard</button>
             <button class="tab" data-tab="prestadores">👨‍💼 Prestadores</button>
             <button class="tab" data-tab="servicos">✂️ Serviços</button>
             <button class="tab" data-tab="horarios">⏰ Horários</button>
             <button class="tab" data-tab="agendamentos">📋 Agendamentos</button>
+            <button class="tab" data-tab="consolidado">📊 Consolidado</button>
+            <button class="tab" data-tab="calendario">📅 Calendário</button>
+            <button class="tab" data-tab="financeiro">💰 Financeiro</button>
         </div>
 
         <!-- DASHBOARD -->
         <div id="dashboardTab" class="tab-content active">
             <div class="panel">
-                <h3>📈 Bem-vindo ao sistema!</h3>
-                <p style="color: #64748b;">Sistema de agendamentos funcionando perfeitamente.</p>
+                <h3><i class="fas fa-chart-line"></i> Dashboard - Resumo do Negócio</h3>
+                <canvas id="graficoDashboard" height="200"></canvas>
+            </div>
+            <div class="panel">
+                <h3><i class="fas fa-clock"></i> Próximos Agendamentos</h3>
+                <div id="proximosAgendamentos"></div>
             </div>
         </div>
 
         <!-- PRESTADORES -->
         <div id="prestadoresTab" class="tab-content">
             <div class="panel">
-                <h3>➕ Novo Prestador</h3>
+                <h3><i class="fas fa-user-plus"></i> Novo Prestador</h3>
                 <div class="form-row">
                     <div class="form-group"><input type="text" id="novoPrestadorNome" placeholder="Nome do prestador"></div>
                     <div class="form-group"><input type="text" id="novoPrestadorWhats" placeholder="WhatsApp"></div>
@@ -184,7 +210,7 @@
                 <button class="btn-salvar" id="addPrestadorBtn">Salvar Prestador</button>
             </div>
             <div class="panel">
-                <h3>📋 Lista de Prestadores</h3>
+                <h3><i class="fas fa-list"></i> Lista de Prestadores</h3>
                 <div id="listaPrestadores" class="item-list"></div>
             </div>
         </div>
@@ -192,16 +218,17 @@
         <!-- SERVIÇOS -->
         <div id="servicosTab" class="tab-content">
             <div class="panel">
-                <h3>➕ Novo Serviço</h3>
+                <h3><i class="fas fa-cut"></i> Novo Serviço</h3>
                 <div class="form-row">
                     <div class="form-group"><input type="text" id="novoServicoNome" placeholder="Nome do serviço"></div>
                     <div class="form-group"><input type="number" id="novoServicoDuracao" placeholder="Duração (min)" value="60"></div>
                     <div class="form-group"><input type="number" id="novoServicoValor" placeholder="Valor (R$)" step="0.01" value="50"></div>
+                    <div class="form-group"><input type="number" id="novoServicoSinal" placeholder="Sinal (%)" step="1" value="30"></div>
                 </div>
                 <button class="btn-salvar" id="addServicoBtn">Salvar Serviço</button>
             </div>
             <div class="panel">
-                <h3>📋 Lista de Serviços</h3>
+                <h3><i class="fas fa-list"></i> Lista de Serviços</h3>
                 <div id="listaServicos" class="item-list"></div>
             </div>
         </div>
@@ -209,7 +236,7 @@
         <!-- HORÁRIOS -->
         <div id="horariosTab" class="tab-content">
             <div class="panel">
-                <h3>⏰ Criar Horários</h3>
+                <h3><i class="fas fa-calendar-plus"></i> Criar Horários</h3>
                 <div class="form-row">
                     <div class="form-group"><select id="horarioPrestadorSelect"></select></div>
                     <div class="form-group"><select id="horarioServicoSelect"></select></div>
@@ -219,17 +246,66 @@
                 </div>
                 <button class="btn-salvar" id="criarHorariosBtn">Criar Horários</button>
             </div>
+        </div>
+
+        <!-- AGENDAMENTOS (CRUD completo) -->
+        <div id="agendamentosTab" class="tab-content">
             <div class="panel">
-                <h3>📋 Lista de Horários</h3>
-                <div id="listaHorarios" class="item-list"></div>
+                <h3><i class="fas fa-calendar-check"></i> Novo Agendamento</h3>
+                <div class="form-row">
+                    <div class="form-group"><input type="text" id="agendamentoCliente" placeholder="Nome do cliente"></div>
+                    <div class="form-group"><input type="text" id="agendamentoWhats" placeholder="WhatsApp"></div>
+                    <div class="form-group"><select id="agendamentoPrestador"></select></div>
+                    <div class="form-group"><select id="agendamentoServico"></select></div>
+                    <div class="form-group"><input type="date" id="agendamentoData"></div>
+                    <div class="form-group"><input type="time" id="agendamentoHora"></div>
+                    <div class="form-group"><input type="number" id="agendamentoSinalPago" placeholder="Sinal pago (R$)" step="0.01" value="0"></div>
+                </div>
+                <button class="btn-salvar" id="addAgendamentoBtn">Salvar Agendamento</button>
+            </div>
+            <div class="panel">
+                <h3><i class="fas fa-list"></i> Lista de Agendamentos</h3>
+                <div id="listaAgendamentos" class="table-wrapper"><table id="tabelaAgendamentos"><thead><tr><th>Cliente</th><th>WhatsApp</th><th>Serviço</th><th>Prestador</th><th>Data/Hora</th><th>Valor</th><th>Sinal</th><th>Status</th><th>Ações</th></tr></thead><tbody></tbody></table></div>
             </div>
         </div>
 
-        <!-- AGENDAMENTOS -->
-        <div id="agendamentosTab" class="tab-content">
+        <!-- CONSOLIDADO -->
+        <div id="consolidadoTab" class="tab-content">
             <div class="panel">
-                <h3>📋 Lista de Agendamentos</h3>
-                <div id="listaAgendamentos" class="item-list"></div>
+                <h3><i class="fas fa-filter"></i> Filtrar Agendamentos</h3>
+                <div class="filtro-row">
+                    <input type="date" id="filtroData" placeholder="Data específica">
+                    <input type="month" id="filtroMes" placeholder="Mês">
+                    <select id="filtroStatus"><option value="">Todos</option><option value="confirmado">Confirmado</option><option value="pendente">Pendente</option></select>
+                    <button class="btn-salvar" id="aplicarFiltroBtn">Filtrar</button>
+                    <button class="btn-salvar" id="limparFiltroBtn">Limpar</button>
+                    <button class="btn-excel" id="exportarExcelBtn"><i class="fas fa-file-excel"></i> Exportar Excel</button>
+                </div>
+            </div>
+            <div class="panel">
+                <h3><i class="fas fa-chart-bar"></i> Consolidado de Agendamentos</h3>
+                <div id="resumoConsolidado" style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px;"></div>
+                <div class="table-wrapper"><table id="tabelaConsolidado"><thead><tr><th>Cliente</th><th>WhatsApp</th><th>Serviço</th><th>Prestador</th><th>Data/Hora</th><th>Valor</th><th>Sinal Pago</th><th>Status</th><th>WhatsApp</th></tr></thead><tbody></tbody></table></div>
+            </div>
+        </div>
+
+        <!-- CALENDÁRIO VISUAL -->
+        <div id="calendarioTab" class="tab-content">
+            <div class="panel">
+                <h3><i class="fas fa-calendar-alt"></i> Calendário de Horários</h3>
+                <div class="filtro-row">
+                    <input type="month" id="calendarioMes" onchange="carregarCalendario()">
+                </div>
+                <div id="calendarioGrid" class="calendario-grid"></div>
+            </div>
+        </div>
+
+        <!-- FINANCEIRO -->
+        <div id="financeiroTab" class="tab-content">
+            <div class="panel">
+                <h3><i class="fas fa-chart-line"></i> Resumo Financeiro</h3>
+                <div id="resumoFinanceiro" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px;"></div>
+                <canvas id="graficoFinanceiro" height="200"></canvas>
             </div>
         </div>
     </div>
@@ -237,14 +313,24 @@
 
 <script>
 // ============================================
-// DADOS MOCKADOS (SIMULADOS, SEM BANCO)
+// DADOS GLOBAIS
 // ============================================
 var prestadores = [];
 var servicos = [];
 var horarios = [];
 var agendamentos = [];
 
+var nextPrestId = 1;
+var nextServId = 1;
+var nextAgeId = 1;
+
 var usuarioAtual = null;
+
+var graficoDashboard = null;
+var graficoFinanceiro = null;
+
+// LINK DA AGENDA EXTERNA (para clientes)
+var LINK_AGENDA_EXTERNA = window.location.href.split('#')[0] + '?modo=cliente';
 
 // ============================================
 // FUNÇÕES DE TELA
@@ -256,37 +342,77 @@ function mostrarLogin() {
     document.getElementById('sistemaScreen').classList.add('hidden');
 }
 
-function mostrarCadastro() {
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('cadastroScreen').classList.remove('hidden');
-    document.getElementById('resetScreen').classList.add('hidden');
-    document.getElementById('sistemaScreen').classList.add('hidden');
-}
-
-function mostrarReset() {
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('cadastroScreen').classList.add('hidden');
-    document.getElementById('resetScreen').classList.remove('hidden');
-    document.getElementById('sistemaScreen').classList.add('hidden');
-}
-
 function mostrarSistema() {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('cadastroScreen').classList.add('hidden');
     document.getElementById('resetScreen').classList.add('hidden');
     document.getElementById('sistemaScreen').classList.remove('hidden');
-    atualizarTela();
+    atualizarTelaCompleta();
+}
+
+function showToast(msg) {
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = '<i class="fas fa-check-circle" style="color:#10b981"></i> ' + msg;
+    document.body.appendChild(toast);
+    setTimeout(function() { toast.remove(); }, 3000);
 }
 
 // ============================================
-// ATUALIZAR TELA
+// ENVIAR WHATSAPP
 // ============================================
-function atualizarTela() {
+function enviarWhatsApp(numero, mensagem) {
+    var numeroLimpo = numero.replace(/\D/g, '');
+    if (numeroLimpo.length < 10) { alert('Número inválido'); return; }
+    var url = 'https://wa.me/55' + numeroLimpo + '?text=' + encodeURIComponent(mensagem);
+    window.open(url, '_blank');
+}
+
+function notificarCliente(agendamento) {
+    var serv = servicos.find(s => s.id === agendamento.servicoId);
+    var prest = prestadores.find(p => p.id === agendamento.prestadorId);
+    var valorSinal = (serv ? serv.valor * (serv.sinalPercentual / 100) : 0);
+    var msg = '✅ *AGENDAMENTO CONFIRMADO!*\n\n' +
+              '📅 Data: ' + agendamento.data + '\n' +
+              '⏰ Horário: ' + agendamento.hora + '\n' +
+              '✂️ Serviço: ' + (serv ? serv.nome : '—') + '\n' +
+              '👨‍💼 Profissional: ' + (prest ? prest.nome : '—') + '\n' +
+              '💰 Valor total: R$ ' + (serv ? serv.valor.toFixed(2) : '0') + '\n' +
+              '💵 Sinal pago: R$ ' + (agendamento.sinalPago || 0).toFixed(2) + '\n\n' +
+              '🔔 Chegue 10 minutos antes!';
+    enviarWhatsApp(agendamento.whats, msg);
+}
+
+function notificarPrestador(agendamento) {
+    var prest = prestadores.find(p => p.id === agendamento.prestadorId);
+    if (!prest || !prest.whats) return;
+    var serv = servicos.find(s => s.id === agendamento.servicoId);
+    var msg = '🆕 *NOVO AGENDAMENTO!*\n\n' +
+              '👤 Cliente: ' + agendamento.cliente + '\n' +
+              '📅 Data: ' + agendamento.data + '\n' +
+              '⏰ Horário: ' + agendamento.hora + '\n' +
+              '✂️ Serviço: ' + (serv ? serv.nome : '—') + '\n' +
+              '💰 Valor: R$ ' + (serv ? serv.valor.toFixed(2) : '0') + '\n' +
+              '💵 Sinal: R$ ' + (agendamento.sinalPago || 0).toFixed(2) + '\n' +
+              '📞 Cliente WhatsApp: ' + agendamento.whats;
+    enviarWhatsApp(prest.whats, msg);
+}
+
+// ============================================
+// ATUALIZAR TELA COMPLETA
+// ============================================
+function atualizarTelaCompleta() {
     // Stats
     document.getElementById('totalPrestadores').innerText = prestadores.length;
     document.getElementById('totalServicos').innerText = servicos.length;
-    document.getElementById('totalHorarios').innerText = horarios.length;
     document.getElementById('totalAgendamentos').innerText = agendamentos.length;
+    
+    var hoje = new Date().toISOString().split('T')[0];
+    var agendamentosHoje = agendamentos.filter(function(a) { return a.data === hoje; });
+    document.getElementById('totalHoje').innerText = agendamentosHoje.length;
+    
+    var totalSinal = agendamentos.reduce(function(soma, a) { return soma + (a.sinalPago || 0); }, 0);
+    document.getElementById('totalSinal').innerHTML = 'R$ ' + totalSinal.toFixed(2);
     
     // Prestadores
     var prestLista = document.getElementById('listaPrestadores');
@@ -295,12 +421,10 @@ function atualizarTela() {
         var p = prestadores[i];
         var div = document.createElement('div');
         div.className = 'item-row';
-        div.innerHTML = '<div><strong>' + p.nome + '</strong><br><small>📱 ' + p.whats + '</small></div><button class="btn-excluir" onclick="excluirPrestador(' + p.id + ')">Excluir</button>';
+        div.innerHTML = '<div><strong>' + p.nome + '</strong><br><small>📱 ' + (p.whats || 'N/A') + '</small></div><button class="btn-excluir" onclick="excluirPrestador(' + p.id + ')">Excluir</button>';
         prestLista.appendChild(div);
     }
-    if (prestadores.length === 0) {
-        prestLista.innerHTML = '<div class="item-row" style="justify-content:center; color:#64748b;">Nenhum prestador cadastrado</div>';
-    }
+    if (prestadores.length === 0) prestLista.innerHTML = '<div class="item-row" style="justify-content:center;">Nenhum prestador</div>';
     
     // Serviços
     var servLista = document.getElementById('listaServicos');
@@ -309,167 +433,383 @@ function atualizarTela() {
         var s = servicos[i];
         var div = document.createElement('div');
         div.className = 'item-row';
-        div.innerHTML = '<div><strong>' + s.nome + '</strong><br><small>⏱️ ' + s.duracao + 'min | 💰 R$ ' + s.valor.toFixed(2) + '</small></div><button class="btn-excluir" onclick="excluirServico(' + s.id + ')">Excluir</button>';
+        div.innerHTML = '<div><strong>' + s.nome + '</strong><br><small>⏱️ ' + s.duracao + 'min | 💰 R$ ' + s.valor.toFixed(2) + ' | Sinal: ' + (s.sinalPercentual || 30) + '%</small></div><button class="btn-excluir" onclick="excluirServico(' + s.id + ')">Excluir</button>';
         servLista.appendChild(div);
     }
-    if (servicos.length === 0) {
-        servLista.innerHTML = '<div class="item-row" style="justify-content:center; color:#64748b;">Nenhum serviço cadastrado</div>';
-    }
+    if (servicos.length === 0) servLista.innerHTML = '<div class="item-row" style="justify-content:center;">Nenhum serviço</div>';
     
-    // Selects para horários
+    // Selects
     var prestSelect = document.getElementById('horarioPrestadorSelect');
+    var prestSelectAge = document.getElementById('agendamentoPrestador');
     prestSelect.innerHTML = '';
+    prestSelectAge.innerHTML = '';
     for (var i = 0; i < prestadores.length; i++) {
         prestSelect.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
+        prestSelectAge.innerHTML += '<option value="' + prestadores[i].id + '">' + prestadores[i].nome + '</option>';
     }
     
     var servSelect = document.getElementById('horarioServicoSelect');
+    var servSelectAge = document.getElementById('agendamentoServico');
     servSelect.innerHTML = '';
+    servSelectAge.innerHTML = '';
     for (var i = 0; i < servicos.length; i++) {
         servSelect.innerHTML += '<option value="' + servicos[i].id + '">' + servicos[i].nome + ' - R$ ' + servicos[i].valor.toFixed(2) + '</option>';
+        servSelectAge.innerHTML += '<option value="' + servicos[i].id + '">' + servicos[i].nome + ' - R$ ' + servicos[i].valor.toFixed(2) + '</option>';
     }
     
-    // Horários
-    var horLista = document.getElementById('listaHorarios');
-    horLista.innerHTML = '';
-    for (var i = 0; i < horarios.length; i++) {
-        var h = horarios[i];
-        var prest = prestadores.find(function(p) { return p.id === h.prestadorId; });
-        var serv = servicos.find(function(s) { return s.id === h.servicoId; });
-        var div = document.createElement('div');
-        div.className = 'item-row';
-        div.innerHTML = '<div><strong>' + (prest ? prest.nome : '—') + '</strong><br><small>' + (serv ? serv.nome : '—') + ' | ' + h.data + ' ' + h.hora + '</small></div>';
-        horLista.appendChild(div);
-    }
-    if (horarios.length === 0) {
-        horLista.innerHTML = '<div class="item-row" style="justify-content:center; color:#64748b;">Nenhum horário criado</div>';
-    }
+    // Agendamentos (tabela)
+    renderizarTabelaAgendamentos();
     
-    // Agendamentos
-    var ageLista = document.getElementById('listaAgendamentos');
-    ageLista.innerHTML = '';
+    // Dashboard
+    renderizarDashboard();
+    
+    // Consolidado
+    renderizarConsolidado();
+    
+    // Financeiro
+    renderizarFinanceiro();
+    
+    // Calendário
+    carregarCalendario();
+}
+
+function renderizarTabelaAgendamentos() {
+    var tbody = document.querySelector('#tabelaAgendamentos tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
     for (var i = 0; i < agendamentos.length; i++) {
         var a = agendamentos[i];
-        var prest = prestadores.find(function(p) { return p.id === a.prestadorId; });
         var serv = servicos.find(function(s) { return s.id === a.servicoId; });
-        var div = document.createElement('div');
-        div.className = 'item-row';
-        div.innerHTML = '<div><strong>' + a.cliente + '</strong><br><small>📱 ' + a.whats + ' | ' + (prest ? prest.nome : '—') + ' | ' + a.data + ' ' + a.hora + '</small></div>';
-        ageLista.appendChild(div);
+        var prest = prestadores.find(function(p) { return p.id === a.prestadorId; });
+        var statusClass = a.status === 'confirmado' ? 'status-pago' : 'status-pendente';
+        var statusText = a.status === 'confirmado' ? 'Confirmado' : 'Pendente';
+        var row = tbody.insertRow();
+        row.insertCell(0).innerHTML = a.cliente;
+        row.insertCell(1).innerHTML = a.whats;
+        row.insertCell(2).innerHTML = serv ? serv.nome : '—';
+        row.insertCell(3).innerHTML = prest ? prest.nome : '—';
+        row.insertCell(4).innerHTML = a.data + ' ' + a.hora;
+        row.insertCell(5).innerHTML = 'R$ ' + (serv ? serv.valor.toFixed(2) : '0');
+        row.insertCell(6).innerHTML = 'R$ ' + (a.sinalPago || 0).toFixed(2);
+        row.insertCell(7).innerHTML = '<span class="' + statusClass + '">' + statusText + '</span>';
+        row.insertCell(8).innerHTML = '<button class="btn-whats" onclick="enviarWhatsAppCliente(' + a.id + ')"><i class="fab fa-whatsapp"></i></button> <button class="btn-excluir" onclick="excluirAgendamento(' + a.id + ')">Excluir</button>';
     }
-    if (agendamentos.length === 0) {
-        ageLista.innerHTML = '<div class="item-row" style="justify-content:center; color:#64748b;">Nenhum agendamento</div>';
+}
+
+function enviarWhatsAppCliente(id) {
+    var a = agendamentos.find(function(ag) { return ag.id === id; });
+    if (a) notificarCliente(a);
+}
+
+function excluirAgendamento(id) {
+    if (confirm('Excluir este agendamento?')) {
+        agendamentos = agendamentos.filter(function(a) { return a.id !== id; });
+        atualizarTelaCompleta();
+        showToast('Agendamento excluído');
     }
 }
 
 // ============================================
-// CRUD PRESTADORES
+// DASHBOARD
 // ============================================
-var nextPrestId = 1;
+function renderizarDashboard() {
+    // Próximos agendamentos
+    var hoje = new Date().toISOString().split('T')[0];
+    var proximos = agendamentos.filter(function(a) { return a.data >= hoje; }).sort(function(a,b) { return a.data.localeCompare(b.data); }).slice(0,5);
+    var container = document.getElementById('proximosAgendamentos');
+    container.innerHTML = '';
+    if (proximos.length === 0) {
+        container.innerHTML = '<p>Nenhum agendamento futuro</p>';
+    } else {
+        for (var i = 0; i < proximos.length; i++) {
+            var a = proximos[i];
+            var serv = servicos.find(function(s) { return s.id === a.servicoId; });
+            var div = document.createElement('div');
+            div.style.cssText = 'padding: 12px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;';
+            div.innerHTML = '<div><strong>' + a.cliente + '</strong><br><small>' + a.data + ' ' + a.hora + ' | ' + (serv ? serv.nome : '—') + '</small></div>';
+            container.appendChild(div);
+        }
+    }
+    
+    // Gráfico
+    var ctx = document.getElementById('graficoDashboard').getContext('2d');
+    var dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+    var agendamentosPorDia = [0,0,0,0,0,0,0];
+    for (var i = 0; i < agendamentos.length; i++) {
+        var data = new Date(agendamentos[i].data);
+        var diaSemana = data.getDay();
+        var idx = diaSemana === 0 ? 6 : diaSemana - 1;
+        agendamentosPorDia[idx]++;
+    }
+    if (graficoDashboard) graficoDashboard.destroy();
+    graficoDashboard = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: dias, datasets: [{ label: 'Agendamentos', data: agendamentosPorDia, backgroundColor: '#4f46e5', borderRadius: 8 }] },
+        options: { responsive: true, maintainAspectRatio: true }
+    });
+}
+
+// ============================================
+// CONSOLIDADO COM FILTROS
+// ============================================
+function renderizarConsolidado() {
+    var dataFiltro = document.getElementById('filtroData') ? document.getElementById('filtroData').value : '';
+    var mesFiltro = document.getElementById('filtroMes') ? document.getElementById('filtroMes').value : '';
+    var statusFiltro = document.getElementById('filtroStatus') ? document.getElementById('filtroStatus').value : '';
+    
+    var dados = agendamentos.slice();
+    if (dataFiltro) dados = dados.filter(function(a) { return a.data === dataFiltro; });
+    if (mesFiltro) dados = dados.filter(function(a) { return a.data.startsWith(mesFiltro); });
+    if (statusFiltro) dados = dados.filter(function(a) { return a.status === statusFiltro; });
+    
+    var totalValor = 0;
+    var totalSinal = 0;
+    var confirmados = 0;
+    var pendentes = 0;
+    
+    for (var i = 0; i < dados.length; i++) {
+        var serv = servicos.find(function(s) { return s.id === dados[i].servicoId; });
+        totalValor += serv ? serv.valor : 0;
+        totalSinal += dados[i].sinalPago || 0;
+        if (dados[i].status === 'confirmado') confirmados++;
+        else pendentes++;
+    }
+    
+    document.getElementById('resumoConsolidado').innerHTML = 
+        '<div class="stat-card"><div class="stat-number">' + dados.length + '</div><div class="stat-label">Total Agendamentos</div></div>' +
+        '<div class="stat-card"><div class="stat-number">R$ ' + totalValor.toFixed(2) + '</div><div class="stat-label">Valor Total</div></div>' +
+        '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
+        '<div class="stat-card"><div class="stat-number">' + confirmados + ' / ' + pendentes + '</div><div class="stat-label">Confirmados/Pendentes</div></div>';
+    
+    var tbody = document.querySelector('#tabelaConsolidado tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    for (var i = 0; i < dados.length; i++) {
+        var a = dados[i];
+        var serv = servicos.find(function(s) { return s.id === a.servicoId; });
+        var prest = prestadores.find(function(p) { return p.id === a.prestadorId; });
+        var row = tbody.insertRow();
+        row.insertCell(0).innerHTML = a.cliente;
+        row.insertCell(1).innerHTML = a.whats;
+        row.insertCell(2).innerHTML = serv ? serv.nome : '—';
+        row.insertCell(3).innerHTML = prest ? prest.nome : '—';
+        row.insertCell(4).innerHTML = a.data + ' ' + a.hora;
+        row.insertCell(5).innerHTML = 'R$ ' + (serv ? serv.valor.toFixed(2) : '0');
+        row.insertCell(6).innerHTML = 'R$ ' + (a.sinalPago || 0).toFixed(2);
+        row.insertCell(7).innerHTML = a.status === 'confirmado' ? 'Confirmado' : 'Pendente';
+        row.insertCell(8).innerHTML = '<button class="btn-whats" onclick="enviarWhatsAppCliente(' + a.id + ')"><i class="fab fa-whatsapp"></i> MSG</button>';
+    }
+}
+
+function aplicarFiltro() { renderizarConsolidado(); }
+function limparFiltro() {
+    if (document.getElementById('filtroData')) document.getElementById('filtroData').value = '';
+    if (document.getElementById('filtroMes')) document.getElementById('filtroMes').value = '';
+    if (document.getElementById('filtroStatus')) document.getElementById('filtroStatus').value = '';
+    renderizarConsolidado();
+}
+function exportarExcel() {
+    var dados = [];
+    var dataFiltro = document.getElementById('filtroData').value;
+    var mesFiltro = document.getElementById('filtroMes').value;
+    var lista = agendamentos.slice();
+    if (dataFiltro) lista = lista.filter(function(a) { return a.data === dataFiltro; });
+    if (mesFiltro) lista = lista.filter(function(a) { return a.data.startsWith(mesFiltro); });
+    for (var i = 0; i < lista.length; i++) {
+        var a = lista[i];
+        var serv = servicos.find(function(s) { return s.id === a.servicoId; });
+        var prest = prestadores.find(function(p) { return p.id === a.prestadorId; });
+        dados.push({
+            Cliente: a.cliente,
+            WhatsApp: a.whats,
+            Servico: serv ? serv.nome : '—',
+            Prestador: prest ? prest.nome : '—',
+            Data: a.data,
+            Hora: a.hora,
+            Valor: serv ? serv.valor : 0,
+            SinalPago: a.sinalPago || 0,
+            Status: a.status
+        });
+    }
+    var ws = XLSX.utils.json_to_sheet(dados);
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Agendamentos');
+    XLSX.writeFile(wb, 'agendamentos_' + new Date().toISOString().slice(0,10) + '.xlsx');
+    showToast('Relatório exportado!');
+}
+
+// ============================================
+// FINANCEIRO
+// ============================================
+function renderizarFinanceiro() {
+    var totalBruto = 0;
+    var totalSinal = 0;
+    var totalAReceber = 0;
+    for (var i = 0; i < agendamentos.length; i++) {
+        var a = agendamentos[i];
+        var serv = servicos.find(function(s) { return s.id === a.servicoId; });
+        var valor = serv ? serv.valor : 0;
+        totalBruto += valor;
+        totalSinal += a.sinalPago || 0;
+        if (a.status !== 'confirmado') totalAReceber += valor - (a.sinalPago || 0);
+    }
+    document.getElementById('resumoFinanceiro').innerHTML = 
+        '<div class="stat-card"><div class="stat-number">R$ ' + totalBruto.toFixed(2) + '</div><div class="stat-label">Valor Bruto</div></div>' +
+        '<div class="stat-card"><div class="stat-number">R$ ' + totalSinal.toFixed(2) + '</div><div class="stat-label">Sinal Recebido</div></div>' +
+        '<div class="stat-card"><div class="stat-number">R$ ' + totalAReceber.toFixed(2) + '</div><div class="stat-label">A Receber</div></div>';
+    
+    var ctx = document.getElementById('graficoFinanceiro').getContext('2d');
+    if (graficoFinanceiro) graficoFinanceiro.destroy();
+    graficoFinanceiro = new Chart(ctx, {
+        type: 'doughnut',
+        data: { labels: ['Sinal Recebido', 'A Receber'], datasets: [{ data: [totalSinal, totalAReceber], backgroundColor: ['#10b981', '#f59e0b'] }] },
+        options: { responsive: true, maintainAspectRatio: true }
+    });
+}
+
+// ============================================
+// CALENDÁRIO VISUAL
+// ============================================
+function carregarCalendario() {
+    var mesAno = document.getElementById('calendarioMes').value;
+    if (!mesAno) {
+        var hoje = new Date();
+        mesAno = hoje.getFullYear() + '-' + String(hoje.getMonth() + 1).padStart(2, '0');
+        document.getElementById('calendarioMes').value = mesAno;
+    }
+    var [ano, mes] = mesAno.split('-').map(Number);
+    var primeiroDia = new Date(ano, mes - 1, 1);
+    var ultimoDia = new Date(ano, mes, 0);
+    var startOffset = primeiroDia.getDay();
+    var grid = document.getElementById('calendarioGrid');
+    grid.innerHTML = '';
+    var diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    for (var i = 0; i < 7; i++) {
+        var header = document.createElement('div');
+        header.style.cssText = 'font-weight:700; text-align:center; padding:8px;';
+        header.innerText = diasSemana[i];
+        grid.appendChild(header);
+    }
+    for (var i = 0; i < startOffset; i++) {
+        var vazio = document.createElement('div');
+        vazio.style.cssText = 'background:#f8fafc; border-radius:12px; padding:12px; min-height:100px; opacity:0.5;';
+        grid.appendChild(vazio);
+    }
+    for (var d = 1; d <= ultimoDia.getDate(); d++) {
+        var dataStr = ano + '-' + String(mes).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        var horariosDia = horarios.filter(function(h) { return h.data === dataStr; });
+        var agendamentosDia = agendamentos.filter(function(a) { return a.data === dataStr; });
+        var diaDiv = document.createElement('div');
+        diaDiv.className = 'cal-dia';
+        diaDiv.innerHTML = '<div class="cal-dia-num">' + d + '</div>';
+        for (var j = 0; j < horariosDia.length && j < 3; j++) {
+            var h = horariosDia[j];
+            var ocupado = agendamentosDia.some(function(a) { return a.hora === h.hora; });
+            var classe = ocupado ? 'cal-ocupado' : 'cal-livre';
+            var texto = ocupado ? '🔴 ' + h.hora : '🟢 ' + h.hora;
+            diaDiv.innerHTML += '<div class="cal-horario ' + classe + '">' + texto + '</div>';
+        }
+        if (horariosDia.length > 3) diaDiv.innerHTML += '<div style="font-size:0.7rem; color:#64748b;">+' + (horariosDia.length - 3) + ' mais</div>';
+        grid.appendChild(diaDiv);
+    }
+}
+
+// ============================================
+// CRUD
+// ============================================
 function adicionarPrestador() {
     var nome = document.getElementById('novoPrestadorNome').value.trim();
     var whats = document.getElementById('novoPrestadorWhats').value.trim();
-    if (nome === '') { alert('Digite o nome do prestador'); return; }
+    if (nome === '') { alert('Digite o nome'); return; }
     prestadores.push({ id: nextPrestId++, nome: nome, whats: whats });
     document.getElementById('novoPrestadorNome').value = '';
     document.getElementById('novoPrestadorWhats').value = '';
-    atualizarTela();
+    atualizarTelaCompleta();
+    showToast('Prestador adicionado!');
 }
 
 function excluirPrestador(id) {
-    if (confirm('Excluir este prestador?')) {
+    if (confirm('Excluir prestador?')) {
         prestadores = prestadores.filter(function(p) { return p.id !== id; });
-        atualizarTela();
+        atualizarTelaCompleta();
+        showToast('Prestador excluído');
     }
 }
 
-// ============================================
-// CRUD SERVIÇOS
-// ============================================
-var nextServId = 1;
 function adicionarServico() {
     var nome = document.getElementById('novoServicoNome').value.trim();
     var duracao = parseInt(document.getElementById('novoServicoDuracao').value);
     var valor = parseFloat(document.getElementById('novoServicoValor').value);
+    var sinal = parseInt(document.getElementById('novoServicoSinal').value);
     if (nome === '') { alert('Digite o nome do serviço'); return; }
-    servicos.push({ id: nextServId++, nome: nome, duracao: duracao || 60, valor: valor || 0 });
+    servicos.push({ id: nextServId++, nome: nome, duracao: duracao || 60, valor: valor || 0, sinalPercentual: sinal || 30 });
     document.getElementById('novoServicoNome').value = '';
     document.getElementById('novoServicoDuracao').value = '60';
     document.getElementById('novoServicoValor').value = '50';
-    atualizarTela();
+    document.getElementById('novoServicoSinal').value = '30';
+    atualizarTelaCompleta();
+    showToast('Serviço adicionado!');
 }
 
 function excluirServico(id) {
-    if (confirm('Excluir este serviço?')) {
+    if (confirm('Excluir serviço?')) {
         servicos = servicos.filter(function(s) { return s.id !== id; });
-        atualizarTela();
+        atualizarTelaCompleta();
+        showToast('Serviço excluído');
     }
 }
 
-// ============================================
-// CRIAR HORÁRIOS
-// ============================================
 function criarHorarios() {
     var prestId = parseInt(document.getElementById('horarioPrestadorSelect').value);
     var servId = parseInt(document.getElementById('horarioServicoSelect').value);
     var data = document.getElementById('horarioDataInput').value;
     var inicio = document.getElementById('horarioInicioInput').value;
     var fim = document.getElementById('horarioFimInput').value;
-    
-    if (!prestId || !servId || !data || !inicio || !fim) {
-        alert('Preencha todos os campos!');
-        return;
-    }
-    
+    if (!prestId || !servId || !data || !inicio || !fim) { alert('Preencha todos os campos'); return; }
     var horaAtual = new Date(data + 'T' + inicio + ':00');
     var horaFim = new Date(data + 'T' + fim + ':00');
     var criados = 0;
-    
     while (horaAtual < horaFim) {
         var horaStr = horaAtual.toTimeString().slice(0,5);
-        horarios.push({
-            id: Date.now() + criados,
-            prestadorId: prestId,
-            servicoId: servId,
-            data: data,
-            hora: horaStr,
-            status: 'livre'
-        });
+        horarios.push({ prestadorId: prestId, servicoId: servId, data: data, hora: horaStr, status: 'livre' });
         horaAtual = new Date(horaAtual.getTime() + 60 * 60000);
         criados++;
     }
-    
     alert('✅ ' + criados + ' horários criados!');
     document.getElementById('horarioDataInput').value = '';
     document.getElementById('horarioInicioInput').value = '';
     document.getElementById('horarioFimInput').value = '';
-    atualizarTela();
+    atualizarTelaCompleta();
+}
+
+function adicionarAgendamento() {
+    var cliente = document.getElementById('agendamentoCliente').value.trim();
+    var whats = document.getElementById('agendamentoWhats').value.trim();
+    var prestId = parseInt(document.getElementById('agendamentoPrestador').value);
+    var servId = parseInt(document.getElementById('agendamentoServico').value);
+    var data = document.getElementById('agendamentoData').value;
+    var hora = document.getElementById('agendamentoHora').value;
+    var sinalPago = parseFloat(document.getElementById('agendamentoSinalPago').value) || 0;
+    if (!cliente || !whats || !prestId || !servId || !data || !hora) { alert('Preencha todos os campos'); return; }
+    var serv = servicos.find(function(s) { return s.id === servId; });
+    var status = sinalPago >= (serv ? serv.valor * (serv.sinalPercentual / 100) : 0) ? 'confirmado' : 'pendente';
+    var novoAgendamento = { id: nextAgeId++, cliente: cliente, whats: whats, prestadorId: prestId, servicoId: servId, data: data, hora: hora, sinalPago: sinalPago, status: status };
+    agendamentos.push(novoAgendamento);
+    notificarCliente(novoAgendamento);
+    notificarPrestador(novoAgendamento);
+    document.getElementById('agendamentoCliente').value = '';
+    document.getElementById('agendamentoWhats').value = '';
+    document.getElementById('agendamentoSinalPago').value = '0';
+    atualizarTelaCompleta();
+    showToast('Agendamento criado! WhatsApp enviado');
 }
 
 // ============================================
-// TABS
-// ============================================
-function initTabs() {
-    var tabs = document.querySelectorAll('.tab');
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].onclick = function() {
-            for (var j = 0; j < tabs.length; j++) tabs[j].classList.remove('active');
-            this.classList.add('active');
-            var tabId = this.getAttribute('data-tab');
-            var contents = document.querySelectorAll('.tab-content');
-            for (var k = 0; k < contents.length; k++) contents[k].classList.remove('active');
-            document.getElementById(tabId + 'Tab').classList.add('active');
-        };
-    }
-}
-
-// ============================================
-// LOGIN MOCKADO
+// LOGIN E NAVEGAÇÃO
 // ============================================
 document.getElementById('btnEntrar').onclick = function() {
     var cpf = document.getElementById('inputCpf').value.trim();
     var senha = document.getElementById('inputSenha').value.trim();
-    
     if (cpf === '12345678909' && senha === 'admin') {
         usuarioAtual = { nome: 'Administrador' };
         document.getElementById('nomeUsuario').innerHTML = 'Administrador';
@@ -479,48 +819,85 @@ document.getElementById('btnEntrar').onclick = function() {
     }
 };
 
-document.getElementById('btnCriarConta').onclick = mostrarCadastro;
-document.getElementById('btnEsqueciSenha').onclick = mostrarReset;
-document.getElementById('voltarLogin').onclick = mostrarLogin;
-document.getElementById('voltarLogin2').onclick = mostrarLogin;
-
+document.getElementById('btnCriarConta').onclick = function() {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('cadastroScreen').classList.remove('hidden');
+};
+document.getElementById('btnEsqueciSenha').onclick = function() {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('resetScreen').classList.remove('hidden');
+};
+document.getElementById('voltarLogin').onclick = function() {
+    document.getElementById('cadastroScreen').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
+};
+document.getElementById('voltarLogin2').onclick = function() {
+    document.getElementById('resetScreen').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
+};
 document.getElementById('btnFinalizarCadastro').onclick = function() {
     alert('✅ Cadastro realizado! Faça login.');
-    mostrarLogin();
+    document.getElementById('cadastroScreen').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
 };
-
 document.getElementById('btnFinalizarReset').onclick = function() {
     var codigo = document.getElementById('resetCodigo').value;
     if (codigo === '123456') {
         alert('✅ Senha redefinida! Faça login.');
-        mostrarLogin();
+        document.getElementById('resetScreen').classList.add('hidden');
+        document.getElementById('loginScreen').classList.remove('hidden');
     } else {
         alert('Código incorreto! Use: 123456');
     }
 };
-
 document.getElementById('btnSair').onclick = function() {
     usuarioAtual = null;
     mostrarLogin();
-    document.getElementById('inputCpf').value = '';
-    document.getElementById('inputSenha').value = '';
+};
+
+// LINK DA AGENDA EXTERNA
+document.getElementById('btnCopiarLinkAgenda').onclick = function() {
+    var link = window.location.href;
+    navigator.clipboard.writeText(link);
+    showToast('Link da agenda externa copiado! Compartilhe com seus clientes');
 };
 
 // BOTÕES
 document.getElementById('addPrestadorBtn').onclick = adicionarPrestador;
 document.getElementById('addServicoBtn').onclick = adicionarServico;
 document.getElementById('criarHorariosBtn').onclick = criarHorarios;
+document.getElementById('addAgendamentoBtn').onclick = adicionarAgendamento;
+document.getElementById('aplicarFiltroBtn').onclick = aplicarFiltro;
+document.getElementById('limparFiltroBtn').onclick = limparFiltro;
+document.getElementById('exportarExcelBtn').onclick = exportarExcel;
+
+// TABS
+var tabs = document.querySelectorAll('.tab');
+for (var i = 0; i < tabs.length; i++) {
+    tabs[i].onclick = function() {
+        for (var j = 0; j < tabs.length; j++) tabs[j].classList.remove('active');
+        this.classList.add('active');
+        var tabId = this.getAttribute('data-tab');
+        var contents = document.querySelectorAll('.tab-content');
+        for (var k = 0; k < contents.length; k++) contents[k].classList.remove('active');
+        document.getElementById(tabId + 'Tab').classList.add('active');
+        if (tabId === 'consolidado') renderizarConsolidado();
+        if (tabId === 'financeiro') renderizarFinanceiro();
+        if (tabId === 'calendario') carregarCalendario();
+    };
+}
 
 // EXPOR FUNÇÕES GLOBAIS
 window.excluirPrestador = excluirPrestador;
 window.excluirServico = excluirServico;
+window.excluirAgendamento = excluirAgendamento;
+window.enviarWhatsAppCliente = enviarWhatsAppCliente;
 
 // DATA PADRÃO
-document.getElementById('horarioDataInput').value = new Date().toISOString().split('T')[0];
-
-// INICIAR
-initTabs();
-mostrarLogin();
+var hoje = new Date().toISOString().split('T')[0];
+document.getElementById('horarioDataInput').value = hoje;
+document.getElementById('agendamentoData').value = hoje;
+document.getElementById('filtroData').value = hoje;
 
 // DADOS DE EXEMPLO
 prestadores = [
@@ -528,13 +905,19 @@ prestadores = [
     { id: 2, nome: 'Maria Santos', whats: '11988888888' }
 ];
 servicos = [
-    { id: 1, nome: 'Corte de Cabelo', duracao: 60, valor: 50 },
-    { id: 2, nome: 'Manicure', duracao: 45, valor: 35 }
+    { id: 1, nome: 'Corte de Cabelo', duracao: 60, valor: 50, sinalPercentual: 30 },
+    { id: 2, nome: 'Manicure', duracao: 45, valor: 35, sinalPercentual: 30 }
+];
+agendamentos = [
+    { id: 1, cliente: 'Ana Souza', whats: '11977777777', prestadorId: 1, servicoId: 1, data: hoje, hora: '09:00', sinalPago: 15, status: 'confirmado' },
+    { id: 2, cliente: 'Carlos Lima', whats: '11966666666', prestadorId: 2, servicoId: 2, data: hoje, hora: '14:00', sinalPago: 0, status: 'pendente' }
 ];
 nextPrestId = 3;
 nextServId = 3;
+nextAgeId = 3;
 
-console.log('✅ Sistema rodando! Use CPF: 12345678909 e senha: admin');
+mostrarLogin();
+console.log('✅ Sistema COMPLETO carregado! Use CPF: 12345678909 e senha: admin');
 </script>
 </body>
 </html>
