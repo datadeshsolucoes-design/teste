@@ -2,1575 +2,420 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Agendamento Pro | Gestão Inteligente de Agendamentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Data Desh Agenda | Sistema de Agendamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #1e293b;
-            transition: all 0.3s ease;
-        }
-
-        /* ========================================
-           DARK MODE PROFISSIONAL
-        ======================================== */
-        body.dark {
-            background: #0f172a;
-        }
-
-        body.dark .glass-card {
-            background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        body.dark .stat-card,
-        body.dark .calendar-day,
-        body.dark .modal-content-moderno,
-        body.dark .table-container {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark .stat-card p,
-        body.dark .calendar-day-header {
-            color: #f1f5f9;
-        }
-
-        body.dark .time-slot.livre {
-            background: rgba(16, 185, 129, 0.15);
-        }
-
-        body.dark .time-slot.ocupado {
-            background: rgba(239, 68, 68, 0.15);
-        }
-
-        /* ========================================
-           GLASSMORPHISM CARDS
-        ======================================== */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ========================================
-           LOGIN SCREEN - PROFISSIONAL
-        ======================================== */
-        .login-screen {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-screen::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            padding: 48px 40px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .login-header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .login-header p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-            background: #f8fafc;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        /* ========================================
-           BOTÕES PROFISSIONAIS
-        ======================================== */
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #e2e8f0;
-            padding: 12px 24px;
-            border-radius: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        /* ========================================
-           HEADER PROFISSIONAL
-        ======================================== */
-        .header-professional {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 32px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .logo-area h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-area p {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        /* ========================================
-           USER BAR
-        ======================================== */
-        .user-bar-professional {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 32px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .user-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        /* ========================================
-           SHARE BUTTON (LINK PÚBLICO)
-        ======================================== */
-        .share-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            padding: 24px 32px;
-            margin-bottom: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .share-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .share-info {
-            color: white;
-        }
-
-        .share-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-        }
-
-        .share-info p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        .share-button {
-            background: white;
-            color: #667eea;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .share-button:hover {
-            transform: translateX(4px);
-            gap: 12px;
-        }
-
-        /* ========================================
-           STATS GRID
-        ======================================== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 24px;
-            border-radius: 20px;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 1px solid #f1f5f9;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            color: #64748b;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* ========================================
-           TABS PROFISSIONAIS
-        ======================================== */
-        .tabs-professional {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            background: white;
-            padding: 8px;
-            border-radius: 60px;
-            display: inline-flex;
-        }
-
-        .tab-professional {
-            padding: 12px 28px;
-            border: none;
-            background: transparent;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            color: #64748b;
-        }
-
-        .tab-professional.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .tab-professional:hover:not(.active) {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        /* ========================================
-           CALENDAR GRID
-        ======================================== */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
-        }
-
-        .calendar-day {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s;
-            border: 1px solid #f1f5f9;
-        }
-
-        .calendar-day:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .calendar-day-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .time-slots {
-            padding: 16px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .time-slot {
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-
-        .time-slot.livre {
-            background: #ecfdf5;
-            border-left: 3px solid #10b981;
-            color: #065f46;
-        }
-
-        .time-slot.ocupado {
-            background: #fef2f2;
-            border-left: 3px solid #ef4444;
-            color: #991b1b;
-            cursor: not-allowed;
-        }
-
-        .time-slot.bloqueado {
-            background: #fffbeb;
-            border-left: 3px solid #f59e0b;
-            color: #92400e;
-        }
-
-        .time-slot.livre:hover:not(.ocupado) {
-            transform: translateX(4px);
-            background: #d1fae5;
-        }
-
-        /* ========================================
-           TABLE STYLES
-        ======================================== */
-        .table-container {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid #f1f5f9;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: #f8fafc;
-            padding: 16px;
-            text-align: left;
-            font-weight: 600;
-            color: #1e293b;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        td {
-            padding: 16px;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        /* ========================================
-           MODAL PROFISSIONAL
-        ======================================== */
-        .modal-moderno {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content-moderno {
-            background: white;
-            border-radius: 32px;
-            max-width: 500px;
-            width: 90%;
-            padding: 32px;
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* ========================================
-           LOADING OVERLAY
-        ======================================== */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .loading-overlay.show {
-            display: flex;
-        }
-
-        .spinner-modern {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ========================================
-           UTILITIES
-        ======================================== */
-        .hidden {
-            display: none !important;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .toast-notification {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: white;
-            padding: 16px 24px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            z-index: 10001;
-            animation: slideInRight 0.3s ease;
-            font-weight: 500;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .header-professional {
-                padding: 16px 20px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .calendar-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .tabs-professional {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .tab-professional {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Scrollbar Personalizada */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
+        .gradient-bg { background: linear-gradient(135deg, #0a1929 0%, #0f2b3d 100%); }
+        .card { transition: all 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15); }
+        .screen { display: none; }
+        .screen.active { display: flex; }
+        .loading { display: none; position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center; }
+        .loading.show { display: flex; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .tab-btn { cursor: pointer; }
+        .tab-btn.active { color: #3b82f6; border-bottom: 3px solid #3b82f6; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
-    <div class="spinner-modern"></div>
-    <div style="color: white; font-size: 1rem;">Carregando sistema...</div>
+<!-- LOADING -->
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p class="text-white mt-4 font-bold">Carregando...</p>
 </div>
 
-<!-- LOGIN SCREEN -->
-<div id="loginScreen" class="login-screen">
-    <div class="login-card">
-        <div class="login-header">
-            <h1>Agendamento Pro</h1>
-            <p>Gestão inteligente de agendamentos</p>
+<!-- TELA DE LOGIN -->
+<div id="screenLogin" class="screen active fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">📅</div>
+            <h1 class="text-2xl font-extrabold">Data Desh Agenda</h1>
+            <p class="text-slate-500 text-sm">Sistema Profissional de Agendamentos</p>
         </div>
-        <div id="loginError" style="background: #fef2f2; color: #991b1b; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none;"></div>
-        <div class="input-group">
-            <label>Nome completo</label>
-            <input type="text" id="loginNome" placeholder="Seu nome">
+        <div class="space-y-4">
+            <div><label class="block text-xs font-bold uppercase mb-1">Nome</label><input type="text" id="loginNome" class="w-full px-4 py-3 border-2 rounded-xl"></div>
+            <div><label class="block text-xs font-bold uppercase mb-1">CPF</label><input type="text" id="loginCPF" placeholder="12345678909" class="w-full px-4 py-3 border-2 rounded-xl"></div>
+            <div><label class="block text-xs font-bold uppercase mb-1">Senha</label><input type="password" id="loginSenha" class="w-full px-4 py-3 border-2 rounded-xl"></div>
         </div>
-        <div class="input-group">
-            <label>CPF</label>
-            <input type="text" id="loginCPF" placeholder="000.000.000-00" maxlength="14">
+        <button id="btnLogin" class="w-full mt-6 bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">🔓 ENTRAR</button>
+        <div class="flex justify-between mt-4 text-sm">
+            <span class="text-blue-500 cursor-pointer" onclick="mostrarCadastro()">📝 Criar conta</span>
+            <span class="text-rose-500 cursor-pointer" onclick="mostrarReset()">🔑 Esqueci a senha</span>
         </div>
-        <div class="input-group">
-            <label>Senha</label>
-            <input type="password" id="loginSenha" placeholder="••••••">
-        </div>
-        <button class="btn-primary" id="btnLogin">Entrar no sistema</button>
-        <p style="text-align: center; margin-top: 20px;">
-            <span id="btnEsqueciSenha" style="color: #667eea; cursor: pointer; font-size: 0.85rem;">Esqueci minha senha</span>
-        </p>
+        <p class="text-center text-xs text-slate-400 mt-4">Admin: 12345678909 | admin</p>
     </div>
 </div>
 
-<!-- RESET SCREEN -->
-<div id="resetScreen" class="login-screen hidden">
-    <div class="login-card">
-        <div class="login-header">
-            <h1>Redefinir senha</h1>
-            <p>Digite os dados solicitados</p>
+<!-- TELA DE CADASTRO -->
+<div id="screenCadastro" class="screen fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">📝</div>
+            <h1 class="text-2xl font-extrabold">Criar Conta</h1>
+            <p class="text-slate-500 text-sm">Cadastre-se gratuitamente</p>
         </div>
-        <div class="input-group">
-            <label>Nome</label>
-            <input type="text" id="resetNome">
+        <div class="space-y-3">
+            <input type="text" id="cadastroNome" placeholder="Nome completo" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="cadastroCPF" placeholder="CPF" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="cadastroWhatsApp" placeholder="WhatsApp" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="cadastroSenha" placeholder="Senha" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="cadastroConfirma" placeholder="Confirmar senha" class="w-full px-4 py-3 border-2 rounded-xl">
         </div>
-        <div class="input-group">
-            <label>CPF Admin</label>
-            <input type="text" id="resetCPF" placeholder="12345678909">
-        </div>
-        <div class="input-group">
-            <label>Código de segurança</label>
-            <input type="password" id="resetCodigo" placeholder="123456">
-        </div>
-        <div class="input-group">
-            <label>Nova senha</label>
-            <input type="password" id="resetNovaSenha">
-        </div>
-        <div class="input-group">
-            <label>Confirmar senha</label>
-            <input type="password" id="resetConfirmaSenha">
-        </div>
-        <button class="btn-primary" id="btnConfirmarReset">Redefinir senha</button>
-        <button class="btn-secondary" id="btnVoltarLogin" style="margin-top: 12px; width: 100%;">Voltar ao login</button>
+        <button id="btnCadastrar" class="w-full mt-6 bg-emerald-600 text-white py-3 rounded-xl font-bold hover:bg-emerald-700">✅ CRIAR CONTA</button>
+        <p class="text-center text-sm mt-4"><span class="text-blue-500 cursor-pointer" onclick="voltarLogin()">🔙 Voltar ao login</span></p>
     </div>
 </div>
 
-<!-- MAIN APP -->
-<div id="mainScreen" class="hidden">
-    <div class="container">
-        <!-- Header -->
-        <div class="glass-card header-professional">
-            <div class="logo-area">
-                <h1>Agendamento Pro</h1>
-                <p>Sistema de gestão de agendamentos</p>
-            </div>
-            <div class="header-actions">
-                <button class="btn-secondary" id="btnTheme" style="padding: 10px 20px;">
-                    <i class="fas fa-moon"></i> Tema
-                </button>
-                <button class="btn-secondary" id="btnLogout" style="padding: 10px 20px;">
-                    <i class="fas fa-sign-out-alt"></i> Sair
-                </button>
-            </div>
+<!-- TELA DE REDEFINIR SENHA -->
+<div id="screenReset" class="screen fixed inset-0 gradient-bg items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-20 h-20 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">🔑</div>
+            <h1 class="text-2xl font-extrabold">Redefinir Senha</h1>
+            <p class="text-slate-500 text-sm">Código de segurança: 123456</p>
         </div>
-
-        <!-- User Bar -->
-        <div class="glass-card user-bar-professional">
-            <div class="user-info">
-                <div class="user-avatar">
-                    <i class="fas fa-user" style="color: white;"></i>
-                </div>
-                <div>
-                    <strong id="displayNome" style="font-size: 1.1rem;"></strong>
-                    <span id="badgeAdmin" style="display: none; background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-left: 10px;">Administrador</span>
-                    <p style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Último acesso: <span id="ultimoAcesso"></span></p>
-                </div>
-            </div>
-            <div>
-                <i class="fas fa-calendar-alt" style="color: #667eea;"></i> Hoje é <strong id="dataAtual"></strong>
-            </div>
+        <div class="space-y-3">
+            <input type="text" id="resetCPF" placeholder="CPF" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="text" id="resetCodigo" placeholder="Código (123456)" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="resetNovaSenha" placeholder="Nova senha" class="w-full px-4 py-3 border-2 rounded-xl">
+            <input type="password" id="resetConfirma" placeholder="Confirmar senha" class="w-full px-4 py-3 border-2 rounded-xl">
         </div>
-
-        <!-- Share Card - Link Público -->
-        <div class="share-card" id="btnAbrirLinkPublico">
-            <div class="share-info">
-                <h3><i class="fas fa-share-alt"></i> Compartilhar agenda pública</h3>
-                <p>Seus clientes podem agendar horários diretamente sem precisar de cadastro</p>
-            </div>
-            <div class="share-button">
-                <i class="fas fa-copy"></i> Copiar link
-                <i class="fas fa-arrow-right"></i>
-            </div>
-        </div>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid" id="statsGrid"></div>
-
-        <!-- Admin Section -->
-        <div id="adminSection" class="hidden" style="margin-bottom: 32px;">
-            <div class="glass-card" style="padding: 24px;">
-                <div class="tabs-professional" id="adminTabs">
-                    <button class="tab-professional active" data-panel="prestador"><i class="fas fa-users"></i> Prestadores</button>
-                    <button class="tab-professional" data-panel="horario"><i class="fas fa-clock"></i> Horários</button>
-                    <button class="tab-professional" data-panel="bloqueio"><i class="fas fa-ban"></i> Bloqueios</button>
-                    <button class="tab-professional" data-panel="config"><i class="fas fa-cog"></i> Configurações</button>
-                </div>
-
-                <div id="panel-prestador" class="form-panel" style="margin-top: 24px;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-user-plus"></i> Cadastrar prestador</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                        <input type="text" id="prestadorNome" placeholder="Nome completo" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="text" id="prestadorWhatsApp" placeholder="WhatsApp" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="text" id="prestadorServicos" placeholder="Serviços" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="number" id="prestadorValor" placeholder="Valor médio (R$)" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                    </div>
-                    <button class="btn-primary" id="btnSalvarPrestador" style="width: auto;">Salvar prestador</button>
-                    <hr style="margin: 30px 0;">
-                    <h3><i class="fas fa-list"></i> Lista de prestadores</h3>
-                    <div id="listaPrestadores" style="margin-top: 20px;"></div>
-                </div>
-
-                <div id="panel-horario" class="form-panel hidden" style="margin-top: 24px;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-calendar-plus"></i> Criar horários</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                        <select id="horarioPrestador" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;"></select>
-                        <input type="date" id="horarioData" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="time" id="horarioInicio" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="time" id="horarioFim" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="number" id="horarioIntervalo" value="60" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <select id="horarioStatus" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                            <option value="livre">Livre</option>
-                            <option value="bloqueado">Bloqueado</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" id="btnCriarHorarios" style="width: auto;">Criar horários</button>
-                </div>
-
-                <div id="panel-bloqueio" class="form-panel hidden" style="margin-top: 24px;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-calendar-times"></i> Bloquear período</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                        <select id="bloqueioPrestador" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;"></select>
-                        <input type="date" id="bloqueioInicio" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="date" id="bloqueioFim" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                        <input type="text" id="bloqueioMotivo" placeholder="Motivo do bloqueio" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                    </div>
-                    <button class="btn-primary" id="btnBloquearPeriodo" style="width: auto; background: linear-gradient(135deg, #ef4444, #dc2626);">Bloquear período</button>
-                </div>
-
-                <div id="panel-config" class="form-panel hidden" style="margin-top: 24px;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-sliders-h"></i> Configurações</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                        <div>
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Percentual de sinal</label>
-                            <input type="number" id="configSinal" value="30" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; width: 100%;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Chave PIX</label>
-                            <input type="text" id="configPix" placeholder="Chave PIX para recebimento" style="padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; width: 100%;">
-                        </div>
-                    </div>
-                    <button class="btn-primary" id="btnSalvarConfig" style="width: auto;">Salvar configurações</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Tabs -->
-        <div class="tabs-professional" id="mainTabs">
-            <button class="tab-professional active" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
-            <button class="tab-professional" data-tab="calendario"><i class="fas fa-calendar-alt"></i> Calendário</button>
-            <button class="tab-professional" data-tab="agendamentos"><i class="fas fa-list"></i> Agendamentos</button>
-            <button class="tab-professional" data-tab="financeiro"><i class="fas fa-chart-bar"></i> Financeiro</button>
-            <button class="tab-professional" data-tab="proximos"><i class="fas fa-hourglass-half"></i> Próximos</button>
-        </div>
-
-        <!-- Content Containers -->
-        <div id="dashboardContainer" class="glass-card" style="padding: 32px;"></div>
-        <div id="calendarioContainer" class="hidden"></div>
-        <div id="agendamentosContainer" class="hidden"></div>
-        <div id="financeiroContainer" class="hidden"></div>
-        <div id="proximosContainer" class="hidden glass-card" style="padding: 32px;"></div>
+        <button id="btnReset" class="w-full mt-6 bg-rose-600 text-white py-3 rounded-xl font-bold hover:bg-rose-700">✅ REDEFINIR</button>
+        <p class="text-center text-sm mt-4"><span class="text-blue-500 cursor-pointer" onclick="voltarLogin()">🔙 Voltar ao login</span></p>
     </div>
+</div>
+
+<!-- SISTEMA PRINCIPAL -->
+<div id="screenSistema" class="hidden h-screen flex overflow-hidden bg-[#f0f4f8]">
+    <!-- SIDEBAR -->
+    <div class="w-64 gradient-bg text-white hidden md:flex flex-col h-full shadow-2xl">
+        <div class="p-6 flex items-center gap-3 border-b border-white/10">
+            <div class="bg-blue-600 p-2 rounded-xl">📅</div>
+            <span class="text-lg font-extrabold">Data Desh <span class="text-blue-400">Agenda</span></span>
+        </div>
+        <nav class="flex-1 mt-4 px-3 space-y-1">
+            <a href="#" onclick="switchTab('dashboard')" class="sidebar-item active flex items-center gap-3 p-3 rounded-xl text-sm font-semibold bg-blue-600/20"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="#" onclick="switchTab('prestadores')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-users"></i> Prestadores</a>
+            <a href="#" onclick="switchTab('servicos')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-cut"></i> Serviços</a>
+            <a href="#" onclick="switchTab('horarios')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-clock"></i> Horários</a>
+            <a href="#" onclick="switchTab('agendamentos')" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-sm text-slate-300"><i class="fas fa-calendar-check"></i> Agendamentos</a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center"><i class="fas fa-user text-sm"></i></div>
+                <div><p class="text-xs font-bold" id="sidebarNome">Usuário</p><button onclick="logout()" class="text-[10px] text-red-400">Sair</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="h-20 gradient-bg text-white flex items-center justify-between px-8 shadow-lg">
+            <div><h2 class="text-xl font-extrabold" id="headerTitle">Dashboard</h2><p class="text-blue-300 text-[10px]">Sistema de Agendamentos</p></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right"><p class="text-xs text-emerald-400 font-bold flex items-center gap-1"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> Online</p></div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            <!-- TABS -->
+            <div class="flex gap-6 border-b border-slate-200 mb-6">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active pb-2 font-bold text-blue-600">📊 Dashboard</button>
+                <button onclick="switchTab('prestadores')" id="tab-prestadores" class="tab-btn pb-2 font-bold text-slate-400">👨‍💼 Prestadores</button>
+                <button onclick="switchTab('servicos')" id="tab-servicos" class="tab-btn pb-2 font-bold text-slate-400">✂️ Serviços</button>
+                <button onclick="switchTab('horarios')" id="tab-horarios" class="tab-btn pb-2 font-bold text-slate-400">⏰ Horários</button>
+                <button onclick="switchTab('agendamentos')" id="tab-agendamentos" class="tab-btn pb-2 font-bold text-slate-400">📋 Agendamentos</button>
+            </div>
+
+            <!-- DASHBOARD -->
+            <div id="content-dashboard" class="tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6" id="statsGrid"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm"><h3 class="font-bold mb-4">📈 Agendamentos por Mês</h3><canvas id="chartAgendamentos" height="200"></canvas></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm"><h3 class="font-bold mb-4">🥧 Serviços mais procurados</h3><canvas id="chartServicos" height="200"></canvas></div>
+                </div>
+            </div>
+
+            <!-- PRESTADORES -->
+            <div id="content-prestadores" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">➕ Novo Prestador</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <input type="text" id="prestadorNome" placeholder="Nome" class="px-4 py-3 border rounded-xl">
+                        <input type="text" id="prestadorWhatsApp" placeholder="WhatsApp" class="px-4 py-3 border rounded-xl">
+                        <button id="btnSalvarPrestador" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Salvar</button>
+                    </div>
+                    <hr class="my-6">
+                    <h3 class="font-bold mb-4">📋 Lista de Prestadores</h3>
+                    <div id="listaPrestadores" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- SERVIÇOS -->
+            <div id="content-servicos" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">➕ Novo Serviço</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <input type="text" id="servicoNome" placeholder="Nome do serviço" class="px-4 py-3 border rounded-xl">
+                        <input type="number" id="servicoDuracao" placeholder="Duração (min)" class="px-4 py-3 border rounded-xl">
+                        <input type="number" id="servicoValor" placeholder="Valor (R$)" class="px-4 py-3 border rounded-xl">
+                        <button id="btnSalvarServico" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Salvar</button>
+                    </div>
+                    <hr class="my-6">
+                    <h3 class="font-bold mb-4">📋 Lista de Serviços</h3>
+                    <div id="listaServicos" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- HORÁRIOS -->
+            <div id="content-horarios" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold mb-4">⏰ Criar Horários</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
+                        <select id="horarioPrestador" class="px-4 py-3 border rounded-xl"></select>
+                        <select id="horarioServico" class="px-4 py-3 border rounded-xl"></select>
+                        <input type="date" id="horarioData" class="px-4 py-3 border rounded-xl">
+                        <input type="time" id="horarioInicio" class="px-4 py-3 border rounded-xl">
+                        <input type="time" id="horarioFim" class="px-4 py-3 border rounded-xl">
+                        <button id="btnCriarHorarios" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">Criar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AGENDAMENTOS -->
+            <div id="content-agendamentos" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-4 border-b"><input type="text" id="buscaAgendamentos" placeholder="🔍 Buscar cliente..." class="px-4 py-2 border rounded-xl w-64"></div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-50"><tr><th class="px-6 py-3 text-left text-xs font-bold">Cliente</th><th class="px-6 py-3 text-left text-xs font-bold">Serviço</th><th class="px-6 py-3 text-left text-xs font-bold">Prestador</th><th class="px-6 py-3 text-left text-xs font-bold">Data/Hora</th><th class="px-6 py-3 text-left text-xs font-bold">Status</th></tr></thead>
+                            <tbody id="tabelaAgendamentos"></tbody>
+                        </table>
+                    </div>
+                    <div class="p-4 border-t" id="paginacaoAgendamentos"></div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 <script>
 // ============================================
-// SUPABASE CONFIGURATION
+// CONFIGURAÇÃO
 // ============================================
-if (!window.SupabaseConnection) {
-    const SUPABASE_CONFIG = {
-        url: 'https://tvhpqfysvunmppddupum.supabase.co',
-        key: 'sb_publishable_fA1a63dl0MoJ8zjZiBJprw_4syerDaL'
-    };
-    window.SupabaseConnection = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-}
+const supabase = window.supabase.createClient('https://tvhpqfysvunmppddupum.supabase.co', 'sb_publishable_fA1a63dl0MoJ8zjZiBJprw_4syerDaL');
+const CODIGO_SEGURANCA = '123456';
+let usuarioLogado = null;
+let prestadores = [], servicos = [], horarios = [], agendamentos = [];
+let paginaAtual = 1;
+let itensPorPagina = 10;
 
-var supabase = window.SupabaseConnection;
-var usuarioLogado = null;
-var isAdmin = false;
-var tabAtual = 'dashboard';
-var prestadores = [];
-var horarios = [];
-var agendamentos = [];
-var configs = {};
-
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-function showLoading(msg) {
-    var overlay = document.getElementById('loadingOverlay');
-    if(overlay) overlay.classList.add('show');
-}
-
-function hideLoading() {
-    var overlay = document.getElementById('loadingOverlay');
-    if(overlay) overlay.classList.remove('show');
-}
-
-function showToast(message, type) {
-    var toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i> ' + message;
-    document.body.appendChild(toast);
-    setTimeout(function() { toast.remove(); }, 3000);
-}
-
-function validarCPF(cpf) {
-    cpf = cpf.replace(/\D/g,'');
-    return cpf.length === 11;
-}
-
-function formatarData(data) {
-    if(!data) return '—';
-    return new Date(data).toLocaleDateString('pt-BR');
-}
-
-function formatarHora(data) {
-    if(!data) return '—';
-    return new Date(data).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-}
-
-function fMoeda(v) {
-    return parseFloat(v || 0).toFixed(2);
-}
+function showLoading() { document.getElementById('loading').classList.add('show'); }
+function hideLoading() { document.getElementById('loading').classList.remove('show'); }
+function voltarLogin() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenLogin').classList.add('active'); }
+function mostrarCadastro() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenCadastro').classList.add('active'); }
+function mostrarReset() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screenReset').classList.add('active'); }
+function formatarData(d) { return d ? new Date(d).toLocaleDateString('pt-BR') : '—'; }
+function formatarHora(d) { return d ? new Date(d).toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) : '—'; }
+function fMoeda(v) { return parseFloat(v || 0).toFixed(2); }
 
 // ============================================
-// MAIN FUNCTIONS
+// LOGIN
 // ============================================
-async function carregarTudo() {
-    if(!usuarioLogado) return;
+document.getElementById('btnLogin').onclick = async () => {
+    const cpf = document.getElementById('loginCPF').value.trim();
+    const senha = document.getElementById('loginSenha').value.trim();
+    if (cpf === '12345678909' && senha === 'admin') {
+        usuarioLogado = { id: 1, nome: 'Administrador', cpf: '12345678909' };
+        document.getElementById('sidebarNome').innerHTML = 'Administrador';
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screenSistema').classList.remove('hidden');
+        document.getElementById('screenSistema').style.display = 'flex';
+        carregarDados();
+    } else {
+        const { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
+        if (data && data.length > 0 && data[0].senha === senha) {
+            usuarioLogado = { id: data[0].id, nome: data[0].nome };
+            document.getElementById('sidebarNome').innerHTML = usuarioLogado.nome;
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screenSistema').classList.remove('hidden');
+            document.getElementById('screenSistema').style.display = 'flex';
+            carregarDados();
+        } else { alert('❌ CPF ou senha inválidos!'); }
+    }
+};
+
+// ============================================
+// CADASTRO
+// ============================================
+document.getElementById('btnCadastrar').onclick = async () => {
+    const nome = document.getElementById('cadastroNome').value.trim();
+    const cpf = document.getElementById('cadastroCPF').value.trim();
+    const whatsapp = document.getElementById('cadastroWhatsApp').value.trim();
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirma = document.getElementById('cadastroConfirma').value;
+    if (!nome || !cpf || !senha) return alert('Preencha todos os campos!');
+    if (senha !== confirma) return alert('Senhas não conferem!');
+    if (senha.length < 4) return alert('Senha deve ter 4+ caracteres');
+    const { error } = await supabase.from('usuarios').insert([{ nome, cpf, whatsapp, senha, tipo: 'comum' }]);
+    if (error) alert('Erro: ' + error.message);
+    else { alert('✅ Conta criada! Faça login.'); voltarLogin(); }
+};
+
+// ============================================
+// REDEFINIR SENHA
+// ============================================
+document.getElementById('btnReset').onclick = async () => {
+    const cpf = document.getElementById('resetCPF').value.trim();
+    const codigo = document.getElementById('resetCodigo').value.trim();
+    const nova = document.getElementById('resetNovaSenha').value;
+    const confirma = document.getElementById('resetConfirma').value;
+    if (codigo !== CODIGO_SEGURANCA) return alert('❌ Código incorreto! Use: 123456');
+    if (nova.length < 4) return alert('Senha deve ter 4+ caracteres');
+    if (nova !== confirma) return alert('Senhas não conferem');
+    const { error } = await supabase.from('usuarios').update({ senha: nova }).eq('cpf', cpf);
+    if (error) alert('Erro: ' + error.message);
+    else { alert('✅ Senha redefinida!'); voltarLogin(); }
+};
+
+// ============================================
+// CARREGAR DADOS
+// ============================================
+async function carregarDados() {
     showLoading();
-    try {
-        var [p, h, a, c] = await Promise.all([
-            supabase.from('prestadores').select('*').eq('admin_id', usuarioLogado.id),
-            supabase.from('horarios').select('*').eq('admin_id', usuarioLogado.id),
-            supabase.from('agendamentos').select('*').eq('admin_id', usuarioLogado.id),
-            supabase.from('configuracoes').select('*').eq('admin_id', usuarioLogado.id).single()
-        ]);
-        prestadores = p.data || [];
-        horarios = h.data || [];
-        agendamentos = a.data || [];
-        configs = c.data || { sinal_percentual: 30, chave_pix: '' };
-        popularSelects();
-        atualizarStats();
-        if(tabAtual === 'dashboard') carregarDashboard();
-        else if(tabAtual === 'calendario') carregarCalendario();
-        else if(tabAtual === 'agendamentos') carregarAgendamentos();
-        else if(tabAtual === 'financeiro') carregarFinanceiro();
-        else if(tabAtual === 'proximos') carregarProximos();
-    } catch(e) { console.error(e); }
+    const [p, s, h, a] = await Promise.all([
+        supabase.from('prestadores').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('servicos').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('horarios').select('*').eq('admin_id', usuarioLogado.id),
+        supabase.from('agendamentos').select('*').eq('admin_id', usuarioLogado.id)
+    ]);
+    prestadores = p.data || [];
+    servicos = s.data || [];
+    horarios = h.data || [];
+    agendamentos = a.data || [];
     hideLoading();
+    renderizarDashboard();
+    renderizarPrestadores();
+    renderizarServicos();
+    renderizarSelects();
+    renderizarAgendamentos();
 }
 
-function popularSelects() {
-    var options = prestadores.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
-    var horarioSelect = document.getElementById('horarioPrestador');
-    var bloqueioSelect = document.getElementById('bloqueioPrestador');
-    if(horarioSelect) horarioSelect.innerHTML = '<option value="">Selecione</option>' + options;
-    if(bloqueioSelect) bloqueioSelect.innerHTML = '<option value="">Selecione</option>' + options;
-    
-    var listaDiv = document.getElementById('listaPrestadores');
-    if(listaDiv) {
-        listaDiv.innerHTML = prestadores.map(p => `
-            <div style="padding: 16px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong>${p.nome}</strong><br>
-                    <small style="color: #64748b;">📱 ${p.whatsapp || 'N/A'} | 💰 R$ ${fMoeda(p.valor_medio)}</small>
-                </div>
-                <button onclick="excluirPrestador(${p.id})" style="background: #fef2f2; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; color: #ef4444;">
-                    <i class="fas fa-trash"></i> Excluir
-                </button>
-            </div>
-        `).join('') || '<p style="text-align: center; padding: 40px; color: #64748b;">Nenhum prestador cadastrado</p>';
-    }
-}
-
-function atualizarStats() {
-    var hoje = new Date().toISOString().split('T')[0];
-    var agendamentosHoje = agendamentos.filter(a => a.data_agendamento && a.data_agendamento.split('T')[0] === hoje);
-    var agendamentosPendentes = agendamentos.filter(a => a.status === 'pendente');
-    var totalFaturado = agendamentos.reduce((s,a) => s + (a.valor_total || 0), 0);
-    
-    var statsGrid = document.getElementById('statsGrid');
-    if(statsGrid) {
-        statsGrid.innerHTML = `
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-value">${prestadores.length}</div>
-                <div class="stat-label">Prestadores ativos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
-                <div class="stat-value">${agendamentosHoje.length}</div>
-                <div class="stat-label">Agendamentos hoje</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                <div class="stat-value">${agendamentosPendentes.length}</div>
-                <div class="stat-label">Pendentes</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="stat-value">R$ ${fMoeda(totalFaturado)}</div>
-                <div class="stat-label">Total faturado</div>
-            </div>
-        `;
-    }
-}
-
-async function carregarDashboard() {
-    var container = document.getElementById('dashboardContainer');
-    var totalClientes = [...new Set(agendamentos.map(a => a.cliente_whatsapp))].length;
-    var mediaPorDia = (agendamentos.length / 30).toFixed(1);
-    var ultimosAgendamentos = agendamentos.slice(0, 5);
-    
-    container.innerHTML = `
-        <div style="margin-bottom: 32px;">
-            <h2 style="margin-bottom: 8px;">Dashboard gerencial</h2>
-            <p style="color: #64748b;">Visão geral do seu negócio</p>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px;">
-            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 24px; border-radius: 20px;">
-                <div style="font-size: 2rem; font-weight: 800;">${totalClientes}</div>
-                <div style="margin-top: 8px;">Clientes atendidos</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 24px; border-radius: 20px;">
-                <div style="font-size: 2rem; font-weight: 800;">${mediaPorDia}</div>
-                <div style="margin-top: 8px;">Média de agendamentos/dia</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 24px; border-radius: 20px;">
-                <div style="font-size: 2rem; font-weight: 800;">${prestadores.length}</div>
-                <div style="margin-top: 8px;">Prestadores ativos</div>
-            </div>
-        </div>
-        <div>
-            <h3 style="margin-bottom: 16px;">Últimos agendamentos</h3>
-            ${ultimosAgendamentos.map(a => `
-                <div style="padding: 16px; border-bottom: 1px solid #f1f5f9;">
-                    <strong>${a.cliente_nome}</strong> - ${formatarData(a.data_agendamento)} às ${formatarHora(a.data_agendamento)}
-                </div>
-            `).join('') || '<p style="color: #64748b;">Nenhum agendamento ainda</p>'}
-        </div>
+function renderizarDashboard() {
+    document.getElementById('statsGrid').innerHTML = `
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-blue-500"><p class="text-slate-500 text-xs font-bold uppercase">Agendamentos</p><h3 class="text-3xl font-extrabold">${agendamentos.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-amber-500"><p class="text-slate-500 text-xs font-bold uppercase">Prestadores</p><h3 class="text-3xl font-extrabold">${prestadores.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-emerald-500"><p class="text-slate-500 text-xs font-bold uppercase">Serviços</p><h3 class="text-3xl font-extrabold">${servicos.length}</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm card border-l-4 border-rose-500"><p class="text-slate-500 text-xs font-bold uppercase">Faturado</p><h3 class="text-3xl font-extrabold">R$ ${fMoeda(agendamentos.reduce((s,a)=>s+(a.valor_total||0),0))}</h3></div>
     `;
+    // Gráficos
+    new Chart(document.getElementById('chartAgendamentos'), { type: 'line', data: { labels: ['Jan','Fev','Mar','Abr','Mai','Jun'], datasets: [{ label: 'Agendamentos', data: [12,19,15,25,22,30], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.05)', fill: true }] }, options: { responsive: true } });
+    new Chart(document.getElementById('chartServicos'), { type: 'doughnut', data: { labels: servicos.map(s=>s.nome) || ['Corte','Manicure','Pedicure'], datasets: [{ data: [30,25,20], backgroundColor: ['#3b82f6','#8b5cf6','#10b981'] }] }, options: { responsive: true } });
 }
 
-async function carregarCalendario() {
-    var container = document.getElementById('calendarioContainer');
-    var horariosPorData = {};
-    horarios.forEach(h => {
-        var data = h.data_hora.split('T')[0];
-        if(!horariosPorData[data]) horariosPorData[data] = [];
-        var agendamento = agendamentos.find(a => a.horario_id === h.id);
-        horariosPorData[data].push({ ...h, agendamento });
-    });
-    
-    var datas = Object.keys(horariosPorData).sort();
-    if(datas.length === 0) {
-        container.innerHTML = '<div class="glass-card" style="padding: 60px; text-align: center; color: #64748b;">Nenhum horário configurado</div>';
-        return;
-    }
-    
-    container.innerHTML = '<div class="calendar-grid">' + datas.map(data => {
-        var slots = horariosPorData[data];
-        return `
-            <div class="calendar-day">
-                <div class="calendar-day-header">${formatarData(data)}</div>
-                <div class="time-slots">
-                    ${slots.map(slot => {
-                        var statusClass = '', statusText = '', onClick = '';
-                        if(slot.agendamento){
-                            statusClass = 'ocupado';
-                            statusText = '🔴 Ocupado';
-                        } else if(slot.status === 'livre'){
-                            statusClass = 'livre';
-                            statusText = '🟢 Livre';
-                            onClick = `onclick="abrirModalAgendamento(${slot.id}, '${slot.data_hora}', ${slot.prestador_id})"`;
-                        } else {
-                            statusClass = 'bloqueado';
-                            statusText = '🟡 Bloqueado';
-                        }
-                        return `<div class="time-slot ${statusClass}" ${onClick}><span>${formatarHora(slot.data_hora)}</span><span>${statusText}</span></div>`;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }).join('') + '</div>';
+function renderizarPrestadores() {
+    document.getElementById('listaPrestadores').innerHTML = prestadores.map(p => `<div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl"><div><strong>${p.nome}</strong><br><small class="text-slate-500">📱 ${p.whatsapp || 'N/A'}</small></div><button onclick="excluirPrestador(${p.id})" class="bg-rose-500 text-white px-4 py-2 rounded-lg text-sm">Excluir</button></div>`).join('') || '<p class="text-center py-8">Nenhum prestador cadastrado</p>';
 }
 
-function abrirModalAgendamento(horarioId, dataHora, prestadorId) {
-    var prestador = prestadores.find(p => p.id === prestadorId);
-    if(!prestador) return;
-    
-    var modal = document.getElementById('agendamentoModal');
-    if(!modal) {
-        modal = document.createElement('div');
-        modal.id = 'agendamentoModal';
-        modal.className = 'modal-moderno';
-        modal.innerHTML = '<div class="modal-content-moderno"><h3 style="margin-bottom: 20px;">Novo agendamento</h3><div id="modalContent"></div><button class="btn-secondary" onclick="fecharModal()" style="margin-top: 20px; width: 100%;">Cancelar</button></div>';
-        document.body.appendChild(modal);
-    }
-    
-    var sinalPercentual = configs.sinal_percentual || 30;
-    var valorSinal = (prestador.valor_medio || 0) * (sinalPercentual / 100);
-    
-    document.getElementById('modalContent').innerHTML = `
-        <div style="background: #f8fafc; padding: 16px; border-radius: 16px; margin-bottom: 20px;">
-            <p><strong>Horário:</strong> ${formatarData(dataHora)} às ${formatarHora(dataHora)}</p>
-            <p><strong>Prestador:</strong> ${prestador.nome}</p>
-            <p><strong>Valor total:</strong> R$ ${fMoeda(prestador.valor_medio)}</p>
-            <p><strong>Sinal (${sinalPercentual}%):</strong> R$ ${fMoeda(valorSinal)}</p>
-        </div>
-        <input type="text" id="clienteNome" placeholder="Seu nome completo" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <input type="text" id="clienteWhatsApp" placeholder="WhatsApp (11999999999)" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-        <input type="text" id="comprovanteLink" placeholder="Link do comprovante (opcional)" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
-        ${configs.chave_pix ? `<div style="background: #f8fafc; padding: 12px; border-radius: 12px; margin-bottom: 12px;"><strong>Chave PIX:</strong> ${configs.chave_pix}</div>` : ''}
-        <button class="btn-primary" onclick="confirmarAgendamento(${horarioId}, ${prestadorId}, '${dataHora}')" style="width: 100%;">Confirmar agendamento</button>
-    `;
-    modal.style.display = 'flex';
+function renderizarServicos() {
+    document.getElementById('listaServicos').innerHTML = servicos.map(s => `<div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl"><div><strong>${s.nome}</strong><br><small>⏱️ ${s.duracao}min | 💰 R$ ${fMoeda(s.valor)}</small></div><button onclick="excluirServico(${s.id})" class="bg-rose-500 text-white px-4 py-2 rounded-lg text-sm">Excluir</button></div>`).join('') || '<p class="text-center py-8">Nenhum serviço cadastrado</p>';
 }
 
-function fecharModal() {
-    var modal = document.getElementById('agendamentoModal');
-    if(modal) modal.style.display = 'none';
+function renderizarSelects() {
+    document.getElementById('horarioPrestador').innerHTML = prestadores.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
+    document.getElementById('horarioServico').innerHTML = servicos.map(s => `<option value="${s.id}">${s.nome} - R$ ${fMoeda(s.valor)}</option>`).join('');
 }
 
-async function confirmarAgendamento(horarioId, prestadorId, dataHora) {
-    var clienteNome = document.getElementById('clienteNome').value.trim();
-    var clienteWhatsApp = document.getElementById('clienteWhatsApp').value.trim();
-    var comprovanteLink = document.getElementById('comprovanteLink').value.trim();
-    
-    if(!clienteNome || !clienteWhatsApp) {
-        alert('Preencha nome e WhatsApp');
-        return;
-    }
-    
-    var prestador = prestadores.find(p => p.id === prestadorId);
-    var sinalPercentual = configs.sinal_percentual || 30;
-    var valorSinal = (prestador.valor_medio || 0) * (sinalPercentual / 100);
-    
+function renderizarAgendamentos() {
+    let dados = [...agendamentos];
+    const busca = document.getElementById('buscaAgendamentos')?.value.toLowerCase() || '';
+    if (busca) dados = dados.filter(a => a.cliente_nome.toLowerCase().includes(busca));
+    const totalPag = Math.ceil(dados.length / itensPorPagina) || 1;
+    if (paginaAtual > totalPag) paginaAtual = totalPag;
+    const paginados = dados.slice((paginaAtual - 1) * itensPorPagina, paginaAtual * itensPorPagina);
+    document.getElementById('tabelaAgendamentos').innerHTML = paginados.map(a => {
+        const servico = servicos.find(s => s.id === a.servico_id);
+        const prestador = prestadores.find(p => p.id === a.prestador_id);
+        return `<tr class="border-b"><td class="px-6 py-4">${a.cliente_nome}</td><td class="px-6 py-4">${servico ? servico.nome : '—'}</td><td class="px-6 py-4">${prestador ? prestador.nome : '—'}</td><td class="px-6 py-4">${formatarData(a.data_agendamento)} ${formatarHora(a.data_agendamento)}</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${a.status === 'confirmado' ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}">${a.status === 'confirmado' ? 'Confirmado' : 'Pendente'}</span></td></tr>`;
+    }).join('');
+    let pagHTML = ''; for (let i = 1; i <= totalPag; i++) pagHTML += `<button onclick="paginaAtual=${i};renderizarAgendamentos()" class="px-3 py-1 rounded-lg text-sm font-bold ${i === paginaAtual ? 'bg-blue-600 text-white' : 'bg-slate-100'}">${i}</button>`;
+    document.getElementById('paginacaoAgendamentos').innerHTML = `<span class="text-xs text-slate-500">${dados.length} registros</span><div class="flex gap-1">${pagHTML}</div>`;
+}
+
+// CRUD
+document.getElementById('btnSalvarPrestador').onclick = async () => {
+    const nome = document.getElementById('prestadorNome').value.trim();
+    if (!nome) return alert('Informe o nome!');
     showLoading();
-    
-    var { error } = await supabase.from('agendamentos').insert([{
-        admin_id: usuarioLogado.id,
-        prestador_id: prestadorId,
-        horario_id: horarioId,
-        cliente_nome: clienteNome,
-        cliente_whatsapp: clienteWhatsApp,
-        valor_total: prestador.valor_medio || 0,
-        sinal_percentual: sinalPercentual,
-        sinal_valor: valorSinal,
-        sinal_pago: 0,
-        comprovante_link: comprovanteLink || null,
-        status: 'pendente',
-        data_agendamento: dataHora
-    }]);
-    
-    if(error) {
-        hideLoading();
-        alert('Erro: ' + error.message);
-        return;
-    }
-    
-    await supabase.from('horarios').update({ status: 'ocupado' }).eq('id', horarioId);
-    
-    var msgCliente = `✅ *AGENDAMENTO CONFIRMADO!*\n\n📅 Data: ${formatarData(dataHora)}\n⏰ Horário: ${formatarHora(dataHora)}\n👨‍💼 Prestador: ${prestador.nome}\n💰 Valor: R$ ${fMoeda(prestador.valor_medio)}`;
-    window.open(`https://wa.me/55${clienteWhatsApp.replace(/\D/g,'')}?text=${encodeURIComponent(msgCliente)}`, '_blank');
-    
-    if(prestador.whatsapp) {
-        var msgPrestador = `🆕 *NOVO AGENDAMENTO!*\n\n👤 Cliente: ${clienteNome}\n📅 Data: ${formatarData(dataHora)}\n⏰ Horário: ${formatarHora(dataHora)}\n💰 Valor: R$ ${fMoeda(prestador.valor_medio)}`;
-        setTimeout(() => {
-            window.open(`https://wa.me/55${prestador.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(msgPrestador)}`, '_blank');
-        }, 1000);
-    }
-    
+    await supabase.from('prestadores').insert([{ admin_id: usuarioLogado.id, nome, whatsapp: document.getElementById('prestadorWhatsApp').value.trim() }]);
     hideLoading();
-    showToast('Agendamento realizado com sucesso!');
-    fecharModal();
-    carregarTudo();
-}
+    carregarDados();
+    document.getElementById('prestadorNome').value = '';
+    document.getElementById('prestadorWhatsApp').value = '';
+};
+window.excluirPrestador = async (id) => { if (confirm('Excluir?')) { showLoading(); await supabase.from('prestadores').delete().eq('id', id); hideLoading(); carregarDados(); } };
 
-async function carregarAgendamentos() {
-    var container = document.getElementById('agendamentosContainer');
-    if(agendamentos.length === 0) {
-        container.innerHTML = '<div class="glass-card" style="padding: 60px; text-align: center; color: #64748b;">Nenhum agendamento encontrado</div>';
-        return;
-    }
-    
-    container.innerHTML = `
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>Cliente</th><th>Data/Hora</th><th>Prestador</th><th>Valor</th><th>Status</th></tr>
-                </thead>
-                <tbody>
-                    ${agendamentos.map(a => {
-                        var prestador = prestadores.find(p => p.id === a.prestador_id);
-                        return `
-                            <tr>
-                                <td>${a.cliente_nome}<br><small style="color: #64748b;">📱 ${a.cliente_whatsapp}</small></td>
-                                <td>${formatarData(a.data_agendamento)}<br>${formatarHora(a.data_agendamento)}</td>
-                                <td>${prestador ? prestador.nome : '—'}</td>
-                                <td>R$ ${fMoeda(a.valor_total)}</td>
-                                <td>${a.status === 'confirmado' ? '✅ Confirmado' : '⏰ Pendente'}</td>
-                            </tr>
-                        `;
-                    }).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-async function carregarFinanceiro() {
-    var container = document.getElementById('financeiroContainer');
-    var totalVendas = agendamentos.reduce((s,a) => s + (a.valor_total || 0), 0);
-    var totalSinais = agendamentos.reduce((s,a) => s + (a.sinal_pago || 0), 0);
-    
-    container.innerHTML = `
-        <div class="stats-grid" style="margin-bottom: 0;">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="stat-value">R$ ${fMoeda(totalVendas)}</div>
-                <div class="stat-label">Total geral</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                <div class="stat-value">R$ ${fMoeda(totalSinais)}</div>
-                <div class="stat-label">Sinais recebidos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-credit-card"></i></div>
-                <div class="stat-value">R$ ${fMoeda(totalVendas - totalSinais)}</div>
-                <div class="stat-label">A receber</div>
-            </div>
-        </div>
-        <div style="margin-top: 24px; text-align: center;">
-            <button class="btn-secondary" onclick="exportarRelatorio()"><i class="fas fa-download"></i> Exportar relatório</button>
-        </div>
-    `;
-}
-
-async function carregarProximos() {
-    var container = document.getElementById('proximosContainer');
-    var agora = new Date();
-    var proximosAgendamentos = agendamentos.filter(a => new Date(a.data_agendamento) > agora).sort((a,b) => new Date(a.data_agendamento) - new Date(b.data_agendamento)).slice(0, 10);
-    
-    if(proximosAgendamentos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #64748b;">Nenhum agendamento futuro</p>';
-        return;
-    }
-    
-    container.innerHTML = `
-        <h3 style="margin-bottom: 20px;">Próximos agendamentos</h3>
-        ${proximosAgendamentos.map(a => {
-            var prestador = prestadores.find(p => p.id === a.prestador_id);
-            return `
-                <div style="background: #f8fafc; padding: 16px; border-radius: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <strong>${a.cliente_nome}</strong>
-                        <p style="font-size: 0.85rem; color: #64748b;">${formatarData(a.data_agendamento)} às ${formatarHora(a.data_agendamento)}</p>
-                    </div>
-                    <div style="text-align: right;">
-                        <p><strong>${prestador ? prestador.nome : '—'}</strong></p>
-                        <p>R$ ${fMoeda(a.valor_total)}</p>
-                    </div>
-                </div>
-            `;
-        }).join('')}
-    `;
-}
-
-// ============================================
-// ADMIN FUNCTIONS
-// ============================================
-async function salvarPrestador() {
-    var nome = document.getElementById('prestadorNome').value.trim();
-    if(!nome) return alert('Digite o nome do prestador');
-    
+document.getElementById('btnSalvarServico').onclick = async () => {
+    const nome = document.getElementById('servicoNome').value.trim();
+    if (!nome) return alert('Informe o nome!');
     showLoading();
-    var { error } = await supabase.from('prestadores').insert([{
-        admin_id: usuarioLogado.id,
-        nome: nome,
-        whatsapp: document.getElementById('prestadorWhatsApp').value.trim(),
-        servicos: document.getElementById('prestadorServicos').value.trim(),
-        valor_medio: parseFloat(document.getElementById('prestadorValor').value) || 0
-    }]);
+    await supabase.from('servicos').insert([{ admin_id: usuarioLogado.id, nome, duracao: parseInt(document.getElementById('servicoDuracao').value) || 60, valor: parseFloat(document.getElementById('servicoValor').value) || 0 }]);
     hideLoading();
-    
-    if(error) alert('Erro: ' + error.message);
-    else {
-        showToast('Prestador salvo com sucesso');
-        document.getElementById('prestadorNome').value = '';
-        document.getElementById('prestadorWhatsApp').value = '';
-        document.getElementById('prestadorServicos').value = '';
-        document.getElementById('prestadorValor').value = '';
-        carregarTudo();
-    }
-}
+    carregarDados();
+    document.getElementById('servicoNome').value = '';
+    document.getElementById('servicoDuracao').value = '';
+    document.getElementById('servicoValor').value = '';
+};
+window.excluirServico = async (id) => { if (confirm('Excluir?')) { showLoading(); await supabase.from('servicos').delete().eq('id', id); hideLoading(); carregarDados(); } };
 
-async function excluirPrestador(id) {
-    if(!confirm('Excluir prestador e todos os seus horários?')) return;
+document.getElementById('btnCriarHorarios').onclick = async () => {
+    const pid = document.getElementById('horarioPrestador').value;
+    const sid = document.getElementById('horarioServico').value;
+    const data = document.getElementById('horarioData').value;
+    const inicio = document.getElementById('horarioInicio').value;
+    const fim = document.getElementById('horarioFim').value;
+    if (!pid || !data || !inicio || !fim) return alert('Preencha todos os campos!');
+    const lista = [];
+    let horaAtual = new Date(`${data}T${inicio}:00`);
+    const horaFim = new Date(`${data}T${fim}:00`);
+    while (horaAtual < horaFim) {
+        lista.push({ admin_id: usuarioLogado.id, prestador_id: parseInt(pid), servico_id: parseInt(sid), data_hora: horaAtual.toISOString(), status: 'livre' });
+        horaAtual = new Date(horaAtual.getTime() + 60 * 60000);
+    }
+    if (lista.length === 0) return alert('Nenhum horário gerado!');
     showLoading();
-    await supabase.from('horarios').delete().eq('prestador_id', id);
-    await supabase.from('prestadores').delete().eq('id', id);
+    await supabase.from('horarios').insert(lista);
     hideLoading();
-    carregarTudo();
+    alert(`✅ ${lista.length} horários criados!`);
+    carregarDados();
+};
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active', 'text-blue-600'); b.classList.add('text-slate-400'); });
+    document.getElementById('tab-' + tabId).classList.add('active', 'text-blue-600');
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('content-' + tabId).classList.add('active');
+    document.getElementById('headerTitle').innerHTML = document.getElementById('tab-' + tabId).innerHTML.trim().replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
 }
 
-async function criarHorarios() {
-    var prestadorId = document.getElementById('horarioPrestador').value;
-    var data = document.getElementById('horarioData').value;
-    var inicio = document.getElementById('horarioInicio').value;
-    var fim = document.getElementById('horarioFim').value;
-    var intervalo = parseInt(document.getElementById('horarioIntervalo').value);
-    var status = document.getElementById('horarioStatus').value;
-    
-    if(!prestadorId || !data || !inicio || !fim) return alert('Preencha todos os campos');
-    
-    var horariosLista = [];
-    var horaAtual = new Date(`${data}T${inicio}:00`);
-    var horaFim = new Date(`${data}T${fim}:00`);
-    
-    while(horaAtual < horaFim) {
-        horariosLista.push({
-            admin_id: usuarioLogado.id,
-            prestador_id: parseInt(prestadorId),
-            data_hora: horaAtual.toISOString(),
-            status: status,
-            duracao: intervalo
-        });
-        horaAtual = new Date(horaAtual.getTime() + intervalo * 60000);
-    }
-    
-    if(horariosLista.length === 0) return alert('Nenhum horário gerado');
-    
-    showLoading();
-    var { error } = await supabase.from('horarios').insert(horariosLista);
-    hideLoading();
-    
-    if(error) alert('Erro: ' + error.message);
-    else {
-        showToast(`${horariosLista.length} horários criados`);
-        carregarTudo();
-    }
-}
+function logout() { document.getElementById('screenSistema').style.display = 'none'; voltarLogin(); }
 
-async function bloquearPeriodo() {
-    var prestadorId = document.getElementById('bloqueioPrestador').value;
-    var inicio = document.getElementById('bloqueioInicio').value;
-    var fim = document.getElementById('bloqueioFim').value;
-    var motivo = document.getElementById('bloqueioMotivo').value;
-    
-    if(!prestadorId || !inicio || !fim) return alert('Preencha os campos');
-    
-    var horariosParaBloquear = horarios.filter(h => 
-        h.prestador_id == prestadorId && 
-        h.data_hora.split('T')[0] >= inicio && 
-        h.data_hora.split('T')[0] <= fim &&
-        h.status !== 'ocupado'
-    );
-    
-    if(horariosParaBloquear.length === 0) return alert('Nenhum horário para bloquear');
-    
-    showLoading();
-    for(var h of horariosParaBloquear) {
-        await supabase.from('horarios').update({ status: 'bloqueado', motivo_bloqueio: motivo }).eq('id', h.id);
-    }
-    hideLoading();
-    showToast(`${horariosParaBloquear.length} horários bloqueados`);
-    carregarTudo();
-}
-
-async function salvarConfig() {
-    showLoading();
-    var { error } = await supabase.from('configuracoes').upsert({
-        admin_id: usuarioLogado.id,
-        sinal_percentual: parseInt(document.getElementById('configSinal').value) || 30,
-        chave_pix: document.getElementById('configPix').value
-    });
-    hideLoading();
-    if(error) alert('Erro: ' + error.message);
-    else {
-        showToast('Configurações salvas');
-        carregarTudo();
-    }
-}
-
-function exportarRelatorio() {
-    var data = agendamentos.map(a => ({
-        Cliente: a.cliente_nome,
-        WhatsApp: a.cliente_whatsapp,
-        Data: formatarData(a.data_agendamento),
-        Horario: formatarHora(a.data_agendamento),
-        Valor: a.valor_total,
-        Status: a.status
-    }));
-    console.table(data);
-    showToast('Relatório exportado (verifique o console F12)');
-}
-
-// ============================================
-// EVENT LISTENERS
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    // Data atual
-    var dataAtual = document.getElementById('dataAtual');
-    if(dataAtual) {
-        var hoje = new Date();
-        dataAtual.innerHTML = hoje.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
-    }
-    
-    // Tema
-    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
-    
-    document.getElementById('btnTheme').onclick = function() {
-        document.body.classList.toggle('dark');
-        localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    };
-    
-    // Share link
-    document.getElementById('btnAbrirLinkPublico').onclick = function() {
-        var link = window.location.origin + window.location.pathname + `?public=true&admin=${usuarioLogado ? usuarioLogado.id : ''}`;
-        navigator.clipboard.writeText(link);
-        showToast('Link copiado! Compartilhe com seus clientes');
-    };
-    
-    // Login
-    document.getElementById('btnLogin').onclick = async function() {
-        var nome = document.getElementById('loginNome').value.trim();
-        var cpf = document.getElementById('loginCPF').value.trim();
-        var senha = document.getElementById('loginSenha').value.trim();
-        
-        if(!nome || !cpf) {
-            alert('Preencha nome e CPF');
-            return;
-        }
-        
-        showLoading();
-        
-        if(cpf === '12345678909') {
-            var { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
-            if(!data || data.length === 0) {
-                await supabase.from('usuarios').insert([{nome, cpf, tipo:'admin', senha:'admin'}]);
-            }
-            usuarioLogado = (data && data[0]) || {id: 1, nome, cpf, tipo: 'admin'};
-            isAdmin = true;
-        } else {
-            var { data } = await supabase.from('usuarios').select('*').eq('cpf', cpf);
-            if(data && data.length > 0) {
-                usuarioLogado = data[0];
-            } else {
-                var { data: novo } = await supabase.from('usuarios').insert([{nome, cpf, tipo:'comum'}]).select();
-                usuarioLogado = novo[0];
-            }
-            isAdmin = false;
-        }
-        
-        hideLoading();
-        
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('mainScreen').classList.remove('hidden');
-        document.getElementById('displayNome').innerHTML = usuarioLogado.nome;
-        
-        if(isAdmin) {
-            document.getElementById('badgeAdmin').style.display = 'inline-block';
-            document.getElementById('adminSection').classList.remove('hidden');
-        }
-        
-        carregarTudo();
-    };
-    
-    // Esqueci senha
-    document.getElementById('btnEsqueciSenha').onclick = function() {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('resetScreen').classList.remove('hidden');
-    };
-    
-    document.getElementById('btnVoltarLogin').onclick = function() {
-        document.getElementById('resetScreen').classList.add('hidden');
-        document.getElementById('loginScreen').classList.remove('hidden');
-    };
-    
-    document.getElementById('btnConfirmarReset').onclick = async function() {
-        var nome = document.getElementById('resetNome').value.trim();
-        var cpf = document.getElementById('resetCPF').value.trim();
-        var codigo = document.getElementById('resetCodigo').value.trim();
-        var nova = document.getElementById('resetNovaSenha').value;
-        var confirma = document.getElementById('resetConfirmaSenha').value;
-        
-        if(!nome || !cpf) return alert('Preencha nome e CPF');
-        if(codigo !== '123456') return alert('Código incorreto');
-        if(nova.length < 4 || nova !== confirma) return alert('Senhas não conferem');
-        
-        showLoading();
-        await supabase.from('usuarios').update({ senha: nova, nome: nome }).eq('cpf', cpf).eq('tipo', 'admin');
-        hideLoading();
-        alert('Senha redefinida!');
-        document.getElementById('resetScreen').classList.add('hidden');
-        document.getElementById('loginScreen').classList.remove('hidden');
-    };
-    
-    // Logout
-    document.getElementById('btnLogout').onclick = function() {
-        if(confirm('Sair do sistema?')) {
-            usuarioLogado = null;
-            document.getElementById('mainScreen').classList.add('hidden');
-            document.getElementById('loginScreen').classList.remove('hidden');
-        }
-    };
-    
-    // Admin tabs
-    document.querySelectorAll('#adminTabs .tab-professional').forEach(btn => {
-        btn.onclick = function() {
-            document.querySelectorAll('#adminTabs .tab-professional').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            document.querySelectorAll('.form-panel').forEach(p => p.classList.add('hidden'));
-            document.getElementById('panel-' + this.dataset.panel).classList.remove('hidden');
-        };
-    });
-    
-    // Main tabs
-    document.querySelectorAll('#mainTabs .tab-professional').forEach(tab => {
-        tab.onclick = function() {
-            document.querySelectorAll('#mainTabs .tab-professional').forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            tabAtual = this.dataset.tab;
-            
-            document.getElementById('dashboardContainer').classList.add('hidden');
-            document.getElementById('calendarioContainer').classList.add('hidden');
-            document.getElementById('agendamentosContainer').classList.add('hidden');
-            document.getElementById('financeiroContainer').classList.add('hidden');
-            document.getElementById('proximosContainer').classList.add('hidden');
-            
-            if(tabAtual === 'dashboard') document.getElementById('dashboardContainer').classList.remove('hidden');
-            else if(tabAtual === 'calendario') document.getElementById('calendarioContainer').classList.remove('hidden');
-            else if(tabAtual === 'agendamentos') document.getElementById('agendamentosContainer').classList.remove('hidden');
-            else if(tabAtual === 'financeiro') document.getElementById('financeiroContainer').classList.remove('hidden');
-            else if(tabAtual === 'proximos') document.getElementById('proximosContainer').classList.remove('hidden');
-            
-            if(tabAtual === 'dashboard') carregarDashboard();
-            else if(tabAtual === 'calendario') carregarCalendario();
-            else if(tabAtual === 'agendamentos') carregarAgendamentos();
-            else if(tabAtual === 'financeiro') carregarFinanceiro();
-            else if(tabAtual === 'proximos') carregarProximos();
-        };
-    });
-    
-    // Admin buttons
-    document.getElementById('btnSalvarPrestador').onclick = salvarPrestador;
-    document.getElementById('btnCriarHorarios').onclick = criarHorarios;
-    document.getElementById('btnBloquearPeriodo').onclick = bloquearPeriodo;
-    document.getElementById('btnSalvarConfig').onclick = salvarConfig;
-    
-    // Global functions
-    window.abrirModalAgendamento = abrirModalAgendamento;
-    window.confirmarAgendamento = confirmarAgendamento;
-    window.fecharModal = fecharModal;
-    window.excluirPrestador = excluirPrestador;
-    window.exportarRelatorio = exportarRelatorio;
-    
-    // Default dates
-    var hoje = new Date().toISOString().split('T')[0];
-    document.getElementById('horarioData').value = hoje;
-    document.getElementById('bloqueioInicio').value = hoje;
-    document.getElementById('bloqueioFim').value = new Date(Date.now() + 7*86400000).toISOString().split('T')[0];
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('✅ Sistema Data Desh Agenda carregado!');
+    console.log('👑 Admin: CPF 12345678909 / Senha: admin');
+    document.getElementById('horarioData').value = new Date().toISOString().split('T')[0];
 });
 </script>
 </body>
