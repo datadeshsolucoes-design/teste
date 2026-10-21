@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataDesh Soluções | Sites, Catálogos e Soluções Digitais para Gestão Pública e Negócios</title>
-    <meta name="description" content="Soluções digitais sob medida para prefeituras e empresas: sites, catálogos, dashboards e ferramentas de gestão. Atendimento personalizado e foco em resultados." />
+    <title>DataDesh Soluções | Tecnologia para Gestão Pública</title>
+    <meta name="description" content="Soluções digitais para prefeituras e órgãos públicos: dashboards de gestão, portais da transparência, painéis de indicadores e automação de processos." />
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
         /* ============================================================
-           ROOT & RESET - MODO CLARO
+           ROOT & RESET - VERSÃO PREFEITURAS
            ============================================================ */
         * {
             margin: 0;
@@ -20,25 +20,27 @@
         }
 
         :root {
-            --bg: #f5f7fb;
+            --bg: #f0f4f8;
             --surface: #ffffff;
-            --surface-hover: #f1f4f9;
-            --text: #1a2332;
-            --text-light: #5b6b7e;
-            --border: #e2e8f0;
-            --primary: #0f766e;
-            --primary-dark: #0a4f4a;
-            --secondary: #7c3aed;
-            --accent: #f59e0b;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            --shadow-glow: 0 0 60px rgba(15, 118, 110, 0.06);
+            --surface-hover: #e8eef5;
+            --text: #0f1e33;
+            --text-light: #4a5b6e;
+            --border: #d1dce8;
+            --primary: #1e3a8a;
+            --primary-dark: #152c6b;
+            --secondary: #0f766e;
+            --accent: #d97706;
+            --shadow: 0 20px 60px rgba(30, 58, 138, 0.08);
+            --shadow-glow: 0 0 60px rgba(30, 58, 138, 0.06);
             --radius: 16px;
             --radius-lg: 24px;
             --radius-xl: 32px;
             --container: 1200px;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -48,9 +50,16 @@
             overflow-x: hidden;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
 
         .container {
             width: min(100% - 32px, var(--container));
@@ -65,15 +74,9 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        @keyframes float3d {
-            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-            25% { transform: translateY(-10px) rotateX(2deg) rotateY(2deg); }
-            75% { transform: translateY(10px) rotateX(-2deg) rotateY(-2deg); }
-        }
-
         @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 40px rgba(15, 118, 110, 0.04); }
-            50% { box-shadow: 0 0 80px rgba(15, 118, 110, 0.10); }
+            0%, 100% { box-shadow: 0 0 40px rgba(30, 58, 138, 0.04); }
+            50% { box-shadow: 0 0 80px rgba(30, 58, 138, 0.10); }
         }
 
         .reveal {
@@ -99,7 +102,7 @@
         }
 
         /* ============================================================
-           PARTICLES
+           PARTICLES - BOLINHAS SUTIS (INSTITUCIONAL)
            ============================================================ */
         #particles-canvas {
             position: fixed;
@@ -118,15 +121,15 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(240, 244, 248, 0.92);
             backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.06);
+            background: rgba(240, 244, 248, 0.98);
+            box-shadow: 0 4px 40px rgba(30, 58, 138, 0.06);
         }
 
         .nav-wrap {
@@ -145,12 +148,12 @@
         }
 
         .brand-mark {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(15, 118, 110, 0.15);
+            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.15);
             transition: transform 0.3s ease;
             background: var(--primary);
             display: flex;
@@ -158,26 +161,49 @@
             justify-content: center;
             color: white;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 16px;
+            letter-spacing: -0.05em;
         }
 
-        .brand-mark img { width: 100%; height: 100%; object-fit: cover; }
-        .brand-mark:hover { transform: rotate(-8deg) scale(1.05); }
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-        .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
-        .brand-text strong { font-size: 1rem; color: var(--text); letter-spacing: -0.02em; }
-        .brand-text span { font-size: 0.7rem; color: var(--text-light); font-weight: 500; }
+        .brand-mark:hover {
+            transform: rotate(-4deg) scale(1.05);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .brand-text strong {
+            font-size: 1rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text span {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 24px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-light);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             text-decoration: none;
             position: relative;
@@ -195,12 +221,19 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover { color: var(--text); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a.active { color: var(--primary); }
-        .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-        .nav-actions { display: flex; align-items: center; gap: 12px; }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
         .btn {
             display: inline-flex;
@@ -210,7 +243,7 @@
             border: none;
             border-radius: 50px;
             padding: 12px 24px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
@@ -223,12 +256,12 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 4px 24px rgba(15, 118, 110, 0.15);
+            box-shadow: 0 4px 24px rgba(30, 58, 138, 0.15);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(15, 118, 110, 0.25);
+            box-shadow: 0 12px 40px rgba(30, 58, 138, 0.25);
         }
 
         .btn-secondary {
@@ -243,18 +276,20 @@
             border-color: var(--primary);
         }
 
-        .btn-catalogo {
-            background: linear-gradient(135deg, var(--secondary), #6d28d9);
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #b45309);
             color: white;
-            box-shadow: 0 4px 24px rgba(124, 58, 237, 0.15);
+            box-shadow: 0 4px 24px rgba(217, 119, 6, 0.15);
         }
 
-        .btn-catalogo:hover {
+        .btn-accent:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
+            box-shadow: 0 12px 40px rgba(217, 119, 6, 0.25);
         }
 
-        .btn-glow { animation: glowPulse 3s ease-in-out infinite; }
+        .btn-glow {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
 
         .nav-icon-link {
             width: 42px;
@@ -294,7 +329,9 @@
             gap: 8px;
         }
 
-        .nav-mobile.active { display: flex; }
+        .nav-mobile.active {
+            display: flex;
+        }
 
         .nav-mobile a {
             padding: 14px 16px;
@@ -309,12 +346,12 @@
 
         .nav-mobile a:hover {
             background: var(--surface-hover);
-            color: var(--text);
+            color: var(--primary);
             border-color: var(--primary);
         }
 
         /* ============================================================
-           HERO
+           HERO - VERSÃO PREFEITURAS
            ============================================================ */
         .hero {
             padding: 80px 0 60px;
@@ -330,7 +367,7 @@
             right: -10%;
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(15, 118, 110, 0.04), transparent 70%);
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.04), transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             animation: glowPulse 6s ease-in-out infinite;
@@ -343,7 +380,7 @@
             left: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.04), transparent 70%);
+            background: radial-gradient(circle, rgba(15, 118, 110, 0.04), transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             animation: glowPulse 8s ease-in-out infinite reverse;
@@ -359,23 +396,23 @@
         }
 
         .hero-content h1 {
-            font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+            font-size: clamp(2.2rem, 3.8vw, 3.8rem);
             font-weight: 900;
-            line-height: 1.05;
+            line-height: 1.08;
             letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: var(--text);
         }
 
         .hero-content h1 .highlight {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-content .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-light);
             font-weight: 400;
             margin-bottom: 1rem;
@@ -383,7 +420,7 @@
 
         .hero-content .bio {
             color: var(--text-light);
-            font-size: 1.05rem;
+            font-size: 1rem;
             max-width: 540px;
             line-height: 1.8;
             margin-bottom: 1.8rem;
@@ -401,7 +438,7 @@
             border: 1px solid var(--border);
             border-radius: 50px;
             padding: 0.4rem 1.2rem;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--text-light);
             transition: all 0.3s ease;
@@ -410,10 +447,13 @@
         .hero-tag:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.05);
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.05);
         }
 
-        .hero-tag i { color: var(--primary); margin-right: 0.3rem; }
+        .hero-tag i {
+            color: var(--primary);
+            margin-right: 0.3rem;
+        }
 
         .hero-actions {
             display: flex;
@@ -442,35 +482,75 @@
             font-weight: 500;
         }
 
-        .hero-avatar {
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid rgba(15, 118, 110, 0.15);
-            box-shadow: var(--shadow), 0 0 40px rgba(15, 118, 110, 0.05);
-            justify-self: center;
-            animation: float3d 6s ease-in-out infinite;
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
-            transform-style: preserve-3d;
-            perspective: 800px;
-            transition: transform 0.6s ease;
         }
 
-        .hero-avatar:hover { transform: rotateY(5deg) rotateX(5deg) scale(1.02); }
+        .hero-mockup {
+            width: 100%;
+            max-width: 420px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            animation: float3d 6s ease-in-out infinite;
+        }
 
-        .hero-avatar::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            25% { transform: translateY(-8px) rotateX(1deg) rotateY(1deg); }
+            75% { transform: translateY(8px) rotateX(-1deg) rotateY(-1deg); }
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            z-index: -1;
-            opacity: 0.15;
-            animation: glowPulse 4s ease-in-out infinite;
         }
 
-        .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .mockup-dot:nth-child(1) { background: #ef4444; }
+        .mockup-dot:nth-child(2) { background: #f59e0b; }
+        .mockup-dot:nth-child(3) { background: #10b981; }
+
+        .mockup-bar {
+            height: 12px;
+            background: var(--surface-hover);
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        .mockup-bar.small { width: 60%; }
+        .mockup-bar.medium { width: 80%; }
+        .mockup-bar.large { width: 100%; }
+
+        .mockup-chart {
+            height: 100px;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.06), rgba(15, 118, 110, 0.06));
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 12px;
+        }
+
+        .mockup-chart .bar {
+            width: 14%;
+            background: linear-gradient(to top, var(--primary), var(--secondary));
+            border-radius: 4px 4px 0 0;
+            opacity: 0.7;
+        }
 
         /* ============================================================
            TRUST BAR
@@ -482,7 +562,7 @@
         }
 
         .trust-box {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
@@ -503,7 +583,7 @@
             width: 48px;
             height: 48px;
             border-radius: 14px;
-            background: rgba(15, 118, 110, 0.08);
+            background: rgba(30, 58, 138, 0.08);
             color: var(--primary);
             display: grid;
             place-items: center;
@@ -511,14 +591,28 @@
             flex-shrink: 0;
         }
 
-        .trust-item div strong { display: block; font-size: 0.95rem; color: var(--text); }
-        .trust-item div span { font-size: 0.8rem; color: var(--text-light); }
+        .trust-item div strong {
+            display: block;
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+
+        .trust-item div span {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
 
         /* ============================================================
            SEÇÕES
            ============================================================ */
-        .section { padding: 90px 0; position: relative; }
-        .section-alt { background: rgba(255, 255, 255, 0.5); }
+        .section {
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-alt {
+            background: rgba(255, 255, 255, 0.5);
+        }
 
         .section-header {
             max-width: 760px;
@@ -532,10 +626,10 @@
             gap: 8px;
             padding: 8px 16px;
             border-radius: 999px;
-            background: rgba(15, 118, 110, 0.06);
-            border: 1px solid rgba(15, 118, 110, 0.1);
+            background: rgba(30, 58, 138, 0.06);
+            border: 1px solid rgba(30, 58, 138, 0.1);
             color: var(--primary);
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -543,7 +637,7 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 3vw, 3rem);
+            font-size: clamp(1.8rem, 2.8vw, 2.8rem);
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.03em;
@@ -552,14 +646,14 @@
         }
 
         .section-title span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section-subtitle {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-light);
             max-width: 680px;
             margin: 0 auto;
@@ -570,7 +664,7 @@
            ============================================================ */
         .about-grid {
             display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
+            grid-template-columns: 0.85fr 1.15fr;
             gap: 48px;
             align-items: center;
         }
@@ -581,20 +675,21 @@
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
             transition: all 0.4s ease;
-            transform-style: preserve-3d;
-            perspective: 600px;
         }
 
         .about-photo-card:hover {
-            transform: rotateX(2deg) rotateY(2deg);
             border-color: var(--primary);
             box-shadow: var(--shadow-glow);
         }
 
-        .about-photo-card img { width: 100%; height: auto; display: block; }
+        .about-photo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .about-copy h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             line-height: 1.15;
             margin-bottom: 0.5rem;
@@ -610,7 +705,7 @@
 
         .about-copy p {
             color: var(--text-light);
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 1.5rem;
         }
@@ -627,13 +722,14 @@
             gap: 12px;
             align-items: flex-start;
             color: var(--text-light);
+            font-size: 0.95rem;
         }
 
         .about-list i {
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: rgba(15, 118, 110, 0.08);
+            background: rgba(30, 58, 138, 0.08);
             color: var(--primary);
             display: grid;
             place-items: center;
@@ -642,7 +738,11 @@
             flex-shrink: 0;
         }
 
-        .contact-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+        .contact-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
         .pill {
             display: inline-flex;
@@ -655,7 +755,7 @@
             color: var(--text-light);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .pill:hover {
@@ -665,56 +765,93 @@
         }
 
         /* ============================================================
-           SERVIÇOS
+           SOLUÇÕES POR SECRETARIA
            ============================================================ */
-        .services-grid {
+        .solutions-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
-        .service-card {
+        .solution-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 32px 24px;
+            padding: 32px 28px;
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            transform-style: preserve-3d;
-            perspective: 600px;
-            text-align: center;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
             border-color: var(--primary);
             box-shadow: var(--shadow-glow);
         }
 
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
+        .solution-card:hover::before {
+            opacity: 1;
+        }
+
+        .solution-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
             display: grid;
             place-items: center;
-            margin: 0 auto 18px;
-            background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(124, 58, 237, 0.08));
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(15, 118, 110, 0.08));
             color: var(--primary);
-            font-size: 26px;
+            font-size: 24px;
             transition: all 0.4s ease;
         }
 
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(-6deg);
+        .solution-card:hover .solution-icon {
+            transform: scale(1.1) rotate(-4deg);
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
 
-        .service-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-        .service-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; }
+        .solution-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .solution-card p {
+            color: var(--text-light);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .solution-tag {
+            display: inline-block;
+            background: rgba(30, 58, 138, 0.06);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
 
         /* ============================================================
-           PROJETOS
+           PROJETOS PÚBLICOS
            ============================================================ */
         .projects-grid {
             display: grid;
@@ -728,13 +865,11 @@
             border-radius: var(--radius-lg);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            transform-style: preserve-3d;
-            perspective: 600px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .project-card:hover {
-            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            transform: translateY(-8px);
             border-color: var(--primary);
             box-shadow: var(--shadow-glow);
         }
@@ -742,16 +877,37 @@
         .project-media {
             aspect-ratio: 16/10;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(30, 58, 138, 0.03);
             position: relative;
         }
 
-        .project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .project-card:hover .project-media img { transform: scale(1.05); }
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
 
-        .project-content { padding: 24px; }
-        .project-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-        .project-content p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px; }
+        .project-card:hover .project-media img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+        }
 
         .project-content .project-link {
             display: inline-flex;
@@ -759,18 +915,26 @@
             gap: 6px;
             color: var(--primary);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .project-content .project-link:hover { color: var(--accent); transform: translateX(4px); }
+        .project-content .project-link:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
 
-        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
 
         .project-tags span {
-            background: rgba(15, 118, 110, 0.06);
-            border: 1px solid rgba(15, 118, 110, 0.08);
+            background: rgba(30, 58, 138, 0.06);
+            border: 1px solid rgba(30, 58, 138, 0.08);
             border-radius: 50px;
             padding: 2px 12px;
             font-size: 0.65rem;
@@ -779,131 +943,79 @@
         }
 
         /* ============================================================
-           CATÁLOGO
+           BENEFÍCIOS
            ============================================================ */
-        .catalog-grid {
+        .benefits-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .catalog-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            transition: all 0.4s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-        }
-
-        .catalog-card:hover { border-color: var(--primary); box-shadow: var(--shadow-glow); }
-        .catalog-card h3 { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-        .catalog-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
-        .catalog-card ul { list-style: none; display: grid; gap: 10px; margin-top: 16px; }
-        .catalog-card ul li { display: flex; align-items: center; gap: 10px; color: var(--text-light); }
-        .catalog-card ul li i { color: var(--primary); font-size: 14px; }
-
-        .catalog-demo {
-            background: linear-gradient(135deg, rgba(15, 118, 110, 0.04), rgba(124, 58, 237, 0.04));
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        .catalog-demo:hover { border-color: var(--primary); box-shadow: var(--shadow-glow); }
-        .catalog-demo h3 { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-        .catalog-demo p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
-        .catalog-demo .btn-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-
-        /* ============================================================
-           CLÍNICAS
-           ============================================================ */
-        .clinic-wrap {
-            background: linear-gradient(135deg, rgba(15, 118, 110, 0.04), rgba(124, 58, 237, 0.04));
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            transition: all 0.4s ease;
-        }
-
-        .clinic-wrap:hover { border-color: var(--primary); box-shadow: var(--shadow-glow); }
-        .clinic-visual { padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; }
-
-        .clinic-visual h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text);
-            line-height: 1.2;
-        }
-
-        .clinic-visual h3 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .clinic-visual p { color: var(--text-light); font-size: 1.05rem; margin-top: 8px; line-height: 1.8; }
-
-        .clinic-pricing {
-            padding: 48px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.4);
-            border-left: 1px solid var(--border);
-        }
-
-        .clinic-pricing h3 { font-size: 1.3rem; font-weight: 700; color: var(--text); }
-        .clinic-pricing p { color: var(--text-light); margin-bottom: 8px; }
-        .clinic-pricing .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
-
-        /* ============================================================
-           DEPOIMENTOS
-           ============================================================ */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
 
-        .testimonial-card {
+        .benefit-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 32px;
+            padding: 32px 24px;
+            text-align: center;
             transition: all 0.4s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
-        .testimonial-card:hover {
-            border-color: var(--primary);
+        .benefit-card:hover {
             transform: translateY(-6px);
+            border-color: var(--primary);
             box-shadow: var(--shadow-glow);
         }
 
-        .testimonial-card .quote { font-size: 2rem; color: var(--primary); opacity: 0.3; margin-bottom: 8px; }
-        .testimonial-card p { color: var(--text-light); font-style: italic; line-height: 1.7; margin-bottom: 12px; }
-        .testimonial-card strong { color: var(--text); font-weight: 700; }
-        .testimonial-card .role { font-size: 0.8rem; color: var(--text-light); }
+        .benefit-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(15, 118, 110, 0.08));
+            color: var(--primary);
+            font-size: 28px;
+            transition: all 0.4s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
 
         /* ============================================================
            CTA
            ============================================================ */
         .cta {
-            background: linear-gradient(135deg, rgba(15, 118, 110, 0.04), rgba(124, 58, 237, 0.04));
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.04), rgba(15, 118, 110, 0.04));
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             padding: 80px 0;
             text-align: center;
         }
 
-        .cta h2 { font-size: 2.4rem; font-weight: 800; color: var(--text); margin-bottom: 16px; }
+        .cta h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
 
         .cta h2 span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -912,61 +1024,109 @@
             background-clip: text;
         }
 
-        .cta p { color: var(--text-light); font-size: 1.1rem; max-width: 560px; margin: 0 auto 2rem; }
-        .cta .btn-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .cta p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta .btn-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
         /* ============================================================
            FOOTER
            ============================================================ */
-        .footer { background: white; border-top: 1px solid var(--border); padding: 48px 0 28px; }
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 48px 0 28px;
+        }
 
         .footer-top {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr 0.8fr;
             gap: 40px;
             padding-bottom: 32px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer-brand h4 { font-size: 1.2rem; font-weight: 800; color: var(--text); }
-        .footer-brand p { color: var(--text-light); font-size: 0.9rem; margin-top: 8px; }
+        .footer-brand h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+        }
 
-        .footer-links h4, .footer-contact h4 {
-            font-size: 0.9rem;
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 0.88rem;
             font-weight: 700;
-            color: var(--text);
+            color: white;
             margin-bottom: 16px;
         }
 
-        .footer-links a, .footer-contact a {
+        .footer-links a,
+        .footer-contact a {
             display: block;
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             padding: 4px 0;
             transition: color 0.3s ease;
         }
 
-        .footer-links a:hover, .footer-contact a:hover { color: var(--primary); }
-        .footer-contact a i { width: 24px; margin-right: 8px; }
+        .footer-links a:hover,
+        .footer-contact a:hover {
+            color: white;
+        }
 
-        .footer-bottom { text-align: center; padding-top: 28px; color: var(--text-light); font-size: 0.85rem; }
-        .footer-social { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
+        .footer-contact a i {
+            width: 24px;
+            margin-right: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 28px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
 
         .footer-social a {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: grid;
             place-items: center;
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .footer-social a:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-4px); }
+        .footer-social a:hover {
+            border-color: white;
+            color: white;
+            transform: translateY(-4px);
+        }
 
         /* ============================================================
            WHATSAPP FLOAT
@@ -990,7 +1150,9 @@
             animation: glowPulse 3s ease-in-out infinite;
         }
 
-        .whatsapp-float:hover { transform: scale(1.1) translateY(-4px); }
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-4px);
+        }
 
         /* ============================================================
            BOTÃO FORMULÁRIO FLOAT
@@ -1007,14 +1169,16 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             font-size: 22px;
-            box-shadow: 0 12px 36px rgba(15, 118, 110, 0.3);
+            box-shadow: 0 12px 36px rgba(30, 58, 138, 0.3);
             z-index: 998;
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
         }
 
-        .form-float:hover { transform: scale(1.1) translateY(-4px); }
+        .form-float:hover {
+            transform: scale(1.1) translateY(-4px);
+        }
 
         /* ============================================================
            MODAL FORM
@@ -1026,14 +1190,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(15, 30, 51, 0.7);
             backdrop-filter: blur(12px);
             justify-content: center;
             align-items: center;
             z-index: 2000;
         }
 
-        .modal-form.active { display: flex; }
+        .modal-form.active {
+            display: flex;
+        }
 
         .modal-form-content {
             background: white;
@@ -1045,11 +1211,21 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 32px 80px rgba(15, 30, 51, 0.3);
         }
 
-        .modal-form-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
-        .modal-form-content p { color: var(--text-light); margin-bottom: 24px; }
+        .modal-form-content h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .modal-form-content p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
 
         .close-modal {
             position: absolute;
@@ -1063,16 +1239,20 @@
             transition: color 0.3s ease;
         }
 
-        .close-modal:hover { color: var(--text); }
+        .close-modal:hover {
+            color: var(--text);
+        }
 
-        .form-group { margin-bottom: 18px; }
+        .form-group {
+            margin-bottom: 18px;
+        }
 
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 6px;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .form-group input,
@@ -1082,7 +1262,7 @@
             padding: 12px 16px;
             border: 2px solid var(--border);
             border-radius: 14px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: inherit;
             background: var(--bg);
             color: var(--text);
@@ -1094,13 +1274,24 @@
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.08);
+            box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.08);
         }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder { color: var(--text-light); opacity: 0.5; }
-        .form-group select option { background: white; color: var(--text); }
-        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group textarea::placeholder {
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+
+        .form-group select option {
+            background: white;
+            color: var(--text);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
 
         .btn-submit {
             width: 100%;
@@ -1110,53 +1301,96 @@
             padding: 14px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(15, 118, 110, 0.2); }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(30, 58, 138, 0.2);
+        }
 
         /* ============================================================
            RESPONSIVO
            ============================================================ */
         @media (max-width: 1100px) {
-            .hero-grid, .about-grid, .catalog-grid, .clinic-wrap { grid-template-columns: 1fr; }
-            .services-grid, .projects-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
-            .trust-box { grid-template-columns: repeat(2, 1fr); }
-            .footer-top { grid-template-columns: 1fr 1fr; }
-            .clinic-pricing { border-left: none; border-top: 1px solid var(--border); }
+            .hero-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .solutions-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .trust-box {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 860px) {
-            .nav-links, .nav-actions .desktop-only { display: none; }
-            .menu-toggle { display: grid; place-items: center; }
-            .hero-avatar { width: 240px; height: 240px; }
-            .hero-stats { gap: 1.5rem; }
-            .hero-stats .stat h3 { font-size: 1.6rem; }
+            .nav-links,
+            .nav-actions .desktop-only {
+                display: none;
+            }
+            .menu-toggle {
+                display: grid;
+                place-items: center;
+            }
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            .hero-stats .stat h3 {
+                font-size: 1.6rem;
+            }
         }
 
         @media (max-width: 640px) {
-            .services-grid, .projects-grid, .testimonials-grid { grid-template-columns: 1fr; }
-            .trust-box { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; }
-            .hero-avatar { width: 200px; height: 200px; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .section { padding: 60px 0; }
-            .hero { padding: 50px 0 40px; }
-            .clinic-visual, .clinic-pricing { padding: 28px 24px; }
-            .modal-form-content { padding: 28px 20px; }
-            .trust-box { padding: 18px 20px; }
-            .catalog-demo { padding: 24px 20px; }
+            .solutions-grid,
+            .projects-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            .trust-box {
+                grid-template-columns: 1fr;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .hero {
+                padding: 50px 0 40px;
+            }
+            .modal-form-content {
+                padding: 28px 20px;
+            }
+            .trust-box {
+                padding: 18px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- PARTICLES CANVAS -->
+    <!-- ============================================================
+    PARTICLES CANVAS
+    ============================================================ -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- HEADER -->
+    <!-- ============================================================
+    HEADER - VERSÃO PREFEITURAS
+    ============================================================ -->
     <header class="navbar" id="navbar">
         <div class="container">
             <div class="nav-wrap">
@@ -1166,68 +1400,64 @@
                     </div>
                     <div class="brand-text">
                         <strong>DataDesh Soluções</strong>
-                        <span>Digitais</span>
+                        <span>Tecnologia para Gestão Pública</span>
                     </div>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#solucoes">Soluções</a></li>
                     <li><a href="#projetos">Projetos</a></li>
-                    <li><a href="#catalogos">Catálogos</a></li>
-                    <li><a href="#clinicas">Clínicas</a></li>
-                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#contato">Contato</a></li>
                 </ul>
                 <div class="nav-actions">
                     <a class="nav-icon-link desktop-only" href="https://www.instagram.com/datadeshsolucoesdigitais/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-catalogo desktop-only" href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" target="_blank"><i class="fa-solid fa-book"></i> Catálogo de Serviços</a>
-                    <a class="btn btn-primary desktop-only btn-glow" href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> Fale comigo</a>
+                    <a class="btn btn-primary desktop-only btn-glow" href="https://wa.me/5531984987116" target="_blank"><i class="fab fa-whatsapp"></i> Falar com especialista</a>
                     <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
             <div class="nav-mobile" id="mobileMenu">
                 <a href="#sobre">Sobre</a>
-                <a href="#servicos">Serviços</a>
+                <a href="#solucoes">Soluções</a>
                 <a href="#projetos">Projetos</a>
-                <a href="#catalogos">Catálogos</a>
-                <a href="#clinicas">Clínicas</a>
-                <a href="#depoimentos">Depoimentos</a>
-                <a href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" target="_blank" style="border-color: var(--secondary); color: var(--secondary);"><i class="fa-solid fa-book"></i> Catálogo</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#contato">Contato</a>
                 <a href="https://wa.me/5531984987116" target="_blank" style="border-color: var(--primary); color: var(--primary);">Falar no WhatsApp</a>
             </div>
         </div>
     </header>
-    
-    <!-- HERO -->
+
+    <!-- ============================================================
+    HERO - VERSÃO PREFEITURAS
+    ============================================================ -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
                     <div class="reveal">
-                        <div class="section-kicker"><i class="fa-solid fa-bolt"></i> Soluções digitais personalizadas</div>
+                        <div class="section-kicker"><i class="fa-solid fa-landmark"></i> Tecnologia para o setor público</div>
                     </div>
-                    <h1 class="reveal">Transformo ideias em <span class="highlight">presença digital</span></h1>
-                    <p class="subtitle reveal">Sites, catálogos, páginas e dashboards</p>
-                    <p class="bio reveal">Crio soluções digitais com visual moderno e foco em resultado. <strong style="color: var(--primary);">+98 projetos</strong> já concluídos para pequenos negócios e órgãos públicos.</p>
+                    <h1 class="reveal">Modernize a <span class="highlight">gestão pública</span> com dados e transparência</h1>
+                    <p class="subtitle reveal">Dashboards, portais e automação para prefeituras e secretarias</p>
+                    <p class="bio reveal">Soluções digitais sob medida para órgãos públicos. Já são <strong style="color: var(--primary);">+98 projetos entregues</strong> para prefeituras, secretarias e órgãos da administração pública.</p>
 
                     <div class="hero-tags reveal">
-                        <span class="hero-tag"><i class="fas fa-code"></i> Sites & Páginas</span>
-                        <span class="hero-tag"><i class="fas fa-mobile-screen"></i> Catálogos Digitais</span>
-                        <span class="hero-tag"><i class="fas fa-hospital-user"></i> Páginas para Clínicas</span>
-                        <span class="hero-tag"><i class="fas fa-chart-line"></i> Dashboards</span>
-                        <span class="hero-tag"><i class="fas fa-file-alt"></i> Currículos</span>
-                        <span class="hero-tag"><i class="fas fa-address-book"></i> Contatos</span>
+                        <span class="hero-tag"><i class="fas fa-chart-pie"></i> Dashboards de Gestão</span>
+                        <span class="hero-tag"><i class="fas fa-eye"></i> Transparência</span>
+                        <span class="hero-tag"><i class="fas fa-file-invoice"></i> Prestação de Contas</span>
+                        <span class="hero-tag"><i class="fas fa-users"></i> Atendimento ao Cidadão</span>
+                        <span class="hero-tag"><i class="fas fa-database"></i> Dados Abertos</span>
                     </div>
 
                     <div class="hero-actions reveal">
-                        <a href="https://wa.me/5531984987116" class="btn btn-primary btn-glow" target="_blank"><i class="fab fa-whatsapp"></i> Quero minha solução</a>
-                        <a href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" class="btn btn-catalogo" target="_blank"><i class="fa-solid fa-book"></i> Ver Catálogo</a>
+                        <a href="https://wa.me/5531984987116?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20solu%C3%A7%C3%B5es%20para%20prefeituras" class="btn btn-primary btn-glow" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar proposta</a>
                         <a href="#projetos" class="btn btn-secondary"><i class="fa-regular fa-eye"></i> Ver projetos</a>
                     </div>
 
                     <div class="hero-stats reveal">
                         <div class="stat">
                             <h3>98+</h3>
-                            <p>Projetos</p>
+                            <p>Projetos entregues</p>
                         </div>
                         <div class="stat">
                             <h3>100%</h3>
@@ -1240,54 +1470,76 @@
                     </div>
                 </div>
 
-                <div class="hero-avatar reveal-tilt">
-                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/foto%20(1).jpg" alt="Ana Paula">
+                <div class="hero-visual reveal-tilt">
+                    <div class="hero-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                        </div>
+                        <div class="mockup-bar large"></div>
+                        <div class="mockup-bar medium"></div>
+                        <div class="mockup-bar small"></div>
+                        <div class="mockup-chart">
+                            <div class="bar" style="height: 40%;"></div>
+                            <div class="bar" style="height: 65%;"></div>
+                            <div class="bar" style="height: 50%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                            <div class="bar" style="height: 70%;"></div>
+                            <div class="bar" style="height: 95%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TRUST BAR -->
+    <!-- ============================================================
+    TRUST BAR
+    ============================================================ -->
     <div class="trust-bar">
         <div class="container">
             <div class="trust-box reveal">
                 <div class="trust-item">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <div><strong>Estrutura profissional</strong><span>Layout confiável</span></div>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div><strong>Segurança e sigilo</strong><span>Dados protegidos</span></div>
                 </div>
                 <div class="trust-item">
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <div><strong>Conformidade</strong><span>LGPD e transparência</span></div>
+                </div>
+                <div class="trust-item">
+                    <i class="fa-solid fa-clock"></i>
                     <div><strong>Entrega planejada</strong><span>Até 30 dias</span></div>
                 </div>
                 <div class="trust-item">
-                    <i class="fa-solid fa-envelope-circle-check"></i>
-                    <div><strong>Aprovação antes</strong><span>Você valida o protótipo</span></div>
-                </div>
-                <div class="trust-item">
-                    <i class="fa-solid fa-file-signature"></i>
-                    <div><strong>20% de sinal</strong><span>Processo seguro</span></div>
+                    <i class="fa-solid fa-handshake"></i>
+                    <div><strong>Suporte dedicado</strong><span>Atendimento exclusivo</span></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SOBRE -->
+    <!-- ============================================================
+    SOBRE
+    ============================================================ -->
     <section class="section" id="sobre">
         <div class="container">
             <div class="about-grid">
                 <div class="about-photo-card reveal-tilt">
-                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/foto%20(1).jpg" alt="Ana Paula">
+                    <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/foto%20(1).jpg" alt="Ana Paula - DataDesh Soluções">
                 </div>
                 <div class="about-copy reveal">
-                    <div class="section-kicker"><i class="fa-solid fa-user-tie"></i> Sobre mim</div>
-                    <h2>Oi, sou a <span>Ana</span></h2>
-                    <p>Tecnóloga em Ciência de Dados, especialista em criar páginas, catálogos, dashboards e ferramentas digitais com visual moderno e foco em resultado. Já concluí <strong style="color: var(--primary);">mais de 98 projetos</strong> para diferentes negócios e órgãos públicos.</p>
+                    <div class="section-kicker"><i class="fa-solid fa-user-tie"></i> Quem somos</div>
+                    <h2>Especialistas em <span>tecnologia pública</span></h2>
+                    <p>Tecnóloga em Ciência de Dados com experiência em projetos para prefeituras, secretarias e órgãos públicos. Desenvolvemos soluções que unem <strong style="color: var(--primary);">eficiência administrativa</strong>, <strong style="color: var(--primary);">transparência</strong> e <strong style="color: var(--primary);">facilidade de uso</strong>.</p>
 
                     <ul class="about-list">
-                        <li><i class="fa-solid fa-check"></i> Sites, páginas e catálogos com visual sofisticado</li>
-                        <li><i class="fa-solid fa-check"></i> Dashboards e painéis no Google Sheets</li>
-                        <li><i class="fa-solid fa-check"></i> Portfólios e currículos interativos</li>
-                        <li><i class="fa-solid fa-check"></i> Páginas para organização de contatos e links</li>
+                        <li><i class="fa-solid fa-check"></i> Dashboards de gestão para tomada de decisão</li>
+                        <li><i class="fa-solid fa-check"></i> Painéis de indicadores para secretarias</li>
+                        <li><i class="fa-solid fa-check"></i> Portais da transparência e dados abertos</li>
+                        <li><i class="fa-solid fa-check"></i> Automação de processos administrativos</li>
+                        <li><i class="fa-solid fa-check"></i> Soluções em conformidade com a LGPD</li>
                         <li><i class="fa-solid fa-check"></i> Processo simples: sinal, protótipo, entrega</li>
                     </ul>
 
@@ -1301,169 +1553,108 @@
         </div>
     </section>
 
-    <!-- SERVIÇOS -->
-    <section class="section section-alt" id="servicos">
+    <!-- ============================================================
+    SOLUÇÕES POR SECRETARIA
+    ============================================================ -->
+    <section class="section section-alt" id="solucoes">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-kicker"><i class="fa-solid fa-screwdriver-wrench"></i> Soluções</div>
-                <h2 class="section-title">O que eu <span>ofereço</span></h2>
-                <p class="section-subtitle">Soluções digitais personalizadas para seu negócio crescer</p>
+                <div class="section-kicker"><i class="fa-solid fa-building-columns"></i> Soluções</div>
+                <h2 class="section-title">Soluções para cada <span>secretaria</span></h2>
+                <p class="section-subtitle">Ferramentas digitais adaptadas à realidade de cada setor da administração pública</p>
             </div>
 
-            <div class="services-grid">
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
-                    <h3>Site Profissional</h3>
-                    <p>Layout moderno e responsivo, com código e domínio entregues.</p>
+            <div class="solutions-grid">
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <h3>Saúde</h3>
+                    <p>Painéis de atendimento, controle de filas, gestão de unidades de saúde e indicadores epidemiológicos.</p>
+                    <span class="solution-tag">Secretaria de Saúde</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                    <h3>Catálogo Digital</h3>
-                    <p>Vitrine virtual com busca, categorias e integração com WhatsApp.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>Educação</h3>
+                    <p>Gestão escolar, matrículas, censo escolar, acompanhamento de frequência e dashboards educacionais.</p>
+                    <span class="solution-tag">Secretaria de Educação</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-hospital-user"></i></div>
-                    <h3>Página para Clínicas</h3>
-                    <p>Apresentação profissional que transmite credibilidade e confiança.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-hard-hat"></i></div>
+                    <h3>Obras e Infraestrutura</h3>
+                    <p>Acompanhamento de obras, cronogramas, medições e relatórios de execução em tempo real.</p>
+                    <span class="solution-tag">Secretaria de Obras</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Dashboards</h3>
-                    <p>Painéis com gráficos interativos sincronizados com seus dados.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <h3>Assistência Social</h3>
+                    <p>Gestão de benefícios, cadastro de famílias, controle de programas sociais e relatórios.</p>
+                    <span class="solution-tag">Secretaria de Assistência</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-file-alt"></i></div>
-                    <h3>Portfólio & Currículo</h3>
-                    <p>Páginas profissionais para apresentar seu trabalho e trajetória.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-tree"></i></div>
+                    <h3>Meio Ambiente</h3>
+                    <p>Monitoramento ambiental, licenciamento, denúncias e indicadores de sustentabilidade.</p>
+                    <span class="solution-tag">Secretaria de Meio Ambiente</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-address-book"></i></div>
-                    <h3>Organização de Contatos</h3>
-                    <p>Páginas interativas para listar contatos e links de forma organizada.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Fazenda e Finanças</h3>
+                    <p>Controle orçamentário, execução financeira, relatórios fiscais e prestação de contas.</p>
+                    <span class="solution-tag">Secretaria de Fazenda</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-table"></i></div>
-                    <h3>Consolidados no Sheets</h3>
-                    <p>Painéis e relatórios dinâmicos no Google Sheets para gestão.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-users-gear"></i></div>
+                    <h3>Administração</h3>
+                    <p>Gestão de RH, protocolo, controle de documentos e automação de processos internos.</p>
+                    <span class="solution-tag">Secretaria de Administração</span>
                 </div>
 
-                <div class="service-card reveal-tilt">
-                    <div class="service-icon"><i class="fa-solid fa-link"></i></div>
-                    <h3>Páginas de Links</h3>
-                    <p>Organize todos os seus links importantes em uma página interativa.</p>
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-tractor"></i></div>
+                    <h3>Agricultura</h3>
+                    <p>Cadastro rural, controle de programas agrícolas e apoio ao produtor rural.</p>
+                    <span class="solution-tag">Secretaria de Agricultura</span>
+                </div>
+
+                <div class="solution-card reveal-tilt">
+                    <div class="solution-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Transparência</h3>
+                    <p>Portal da transparência, dados abertos, prestação de contas e acesso à informação.</p>
+                    <span class="solution-tag">Controladoria</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROJETOS ATUALIZADOS -->
+    <!-- ============================================================
+    PROJETOS PÚBLICOS
+    ============================================================ -->
     <section class="section" id="projetos">
         <div class="container">
             <div class="section-header reveal">
                 <div class="section-kicker"><i class="fa-solid fa-diagram-project"></i> Portfólio</div>
-                <h2 class="section-title">Projetos <span>concluídos</span></h2>
-                <p class="section-subtitle">Alguns dos trabalhos que já entreguei</p>
+                <h2 class="section-title">Projetos <span>entregues</span></h2>
+                <p class="section-subtitle">Alguns exemplos de soluções desenvolvidas para o setor público</p>
             </div>
 
             <div class="projects-grid">
-                <!-- Site Simples (Clínica) -->
+                <!-- Dashboard OCI -->
                 <div class="project-card reveal-tilt">
                     <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/site%20modernos.png" alt="Site Simples para Clínica">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/deshbord.png" alt="Dashboard OCI">
                     </div>
                     <div class="project-content">
-                        <h3>Site Simples para Clínica</h3>
-                        <p>Site institucional elegante com agendamento direto via WhatsApp.</p>
-                        <a href="https://anadesenvolvedora.github.io/prototipositeclinica/#contato" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3>Dashboard OCI</h3>
+                        <p>Painel interativo para acompanhamento de indicadores e tomada de decisão.</p>
+                        <a href="https://datadeshsolucoes-design.github.io/Painel-OCI/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
                         <div class="project-tags">
-                            <span>HTML/CSS</span>
-                            <span>Clínica</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cardápio Virtual -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/site%20modernos.png" alt="Cardápio Virtual Inteligente">
-                    </div>
-                    <div class="project-content">
-                        <h3>Cardápio Virtual Inteligente</h3>
-                        <p>Cardápio interativo com carrinho e pedido automático via WhatsApp.</p>
-                        <a href="https://anadesenvolvedora.github.io/Bellas-Pizzaria/#home" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>JavaScript</span>
-                            <span>Cardápio</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Convite Digital -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/site%20modernos.png" alt="Convite Especial para Eventos">
-                    </div>
-                    <div class="project-content">
-                        <h3>Convite Especial para Eventos</h3>
-                        <p>Convite digital com contagem regressiva e confirmação de presença.</p>
-                        <a href="https://anadesenvolvedora.github.io/Convite-Digital/#detalhes" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Evento</span>
-                            <span>Interativo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lista Churrasco -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/site%20modernos.png" alt="Lista Churrasco da Família">
-                    </div>
-                    <div class="project-content">
-                        <h3>Lista Churrasco da Família</h3>
-                        <p>Organizador colaborativo onde cada um escolhe o que trazer.</p>
-                        <a href="https://anadesenvolvedora.github.io/Organizador-de-Festas-e-Eventos/#confirmar" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Colaborativo</span>
-                            <span>Lista</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lista de Presentes -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/site%20modernos.png" alt="Lista de Presentes Virtual">
-                    </div>
-                    <div class="project-content">
-                        <h3>Lista de Presentes Virtual</h3>
-                        <p>Lista inteligente com cotas coletivas — ninguém dá presente repetido.</p>
-                        <a href="https://anadesenvolvedora.github.io/Lista-de-Presentes/#contato" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Lista</span>
-                            <span>Interativo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Organização de Links -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/pagina%20de%20links.png" alt="Organização de Links">
-                    </div>
-                    <div class="project-content">
-                        <h3>Organização de Links</h3>
-                        <p>Central de ferramentas e links essenciais, tudo organizado em um só lugar.</p>
-                        <a href="https://anadesenvolvedora.github.io/controledeferramentassaude/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>HTML/CSS</span>
-                            <span>Links</span>
+                            <span>Gestão Pública</span>
+                            <span>Dashboard</span>
                         </div>
                     </div>
                 </div>
@@ -1471,127 +1662,79 @@
                 <!-- Painel IBGE -->
                 <div class="project-card reveal-tilt">
                     <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/painelibge.png" alt="Painel IBGE - Censo Distrito Eldorado">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/painelibge.png" alt="Painel IBGE">
                     </div>
                     <div class="project-content">
                         <h3>Painel IBGE - Censo</h3>
                         <p>Visualização interativa dos dados do censo do Distrito Eldorado.</p>
                         <a href="https://anadesenvolvedora.github.io/painelcensoibgedistritoeldorado/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
                         <div class="project-tags">
-                            <span>D3.js</span>
+                            <span>Dados Abertos</span>
                             <span>IBGE</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Painel Executivo OCI -->
+                <!-- Painel Google Sheets -->
                 <div class="project-card reveal-tilt">
                     <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/deshbord.png" alt="Painel Executivo OCI">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/Googleshetes.png" alt="Painel no Google Sheets">
                     </div>
                     <div class="project-content">
-                        <h3>Painel Executivo OCI</h3>
-                        <p>Painel consolidado com visão executiva dos indicadores OCI.</p>
-                        <a href="https://anadesenvolvedora.github.io/ociconsolidado/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Chart.js</span>
-                            <span>Dashboard</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lista Telefônica -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/organiza%C3%A7%C3%A3o%20de%20contatos%20telefonicos.png" alt="Lista Telefônica Virtual">
-                    </div>
-                    <div class="project-content">
-                        <h3>Lista Telefônica Virtual</h3>
-                        <p>Agenda telefônica completa da rede de saúde, com busca rápida.</p>
-                        <a href="https://anadesenvolvedora.github.io/saudecontatosubs/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Contatos</span>
-                            <span>Busca</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Resumo de Documentos -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/resumo%20dos%20fluxos.png" alt="Resumo de Documentos - Regulação">
-                    </div>
-                    <div class="project-content">
-                        <h3>Resumo de Documentos</h3>
-                        <p>Página com fluxo da regulação em saúde — toda a informação centralizada.</p>
-                        <a href="https://anadesenvolvedora.github.io/saudepaginafluxodaregula-o/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Documentos</span>
-                            <span>Dashboard</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portfólio Virtual -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/portifolio.png" alt="Portfólio Virtual">
-                    </div>
-                    <div class="project-content">
-                        <h3>Portfólio Virtual</h3>
-                        <p>Vitrine completa com todos os serviços da DataDesh Soluções Digitais.</p>
-                        <a href="https://portifolio.datadeshsolucoes.workers.dev/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Portfólio</span>
-                            <span>HTML/CSS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Currículo Virtual -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/curriculo.png" alt="Currículo Virtual">
-                    </div>
-                    <div class="project-content">
-                        <h3>Currículo Virtual</h3>
-                        <p>Currículo digital moderno e interativo da Ana Desenvolvedora.</p>
-                        <a href="https://curriculo.datadeshsolucoes.workers.dev/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Currículo</span>
-                            <span>Interativo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ferramenta OCI (Sistema) -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/deshbord.png" alt="Ferramenta Inteligente de Análise">
-                    </div>
-                    <div class="project-content">
-                        <h3>Ferramenta Inteligente de Análise</h3>
-                        <p>Sistema completo com login, senha, dashboards e lógica personalizada.</p>
-                        <a href="https://anadesenvolvedora.github.io/Ferramenta-OCI/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Login</span>
-                            <span>Sistema</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Painel Automatizado em Planilhas -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/Googleshetes.png" alt="Painel Automatizado em Planilhas">
-                    </div>
-                    <div class="project-content">
-                        <h3>Painel Automatizado em Planilhas</h3>
-                        <p>Automação completa no Google Sheets com fórmulas, scripts e dashboards.</p>
-                        <a href="https://docs.google.com/spreadsheets/d/12LOIIdR6bSkS1vV2o6984K1UvUsMGrHIg6z0xcSCpAs/edit?gid=1423732641#gid=1423732641" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3>Painel no Google Sheets</h3>
+                        <p>Consolidado de dados com gráficos e filtros dinâmicos para gestão.</p>
+                        <a href="https://docs.google.com/spreadsheets/d/1JcUzW28VGqYHqSBamvDj_-OeTWKDxKsiL9UBX17ejnk/edit?gid=123637652#gid=123637652" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
                         <div class="project-tags">
                             <span>Google Sheets</span>
-                            <span>Automação</span>
+                            <span>Gestão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo dos Fluxos -->
+                <div class="project-card reveal-tilt">
+                    <div class="project-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/resumo%20dos%20fluxos.png" alt="Resumo dos Fluxos">
+                    </div>
+                    <div class="project-content">
+                        <h3>Resumo dos Fluxos</h3>
+                        <p>Página para acompanhamento e resumo dos fluxos de regulação em saúde.</p>
+                        <a href="https://anadesenvolvedora.github.io/saudepaginafluxodaregula-o/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="project-tags">
+                            <span>Saúde</span>
+                            <span>Regulação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organização de Contatos -->
+                <div class="project-card reveal-tilt">
+                    <div class="project-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/organiza%C3%A7%C3%A3o%20de%20contatos%20telefonicos.png" alt="Organização de Contatos">
+                    </div>
+                    <div class="project-content">
+                        <h3>Organização de Contatos</h3>
+                        <p>Página interativa para listar contatos telefônicos de setores públicos.</p>
+                        <a href="https://regulacaoconsolidados-dot.github.io/contatosdasubs/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="project-tags">
+                            <span>Atendimento</span>
+                            <span>Contatos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Página de Links -->
+                <div class="project-card reveal-tilt">
+                    <div class="project-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/pagina%20de%20links.png" alt="Página de Links">
+                    </div>
+                    <div class="project-content">
+                        <h3>Página de Links</h3>
+                        <p>Organização de links e recursos importantes em uma página interativa.</p>
+                        <a href="https://regulacaoconsolidados-dot.github.io/linksteleconsulta/?utm_source=chatgpt.com" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="project-tags">
+                            <span>Transparência</span>
+                            <span>Links</span>
                         </div>
                     </div>
                 </div>
@@ -1599,150 +1742,79 @@
         </div>
     </section>
 
-    <!-- CATÁLOGO -->
-    <section class="section section-alt" id="catalogos">
+    <!-- ============================================================
+    BENEFÍCIOS
+    ============================================================ -->
+    <section class="section section-alt" id="beneficios">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-kicker"><i class="fa-solid fa-store"></i> Catálogo Digital</div>
-                <h2 class="section-title"><span>Catálogo digital</span> profissional</h2>
-                <p class="section-subtitle">Sua vitrine virtual com carrinho, busca e pedido direto via WhatsApp</p>
+                <div class="section-kicker"><i class="fa-solid fa-star"></i> Diferenciais</div>
+                <h2 class="section-title">Por que escolher a <span>DataDesh</span></h2>
+                <p class="section-subtitle">Soluções pensadas para a realidade da gestão pública</p>
             </div>
 
-            <div class="catalog-grid">
-                <div class="catalog-card reveal">
-                    <h3>Por que ter um catálogo digital?</h3>
-                    <p>Organização, profissionalismo e facilidade para seus clientes fecharem pedidos.</p>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> Visual organizado e profissional</li>
-                        <li><i class="fa-solid fa-check"></i> Categorias personalizadas</li>
-                        <li><i class="fa-solid fa-check"></i> Botão direto para WhatsApp</li>
-                        <li><i class="fa-solid fa-check"></i> Cliente monta o carrinho sozinho</li>
-                    </ul>
+            <div class="benefits-grid">
+                <div class="benefit-card reveal-tilt">
+                    <div class="benefit-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Eficiência</h3>
+                    <p>Automatize processos e reduza o tempo gasto com tarefas manuais.</p>
                 </div>
 
-                <div class="catalog-card reveal">
-                    <h3>Catálogo Virtual</h3>
-                    <p>Até 50 produtos • Busca por nome • WhatsApp integrado</p>
-                    <div style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
-                        <a href="https://wa.me/5531984987116?text=Quero%20um%20cat%C3%A1logo%20digital!" class="btn btn-primary" target="_blank">Quero meu catálogo</a>
-                        <a href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" class="btn btn-secondary" target="_blank">Ver demo</a>
-                    </div>
+                <div class="benefit-card reveal-tilt">
+                    <div class="benefit-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3>Transparência</h3>
+                    <p>Dados claros e acessíveis para a população e para os gestores.</p>
                 </div>
-            </div>
 
-            <div style="margin-top: 48px;">
-                <div class="catalog-demo reveal-tilt">
-                    <div class="section-kicker" style="margin: 0 auto 12px; display: inline-flex;">
-                        <i class="fa-solid fa-book-open"></i> Catálogo Completo
-                    </div>
-                    <h3>Conheça meu <span style="color: var(--primary);">catálogo de soluções</span></h3>
-                    <p>Mais de 112 soluções digitais disponíveis — sites, catálogos, dashboards, automações e micro-sistemas para pequenos negócios.</p>
-                    <div class="btn-group">
-                        <a href="https://datadeshsolucoes-design.github.io/catalago-com-precos-DataDesh/" class="btn btn-catalogo" target="_blank">
-                            <i class="fa-solid fa-book"></i> Ver Catálogo Completo
-                        </a>
-                        <a href="https://wa.me/5531984987116?text=Quero%20saber%20mais%20sobre%20o%20cat%C3%A1logo%20de%20solu%C3%A7%C3%B5es!" class="btn btn-primary" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Quero uma solução
-                        </a>
-                    </div>
+                <div class="benefit-card reveal-tilt">
+                    <div class="benefit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Segurança</h3>
+                    <p>Soluções em conformidade com a LGPD e boas práticas de segurança.</p>
+                </div>
+
+                <div class="benefit-card reveal-tilt">
+                    <div class="benefit-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h3>Suporte</h3>
+                    <p>Atendimento dedicado e acompanhamento após a entrega do projeto.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CLÍNICAS -->
-    <section class="section" id="clinicas">
+    <!-- ============================================================
+    CTA
+    ============================================================ -->
+    <section class="cta" id="contato">
         <div class="container">
-            <div class="clinic-wrap reveal-tilt">
-                <div class="clinic-visual">
-                    <div class="section-kicker" style="background: rgba(15,118,110,0.08); border-color: rgba(15,118,110,0.1); color: var(--primary);">
-                        <i class="fa-solid fa-hospital-user"></i> Especial para clínicas
-                    </div>
-                    <h3>Página profissional para <span>clínicas e consultórios</span></h3>
-                    <p>Estrutura completa para apresentar serviços, diferenciais, equipe e contato. Visual moderno que transmite credibilidade ao paciente.</p>
-                    <div style="margin-top: 16px;">
-                        <a href="https://anadesenvolvedora.github.io/prototipositeclinica/#depoimentos" target="_blank" class="btn btn-secondary" style="display: inline-flex;">
-                            <i class="fa-regular fa-eye"></i> Ver exemplo
-                        </a>
-                    </div>
-                </div>
-                <div class="clinic-pricing">
-                    <h3>Solução completa</h3>
-                    <p>Apresentação profissional com layout exclusivo</p>
-                    <div class="btn-group">
-                        <a href="https://wa.me/5531984987116?text=Quero%20uma%20p%C3%A1gina%20para%20minha%20cl%C3%ADnica!" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Quero a minha</a>
-                        <a href="https://datadeshsolucoes-design.github.io/prototipopaginaclinicas/" class="btn btn-secondary" target="_blank">Ver exemplos</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEPOIMENTOS -->
-    <section class="section section-alt" id="depoimentos">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-kicker"><i class="fa-regular fa-message"></i> Feedbacks</div>
-                <h2 class="section-title">Quem já usou <span>recomenda</span></h2>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal">
-                    <div class="quote"><i class="fa-solid fa-quote-left"></i></div>
-                    <p>"A página que a Ana criou trouxe muita credibilidade para minha clínica. Os pacientes elogiam a apresentação."</p>
-                    <strong>Dra. Mariana L.</strong>
-                    <div class="role">Médica especialista</div>
-                </div>
-
-                <div class="testimonial-card reveal">
-                    <div class="quote"><i class="fa-solid fa-quote-left"></i></div>
-                    <p>"Meu catálogo digital antes era uma bagunça. Agora é profissional e as vendas aumentaram significativamente."</p>
-                    <strong>Renata S.</strong>
-                    <div class="role">Empreendedora</div>
-                </div>
-
-                <div class="testimonial-card reveal">
-                    <div class="quote"><i class="fa-solid fa-quote-left"></i></div>
-                    <p>"Excelente profissional, entrega no prazo e resolveu todas as minhas dúvidas. Recomendo sem hesitar."</p>
-                    <strong>Carlos A.</strong>
-                    <div class="role">Empresário</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <h2>Pronto para dar um <span>upgrade digital</span> no seu negócio?</h2>
-            <p>Vamos conversar sobre como posso ajudar sua empresa a ter uma presença digital profissional.</p>
+            <h2>Pronto para <span>modernizar a gestão</span> da sua prefeitura?</h2>
+            <p>Vamos conversar sobre como podemos ajudar sua administração a ter mais eficiência, transparência e resultados.</p>
             <div class="btn-group">
-                <a href="https://wa.me/5531984987116" class="btn btn-primary btn-glow" target="_blank"><i class="fab fa-whatsapp"></i> Falar com Ana</a>
-                <a href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" class="btn btn-catalogo" target="_blank"><i class="fa-solid fa-book"></i> Ver Catálogo</a>
-                <a href="#projetos" class="btn btn-secondary"><i class="fa-regular fa-eye"></i> Ver projetos</a>
+                <a href="https://wa.me/5531984987116?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20solu%C3%A7%C3%B5es%20para%20prefeituras" class="btn btn-primary btn-glow" target="_blank"><i class="fab fa-whatsapp"></i> Falar com especialista</a>
+                <a href="mailto:datadshsolucoes@gmail.com?subject=Proposta%20para%20Prefeitura" class="btn btn-secondary"><i class="fa-regular fa-envelope"></i> Enviar e-mail</a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
     <footer class="footer">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
                     <h4>DataDesh Soluções</h4>
-                    <p>Soluções digitais personalizadas para pequenos negócios.</p>
-                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 8px;">
+                    <p>Tecnologia e soluções digitais para a gestão pública.</p>
+                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 8px;">
                         <strong>CNPJ:</strong> 66.884.261/0001-20
                     </p>
                 </div>
                 <div class="footer-links">
                     <h4>Links rápidos</h4>
                     <a href="#sobre">Sobre</a>
-                    <a href="#servicos">Serviços</a>
+                    <a href="#solucoes">Soluções</a>
                     <a href="#projetos">Projetos</a>
-                    <a href="#catalogos">Catálogos</a>
-                    <a href="#clinicas">Clínicas</a>
-                    <a href="https://datadeshsolucoes-design.github.io/catalago-sem-precos-DataDesh/" target="_blank">Catálogo Completo</a>
+                    <a href="#beneficios">Benefícios</a>
+                    <a href="#contato">Contato</a>
                 </div>
                 <div class="footer-contact">
                     <h4>Contato</h4>
@@ -1763,23 +1835,34 @@
         </div>
     </footer>
 
-    <!-- WHATSAPP FLOAT -->
+    <!-- ============================================================
+    WHATSAPP FLOAT
+    ============================================================ -->
     <a href="https://wa.me/5531984987116" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- FORM FLOAT -->
+    <!-- ============================================================
+    FORM FLOAT
+    ============================================================ -->
     <button class="form-float" id="openFormBtn"><i class="fa-regular fa-message"></i></button>
 
-    <!-- FORM MODAL -->
+    <!-- ============================================================
+    FORM MODAL
+    ============================================================ -->
     <div class="modal-form" id="formModal">
         <div class="modal-form-content">
             <button class="close-modal" id="closeModalBtn">&times;</button>
-            <h2><i class="fa-regular fa-file-lines"></i> Fale comigo</h2>
-            <p>Preencha os campos e receba um retorno rápido!</p>
+            <h2><i class="fa-regular fa-file-lines"></i> Solicitar proposta</h2>
+            <p>Preencha os dados e receba um retorno em até 24h.</p>
 
             <form id="leadForm">
                 <div class="form-group">
-                    <label>Seu nome completo *</label>
-                    <input type="text" id="nomeCliente" required placeholder="Ex: Maria Silva">
+                    <label>Nome completo *</label>
+                    <input type="text" id="nomeCliente" required placeholder="Ex: João Silva">
+                </div>
+
+                <div class="form-group">
+                    <label>Órgão / Prefeitura *</label>
+                    <input type="text" id="orgaoCliente" required placeholder="Ex: Prefeitura Municipal de...">
                 </div>
 
                 <div class="form-group">
@@ -1788,24 +1871,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Tipo de serviço *</label>
+                    <label>E-mail institucional *</label>
+                    <input type="email" id="emailCliente" required placeholder="seu.email@prefeitura.gov.br">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de solução *</label>
                     <select id="tipoServico" required>
                         <option value="">Selecione...</option>
-                        <option value="Site profissional">💻 Site profissional</option>
-                        <option value="Catálogo digital">📱 Catálogo digital</option>
-                        <option value="Página para clínica">🏥 Página para clínica</option>
-                        <option value="Dashboard">📊 Dashboard</option>
-                        <option value="Portfólio ou currículo">📄 Portfólio ou currículo</option>
-                        <option value="Página de contatos ou links">📇 Página de contatos/links</option>
-                        <option value="Painel no Google Sheets">📊 Painel no Google Sheets</option>
-                        <option value="Suporte técnico">🔧 Suporte técnico</option>
+                        <option value="Dashboard de Gestão">📊 Dashboard de Gestão</option>
+                        <option value="Portal da Transparência">🔍 Portal da Transparência</option>
+                        <option value="Painel de Indicadores">📈 Painel de Indicadores</option>
+                        <option value="Automação de Processos">⚙️ Automação de Processos</option>
+                        <option value="Sistema de Atendimento">👥 Sistema de Atendimento</option>
+                        <option value="Gestão de Saúde">🏥 Gestão de Saúde</option>
+                        <option value="Gestão de Educação">🎓 Gestão de Educação</option>
+                        <option value="Gestão de Obras">🏗️ Gestão de Obras</option>
                         <option value="Outro">✨ Outro</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Mensagem</label>
-                    <textarea id="mensagemCliente" placeholder="Descreva o que você precisa..."></textarea>
+                    <textarea id="mensagemCliente" placeholder="Descreva brevemente a necessidade do órgão..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit"><i class="fab fa-whatsapp"></i> Enviar mensagem</button>
@@ -1813,13 +1901,17 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
     <script>
-        // PARTICLES
+        // ============================================================
+        // PARTICLES - VERSÃO INSTITUCIONAL SUTIL
+        // ============================================================
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null };
+        let animId = null;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -1828,57 +1920,24 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
-
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 4 + 2;
+                this.size = Math.random() * 3 + 1;
                 this.baseSize = this.size;
-                this.speedX = (Math.random() - 0.5) * 0.6;
-                this.speedY = (Math.random() - 0.5) * 0.6;
-                const colors = ['15, 118, 110', '124, 58, 237', '245, 158, 11', '14, 165, 233', '236, 72, 153'];
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                const colors = ['30, 58, 138', '15, 118, 110'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.opacity = Math.random() * 0.3 + 0.15;
-                this.pulseSpeed = Math.random() * 0.02 + 0.01;
-                this.pulseOffset = Math.random() * Math.PI * 2;
-                this.angle = Math.random() * Math.PI * 2;
-                this.orbitSpeed = (Math.random() - 0.5) * 0.02;
-                this.orbitRadius = Math.random() * 80 + 20;
-                this.orbitCenterX = this.x;
-                this.orbitCenterY = this.y;
-                this.hasOrbit = Math.random() > 0.6;
+                this.opacity = Math.random() * 0.15 + 0.05;
             }
 
             update() {
-                if (this.hasOrbit) {
-                    this.angle += this.orbitSpeed;
-                    this.x = this.orbitCenterX + Math.cos(this.angle) * this.orbitRadius;
-                    this.y = this.orbitCenterY + Math.sin(this.angle) * this.orbitRadius;
-                } else {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-                }
-
-                this.size = this.baseSize + Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.8;
-
-                if (mouse.x !== null) {
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const force = (150 - dist) / 150;
-                        this.size = this.baseSize + force * 3;
-                        this.opacity = Math.min(0.5, this.opacity + force * 0.2);
-                    } else {
-                        this.size = this.baseSize + Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.8;
-                        this.opacity = Math.max(0.1, this.opacity - 0.001);
-                    }
-                }
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
 
             draw() {
@@ -1886,19 +1945,14 @@
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
                 ctx.fill();
-
-                if (this.size > 3) {
-                    ctx.beginPath();
-                    ctx.arc(this.x - this.size * 0.2, this.y - this.size * 0.2, this.size * 0.3, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.3})`;
-                    ctx.fill();
-                }
             }
         }
 
-        function initParticles(count = 70) {
+        function initParticles(count = 50) {
             particles = [];
-            for (let i = 0; i < count; i++) particles.push(new Particle());
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
         }
         initParticles();
 
@@ -1908,11 +1962,10 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const opacity = 0.06 * (1 - dist / 150);
+                    if (dist < 130) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(15, 118, 110, ${opacity})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(30, 58, 138, ${0.04 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.6;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -1925,49 +1978,79 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             connectParticles();
             particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateParticles);
+            animId = requestAnimationFrame(animateParticles);
         }
         animateParticles();
 
+        // ============================================================
         // REVEAL ON SCROLL
+        // ============================================================
         const reveals = document.querySelectorAll('.reveal, .reveal-tilt');
 
         function checkReveals() {
             reveals.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 80) el.classList.add('active');
+                if (rect.top < window.innerHeight - 80) {
+                    el.classList.add('active');
+                }
             });
         }
 
         window.addEventListener('scroll', checkReveals);
         window.addEventListener('load', checkReveals);
 
+        // ============================================================
         // NAVBAR SCROLL
+        // ============================================================
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
 
+        // ============================================================
         // MENU MOBILE
+        // ============================================================
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
 
-        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
         });
 
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // ============================================================
         // FORM MODAL
+        // ============================================================
         const openFormBtn = document.getElementById('openFormBtn');
         const formModal = document.getElementById('formModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
-        openFormBtn.addEventListener('click', () => formModal.classList.add('active'));
-        closeModalBtn.addEventListener('click', () => formModal.classList.remove('active'));
-        formModal.addEventListener('click', (e) => { if (e.target === formModal) formModal.classList.remove('active'); });
+        openFormBtn.addEventListener('click', () => {
+            formModal.classList.add('active');
+        });
 
+        closeModalBtn.addEventListener('click', () => {
+            formModal.classList.remove('active');
+        });
+
+        formModal.addEventListener('click', (e) => {
+            if (e.target === formModal) {
+                formModal.classList.remove('active');
+            }
+        });
+
+        // ============================================================
         // FORM ENVIO VIA WHATSAPP
+        // ============================================================
         const leadForm = document.getElementById('leadForm');
         const NUMERO_WPP = "5531984987116";
 
@@ -1975,21 +2058,25 @@
             e.preventDefault();
 
             const nome = document.getElementById('nomeCliente').value.trim();
+            const orgao = document.getElementById('orgaoCliente').value.trim();
             const telefone = document.getElementById('telefoneCliente').value.trim();
+            const email = document.getElementById('emailCliente').value.trim();
             const servico = document.getElementById('tipoServico').value;
             const mensagem = document.getElementById('mensagemCliente').value.trim();
 
-            if (!nome || !telefone || !servico) {
-                alert('⚠️ Por favor, preencha nome, telefone e tipo de serviço!');
+            if (!nome || !orgao || !telefone || !email || !servico) {
+                alert('⚠️ Por favor, preencha todos os campos obrigatórios!');
                 return;
             }
 
-            let textoWhats = `📋 *NOVO CONTATO - DATADESH* 📋%0A%0A` +
+            let textoWhats = `🏛️ *SOLICITAÇÃO DE PROPOSTA - SETOR PÚBLICO* 🏛️%0A%0A` +
                 `👤 *Nome:* ${nome}%0A` +
+                `🏢 *Órgão:* ${orgao}%0A` +
                 `📞 *Telefone:* ${telefone}%0A` +
-                `🎯 *Serviço:* ${servico}%0A` +
-                `💬 *Mensagem:* ${mensagem || "Cliente não deixou mensagem adicional"}%0A%0A` +
-                `✅ *Origem:* Formulário do site DataDesh Soluções`;
+                `📧 *E-mail:* ${email}%0A` +
+                `🎯 *Solução:* ${servico}%0A` +
+                `💬 *Mensagem:* ${mensagem || "Sem mensagem adicional"}%0A%0A` +
+                `✅ *Origem:* Landing Page Prefeituras - DataDesh Soluções`;
 
             const urlWhats = `https://wa.me/${NUMERO_WPP}?text=${textoWhats}`;
             window.open(urlWhats, "_blank");
